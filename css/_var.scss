@@ -1,0 +1,268 @@
+// 自訂
+
+@mixin font-self($fz,$fw: 400,$lh: 1.5){
+    font-size: $fz;
+    font-weight: $fw;
+ 	line-height: $lh;
+
+ @include mobile{
+  line-height: if($lh == 1.5, 1.3, $lh);
+ }
+ 
+};
+
+@mixin transition {
+    transition: all 0.2s;
+};
+
+
+// 字級
+$font-size:(
+	h1:48px,
+	h2:32px,
+	h3:24px,
+	h4:20px,
+	body1:18px,
+	body2:16px,
+	body3:14px,
+	caption:13px,
+);
+$m-font-size:(
+	h1:32px,
+	h2:24px,
+	h3:20px,
+	h4:18px,
+	body1:16px,
+	body2:14px,
+	body3:14px,
+	caption:13px,
+);
+@mixin font-page($fz,$fw,$lh: 1.5){
+    font-size: map-get($font-size, $fz);
+	font-weight: $fw;
+	line-height: 1.5;
+
+	@include mobile{
+		line-height: if($lh == 1.5, 1.3, $lh);
+		font-size: map-get($m-font-size, $fz);
+	}
+};
+
+
+
+// 段落間距
+$paragraph-spacing:(
+	paragraph-spacing:80px,
+	paragraph-spacing-small:40px,
+
+);
+$m-paragraph-spacing:(
+	paragraph-spacing:40px,
+	paragraph-spacing-small:24px,
+);
+@mixin margin ($margin){
+	margin-bottom: map-get($paragraph-spacing, $margin);
+	@include pad{
+		margin-bottom: map-get($m-paragraph-spacing, $margin);
+	}
+};
+@mixin padding ($padding){
+	padding-top: map-get($paragraph-spacing, $padding);
+	padding-bottom: map-get($paragraph-spacing, $padding);
+	@include pad{
+		padding-top: map-get($m-paragraph-spacing, $padding);
+		padding-bottom: map-get($m-paragraph-spacing, $padding);
+	}
+};
+
+
+$poi-otherlink-border:#B1382F;
+$go-top-color:#FF6C55;
+
+
+
+@mixin font ($fontsize,$fontweight,$lineheight:1.5){
+
+	 font-size: map-get($font-themes, $fontsize);
+	 font-weight: map-get($font-themes, $fontweight);
+	 line-height: map-get($font-themes, $lineheight);
+
+	 @include mobile{
+	 font-size: map-get($m-font-themes, $fontsize);
+	 font-weight: map-get($m-font-themes, $fontweight);
+	 line-height: map-get($m-font-themes, $lineheight);
+
+	 }
+
+};
+
+@mixin theme ($color:#000,$bg:unset){
+
+	color:map-get($color-themes,$color);
+	background: map-get($color-themes, $bg);
+
+};
+
+
+
+@mixin hover-support {
+	@media not all and (pointer: coarse) {
+	  &:hover {
+	 @content;
+	  }
+		  }
+	}
+
+
+
+@mixin poi-border($top,$right,$bottom,$left){
+	border:$poi-border 2px solid;
+	border-radius: $top $right $bottom $left;
+
+}
+
+@mixin poi-shadow{
+	width: 100%;
+	height: 100%;
+	content: "";
+	background: #FFF;
+	right:-10px;
+	top: 10px;
+	overflow: hidden;
+	z-index: -1;
+	position: absolute;
+}
+
+@mixin poi-scroll($justify){
+    flex-wrap:nowrap;
+    justify-content: $justify;  
+    -webkit-overflow-scrolling: touch; 
+    overflow-scrolling: touch; 
+    overflow-x: scroll; 
+    margin-left: 0%;
+
+}
+
+
+
+
+@mixin desktop{
+    @media (max-width:1200px) {
+        @content
+      
+    }
+};
+
+@mixin pad{
+    @media (max-width:992px) {
+        @content
+    }
+};
+
+
+@mixin mobile{
+    @media (max-width:768px) {
+        @content
+
+    }
+};
+
+@mixin small{
+    @media (max-width:576px) {
+        @content
+
+    }
+};
+@mixin pad-to-pc{
+    @media (min-width:993px)  {
+        @content
+      
+    }
+};
+@mixin mobile-to-pc{
+    @media (min-width:769px)  {
+        @content
+      
+    }
+};
+
+@mixin small-to-pc{
+    @media (min-width:577px)  {
+        @content
+      
+    }
+};
+
+
+$padding-x:24px;
+
+.containers{
+
+  max-width: 1210px;
+  width: 100%;
+  padding-right: $padding-x;
+  padding-left: $padding-x;
+  margin-right: auto;
+  margin-left: auto;
+};
+
+
+
+.pcOnly{
+    display: block;
+    @include mobile{
+        display: none; 
+    }
+}
+.mobileOnly{
+    display: none;
+    @include mobile{
+        display: block; 
+    }
+}
+
+
+@keyframes updown{
+
+    0%{
+      
+        transform: translateY(8px);
+
+    }
+    100%{
+        
+        transform: translateY(0px);
+    }
+
+}
+
+
+$main-light-yellow:#FFF38F;
+
+ @mixin poi-1-theme1-photo-shadow{
+	content: "";
+	width: 100%;
+	height: 100%;
+	background: $main-light-yellow;
+	position: absolute;
+	left: -50px;
+	top: -50px;
+	z-index: -1;
+	transform: rotate(-2.657deg);
+	border-radius: 20px;
+	@include mobile{
+		left: -30px;
+		top: -30px;
+
+	}
+
+}
+
+@mixin poi-1-theme1-photo-border{
+
+	border-radius: 10px;     
+	outline: 2px solid $main-light-yellow;
+	border: 13px solid #fff;
+
+
+}

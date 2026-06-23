@@ -1,0 +1,179 @@
+nav.nav{
+   
+    
+    z-index: 99;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    width: 100%;
+    position: relative;
+    transition: 0.3s;
+
+    .nav-list{
+        @include theme('nav-list-color','nav-list-bg-color');
+        padding:  0 $padding-x;
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+       
+        gap: 0px;
+        *{
+            @include font('nav-size','nav-weight','nav-line-height');
+        }
+
+        @include small{
+            
+            @include poi-scroll(left);
+            margin: 0px auto;
+            padding: 0 8px;
+        }
+
+         .nav-tab{
+
+
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+           
+            white-space: nowrap;
+            @include theme('nav-tab-color','nav-tab-bg-color');
+
+
+
+            @include small{
+ 
+            }
+
+            a{
+                padding: 16px;
+                display: block;
+                @include theme('nav-tab-color','nav-tab-bg-color');
+                &.on{
+
+                     @include theme('nav-tab-hover-color','nav-tab-hover-bg-color');  
+
+                }                
+                &:hover{
+                   
+                    @include theme('nav-tab-hover-color','nav-tab-hover-bg-color');  
+                  
+                    
+                    @include small{
+                        @include theme('nav-tab-color','nav-tab-bg-color');
+                    }
+                }
+
+            }
+
+            // &:nth-of-type(1){
+            //     &::before{
+            //         content: "";
+            //         position: absolute;
+            //         background: url(../images/new-icon.png) top center no-repeat;
+            //         width: 69px;
+            //         height: 45px;
+            //         left: -42px;
+            //         top: -12px;
+            //     }
+            // }
+
+        }
+    }
+
+    /*黏*/
+    &.sticky{
+        position: sticky;
+        top: 0;
+        left: 0;
+        margin: 0px auto;
+
+
+    }
+
+
+    .poi-list{
+        
+
+        @include theme('poi-list-color','poi-list-bg-color');
+
+        *{
+            @include font('poi-list-size','poi-list-weight','poi-list-line-height');
+ 
+        }
+   
+        width: 100%;  
+        top: 0px;  
+        left: 0;  
+        text-align: center;  
+        z-index: 5;  
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        gap: 32px;
+        padding: 16px $padding-x;
+        position: relative;
+    
+
+        @include small{
+            @include poi-scroll(left);       
+        }
+
+
+        .poi-tab{
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            flex-shrink: 0;
+            
+            @include theme('poi-tab-color','poi-tab-bg-color');
+             &:hover{
+                 @include theme('poi-tab-hover-color','poi-tab-hover-bg-color');
+              
+             }       
+
+
+        }
+
+
+
+    }
+
+}
+
+
+    
+
+
+
+
+/*分頁改色範例*/
+.eventpage{
+    nav.nav {
+    .nav-list {
+        .nav-tab{
+            color:  #a15e34;
+
+            &:hover{
+                background:#df8045;
+                color: #fff;
+            }
+            &.on{
+                background: #a15e34;
+                color: #fff;
+
+
+
+            }
+
+        }
+    }
+
+    .poi-list{
+        background: #a15e34;
+    }
+
+    }
+
+}

@@ -1,0 +1,979 @@
+$color-themes:(
+	unset:unset,
+
+
+	/*第一層選單*/
+	nav-list-color:unset,
+	nav-list-bg-color:#000,
+	nav-tab-color:#fff,
+	nav-tab-bg-color:unset,
+	nav-tab-hover-color:#fff,
+	nav-tab-hover-bg-color:#707070,
+
+	/*第二層選單*/
+	poi-list-color:unset,
+	poi-list-bg-color:#FF6C55,
+	poi-tab-color:#fff,
+	poi-tab-bg-color:unset,
+	poi-tab-a-bg-color:unset,
+	poi-tab-hover-color:#FCF77F,
+	poi-tab-hover-bg-color:unset,
+
+	/*第三層選單(poi)*/
+	poi-ph-menu-color:#333,
+	poi-ph-menu-bg-color:unset,
+	poi-ph-menu-hover-color:#fff,
+	poi-ph-menu-hover-bg-color:#FF5136,
+
+
+	/*第四層小小選單(poi)*/
+	poi-ph-group-menu-color:#868686,
+	poi-ph-group-menu-bg-color:unset,
+	poi-ph-group-menu-hover-color:#fff,
+	poi-ph-group-menu-hover-bg-color:#868686,
+
+
+	/*poi*/
+	poi-color:unset,
+	poi-bg-color:#FFF,
+    poi-title-color:#FF5136,
+	poi-title-bg-color:unset,
+    poi-text-color:#515151,
+	poi-text-bg-color:unset,
+    poi-name-color:#000,
+	poi-name-bg-color:unset,
+    poi-sale-color:#333,
+	poi-sale-bg-color:#dddddd,
+    poi-price-color:#FF5136,
+	poi-price-bg-color:unset,	
+    poi-detail-color:#515151,	
+	poi-detail-bg-color:unset,
+    poi-tag-color:#333,	
+	poi-tag-bg-color:#ffd9a1,
+
+	poi-otherlink-color:#5AC4F1,	
+	poi-otherlink-bg-color:unset,
+	poi-otherlink-hover-color:#FFF,	
+	poi-otherlink-hover-bg-color:#5AC4F1,
+
+	
+
+
+);
+
+
+$font-themes:(
+
+
+	nav-size:20px,
+	nav-weight:500,
+	nav-line-height:1,
+
+	poi-list-size:16px,
+	poi-list-weight:400,
+	poi-list-line-height:1,
+
+	poi-ph-menu-size:16px,
+	poi-ph-menu-weight:400,
+	poi-ph-menu-line-height:1,
+
+	poi-size:18px,
+	poi-weight:500,
+    poi-title-size:32px,
+	poi-title-weight:700,
+
+	/*行程預設234*/
+	poi-name-size:18px,
+	poi-name-weight:700,	
+	poi-sale-size:14px,
+	poi-sale-weight:700,
+    poi-price-size:24px,
+	poi-price-weight:700,
+    poi-price-span-size:14px,
+	poi-price-span-weight:400,
+    poi-detail-size:14px,	
+	poi-detail-weight:400,
+	poi-tag-size:14px,	
+	poi-tag-weight:500,	
+	poi-otherlink-size:16px,	
+	poi-otherlink-weight:700,	
+	poi-line-height:1.5,
+	poi-tag-line-height:1,
+
+
+	/*行程預設1*/
+	poi-product-1-name-size:24px,
+	poi-product-1-name-weight:700,	
+	poi-product-1-sale-size:22px,
+	poi-product-1-sale-weight:700,
+    poi-product-1-price-size:30px,
+	poi-product-1-price-weight:700,
+    poi-product-1-price-span-size:16px,
+	poi-product-1-price-span-weight:400,
+    poi-product-1-detail-size:18px,	
+	poi-product-1-detail-weight:400,
+	poi-product-1-detail-lh:28px,	
+	poi-product-1-tag-size:14px,	
+	poi-product-1-tag-weight:500,	
+	poi-product-1-otherlink-size:16px,	
+	poi-product-1-otherlink-weight:700,	
+	//36 30 24
+	/*介紹預設1*/
+	poi-intro-1-name-size:28px,
+	poi-intro-1-name-weight:700,	
+	poi-intro-1-sale-size:24px,
+	poi-intro-1-sale-weight:700,
+    poi-intro-1-price-size:22px,
+	poi-intro-1-price-weight:700,
+    poi-intro-1-price-span-size:14px,
+	poi-intro-1-price-span-weight:400,
+    poi-intro-1-detail-size:20px,	
+	poi-intro-1-detail-weight:400,
+	poi-intro-1-detail-lh:30px,
+	poi-intro-1-tag-size:16px,	
+	poi-intro-1-tag-weight:500,	
+	poi-intro-1-otherlink-size:16px,	
+	poi-intro-1-otherlink-weight:700,	
+	poi-intro-1-line-height:1.5,
+	poi-intro-1-tag-line-height:1,
+
+	/*介紹預設2*/
+	//34 28 22
+	poi-intro-2-name-size:28px,
+	poi-intro-2-name-weight:700,	
+	poi-intro-2-sale-size:24px,
+	poi-intro-2-sale-weight:700,
+    poi-intro-2-price-size:22px,
+	poi-intro-2-price-weight:700,
+    poi-intro-2-price-span-size:14px,
+	poi-intro-2-price-span-weight:400,
+    poi-intro-2-detail-size:20px,	
+	poi-intro-2-detail-weight:400,
+	poi-intro-2-detail-lh:30px,
+	poi-intro-2-tag-size:16px,	
+	poi-intro-2-tag-weight:500,	
+	poi-intro-2-otherlink-size:16px,	
+	poi-intro-2-otherlink-weight:700,	
+	poi-intro-2-line-height:1.5,
+	poi-intro-2-tag-line-height:1,
+
+	/*介紹預設3*/
+
+	poi-intro-3-name-size:24px,
+	poi-intro-3-name-weight:700,	
+	poi-intro-3-sale-size:20px,
+	poi-intro-3-sale-weight:700,
+    poi-intro-3-price-size:20px,
+	poi-intro-3-price-weight:700,
+    poi-intro-3-price-span-size:14px,
+	poi-intro-3-price-span-weight:400,
+    poi-intro-3-detail-size:18px,	
+	poi-intro-3-detail-weight:400,
+	poi-intro-3-detail-lh:26px,	
+	poi-intro-3-tag-size:14px,	
+	poi-intro-3-tag-weight:500,	
+	poi-intro-3-otherlink-size:14px,	
+	poi-intro-3-otherlink-weight:700,	
+	poi-intro-3-line-height:1.5,
+	poi-intro-3-tag-line-height:1,	
+
+	/*介紹預設4*/
+	poi-intro-4-name-size:20px,
+	poi-intro-4-name-weight:700,	
+	poi-intro-4-sale-size:16px,
+	poi-intro-4-sale-weight:700,
+    poi-intro-4-price-size:16px,
+	poi-intro-4-price-weight:700,
+    poi-intro-4-price-span-size:14px,
+	poi-intro-4-price-span-weight:400,
+    poi-intro-4-detail-size:16px,	
+	poi-intro-4-detail-weight:400,
+	poi-intro-4-detail-lh:22px,	
+	poi-intro-4-tag-size:14px,	
+	poi-intro-4-tag-weight:500,	
+	poi-intro-4-otherlink-size:14px,	
+	poi-intro-4-otherlink-weight:700,	
+	poi-intro-4-line-height:1.5,
+	poi-intro-4-tag-line-height:1,	
+
+
+
+
+
+);
+
+$m-font-themes:(
+	nav-size:18px,
+	nav-weight:500,
+	poi-list-size:14px,
+	poi-list-weight:500,
+	poi-ph-menu-size:14px,
+	poi-ph-menu-weight:400,
+	poi-ph-menu-line-height:1,
+	poi-size:18px,
+	poi-weight:500,
+    poi-title-size:24px,
+	poi-title-weight:500,
+
+	/*行程預設234*/
+	poi-name-size:18px,
+	poi-name-weight:700,	
+	poi-sale-size:16px,
+	poi-sale-weight:700,
+    poi-price-size:26px,
+	poi-price-weight:700,
+	poi-price-span-size:14px,
+	poi-price-span-weight:400,
+    poi-detail-size:16px,	
+	poi-detail-weight:400,
+	poi-tag-size:14px,	
+	poi-tag-weight:500,	
+	poi-otherlink-size:16px,	
+	poi-otherlink-weight:700,	
+	poi-line-height:1.3,
+	poi-tag-line-height:1,
+
+	/*行程預設1*/
+	poi-product-1-name-size:20px,
+	poi-product-1-name-weight:700,	
+	poi-product-1-sale-size:16px,
+	poi-product-1-sale-weight:700,
+    poi-product-1-price-size:26px,
+	poi-product-1-price-weight:700,
+    poi-product-1-price-span-size:14px,
+	poi-product-1-price-span-weight:400,
+    poi-product-1-detail-size:16px,	
+	poi-product-1-detail-weight:400,
+	poi-product-1-detail-lh:1.3,	
+	poi-product-1-tag-size:14px,	
+	poi-product-1-tag-weight:500,	
+	poi-product-1-otherlink-size:16px,	
+	poi-product-1-otherlink-weight:700,	
+
+
+
+	/*介紹預設1*/
+	poi-intro-1-name-size:26px,
+	poi-intro-1-name-weight:700,	
+	poi-intro-1-sale-size:20px,
+	poi-intro-1-sale-weight:700,
+    poi-intro-1-price-size:16px,
+	poi-intro-1-price-weight:700,
+    poi-intro-1-price-span-size:14px,
+	poi-intro-1-price-span-weight:400,
+    poi-intro-1-detail-size:16px,	
+	poi-intro-1-detail-weight:400,
+	poi-intro-1-detail-lh:26px,
+	poi-intro-1-tag-size:14px,	
+	poi-intro-1-tag-weight:500,	
+	poi-intro-1-otherlink-size:16px,	
+	poi-intro-1-otherlink-weight:700,	
+	poi-intro-1-tag-line-height:1,	
+
+	poi-intro-2-name-size:26px,
+	poi-intro-2-name-weight:700,	
+	poi-intro-2-sale-size:20px,
+	poi-intro-2-sale-weight:700,
+    poi-intro-2-price-size:16px,
+	poi-intro-2-price-weight:700,
+    poi-intro-2-price-span-size:14px,
+	poi-intro-2-price-span-weight:400,
+    poi-intro-2-detail-size:16px,	
+	poi-intro-2-detail-weight:400,
+	poi-intro-2-detail-lh:26px,	
+	poi-intro-2-tag-size:14px,	
+	poi-intro-2-tag-weight:500,	
+	poi-intro-2-otherlink-size:16px,	
+	poi-intro-2-otherlink-weight:700,	
+	poi-intro-2-tag-line-height:1,	
+
+	poi-intro-3-name-size:26px,
+	poi-intro-3-name-weight:700,	
+	poi-intro-3-sale-size:20px,
+	poi-intro-3-sale-weight:700,
+    poi-intro-3-price-size:16px,
+	poi-intro-3-price-weight:700,
+    poi-intro-3-price-span-size:14px,
+	poi-intro-3-price-span-weight:400,
+    poi-intro-3-detail-size:16px,	
+	poi-intro-3-detail-weight:400,
+	poi-intro-3-detail-lh:26px,	
+	poi-intro-3-tag-size:14px,	
+	poi-intro-3-tag-weight:500,	
+	poi-intro-3-otherlink-size:16px,	
+	poi-intro-3-otherlink-weight:700,	
+	poi-intro-3-tag-line-height:1,	
+
+	poi-intro-4-name-size:26px,
+	poi-intro-4-name-weight:700,	
+	poi-intro-4-sale-size:20px,
+	poi-intro-4-sale-weight:700,
+    poi-intro-4-price-size:16px,
+	poi-intro-4-price-weight:700,
+    poi-intro-4-price-span-size:14px,
+	poi-intro-4-price-span-weight:400,
+    poi-intro-4-detail-size:16px,	
+	poi-intro-4-detail-weight:400,
+	poi-intro-4-detail-lh:26px,		
+	poi-intro-4-tag-size:14px,	
+	poi-intro-4-tag-weight:500,	
+	poi-intro-4-otherlink-size:16px,	
+	poi-intro-4-otherlink-weight:700,	
+	poi-intro-4-tag-line-height:1,	
+
+);
+/***********字體大小*************/
+@mixin poi-product-font--col-1{
+   
+        .ph-group-content-photo{
+            .ph-group-content-tag{
+                @include font('poi-product-1-tag-size', 'poi-product-1-tag-weight', 'poi-tag-line-height');
+            }
+        }
+        .ph-group-content-text{
+            .ph-group-content-text-name{
+                @include font('poi-product-1-name-size', 'poi-product-1-name-weight', 'poi-line-height');
+            }
+            .ph-group-content-text-sale{
+                @include font('poi-product-1-sale-size', 'poi-product-1-sale-weight', 'poi-line-height');
+                a{
+                    @include font('poi-product-1-sale-size', 'poi-product-1-sale-weight', 'poi-line-height');
+                }
+            }
+            .ph-group-content-text-detail{
+                // Line Height: 使用專門的 poi-product-1-detail-lh
+                @include font('poi-product-1-detail-size', 'poi-product-1-detail-weight', 'poi-product-1-detail-lh');
+                a{
+                    @include font('poi-product-1-detail-size', 'poi-product-1-detail-weight', 'poi-product-1-detail-lh');
+                }
+            }
+            .ph-group-content-text-price{
+                @include font('poi-product-1-price-size', 'poi-product-1-price-weight', 'poi-line-height');
+                span {
+                    @include font('poi-product-1-price-span-size', 'poi-product-1-price-span-weight', 'poi-line-height');
+                }
+            }
+			.ph-group-content-otherlink {
+				a {
+					@include font('poi-product-1-otherlink-size', 'poi-product-1-otherlink-weight', 'poi-line-height');
+				}
+			}			
+        }
+
+    
+}
+
+
+@mixin poi-intro-font--col-1{
+   
+        .ph-group-content-photo{
+            .ph-group-content-tag{
+                @include font('poi-intro-1-tag-size', 'poi-intro-1-tag-weight', 'poi-intro-1-tag-line-height');
+            }
+        }
+        .ph-group-content-text{
+            .ph-group-content-text-name{
+                @include font('poi-intro-1-name-size', 'poi-intro-1-name-weight', 'poi-intro-1-line-height');
+            }
+            .ph-group-content-text-sale{
+                @include font('poi-intro-1-sale-size', 'poi-intro-1-sale-weight', 'poi-intro-1-line-height');
+                a{
+                    @include font('poi-intro-1-sale-size', 'poi-intro-1-sale-weight', 'poi-intro-1-line-height');
+                }
+            }
+            .ph-group-content-text-detail{
+                // Line Height: 使用專門的 poi-intro-1-detail-lh
+                @include font('poi-intro-1-detail-size', 'poi-intro-1-detail-weight', 'poi-intro-1-detail-lh');
+                a{
+                    @include font('poi-intro-1-detail-size', 'poi-intro-1-detail-weight', 'poi-intro-1-detail-lh');
+                }
+            }
+            .ph-group-content-text-price{
+                @include font('poi-intro-1-price-size', 'poi-intro-1-price-weight', 'poi-intro-1-line-height');
+                span {
+                    @include font('poi-intro-1-price-span-size', 'poi-intro-1-price-span-weight', 'poi-intro-1-line-height');
+                }
+            }
+			.ph-group-content-otherlink {
+				a {
+					@include font('poi-intro-1-otherlink-size', 'poi-intro-1-otherlink-weight', 'poi-line-height');
+				}
+			}			
+        }
+
+  
+}
+
+
+@mixin poi-intro-font--col-2{
+   
+        .ph-group-content-photo{
+            .ph-group-content-tag{
+                @include font('poi-intro-2-tag-size', 'poi-intro-2-tag-weight', 'poi-intro-2-tag-line-height');
+            }
+        }
+        .ph-group-content-text{
+            .ph-group-content-text-name{
+                @include font('poi-intro-2-name-size', 'poi-intro-2-name-weight', 'poi-intro-2-line-height');
+            }
+            .ph-group-content-text-sale{
+                @include font('poi-intro-2-sale-size', 'poi-intro-2-sale-weight', 'poi-intro-2-line-height');
+                a{
+                    @include font('poi-intro-2-sale-size', 'poi-intro-2-sale-weight', 'poi-intro-2-line-height');
+                }
+            }
+            .ph-group-content-text-detail{
+                // Line Height: 使用專門的 poi-intro-2-detail-lh
+                @include font('poi-intro-2-detail-size', 'poi-intro-2-detail-weight', 'poi-intro-2-detail-lh');
+                a{
+                    @include font('poi-intro-2-detail-size', 'poi-intro-2-detail-weight', 'poi-intro-2-detail-lh');
+                }
+            }
+            .ph-group-content-text-price{
+                @include font('poi-intro-2-price-size', 'poi-intro-2-price-weight', 'poi-intro-2-line-height');
+                span {
+                    @include font('poi-intro-2-price-span-size', 'poi-intro-2-price-span-weight', 'poi-intro-2-line-height');
+                }
+            }
+			.ph-group-content-otherlink {
+				a {
+					@include font('poi-intro-2-otherlink-size', 'poi-intro-2-otherlink-weight', 'poi-line-height');
+				}
+			}			
+        }
+
+    
+}
+
+@mixin poi-intro-font--col-3{
+    
+        .ph-group-content-photo{
+            .ph-group-content-tag{
+                @include font('poi-intro-3-tag-size', 'poi-intro-3-tag-weight', 'poi-intro-3-tag-line-height');
+            }
+        }
+        .ph-group-content-text{
+            .ph-group-content-text-name{
+                @include font('poi-intro-3-name-size', 'poi-intro-3-name-weight', 'poi-intro-3-line-height');
+            }
+            .ph-group-content-text-sale{
+                @include font('poi-intro-3-sale-size', 'poi-intro-3-sale-weight', 'poi-intro-3-line-height');
+                a{
+                    @include font('poi-intro-3-sale-size', 'poi-intro-3-sale-weight', 'poi-intro-3-line-height');
+                }
+            }
+            .ph-group-content-text-detail{
+                // Line Height: 使用專門的 poi-intro-3-detail-lh
+                @include font('poi-intro-3-detail-size', 'poi-intro-3-detail-weight', 'poi-intro-3-detail-lh');
+                a{
+                    @include font('poi-intro-3-detail-size', 'poi-intro-3-detail-weight', 'poi-intro-3-detail-lh');
+                }
+            }
+            .ph-group-content-text-price{
+                @include font('poi-intro-3-price-size', 'poi-intro-3-price-weight', 'poi-intro-3-line-height');
+                span {
+                    @include font('poi-intro-3-price-span-size', 'poi-intro-3-price-span-weight', 'poi-intro-3-line-height');
+                }
+            }
+			.ph-group-content-otherlink {
+				a {
+					@include font('poi-intro-3-otherlink-size', 'poi-intro-3-otherlink-weight', 'poi-line-height');
+				}
+			}			
+        }
+
+ 
+}
+
+
+@mixin poi-intro-font--col-4{
+   
+        .ph-group-content-photo{
+            .ph-group-content-tag{
+                @include font('poi-intro-4-tag-size', 'poi-intro-4-tag-weight', 'poi-intro-4-tag-line-height');
+            }
+        }
+        .ph-group-content-text{
+            .ph-group-content-text-name{
+                @include font('poi-intro-4-name-size', 'poi-intro-4-name-weight', 'poi-intro-4-line-height');
+            }
+            .ph-group-content-text-sale{
+                @include font('poi-intro-4-sale-size', 'poi-intro-4-sale-weight', 'poi-intro-4-line-height');
+                a{
+                    @include font('poi-intro-4-sale-size', 'poi-intro-4-sale-weight', 'poi-intro-4-line-height');
+                }
+            }
+            .ph-group-content-text-detail{
+                // Line Height: 使用專門的 poi-intro-4-detail-lh
+                @include font('poi-intro-4-detail-size', 'poi-intro-4-detail-weight', 'poi-intro-4-detail-lh');
+                a{
+                    @include font('poi-intro-4-detail-size', 'poi-intro-4-detail-weight', 'poi-intro-4-detail-lh');
+                }
+            }
+            .ph-group-content-text-price{
+                @include font('poi-intro-4-price-size', 'poi-intro-4-price-weight', 'poi-intro-4-line-height');
+                span {
+                    @include font('poi-intro-4-price-span-size', 'poi-intro-4-price-span-weight', 'poi-intro-4-line-height');
+                }
+            }
+			.ph-group-content-otherlink {
+				a {
+					@include font('poi-intro-4-otherlink-size', 'poi-intro-4-otherlink-weight', 'poi-line-height');
+				}
+			}			
+        }
+
+    
+}
+
+/***********基本骨架*************/
+@mixin product--col-1{
+
+			@include small-to-pc{
+				width: 100%;
+				flex-grow: 1;
+				display: inline-flex;
+				flex-wrap: nowrap;
+				gap: 16px;
+				padding: 16px;
+				max-width: unset;
+
+				@include pad {
+					flex-wrap: wrap;
+					display: block;
+				}
+	
+				.ph-group-content-photo {
+					width: 50%;
+					display: inline-flex;
+					@include pad {
+						width: 100%;
+						flex-shrink: 0;
+					}
+					img {
+						object-fit: cover;
+						height: 100%;
+						@include pad {
+							height: auto;
+							object-fit: unset;
+						}
+					}
+				}
+
+				.ph-group-content-text {
+					width: calc(50% - 16px);
+					display: inline-block;
+					padding: 0 0 29px 0;
+					@include pad {
+						flex-shrink: 0;
+						width: 100%;
+		
+					}
+
+
+				}
+			}
+        }
+
+
+@mixin product--col-2{
+
+    
+
+	@include small-to-pc{
+            width: 45%;
+            flex-grow: 1;
+            display: inline-flex;
+            flex-wrap: nowrap;
+            gap: 16px;
+            padding: 16px;
+            max-width: 573px;
+
+            @include pad {
+                flex-wrap: wrap;
+                display: block;
+            }
+
+            .ph-group-content-photo {
+                width: 55%;
+                display: inline-flex;
+                @include pad {
+                    width: 100%;
+                    flex-shrink: 0;
+                }
+                img {
+                    object-fit: cover;
+                    height: 100%;
+                    @include pad {
+                        height: auto;
+                        object-fit: unset;
+                    }
+                }
+            }
+
+            .ph-group-content-text {
+                width: calc(45% - 16px);
+                display: inline-block;
+                padding: 0 0 29px 0;
+                @include pad {
+                    flex-shrink: 0;
+                    width: 100%;
+    
+                }
+
+
+            }
+	}
+}
+
+@mixin product--col-3{
+    
+	@include small-to-pc{
+            width: calc(100% / 3 - 11px);
+
+            @include pad {
+                width: calc(50% - 16px);
+            }
+
+
+		}
+        	
+}
+
+@mixin product--col-text{
+	display: inline-flex;
+	flex-wrap: nowrap;
+	width: calc(100%);
+	flex-grow: 1;
+	padding: 16px;
+	
+	@include desktop{
+		padding-bottom: 43px;
+	}
+	@include pad {
+		width: 100%;
+		
+	}
+
+	@include small {
+		width: 90%;
+		flex-wrap: wrap;
+		align-content: baseline;
+	}
+
+
+	.ph-group-content-photo{
+		display: inline-block;
+		overflow:unset;
+		flex-shrink: 0;
+		@include small{
+			width: 100%;
+			display: block;
+		}
+		
+		img{
+			display: none;
+			@include small{
+				display: block;
+
+			
+			}
+		}
+		.ph-group-content-tag{
+			position: relative;
+			top: 12px;
+			left: -16px;
+
+			min-width: 152px;
+			display: inline-block;
+			text-align: center;                        
+			border-radius: 0px 20px 20px 0px;
+
+			@include small{
+				top: 0px;
+				left: 0px;
+				position: absolute;
+				min-width: unset;
+				border-radius: 10px 20px 20px 0px;
+				padding: 8px 16px;
+				
+
+			}
+		}
+		
+	}
+
+	.ph-group-content-text{
+		display: inline-block;
+		flex-shrink: 1;
+		width: calc(100% - 338px);
+		@include desktop{
+			
+			width: 100%;
+		}
+		@include small{
+			display: block;
+			width: 100%;
+		}
+
+
+		.ph-group-content-text-sale {
+
+				@include theme('poi-tag-bg-color','unset');
+				@include small{
+					@include theme('poi-sale-color', 'poi-sale-bg-color');
+				}
+
+			a {
+				// padding: 0px;
+					@include theme('poi-tag-bg-color','unset');
+					@include small{
+						@include theme('poi-sale-color', 'poi-sale-bg-color');
+					}
+			}
+		}
+
+
+	}
+
+}
+
+/*********景點**********/
+@mixin intro--col{
+	&.poi-1{
+		.ph-group{
+			.ph-group-content{
+				@include poi-intro-font--col-1;
+
+				&:nth-of-type(even){
+
+					@include small-to-pc{
+						
+						
+					
+							.ph-group-content-photo{
+								order: 2;
+								@include mobile{
+								
+									order: 1;
+								}
+							}
+				
+							.ph-group-content-text{
+								order: 1;
+								@include mobile{
+									order: 2;
+								}
+							}
+				
+						}
+					}
+
+
+    				
+			}
+		}
+	}
+	&.poi-2{
+		.ph-group{
+			.ph-group-content{
+				@include poi-intro-font--col-2;
+			}
+		}
+	}
+	&.poi-3{
+		.ph-group{
+			.ph-group-content{
+				@include poi-intro-font--col-3;
+			}
+		}
+	}	
+
+	.ph-group{
+		.ph-group-content{
+			@include poi-intro-font--col-4;
+		}
+	}
+		
+}
+
+
+@mixin intro-col-1{
+
+
+			@include small-to-pc{
+				width: 100%;
+				flex-grow: 1;
+				display: inline-flex;
+				flex-wrap: nowrap;
+				align-items: center;
+				max-width: unset;
+
+				@include pad {
+					flex-wrap: wrap;
+					display: block;
+				}
+	
+				.ph-group-content-photo {
+					width: 60%;
+					display: inline-flex;
+					@include pad {
+						width: 100%;
+						flex-shrink: 0;
+					}
+					img {
+						object-fit: cover;
+						height: 100%;
+						@include pad {
+							height: auto;
+							object-fit: unset;
+						}
+					}
+				}
+
+				.ph-group-content-text {
+					width: calc(40% + 24px);
+					
+					display: inline-block;
+					padding: 28px 28px 48px 28px;
+					@include pad-to-pc{
+						// margin: 0px 0px 0px -24px;
+					}
+					@include pad {
+						flex-shrink: 0;
+
+					}
+
+
+				}
+			}
+
+
+}
+
+
+@mixin intro-col-2{
+
+
+			@include small-to-pc{
+    
+			
+						width: calc(100% / 2 - 11px);
+
+						@include pad {
+							width: calc(50% - 16px);
+						}
+
+
+			
+			}
+
+
+}
+
+@mixin intro-col-3{
+	@include small-to-pc{
+	
+	         width: calc(100% / 3 - 11px);
+
+            @include pad {
+                width: calc(50% - 16px);
+            }
+	}
+}
+
+
+
+/*********QA**********/
+@mixin qa--col{
+
+		@include poi-intro-font--col-3;
+        .ph-group{
+			flex-wrap: wrap;
+			overflow-x: unset;
+			justify-content: center;
+            .ph-group-content{
+				border-radius: 0;
+				background: unset;
+                width: 100%;
+				padding: 16px;
+                
+                @include small {
+                    width: 90%;
+                    flex-shrink: 0;
+                }
+            
+                .ph-group-content-photo{
+                    display: none;
+                }
+            
+                .ph-group-content-text{
+					.ph-group-content-text-name{
+						@include font-self(20px,700);
+						@include mobile{
+								@include font-self(16px,700);
+						}
+					}
+					.ph-group-content-text-detail{
+						@include font-self(14px,400);
+				
+
+						a{
+								@include font-self(14px,400);
+						}
+					}
+                    .ph-group-content-text-price{
+                        display: none;
+                    }
+                
+                }   
+            }
+
+        }
+
+}
+
+
+@mixin yt-col{
+
+	.ph-group{
+		.ph-group-content{
+			@include poi-intro-font--col-1;
+			.ph-group-content-photo{
+				aspect-ratio: 16 / 9;
+			}
+			.ph-group-content-text{
+				.ph-group-content-otherlink {
+					a {
+						@include font('poi-intro-1-price-size', 'poi-intro-1-price-weight', 'poi-line-height');
+					}
+				}	
+			}
+			&:nth-of-type(even){
+
+				@include small-to-pc{
+					
+					
+				
+						.ph-group-content-photo{
+							order: 2;
+							@include mobile{
+							
+								order: 1;
+							}
+						}
+
+						.ph-group-content-text{
+							order: 1;
+							@include mobile{
+								order: 2;
+							}
+						}
+
+				}
+			}				
+		}
+	}
+
+
+}
