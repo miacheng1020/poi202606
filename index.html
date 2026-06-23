@@ -9,7 +9,7 @@
   <style>
     /* ===== BUILDER 工具列 ===== */
     .builder-bar {
-      position: sticky; top: 0; z-index: 90;
+      position: sticky; top: 52px; z-index: 90;
       width: 100%; height: 48px; background: #333333;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 24px; box-sizing: border-box;
@@ -36,8 +36,8 @@
     /* ===== 左側選單 ===== */
     .sidebar {
       width: 200px; background: #fff; border-right: 1px solid #ddd;
-      flex-shrink: 0; position: sticky; top: 48px;
-      height: calc(100vh - 48px); overflow-y: auto;
+      flex-shrink: 0; position: sticky; top: 100px;
+      height: calc(100vh - 100px); overflow-y: auto;
       z-index: 85;
       font-family: "Noto Sans TC",sans-serif;
     }
@@ -176,7 +176,6 @@ function _moveDown(btn) {
 <div data-include="banner"></div>
 <div data-include="nav"></div>
 
-<style>.site-header-wrap,.site-banner-wrap,.int-sub-nav-sticky{display:none!important}</style>
 
 <div class="builder-bar">
   <div class="builder-bar-title">⭐ POI 頁面組合器</div>
@@ -629,7 +628,9 @@ document.getElementById('btnGenerate').addEventListener('click', function() {
     var d = MODULE_DATA[key];
     if (!d) return;
     if (!usedCSS[d.page]) {
-      allCSS += '\n/* ' + d.page + ' */\n' + d.css;
+      // 過濾掉 iframe 預覽注入的置中 CSS（從 .demo-wrap{display:none 開始的段落）
+      var cleanCSS = d.css.replace(/\n?\.demo-wrap\s*\{[^}]*display\s*:\s*none[^}]*\}[\s\S]*$/, '');
+      allCSS += '\n/* ' + d.page + ' */\n' + cleanCSS;
       usedCSS[d.page] = true;
     }
     allHTML += '\n<!-- ' + d.cat + ' / ' + d.page + ' / ' + d.title + ' -->\n' + d.html + '\n';
