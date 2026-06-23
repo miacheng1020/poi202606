@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <style>
+    /* ===== 內層 Tab ===== */
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
+    .int-sub-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      padding: 0;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+    .int-sub-nav .sub-tab {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      height: 48px;
+      min-width: 91px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      color: #FFFFFF;
+      box-sizing: border-box;
+      text-decoration: none;
+    }
+    .int-sub-nav .sub-tab:first-child { min-width: 92px; }
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+    }
+
+    /* ===== Section 共用 ===== */
+    .int-section {
+      width: 1400px;
+      margin: 0 auto;
+      padding: 50px 0 60px;
+    }
+    .int-section-title {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+      text-align: center;
+      letter-spacing: 1px;
+      color: #333333;
+      margin-bottom: 18px;
+    }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      line-height: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+    }
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== Demo wrap ===== */
+    .demo-wrap {
+      width: 1400px;
+      min-height: 700px;
+      background: #FFF9F0;
+      border: 0.5px solid #333333;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 30px;
+    }
+
+    /* ===== Wireframe wrap ===== */
+    .wireframe-wrap {
+      width: 1400px;
+      min-height: 700px;
+      background: #E5E5E5;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 30px;
+    }
+
+    /* ===================================
+       INT4 — 一排四個
+    =================================== */
+    .int4-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 17px;
+    }
+
+    /* demo 卡片 */
+    .int4-demo-card {
+      width: 278px;
+      display: flex;
+      flex-direction: column;
+    }
+    .int4-demo-card .card-img {
+      width: 278px;
+      height: 177px;
+      background: #FFFFFF;
+      border: 1.5px solid #FFB06B;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .int4-demo-card .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .int4-demo-card .card-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 4px 16px;
+      background: #FE6011;
+      border-radius: 0 0 10px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .int4-demo-card .card-rect { width: 278px; height: 26px; background: #FFEEC9; }
+    .int4-demo-card .card-text {
+      width: 278px;
+      background: #FFEEC9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 14px 15px;
+      gap: 8px;
+      box-sizing: border-box;
+    }
+    .int4-demo-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 130%;
+      text-align: center;
+      color: #FE6011;
+      width: 100%;
+    }
+    .int4-demo-card .card-line { width: 100%; height: 1px; background: #FFB06B; }
+    .int4-demo-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      color: #563823;
+      width: 100%;
+    }
+    .int4-demo-card .card-price {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 24px;
+      background: #FE6011;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+    }
+    .int4-demo-card .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 23px;
+    }
+    .int4-demo-card .card-price-btn {
+      width: 11px; height: 11px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .int4-demo-card .card-price-btn svg { width: 5px; height: 5px; }
+
+    /* 架構 卡片 */
+    .int4-wf-card {
+      width: 278px;
+      display: flex;
+      flex-direction: column;
+    }
+    .int4-wf-card .card-img {
+      width: 278px;
+      height: 177px;
+      background: #FFFFFF;
+      border: 1.5px solid #333333;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .int4-wf-card .card-img-inner { width: 237px; height: 161px; background: #999999; margin: auto; }
+    .int4-wf-card .card-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 4px 16px;
+      background: #333333;
+      border-radius: 0 0 10px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .int4-wf-card .card-rect { width: 278px; height: 26px; background: #FFFFFF; }
+    .int4-wf-card .card-text {
+      width: 278px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 14px 15px;
+      gap: 8px;
+      box-sizing: border-box;
+    }
+    .int4-wf-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 130%;
+      text-align: center;
+      color: #333333;
+      width: 100%;
+    }
+    .int4-wf-card .card-sale {
+      width: 100%;
+      background: #333333;
+      padding: 4px 0;
+      text-align: center;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 150%;
+    }
+    .int4-wf-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 150%;
+      color: #333333;
+      width: 100%;
+    }
+    .int4-wf-card .card-price {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      padding: 6px 24px;
+      background: #333333;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+    }
+    .int4-wf-card .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+    .int4-wf-card .card-price-btn {
+      width: 11px; height: 11px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ===================================
+       INT3 — 一排三個
+    =================================== */
+    .int3-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 17px;
+    }
+
+    /* demo */
+    .int3-demo-card {
+      width: 376px;
+      display: flex;
+      flex-direction: column;
+    }
+    .int3-demo-card .card-img {
+      width: 376px;
+      height: 239px;
+      background: #FFFFFF;
+      border: 1px solid #FFB06B;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .int3-demo-card .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .int3-demo-card .card-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 6px 16px;
+      background: #FE6011;
+      border-radius: 0 0 10px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .int3-demo-card .card-rect { width: 376px; height: 36px; background: #FFEEC9; }
+    .int3-demo-card .card-text {
+      width: 376px;
+      background: #FFEEC9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 18px 20px;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+    .int3-demo-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 130%;
+      text-align: center;
+      color: #FE6011;
+      width: 100%;
+    }
+    .int3-demo-card .card-line { width: 100%; height: 2px; background: #FFB06B; }
+    .int3-demo-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 150%;
+      text-align: center;
+      color: #563823;
+      width: 100%;
+    }
+    .int3-demo-card .card-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 28px;
+      background: #FE6011;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+    }
+    .int3-demo-card .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+    .int3-demo-card .card-price-btn {
+      width: 15px; height: 15px;
+      background: #FFFFFF;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* 架構 */
+    .int3-wf-card {
+      width: 376px;
+      display: flex;
+      flex-direction: column;
+    }
+    .int3-wf-card .card-img {
+      width: 376px;
+      height: 239px;
+      background: #FFFFFF;
+      border: 1px solid #333333;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .int3-wf-card .card-img-inner { width: 321px; height: 217px; background: #999999; margin: auto; }
+    .int3-wf-card .card-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 6px 16px;
+      background: #333333;
+      border-radius: 0 0 10px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .int3-wf-card .card-rect { width: 376px; height: 36px; background: #FFFFFF; }
+    .int3-wf-card .card-text {
+      width: 376px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px 18px 20px;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+    .int3-wf-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 130%;
+      text-align: center;
+      color: #333333;
+      width: 100%;
+    }
+    .int3-wf-card .card-sale {
+      width: 100%;
+      background: #333333;
+      padding: 6px 0;
+      text-align: center;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+    .int3-wf-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 150%;
+      text-align: center;
+      color: #333333;
+      width: 100%;
+    }
+    .int3-wf-card .card-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 28px;
+      background: #333333;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+    }
+    .int3-wf-card .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+    .int3-wf-card .card-price-btn {
+      width: 15px; height: 15px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    /* ===================================
+       INT2 — 一排二個
+    =================================== */
+    .int2-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    /* demo */
+    .int2-demo-card {
+      width: 569px;
+      display: flex;
+      flex-direction: column;
+    }
+    .int2-demo-card .card-img {
+      width: 569px;
+      height: 361px;
+      background: #FFFFFF;
+      border: 2px solid #FFB06B;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .int2-demo-card .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .int2-demo-card .card-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 8px 16px;
+      background: #333333;
+      border-radius: 0 0 10px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      white-space: nowrap;
+      visibility: hidden;
+    }
+    .int2-demo-card .card-rect { width: 569px; height: 54px; background: #FFEEC9; }
+    .int2-demo-card .card-text {
+      width: 569px;
+      background: #FFEEC9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 26px;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+    .int2-demo-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 130%;
+      text-align: center;
+      color: #FE6011;
+      width: 100%;
+    }
+    .int2-demo-card .card-line { width: 100%; height: 2px; background: #FFB06B; }
+    .int2-demo-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 150%;
+      color: #563823;
+      width: 100%;
+    }
+    .int2-demo-card .card-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 28px;
+      background: #FE6011;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+    }
+    .int2-demo-card .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+    .int2-demo-card .card-price-btn {
+      width: 20px; height: 20px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    /* 架構 */
+    .int2-wf-card {
+      width: 569px;
+      display: flex;
+      flex-direction: column;
+    }
+    .int2-wf-card .card-img {
+      width: 569px;
+      height: 361px;
+      background: #FFFFFF;
+      border: 2px solid #333333;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+    .int2-wf-card .card-img-inner { width: 486px; height: 329px; background: #999999; margin: auto; }
+    .int2-wf-card .card-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 8px 16px;
+      background: #333333;
+      border-radius: 0 0 10px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .int2-wf-card .card-rect { width: 569px; height: 54px; background: #FFFFFF; }
+    .int2-wf-card .card-text {
+      width: 569px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 26px;
+      gap: 10px;
+      box-sizing: border-box;
+    }
+    .int2-wf-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 130%;
+      text-align: center;
+      color: #333333;
+      width: 100%;
+    }
+    .int2-wf-card .card-sale {
+      width: 100%;
+      background: #333333;
+      padding: 6px 0;
+      text-align: center;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+    .int2-wf-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 150%;
+      color: #333333;
+      width: 100%;
+    }
+    .int2-wf-card .card-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 28px;
+      background: #333333;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+    }
+    .int2-wf-card .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+    .int2-wf-card .card-price-btn {
+      width: 20px; height: 20px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    /* ===================================
+       INT1 — 一排一個
+    =================================== */
+    /* demo */
+    .int1-demo-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 1162px;
+    }
+    .int1-demo-img {
+      width: 569px;
+      height: 390px;
+      background: #FFFFFF;
+      border: 1px solid #FFB06B;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .int1-demo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .int1-demo-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 12px 16px;
+      background: #FE6011;
+      border-radius: 0 0 15px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .int1-demo-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 645px;
+    }
+    .int1-demo-spacer { width: 52px; height: 287px; background: #FFFFFF; flex-shrink: 0; }
+    .int1-demo-text {
+      width: 593px;
+      height: 287px;
+      background: #FFEEC9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 25px 24px;
+      gap: 12px;
+      box-sizing: border-box;
+    }
+    .int1-demo-text .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 130%;
+      text-align: center;
+      color: #FE6011;
+      width: 100%;
+    }
+    .int1-demo-text .card-line { width: 100%; height: 3px; background: #FFB06B; }
+    .int1-demo-text .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 150%;
+      color: #563823;
+      width: 100%;
+    }
+    .int1-demo-text .card-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 32px;
+      background: #FE6011;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .int1-demo-text .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+    .int1-demo-text .card-price-btn {
+      width: 20px; height: 20px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    /* 架構 */
+    .int1-wf-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 1162px;
+    }
+    .int1-wf-img {
+      width: 569px;
+      height: 390px;
+      background: #FFFFFF;
+      border: 1px solid #333333;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .int1-wf-img-inner { width: 536px; height: 358px; background: #999999; }
+    .int1-wf-tag {
+      position: absolute;
+      left: 0; top: 0;
+      padding: 12px 16px;
+      background: #333333;
+      border-radius: 0 0 15px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+    .int1-wf-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 645px;
+    }
+    .int1-wf-spacer { width: 52px; height: 342px; background: #FFFFFF; flex-shrink: 0; }
+    .int1-wf-text {
+      width: 593px;
+      height: 342px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 25px 24px;
+      gap: 12px;
+      box-sizing: border-box;
+    }
+    .int1-wf-text .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 130%;
+      text-align: center;
+      color: #333333;
+      width: 100%;
+    }
+    .int1-wf-text .card-sale {
+      width: 100%;
+      background: #333333;
+      padding: 8px 0;
+      text-align: center;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+    .int1-wf-text .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 150%;
+      color: #333333;
+      width: 100%;
+    }
+    .int1-wf-text .card-price {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 8px 32px;
+      background: #333333;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .int1-wf-text .card-price span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+    .int1-wf-text .card-price-btn {
+      width: 20px; height: 20px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    /* ===== TOP 按鈕 ===== */
+    #topBtn {
+      position: fixed;
+      right: 24px; bottom: 32px;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none; cursor: pointer;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1919px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .wireframe-wrap, .demo-wrap { width: 100%; box-sizing: border-box; overflow-x: auto; }
+    }
+
+    @media (max-width: 1024px) {
+      .int-section { padding: 40px 20px; }
+      .wireframe-wrap, .demo-wrap { padding: 20px; }
+
+      /* 4欄 → 2欄 */
+      .int4-row { width: 100%; flex-wrap: wrap; justify-content: center; gap: 16px; }
+      .int4-demo-card, .int4-wf-card {
+        width: calc(50% - 8px); min-width: 240px;
+        display: flex; flex-direction: column;
+      }
+      .int4-demo-card .card-img, .int4-wf-card .card-img { width: 100%; height: auto; aspect-ratio: 3/2; }
+      .int4-demo-card .card-rect, .int4-demo-card .card-text,
+      .int4-wf-card .card-rect, .int4-wf-card .card-text { width: 100%; }
+
+      /* 3欄 → 1欄 */
+      .int3-row { width: 100%; flex-wrap: wrap; justify-content: center; gap: 24px; }
+      .int3-demo-card, .int3-wf-card { width: 100%; max-width: 480px; }
+      .int3-demo-card .card-img, .int3-wf-card .card-img { width: 100%; height: auto; aspect-ratio: 3/2; }
+      .int3-demo-card .card-rect, .int3-demo-card .card-text,
+      .int3-wf-card .card-rect, .int3-wf-card .card-text { width: 100%; }
+
+      /* 2欄 → 1欄 */
+      .int2-row { width: 100%; flex-wrap: wrap; justify-content: center; gap: 24px; }
+      .int2-demo-card, .int2-wf-card { width: 100%; max-width: 560px; }
+      .int2-demo-card .card-img, .int2-wf-card .card-img { width: 100%; height: auto; aspect-ratio: 3/2; }
+      .int2-demo-card .card-rect, .int2-demo-card .card-text,
+      .int2-wf-card .card-rect, .int2-wf-card .card-text { width: 100%; }
+
+      /* 1欄 */
+      .int1-demo-wrap, .int1-wf-wrap {
+        width: 100%; max-width: 640px; height: auto;
+        margin: 0 auto; flex-direction: column; align-items: center;
+      }
+      .int1-demo-img, .int1-wf-img {
+        width: 100%; height: 0; padding-bottom: 68%; border-radius: 12px;
+      }
+      .int1-demo-content, .int1-wf-content { width: 100%; }
+      .int1-demo-spacer, .int1-wf-spacer { display: none; }
+      .int1-demo-text, .int1-wf-text { width: 100%; height: auto; }
+    }
+
+    @media (max-width: 767px) {
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto; overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; flex-wrap: nowrap; height: auto; align-items: stretch;
+      }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .wireframe-wrap, .demo-wrap { padding: 20px 16px; min-height: auto; }
+
+      /* 全部1欄，卡片統一 278px */
+      .int4-row, .int3-row, .int2-row {
+        flex-direction: column; align-items: center; width: 100%; gap: 32px;
+      }
+
+      /* ===== M版 demo 卡片（橘色系）===== */
+      .int4-demo-card, .int3-demo-card, .int2-demo-card {
+        width: 278px !important; flex-shrink: 0;
+        display: flex; flex-direction: column;
+      }
+      .int4-demo-card .card-img, .int3-demo-card .card-img, .int2-demo-card .card-img {
+        width: 278px !important; height: 0 !important;
+        padding-bottom: 76.98% !important;
+        position: relative !important; overflow: hidden; flex-shrink: 0;
+      }
+      .int4-demo-card .card-img img, .int3-demo-card .card-img img, .int2-demo-card .card-img img {
+        position: absolute; top: 0; left: 0;
+        width: 100% !important; height: 100% !important; object-fit: cover;
+      }
+      .int4-demo-card .card-rect, .int3-demo-card .card-rect, .int2-demo-card .card-rect {
+        width: 278px !important;
+      }
+      .int4-demo-card .card-text, .int3-demo-card .card-text, .int2-demo-card .card-text {
+        width: 278px !important; box-sizing: border-box;
+      }
+      .int4-demo-card .card-name, .int3-demo-card .card-name, .int2-demo-card .card-name {
+        font-size: 20px !important; width: 100%;
+      }
+      .int4-demo-card .card-detail, .int3-demo-card .card-detail, .int2-demo-card .card-detail {
+        font-size: 16px !important; width: 100%;
+      }
+
+      /* ===== M版 架構 卡片（黑色系）===== */
+      .int4-wf-card, .int3-wf-card, .int2-wf-card {
+        width: 278px !important; flex-shrink: 0;
+        display: flex; flex-direction: column;
+      }
+      .int4-wf-card .card-img, .int3-wf-card .card-img, .int2-wf-card .card-img {
+        width: 278px !important; height: 0 !important;
+        padding-bottom: 76.98% !important;
+        position: relative !important; overflow: hidden; flex-shrink: 0;
+      }
+      .int4-wf-card .card-img-inner, .int3-wf-card .card-img-inner, .int2-wf-card .card-img-inner {
+        position: absolute; top: 0; left: 0;
+        width: 100% !important; height: 100% !important;
+      }
+      .int4-wf-card .card-rect, .int3-wf-card .card-rect, .int2-wf-card .card-rect {
+        width: 278px !important;
+      }
+      .int4-wf-card .card-text, .int3-wf-card .card-text, .int2-wf-card .card-text {
+        width: 278px !important; box-sizing: border-box;
+      }
+      .int4-wf-card .card-name, .int3-wf-card .card-name, .int2-wf-card .card-name {
+        font-size: 20px !important; width: 100%;
+      }
+      .int4-wf-card .card-sale, .int3-wf-card .card-sale, .int2-wf-card .card-sale {
+        font-size: 16px !important; width: 100%;
+      }
+      .int4-wf-card .card-detail, .int3-wf-card .card-detail, .int2-wf-card .card-detail {
+        font-size: 16px !important; width: 100%;
+      }
+
+      /* ===== 一排一個 M版 ===== */
+      .int1-demo-wrap, .int1-wf-wrap {
+        width: 278px !important; height: auto; margin: 0 auto;
+        flex-direction: column; align-items: center;
+      }
+      .int1-demo-img, .int1-wf-img {
+        width: 278px !important; height: 0 !important;
+        padding-bottom: 76.98% !important;
+        border-radius: 10px; overflow: hidden;
+      }
+      .int1-demo-img img {
+        position: absolute; top: 0; left: 0;
+        width: 100% !important; height: 100% !important; object-fit: cover;
+      }
+      .int1-wf-img-inner {
+        position: absolute; top: 0; left: 0;
+        width: 100% !important; height: 100% !important;
+      }
+      .int1-demo-content, .int1-wf-content { width: 278px; }
+      .int1-demo-spacer, .int1-wf-spacer { display: none; }
+      .int1-demo-text, .int1-wf-text {
+        width: 260px !important; height: auto !important;
+        margin-top: -26px; padding: 14px; gap: 8px; box-sizing: border-box;
+      }
+      .int1-demo-text .card-name, .int1-wf-text .card-name {
+        font-size: 20px !important; width: 100%;
+      }
+      .int1-demo-text .card-detail, .int1-wf-text .card-detail {
+        font-size: 16px !important; width: 100%;
+      }
+      .int1-wf-text .card-sale { font-size: 16px !important; width: 100%; }
+    }
+  </style>
+</head>
+<body data-id="int" data-page="intro">
+
+<!-- Header -->
+<div data-include="header"></div>
+
+<!-- Banner -->
+<div data-include="banner"></div>
+
+<!-- 外層 Nav -->
+<div data-include="nav"></div>
+
+<!-- 內層 Tab -->
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
+    <a class="sub-tab active" href="INT_02.html#content">介紹_02</a>
+    <a class="sub-tab" href="INT_03.html#content">介紹_03</a>
+    <a class="sub-tab" href="INT_04.html#content">介紹_04</a>
+    <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
+    <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
+    <a class="sub-tab" href="INT_07.html#content">介紹_07</a>
+    <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
+  </div>
+</div>
+
+<!-- ===== 一排四個 ===== -->
+<div class="int-section">
+  <div class="int-section-title">一排四個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-4">demo</button>
+    <button class="toggle-btn" data-view="wf-4">架構</button>
+  </div>
+  <!-- demo -->
+  <div class="demo-wrap view-panel active" id="demo-4">
+    <div class="int4-row">
+      <div class="int4-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
+        </div>
+      </div>
+      <div class="int4-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
+        </div>
+      </div>
+      <div class="int4-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
+        </div>
+      </div>
+      <div class="int4-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-4">
+    <div class="int4-row">
+      <div class="int4-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+      <div class="int4-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+      <div class="int4-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+      <div class="int4-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 一排三個 ===== -->
+<div class="int-section">
+  <div class="int-section-title">一排三個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-3">demo</button>
+    <button class="toggle-btn" data-view="wf-3">架構</button>
+  </div>
+  <!-- demo -->
+  <div class="demo-wrap view-panel active" id="demo-3">
+    <div class="int3-row">
+      <div class="int3-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝，結合現代舒適和當地文化特色設計，戶外提供大片游泳池。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 7 7" width="7" height="7"><path d="M0 0L7 3.5L0 7V0Z" fill="#FE6011"/></svg></div></button>
+        </div>
+      </div>
+      <div class="int3-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝，結合現代舒適和當地文化特色設計，戶外提供大片游泳池。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 7 7" width="7" height="7"><path d="M0 0L7 3.5L0 7V0Z" fill="#FE6011"/></svg></div></button>
+        </div>
+      </div>
+      <div class="int3-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝，結合現代舒適和當地文化特色設計，戶外提供大片游泳池。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 7 7" width="7" height="7"><path d="M0 0L7 3.5L0 7V0Z" fill="#FE6011"/></svg></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-3">
+    <div class="int3-row">
+      <div class="int3-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+      <div class="int3-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+      <div class="int3-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 一排二個 ===== -->
+<div class="int-section">
+  <div class="int-section-title">一排二個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-2">demo</button>
+    <button class="toggle-btn" data-view="wf-2">架構</button>
+  </div>
+  <!-- demo -->
+  <div class="demo-wrap view-panel active" id="demo-2">
+    <div class="int2-row">
+      <div class="int2-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。戶外提供大片游泳池、健身中心和兒童遊樂區等豐富的休閒設施。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+      <div class="int2-demo-card">
+        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。戶外提供大片游泳池、健身中心和兒童遊樂區等豐富的休閒設施。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-2">
+    <div class="int2-row">
+      <div class="int2-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+      <div class="int2-wf-card">
+        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
+        <div class="card-rect"></div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== 一排一個 ===== -->
+<div class="int-section">
+  <div class="int-section-title">一排一個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-1">demo</button>
+    <button class="toggle-btn" data-view="wf-1">架構</button>
+  </div>
+  <!-- demo -->
+  <div class="demo-wrap view-panel active" id="demo-1">
+    <div class="int1-demo-wrap">
+      <div class="int1-demo-img">
+        <img src="images/img_INT_02.jpg" alt="">
+        <div class="int1-demo-tag">標籤字數限八字元</div>
+      </div>
+      <div class="int1-demo-content">
+        <div class="int1-demo-spacer"></div>
+        <div class="int1-demo-text">
+          <div class="card-name">六一溜阿寬馬來西亞</div>
+          <div class="card-line"></div>
+          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。戶外提供大片游泳池、健身中心和兒童遊樂區等豐富的休閒設施，提供免費wi-fi及免費的空間乾淨享受。</div>
+          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-1">
+    <div class="int1-wf-wrap">
+      <div class="int1-wf-img">
+        <div class="int1-wf-img-inner"></div>
+        <div class="int1-wf-tag">標籤字數限八字元</div>
+      </div>
+      <div class="int1-wf-content">
+        <div class="int1-wf-spacer"></div>
+        <div class="int1-wf-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div data-include="footer"></div>
+
+<!-- TOP 按鈕 -->
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+</script>
+
+<script src="js/include.js"></script>
+</body>
+</html>

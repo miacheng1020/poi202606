@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <style>
+
+    /* ===== 副選單 ===== */
+    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
+    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
+    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
+    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+
+    /* ===== Section ===== */
+    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
+    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
+    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
+    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== wrap ===== */
+    .demo-wrap {
+      width: 1400px; min-height: 700px;
+      background: #CFF2A4;
+      box-sizing: border-box; padding: 55px 0;
+    }
+    .wireframe-wrap {
+      width: 1400px; min-height: 700px;
+      background: #E5E5E5; border: 0.5px solid #333333;
+      box-sizing: border-box; padding: 55px 0;
+    }
+
+    /* ===== 共用 inner ===== */
+    .prd-inner {
+      width: 1162px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    /* ============================================
+       大卡（一排一個）PRD1 共用
+    ============================================ */
+    .prd1-card {
+      position: relative;
+      width: 1162px;
+      background: #FFFFFF;
+      display: flex; flex-direction: row;
+      align-items: flex-start;
+      padding: 16px; gap: 16px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    .demo-wrap .prd1-card { border-radius: 10px; }
+
+    .prd1-card .card-img {
+      position: relative;
+      width: 551px; aspect-ratio: 3 / 2;
+      flex-shrink: 0; overflow: hidden;
+    }
+    .prd1-card .card-img img,
+    .prd1-card .card-img .img-grey {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .prd1-card .card-img .img-grey { background: #999999; }
+
+    .prd1-card .card-text {
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      gap: 8px; flex: 1; min-width: 0;
+    }
+    .prd1-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 24px; line-height: 29px;
+      color: #333333; width: 100%;
+    }
+    .prd1-card .card-sale {
+      display: flex; align-items: center;
+      padding: 8px; gap: 8px; width: 100%; min-height: 40px; height: auto;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 20px; line-height: 24px;
+      color: #FFFFFF; box-sizing: border-box;
+    }
+    .demo-wrap .prd1-card .card-sale { background: #FE6011; }
+    .wireframe-wrap .prd1-card .card-sale { background: #333333; width: 100%; }
+
+    .prd1-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 18px; line-height: 28px;
+      color: #515151; width: 100%; flex: 1;
+    }
+    .prd1-card .card-price {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 16px; line-height: 1.2;
+      text-align: right; width: 100%;
+      margin-top: auto;
+      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+    }
+    .prd1-card .card-price .price-num {
+      font-size: 34px !important; font-weight: 700; line-height: 1;
+    }
+    .demo-wrap .prd1-card .card-price { color: #14A483; }
+    .wireframe-wrap .prd1-card .card-price { color: #333333; }
+
+    /* PRD1 tag */
+    .prd1-card .card-tag {
+      position: absolute; left: 0; top: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px 20px; height: 34px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 18px; font-weight: 400; color: #FFFFFF;
+      white-space: nowrap; box-sizing: border-box;
+    }
+    /* demo：箭頭 tag */
+    .demo-wrap .prd1-card .card-tag {
+      background: #14A483;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+      padding-right: 24px;
+    }
+    /* 架構：圓角矩形 tag */
+    .wireframe-wrap .prd1-card .card-tag {
+      background: #333333;
+      border-radius: 0 20px 20px 0;
+    }
+
+    /* ============================================
+       小卡群組 row
+    ============================================ */
+    .prd-row {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      width: 1162px;
+      gap: 16px;
+    }
+
+    /* ============================================
+       PRD4 小卡：278×420px 垂直
+    ============================================ */
+    .prd4-card {
+      position: relative;
+      width: 278px; height: 420px;
+      flex-shrink: 0;
+      background: #FFFFFF;
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      padding: 16px; gap: 0;
+      box-sizing: border-box; overflow: hidden;
+    }
+    .demo-wrap .prd4-card { border-radius: 10px; height: auto; }
+    .wireframe-wrap .prd4-card { height: auto; overflow: visible; }
+
+    .prd4-card .card-img {
+      position: relative;
+      width: 100%; aspect-ratio: 3 / 2;
+      flex-shrink: 0; overflow: hidden; margin-bottom: 8px;
+    }
+    .prd4-card .card-img img,
+    .prd4-card .card-img .img-grey {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .prd4-card .card-img .img-grey { background: #999999; }
+
+    /* PRD4 tag */
+    .prd4-card .card-tag {
+      position: absolute; left: 0; top: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6px 12px; height: 28px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px; font-weight: 400; color: #FFFFFF;
+      white-space: nowrap; box-sizing: border-box;
+    }
+    .demo-wrap .prd4-card .card-tag {
+      background: #14A483;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+      padding-right: 18px;
+    }
+    .wireframe-wrap .prd4-card .card-tag {
+      background: #333333;
+      border-radius: 0 50px 50px 0;
+      padding: 8px 16px; height: 30px; font-size: 14px;
+    }
+
+    .prd4-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 18px; line-height: 22px;
+      color: #333333; width: 100%; margin-bottom: 8px;
+    }
+    .demo-wrap .prd4-card .card-name { height: 66px; overflow: hidden; }
+
+    .prd4-card .card-sale {
+      display: flex; align-items: center;
+      padding: 8px; gap: 8px; width: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 14px; line-height: 17px;
+      color: #FFFFFF; box-sizing: border-box; margin-bottom: 8px;
+    }
+    .demo-wrap .prd4-card .card-sale { background: #FE6011; }
+    .wireframe-wrap .prd4-card .card-sale { background: #333333; }
+
+    .prd4-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 20px;
+      color: #333333; width: 100%;
+    }
+    .demo-wrap .prd4-card .card-detail { flex: 1; }
+
+    .prd4-card .card-price {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2;
+      text-align: right; width: 100%;
+      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+    }
+    .prd4-card .card-price .price-num { font-size: 24px !important; font-weight: 700; line-height: 1; }
+    .demo-wrap .prd4-card .card-price { color: #14A483; margin-top: auto; }
+    .wireframe-wrap .prd4-card .card-price { color: #333333; }
+
+    /* ============================================
+       PRD3 中卡：376×466px 垂直
+    ============================================ */
+    .prd3-card {
+      position: relative;
+      width: 376px; height: 466px;
+      flex-shrink: 0;
+      background: #FFFFFF;
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      padding: 16px; gap: 0;
+      box-sizing: border-box; overflow: hidden;
+    }
+    .demo-wrap .prd3-card { border-radius: 10px; height: auto; }
+    .wireframe-wrap .prd3-card { height: auto; overflow: visible; }
+
+    .prd3-card .card-img {
+      position: relative;
+      width: 100%; aspect-ratio: 3 / 2;
+      flex-shrink: 0; overflow: hidden; margin-bottom: 8px;
+    }
+    .prd3-card .card-img img,
+    .prd3-card .card-img .img-grey {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .prd3-card .card-img .img-grey { background: #999999; }
+
+    .prd3-card .card-tag {
+      position: absolute; left: 0; top: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 12px; height: 36px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px; font-weight: 400; color: #FFFFFF;
+      white-space: nowrap; box-sizing: border-box;
+    }
+    .demo-wrap .prd3-card .card-tag {
+      background: #14A483;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+      padding-right: 22px;
+    }
+    .wireframe-wrap .prd3-card .card-tag {
+      background: #333333;
+      border-radius: 0 20px 20px 0;
+      padding: 8px 16px; height: 30px;
+    }
+
+    .prd3-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 18px; line-height: 22px;
+      color: #333333; width: 100%; margin-bottom: 8px;
+    }
+    .demo-wrap .prd3-card .card-name { height: 44px; overflow: hidden; }
+
+    .prd3-card .card-sale {
+      display: flex; align-items: center;
+      padding: 8px; gap: 8px; width: 100%; min-height: 33px; height: auto;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 14px; line-height: 17px;
+      color: #FFFFFF; box-sizing: border-box; margin-bottom: 8px;
+    }
+    .demo-wrap .prd3-card .card-sale { background: #FE6011; }
+    .wireframe-wrap .prd3-card .card-sale { background: #333333; }
+
+    .prd3-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 20px;
+      color: #333333; width: 100%;
+    }
+    .demo-wrap .prd3-card .card-detail { flex: 1; }
+
+    .prd3-card .card-price {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2;
+      text-align: right; width: 100%;
+      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+    }
+    .prd3-card .card-price .price-num { font-size: 24px !important; font-weight: 700; line-height: 1; }
+    .demo-wrap .prd3-card .card-price { color: #14A483; margin-top: auto; }
+    .wireframe-wrap .prd3-card .card-price { color: #333333; }
+
+    /* ============================================
+       PRD2 橫式卡：573×259px
+    ============================================ */
+    .prd2-inner { gap: 17px; }
+
+    .prd2-card {
+      position: relative;
+      width: 573px; height: 259px;
+      flex-shrink: 0;
+      background: #FFFFFF;
+      display: flex; flex-direction: row;
+      align-items: flex-start;
+      padding: 14px; gap: 14px;
+      box-sizing: border-box; overflow: hidden;
+    }
+    .demo-wrap .prd2-card { border-radius: 10px; }
+    .wireframe-wrap .prd2-card { height: auto; overflow: visible; }
+
+    .prd2-card .card-img {
+      position: relative;
+      width: 299px; aspect-ratio: 3 / 2;
+      flex-shrink: 0; overflow: hidden;
+    }
+    .prd2-card .card-img img,
+    .prd2-card .card-img .img-grey {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .demo-wrap .prd2-card .card-img { background: #FE6011; }
+    .prd2-card .card-img .img-grey { background: #999999; }
+
+    .prd2-card .card-tag {
+      position: absolute; left: 0; top: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 12px; height: 36px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px; font-weight: 400; color: #FFFFFF;
+      white-space: nowrap; box-sizing: border-box;
+    }
+    .demo-wrap .prd2-card .card-tag {
+      background: #14A483;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%);
+      padding-right: 22px;
+    }
+    .wireframe-wrap .prd2-card .card-tag {
+      background: #333333;
+      border-radius: 0 20px 20px 0;
+      padding: 8px 16px; height: 30px;
+    }
+
+    .prd2-card .card-text {
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: 8px;
+      flex: 1; min-width: 0;
+    }
+    .prd2-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 18px; line-height: 24px;
+      color: #333333; width: 100%;
+    }
+    .demo-wrap .prd2-card .card-name { height: 72px; overflow: hidden; }
+
+    .prd2-card .card-sale {
+      display: flex; align-items: center;
+      padding: 8px; gap: 8px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 14px; line-height: 17px;
+      color: #FFFFFF; min-height: 33px; height: auto; box-sizing: border-box;
+    }
+    .demo-wrap .prd2-card .card-sale { background: #FE6011; }
+    .wireframe-wrap .prd2-card .card-sale { background: #333333; width: 100%; }
+
+    .prd2-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 20px;
+      color: #333333; width: 100%;
+    }
+    .demo-wrap .prd2-card .card-detail { flex: 1; }
+
+    .prd2-card .card-price {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2;
+      text-align: right; width: 100%;
+      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+    }
+    .prd2-card .card-price .price-num { font-size: 24px !important; font-weight: 700; line-height: 1; }
+    .demo-wrap .prd2-card .card-price { color: #14A483; margin-top: auto; }
+    .wireframe-wrap .prd2-card .card-price { color: #333333; }
+
+    /* 架構 tag 相對卡片定位（不在 img 內） */
+    .wireframe-wrap .prd4-card .card-tag,
+    .wireframe-wrap .prd3-card .card-tag,
+    .wireframe-wrap .prd2-card .card-tag,
+    .wireframe-wrap .prd1-card .card-tag {
+      position: absolute; left: 0; top: 0; z-index: 3;
+    }
+    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    /* ===== 大平板 ≤1200 ===== */
+    @media (max-width: 1200px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .demo-wrap, .wireframe-wrap { width: 100%; }
+      .prd-inner { width: 100%; max-width: 1162px; }
+      .prd-row { width: 100%; max-width: 1162px; }
+      .prd1-card { width: 100%; }
+      .prd1-card .card-img { width: 55%; }
+    }
+
+    /* ===== 平板 ≤992 ===== */
+    @media (max-width: 992px) {
+      .int-section { padding: 40px 20px; }
+      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
+      /* prd4 → 2欄 */
+      .prd-row { flex-wrap: wrap; justify-content: center; }
+      .prd4-card { width: calc(50% - 8px); }
+      /* prd3 → 2欄 */
+      .prd3-card { width: calc(50% - 8px); max-width: none; }
+      /* prd2 → 維持2欄 */
+      .prd2-card { width: calc(50% - 8px); }
+      /* prd1 → 維持橫式 */
+      .prd1-card .card-img { width: 50%; }
+    }
+
+    /* ===== 手機橫向 ≤768（主力，套 M 版字級）===== */
+    @media (max-width: 768px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
+      /* demo 版固定高度解除，避免標題/內文被裁切 */
+      .demo-wrap .prd1-card .card-name, .demo-wrap .prd2-card .card-name,
+      .demo-wrap .prd3-card .card-name, .demo-wrap .prd4-card .card-name { height: auto !important; overflow: visible !important; }
+      .demo-wrap .prd1-card .card-detail, .demo-wrap .prd2-card .card-detail,
+      .demo-wrap .prd3-card .card-detail, .demo-wrap .prd4-card .card-detail { height: auto !important; overflow: visible !important; }
+      .demo-wrap .prd1-card .card-text, .demo-wrap .prd2-card .card-text { height: auto !important; }
+      /* === M版字級下限 === */
+      .prd1-card .card-name, .prd2-card .card-name, .prd3-card .card-name, .prd4-card .card-name { font-size: 20px; line-height: 1.3; height: auto; }
+      .prd1-card .card-sale, .prd2-card .card-sale, .prd3-card .card-sale, .prd4-card .card-sale { font-size: 16px; line-height: 1.3; height: auto; }
+      .prd1-card .card-detail, .prd2-card .card-detail, .prd3-card .card-detail, .prd4-card .card-detail { font-size: 16px; line-height: 1.5; height: auto; }
+      .prd1-card .card-price, .prd2-card .card-price, .prd3-card .card-price, .prd4-card .card-price { font-size: 16px; }
+      .prd1-card .card-price .price-num, .prd2-card .card-price .price-num,
+      .prd3-card .card-price .price-num, .prd4-card .card-price .price-num { font-size: 26px !important; }
+      /* 排列：prd4 → 2欄，其餘單欄 */
+      .prd-row { flex-wrap: wrap; justify-content: center; }
+      .prd4-card { width: calc(50% - 8px); }
+      .prd3-card { width: 100%; max-width: 420px; }
+      .prd2-card { width: 100%; max-width: 420px; height: auto; flex-direction: column; }
+      .prd2-card .card-img { width: 100%; }
+      .prd1-card { width: 100%; flex-direction: column; }
+      .prd1-card .card-img { width: 100%; }
+      .prd1-card .card-text { width: 100%; }
+    }
+
+    /* ===== 手機直向 ≤576：全部單欄 278 ===== */
+    @media (max-width: 576px) {
+      .prd-inner { width: 278px; }
+      .prd-row { width: 278px; flex-direction: column; align-items: center; }
+      .prd4-card { width: 278px; }
+      .prd3-card { width: 278px; max-width: 278px; }
+      .prd2-card { width: 278px; max-width: 278px; }
+      .prd1-card { width: 278px; }
+    }
+  </style>
+</head>
+<body data-id="prd" data-page="product">
+
+<div data-include="header"></div>
+<div data-include="banner"></div>
+<div data-include="nav"></div>
+
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab" href="PRD_01.html#content">產品_01</a>
+    <a class="sub-tab active" href="PRD_02.html#content">產品_02</a>
+    <a class="sub-tab" href="PRD_03.html#content">產品_03</a>
+    <a class="sub-tab" href="PRD_04.html#content">產品_04</a>
+  </div>
+</div>
+
+<!-- =============================================
+     一+四個
+============================================= -->
+<div class="int-section">
+  <div class="int-section-title">一+四個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-p14">demo</button>
+    <button class="toggle-btn" data-view="wf-p14">架構</button>
+  </div>
+
+  <!-- demo -->
+  <div class="demo-wrap view-panel active" id="demo-p14">
+    <div class="prd-inner">
+      <!-- 大卡 -->
+      <div class="prd1-card">
+        <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">曼谷芭達雅大城</div>
+        <div class="card-text">
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘、體驗實彈射擊、喬德夜市 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+      </div>
+      <!-- 四小卡 -->
+      <div class="prd-row">
+        <div class="prd4-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷芭達雅</div>
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+        <div class="prd4-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷芭達雅</div>
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+        <div class="prd4-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷芭達雅</div>
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+        <div class="prd4-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷芭達雅</div>
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-p14">
+    <div class="prd-inner">
+      <div class="prd1-card">
+        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+      <div class="prd-row">
+        <div class="prd4-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd4-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd4-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd4-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     一+三個
+============================================= -->
+<div class="int-section">
+  <div class="int-section-title">一+三個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-p13">demo</button>
+    <button class="toggle-btn" data-view="wf-p13">架構</button>
+  </div>
+
+  <!-- demo -->
+  <div class="demo-wrap view-panel active" id="demo-p13">
+    <div class="prd-inner">
+      <div class="prd1-card">
+        <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">曼谷芭達雅大城</div>
+        <div class="card-text">
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘、體驗實彈射擊、喬德夜市 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+      </div>
+      <div class="prd-row">
+        <div class="prd3-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷大城</div>
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+        <div class="prd3-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷大城</div>
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+        <div class="prd3-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷大城</div>
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-p13">
+    <div class="prd-inner">
+      <div class="prd1-card">
+        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+      <div class="prd-row">
+        <div class="prd3-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd3-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd3-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     一+二個
+============================================= -->
+<div class="int-section">
+  <div class="int-section-title">一+二個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-p12">demo</button>
+    <button class="toggle-btn" data-view="wf-p12">架構</button>
+  </div>
+
+  <!-- demo -->
+  <div class="demo-wrap view-panel active" id="demo-p12">
+    <div class="prd-inner">
+      <div class="prd1-card">
+        <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">曼谷芭達雅大城</div>
+        <div class="card-text">
+          <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘、體驗實彈射擊、喬德夜市 五日</div>
+          <div class="card-sale">指定出發日：6-8月</div>
+          <div class="card-detail">• 真槍實彈，體驗實彈射擊<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+          <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+        </div>
+      </div>
+      <div class="prd-row prd2-inner">
+        <div class="prd2-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷芭達雅</div>
+          <div class="card-text">
+            <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘、體驗實彈射擊、喬德夜市 五日</div>
+            <div class="card-sale">指定出發日：6-8月</div>
+            <div class="card-detail">• 華欣市區海邊五星渡假飯店<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+            <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+          </div>
+        </div>
+        <div class="prd2-card">
+          <div class="card-img"><img src="images/img_PRD_02.jpg" alt=""></div><div class="card-tag">泰國曼谷芭達雅</div>
+          <div class="card-text">
+            <div class="card-name">【大城小市】獅子長頸鹿動物園、秘境海灘、體驗實彈射擊、喬德夜市 五日</div>
+            <div class="card-sale">指定出發日：6-8月</div>
+            <div class="card-detail">• 華欣市區海邊五星渡假飯店<br>• ALL STAR夜遊暹羅灣<br>• 時下最夯近距離與長頸鹿互動</div>
+            <div class="card-price">天數 <span class="price-num">$31,900</span>起</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-p12">
+    <div class="prd-inner">
+      <div class="prd1-card">
+        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+      <div class="prd-row prd2-inner">
+        <div class="prd2-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+        <div class="prd2-card">
+          <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-include="footer"></div>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('topBtn');
+    if (window.scrollY > 300) { btn.classList.add('visible'); }
+    else { btn.classList.remove('visible'); }
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>

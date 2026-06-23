@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Montserrat+Alternates:wght@800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <style>
+
+    /* ===== 副選單 ===== */
+    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
+    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
+    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
+    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+
+    /* ===== Section ===== */
+    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
+    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
+    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
+    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== wrap ===== */
+    .demo-wrap      { width: 1400px; min-height: 700px; background: #D8FFAC; box-sizing: border-box; padding: 95px 0; }
+    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 95px 0; border: 0.5px solid #333333; }
+
+    /* ===== 主容器 ===== */
+    .trip02-inner { display: flex; flex-direction: row; align-items: flex-start; }
+    .demo-wrap      .trip02-inner { width: 1162px; gap: 5px; }
+    .wireframe-wrap .trip02-inner { width: 1154px; gap: 16px; }
+
+    /* ===== 卡片外層 ===== */
+    .trip02-card {
+      flex-shrink: 0;
+      position: relative;
+      width: 374px;
+      display: flex; flex-direction: column;
+    }
+
+    /* ===== card-header（日期圖片區） ===== */
+    .trip02-card .card-header {
+      position: relative;
+      width: 100%; height: 70px;
+      flex-shrink: 0; z-index: 2;
+    }
+    /* demo：用圖片 */
+    .demo-wrap .trip02-card .card-header {
+      background: url('images/img_TRIP_top.png') no-repeat left top / 100% auto;
+    }
+    /* 隱藏 demo 的文字元素 */
+    .demo-wrap .trip02-card .card-header span,
+    .demo-wrap .trip02-card .card-header div { display: none; }
+    /* wireframe：用架構圖片，隱藏文字 */
+    .wireframe-wrap .trip02-card .card-header {
+      background: url('images/img_TRIP_top_2.png') no-repeat left top / 100% auto;
+    }
+    .wireframe-wrap .trip02-card .card-header span,
+    .wireframe-wrap .trip02-card .card-header div { display: none; }
+
+    /* 大日期 5/20 */
+    .trip02-card .card-date-num {
+      position: absolute;
+      left: 21px; top: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 54px; line-height: 38px;
+      letter-spacing: 0.02em; white-space: nowrap;
+    }
+    .demo-wrap      .trip02-card .card-date-num { color: #FFFFFF; }
+    .wireframe-wrap .trip02-card .card-date-num { color: #333333; }
+
+    /* 星期 （二） */
+    .trip02-card .card-date-day {
+      position: absolute;
+      left: 147px; top: 35px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600; font-size: 20px; line-height: 24px;
+      white-space: nowrap;
+    }
+    .demo-wrap      .trip02-card .card-date-day { color: #FFFFFF; }
+    .wireframe-wrap .trip02-card .card-date-day { color: #333333; }
+
+    /* 開搶時間 10:00開搶 */
+    .trip02-card .card-date-time {
+      position: absolute;
+      right: 56px; top: 27px;
+      font-family: 'Montserrat Alternates', sans-serif;
+      font-weight: 800; font-size: 27px; line-height: 22px;
+      letter-spacing: 0.05em; white-space: nowrap;
+    }
+    .demo-wrap      .trip02-card .card-date-time { color: #FFFFFF; }
+    .wireframe-wrap .trip02-card .card-date-time { color: #333333; }
+
+    /* clock icon */
+    .trip02-card .card-clock {
+      position: absolute;
+      right: 0; top: 0;
+      width: 52px; height: 55px;
+    }
+    .trip02-card .card-clock img { width: 100%; height: 100%; object-fit: contain; }
+
+    /* ===== card-body ===== */
+    .trip02-card .card-body {
+      width: 100%; padding: 16px; gap: 8px;
+      display: flex; flex-direction: column; align-items: flex-start;
+      box-sizing: border-box; border-radius: 10px;
+    }
+    .demo-wrap .trip02-card .card-body {
+      background: #5B3AFF;
+      border: 5px solid #5B3AFF;
+      box-shadow: 0px 4px 0px rgba(0,0,0,0.3);
+      margin-top: -16px; /* 與 header 重疊 16px 製造包覆效果 */
+      flex: 1;
+    }
+    .wireframe-wrap .trip02-card .card-body {
+      background: #FFFFFF;
+      border: 5px solid #FFFFFF;
+      margin-top: -13px;
+      flex: 1;
+    }
+
+    /* 圖片容器 */
+    .trip02-card .card-img-wrap {
+      position: relative;
+      width: 100%; height: 225px;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .trip02-card .card-img-wrap img,
+    .trip02-card .card-img-wrap .img-grey {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .trip02-card .card-img-wrap .img-grey { background: #999999; }
+
+    /* 商品名稱 */
+    .trip02-card .card-name {
+      width: 100%; height: auto;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 18px; line-height: 22px;
+      flex-shrink: 0;
+    }
+    .demo-wrap      .trip02-card .card-name { color: #FFFFFF; }
+    .wireframe-wrap .trip02-card .card-name { color: #333333; }
+
+    /* sale bar */
+    .trip02-card .card-sale {
+      width: 100%; padding: 8px;
+      display: flex; align-items: center;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 14px; line-height: 17px;
+      flex-shrink: 0; box-sizing: border-box;
+    }
+    .demo-wrap .trip02-card .card-sale      { background: #FAFF00; height: auto; min-height: 36px; color: #5B3AFF; }
+    .wireframe-wrap .trip02-card .card-sale { background: #333333; height: auto; min-height: 33px; color: #FFFFFF; }
+
+    /* detail */
+    .trip02-card .card-detail {
+      width: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 17px;
+      flex-shrink: 0;
+    }
+    .demo-wrap      .trip02-card .card-detail { color: #FFFFFF; }
+    .wireframe-wrap .trip02-card .card-detail { color: #333333; }
+
+    /* price */
+    .trip02-card .card-price {
+      width: 100%; margin-top: auto;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 17px;
+      display: flex; align-items: baseline; justify-content: flex-end;
+    }
+    .demo-wrap      .trip02-card .card-price { color: #FFFFFF; }
+    .wireframe-wrap .trip02-card .card-price { color: #333333; }
+    .trip02-card .card-price .price-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px !important; font-weight: 700;
+    }
+
+    /* ===== TOP ===== */
+    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1919px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .demo-wrap, .wireframe-wrap { width: 100%; }
+      .trip02-inner { width: 100%; max-width: 1162px; }
+    }
+    @media (max-width: 1024px) {
+      .int-section { padding: 40px 20px; }
+      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
+      .trip02-inner { flex-wrap: wrap; justify-content: center; gap: 24px; }
+      .demo-wrap      .trip02-card { width: calc(50% - 12px); max-width: 374px; }
+      .wireframe-wrap .trip02-card { width: calc(50% - 12px); max-width: 374px; }
+    }
+    @media (max-width: 767px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
+      .trip02-inner { width: 278px; flex-direction: column; align-items: center; }
+      .demo-wrap      .trip02-card,
+      .wireframe-wrap .trip02-card { width: 278px; }
+      .trip02-card .card-date-num  { font-size: 36px; left: 14px; }
+      .trip02-card .card-date-day  { left: 100px; top: 38px; font-size: 14px; }
+      .trip02-card .card-date-time { font-size: 18px; right: 44px; top: 30px; }
+      .trip02-card .card-clock     { width: 40px; height: 42px; }
+    }
+  </style>
+</head>
+<body data-id="trip" data-page="travel">
+
+<div data-include="header"></div>
+<div data-include="banner"></div>
+<div data-include="nav"></div>
+
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab" href="TRIP_01.html#content">旅展_01</a>
+    <a class="sub-tab active" href="TRIP_02.html#content">旅展_02</a>
+  </div>
+</div>
+
+<div class="int-section">
+  <div class="int-section-title">旅展_02</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-t02">demo</button>
+    <button class="toggle-btn" data-view="wf-t02">架構</button>
+  </div>
+
+  <!-- ===== DEMO ===== -->
+  <div class="demo-wrap view-panel active" id="demo-t02">
+    <div class="trip02-inner">
+
+      <!-- 卡片1 -->
+      <div class="trip02-card">
+        <div class="card-header">
+          <span class="card-date-num">5/20</span>
+          <span class="card-date-day">（二）</span>
+          <span class="card-date-time">10:00開搶</span>
+          <div class="card-clock"><img src="images/clock1.svg" alt="clock"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-img-wrap">
+            <img src="images/img_TRIP_02.jpg" alt="">
+          </div>
+          <div class="card-name">超澎湃海鮮蒸籠塔、阿里山森林香林神木、夏日遊暑木馬古道、品嚐油豆花三日</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+      <!-- 卡片2 -->
+      <div class="trip02-card">
+        <div class="card-header">
+          <span class="card-date-num">5/20</span>
+          <span class="card-date-day">（二）</span>
+          <span class="card-date-time">10:00開搶</span>
+          <div class="card-clock"><img src="images/clock1.svg" alt="clock"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-img-wrap">
+            <img src="images/img_TRIP_02.jpg" alt="">
+          </div>
+          <div class="card-name">超澎湃海鮮蒸籠塔、阿里山森林香林神木、夏日遊暑木馬古道、品嚐油豆花三日</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+      <!-- 卡片3 -->
+      <div class="trip02-card">
+        <div class="card-header">
+          <span class="card-date-num">5/20</span>
+          <span class="card-date-day">（二）</span>
+          <span class="card-date-time">10:00開搶</span>
+          <div class="card-clock"><img src="images/clock1.svg" alt="clock"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-img-wrap">
+            <img src="images/img_TRIP_02.jpg" alt="">
+          </div>
+          <div class="card-name">超澎湃海鮮蒸籠塔、阿里山森林香林神木、夏日遊暑木馬古道、品嚐油豆花三日</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 架構 ===== -->
+  <div class="wireframe-wrap view-panel" id="wf-t02">
+    <div class="trip02-inner">
+
+      <!-- 卡片1 -->
+      <div class="trip02-card">
+        <div class="card-header">
+          <span class="card-date-num">5/20</span>
+          <span class="card-date-day">（二）</span>
+          <span class="card-date-time">10:00開搶</span>
+          <div class="card-clock"><img src="images/clock2.svg" alt="clock"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-img-wrap"><div class="img-grey"></div></div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+      <!-- 卡片2 -->
+      <div class="trip02-card">
+        <div class="card-header">
+          <span class="card-date-num">5/20</span>
+          <span class="card-date-day">（二）</span>
+          <span class="card-date-time">10:00開搶</span>
+          <div class="card-clock"><img src="images/clock2.svg" alt="clock"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-img-wrap"><div class="img-grey"></div></div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+      <!-- 卡片3 -->
+      <div class="trip02-card">
+        <div class="card-header">
+          <span class="card-date-num">5/20</span>
+          <span class="card-date-day">（二）</span>
+          <span class="card-date-time">10:00開搶</span>
+          <div class="card-clock"><img src="images/clock2.svg" alt="clock"></div>
+        </div>
+        <div class="card-body">
+          <div class="card-img-wrap"><div class="img-grey"></div></div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>・介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div data-include="footer"></div>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('topBtn');
+    if (window.scrollY > 300) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>

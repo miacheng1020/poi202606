@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>POI頁面模組版型｜東南旅遊</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="css/all.css?v=20240808-3" rel="stylesheet" type="text/css"/>
+<link href="css/common.css" rel="stylesheet" type="text/css"/>
+<style>
+    /* ===== 內層 Tab ===== */
+    .vid-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
+    .vid-sub-nav {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: stretch;
+      padding: 0;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+    .vid-sub-nav .sub-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      min-width: 91px;
+      height: 48px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      box-sizing: border-box;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .vid-sub-nav .sub-tab:first-child { min-width: 92px; }
+    .vid-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+    }
+
+    /* ===== Panel ===== */
+    .vid-sub-panel { display: none; }
+    .vid-sub-panel.active { display: block; }
+
+    /* ===== Section ===== */
+    .vid-section {
+      width: 1400px;
+      margin: 0 auto;
+      padding: 50px 0 60px;
+    }
+    .vid-section-title {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+      text-align: center;
+      letter-spacing: 1px;
+      color: #333333;
+      margin-bottom: 18px;
+    }
+
+    /* ===== 架構/demo 切換（完全同 INT_01）===== */
+    .view-toggle {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 0;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      line-height: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+    }
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
+
+    /* ===== Demo / 架構 wrap（完全同 INT_01 結構）===== */
+    .wireframe-wrap {
+      width: 1400px;
+      min-height: 700px;
+      background: #E5E5E5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 30px;
+    }
+    .demo-wrap {
+      width: 1400px;
+      min-height: 700px;
+      background: linear-gradient(180deg, #FFF5F5 0%, #FFE6E7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 30px;
+    }
+    .view-panel { display: none; }
+    .view-panel.active { display: flex; align-items: center; justify-content: center; }
+
+    /* ===== 影片容器 ===== */
+    .vid-player-wrap {
+      position: relative;
+      width: 926px;
+      height: 521px;
+      border-radius: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .vid-player-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .vid-wf-player {
+      position: relative;
+      width: 926px;
+      height: 521px;
+      border-radius: 24px;
+      background: #999999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* RWD 時 vid-wf-player 跟 vid-player-wrap 同樣用 padding-bottom */
+    @media (max-width: 1024px) {
+      .vid-wf-player {
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%;
+        border-radius: 16px;
+      }
+      .vid-wf-player img {
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    /* ===== TOP 按鈕 ===== */
+    #topBtn {
+      position: fixed;
+      right: 24px; bottom: 32px;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none; cursor: pointer;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px; font-weight: 700;
+      color: #FFFFFF; line-height: 1;
+    }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1024px) {
+      .vid-section { width: 100%; padding: 40px 20px; box-sizing: border-box; }
+      .wireframe-wrap, .demo-wrap { width: 100%; min-height: auto; padding: 20px; box-sizing: border-box; }
+      .vid-player-wrap, .vid-wf-player { width: 100%; height: 0; padding-bottom: 56.25%; border-radius: 16px; }
+      .vid-player-wrap iframe { border-radius: 16px; }
+    }
+    @media (max-width: 767px) {
+      .vid-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto; overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; flex-wrap: nowrap;
+      }
+      .vid-sub-nav::-webkit-scrollbar { display: none; }
+      .vid-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
+      .vid-section { padding: 30px 16px; }
+      .vid-section-title { font-size: 24px; }
+      .wireframe-wrap, .demo-wrap { padding: 20px 16px; }
+      .vid-player-wrap img[alt="YT"],
+      .vid-wf-player img[alt="YT"] { width: 67px; height: 46px; }
+    }
+  </style>
+</head>
+<body data-id="video" data-page="video">
+<!-- Header -->
+<div data-include="header"></div>
+<!-- Banner -->
+<div data-include="banner"></div>
+<!-- 外層 Nav（sticky）-->
+<div data-include="nav"></div>
+<!-- 內層 Tab（sticky）-->
+<div class="vid-sub-nav-sticky">
+<div class="vid-sub-nav">
+<a class="sub-tab active" href="VIDEO_01.html#content">影片_01</a>
+<a class="sub-tab" href="VIDEO_02.html#content">影片_02</a>
+<a class="sub-tab" href="VIDEO_03.html#content">影片_03</a>
+</div>
+</div>
+<!-- 影片_01 -->
+<div id="content"></div>
+<div class="vid-sub-panel active int-section" id="subpanel-vid01"><div class="int-section-title" style="display:none">影片_01</div>
+<div class="vid-section">
+<div class="vid-section-title">影片_01</div>
+<div class="view-toggle">
+<button class="toggle-btn active" data-view="demo-v1">demo</button>
+<button class="toggle-btn" data-view="wf-v1">架構</button>
+</div>
+<!-- demo -->
+<div class="demo-wrap view-panel active" id="demo-v1">
+<div class="vid-player-wrap">
+<img alt="影片_01 demo" src="images/img_VIDEO.jpg" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;border-radius:24px;display:block;"/>
+<img alt="YT" src="images/YTicon.svg" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:134px;height:92px;pointer-events:none;"/>
+</div>
+</div>
+<!-- 架構 -->
+<div class="wireframe-wrap view-panel" id="wf-v1">
+<div class="vid-wf-player">
+<img alt="YT" src="images/YTicon.svg" style="width:134px;height:92px;"/>
+</div>
+</div>
+</div>
+</div>
+<!-- 影片_02 placeholder -->
+<div class="vid-sub-panel" id="subpanel-vid02">
+<div style="min-height:400px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans TC',sans-serif;font-size:24px;color:#999;letter-spacing:2px;">影片_02 內容待規劃</div>
+</div>
+<!-- 影片_03 placeholder -->
+<div class="vid-sub-panel" id="subpanel-vid03">
+<div style="min-height:400px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans TC',sans-serif;font-size:24px;color:#999;letter-spacing:2px;">影片_03 內容待規劃</div>
+</div>
+<!-- Footer -->
+<div data-include="footer"></div>
+<!-- TOP 按鈕 -->
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+<svg fill="none" height="12" viewbox="0 0 14 12" width="14" xmlns="http://www.w3.org/2000/svg">
+<path d="M7 0L14 12H0L7 0Z" fill="white"></path>
+</svg>
+<span>TOP</span>
+</button>
+<!-- 切換邏輯（同 INT_01，直接跑在 include.js 之前）-->
+<script>
+  // 內層 Tab 切換
+  document.querySelectorAll('.vid-sub-nav .sub-tab').forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.vid-sub-nav .sub-tab').forEach(function(t) { t.classList.remove('active'); });
+      tab.classList.add('active');
+      document.querySelectorAll('.vid-sub-panel').forEach(function(p) { p.classList.remove('active'); });
+      document.getElementById('subpanel-' + tab.dataset.sub).classList.add('active');
+    });
+  });
+
+  // 架構/demo 切換（完全同 INT_01）
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.vid-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>

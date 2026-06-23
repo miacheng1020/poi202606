@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <style>
+
+    /* ===== 副選單 ===== */
+    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
+    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
+    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
+    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+
+    /* ===== Section ===== */
+    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
+    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
+    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
+    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== wrap ===== */
+    .demo-wrap {
+      width: 1400px; min-height: 700px;
+      background: #FFEEC9;
+      box-sizing: border-box; padding: 55px 0;
+    }
+    .wireframe-wrap {
+      width: 1400px; min-height: 700px;
+      background: #E5E5E5;
+      box-sizing: border-box; padding: 55px 0;
+    }
+
+    /* ===== 主容器 ===== */
+    .prd04-inner {
+      width: 1162px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* ============================================
+       列表橫條
+    ============================================ */
+    .prd04-row {
+      width: 1162px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 16px 0;
+      gap: 16px;
+      box-sizing: border-box;
+    }
+
+    /* demo：奇偶列背景、圓角 */
+    .demo-wrap .prd04-row:first-child { background: #FFFFFF; border-radius: 10px 10px 0 0; }
+    .demo-wrap .prd04-row:nth-child(2) { background: #FFF4E6; }
+    .demo-wrap .prd04-row:last-child { background: #FFFFFF; border-radius: 0 0 10px 10px; }
+
+    /* 架構：全白，列間加分隔線 */
+    .wireframe-wrap .prd04-row { background: #FFFFFF; }
+    .wireframe-wrap .prd04-row:not(:last-child) { border-bottom: 1px solid #333333; }
+
+    /* tag */
+    .prd04-row .card-tag {
+      display: flex; align-items: center; justify-content: center;
+      padding: 8px 16px;
+      width: 144px; height: 30px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px; font-weight: 400; color: #FFFFFF;
+      white-space: nowrap; box-sizing: border-box;
+      border-radius: 0 20px 20px 0;
+      flex-shrink: 0;
+    }
+    .demo-wrap .prd04-row .card-tag { background: #FE6011; }
+    .wireframe-wrap .prd04-row .card-tag { background: #333333; }
+
+    /* 中間文字區 */
+    .prd04-row .card-text {
+      display: flex; flex-direction: column;
+      align-items: flex-start; gap: 8px;
+      flex: 1; min-width: 0;
+    }
+    .prd04-row .card-name {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 18px; line-height: 22px;
+      width: 100%;
+    }
+    .demo-wrap .prd04-row .card-name { color: #82463A; }
+    .wireframe-wrap .prd04-row .card-name { color: #333333; }
+
+    .prd04-row .card-sale {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 14px; line-height: 17px;
+      width: 100%;
+    }
+    .demo-wrap .prd04-row .card-sale { color: #FE6011; }
+    .wireframe-wrap .prd04-row .card-sale { color: #333333; }
+
+    .prd04-row .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 20px;
+      color: #333333; width: 100%;
+    }
+
+    /* 右側 price 靠右靠底 */
+    .prd04-row .card-price-wrap {
+      display: flex; flex-direction: column;
+      justify-content: flex-end; align-items: flex-end;
+      padding: 16px 16px 0;
+      width: 192px; height: 95px;
+      flex-shrink: 0; box-sizing: border-box;
+    }
+    .prd04-row .card-price {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 1.2;
+      text-align: right;
+      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+    }
+    .prd04-row .card-price .price-num { font-size: 24px !important; font-weight: 700; line-height: 1; }
+    .demo-wrap .prd04-row .card-price { color: #FE6011; }
+    .wireframe-wrap .prd04-row .card-price { color: #333333; }
+
+    /* ===== TOP ===== */
+    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1200px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .demo-wrap, .wireframe-wrap { width: 100%; }
+      .prd04-inner { width: 100%; max-width: 1162px; }
+      .prd04-row { width: 100%; max-width: 1162px; }
+    }
+
+    @media (max-width: 992px) {
+      .int-section { padding: 40px 20px; }
+      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
+      .prd04-row { flex-wrap: wrap; gap: 12px; }
+      .prd04-row .card-price-wrap { width: auto; height: auto; padding: 4px 0 0; justify-content: flex-end; align-self: flex-end; margin-left: auto; }
+    }
+
+    @media (max-width: 768px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
+      /* demo 標題不裁切 */
+      .demo-wrap .prd04-row .card-name { height: auto !important; overflow: visible !important; }
+      /* === M版字級下限 === */
+      .prd04-row .card-name { font-size: 20px; line-height: 1.3; height: auto; }
+      .prd04-row .card-sale { font-size: 16px; line-height: 1.3; min-height: auto; height: auto; }
+      .prd04-row .card-detail { font-size: 16px; line-height: 1.5; }
+      .prd04-row .card-price { font-size: 16px; }
+      .prd04-row .card-price .price-num { font-size: 26px !important; }
+      /* 橫式 → 換行 */
+      .prd04-row { flex-wrap: wrap; gap: 12px; padding: 16px; }
+      .prd04-row .card-price-wrap { width: 100%; height: auto; padding: 4px 0 0; align-items: flex-end; }
+    }
+
+    @media (max-width: 576px) {
+      .prd04-inner { width: 278px; }
+      .prd04-row { width: 278px; flex-direction: column; gap: 8px; padding: 16px; }
+      .prd04-row .card-tag { width: auto; }
+      .prd04-row .card-price-wrap { width: 100%; height: auto; padding: 4px 0 0; align-items: flex-end; }
+    }
+  </style>
+</head>
+<body data-id="prd" data-page="product">
+
+<div data-include="header"></div>
+<div data-include="banner"></div>
+<div data-include="nav"></div>
+
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab" href="PRD_01.html#content">產品_01</a>
+    <a class="sub-tab" href="PRD_02.html#content">產品_02</a>
+    <a class="sub-tab" href="PRD_03.html#content">產品_03</a>
+    <a class="sub-tab active" href="PRD_04.html#content">產品_04</a>
+  </div>
+</div>
+
+<div class="int-section">
+  <div class="int-section-title">一排四個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-p04">demo</button>
+    <button class="toggle-btn" data-view="wf-p04">架構</button>
+  </div>
+
+  <!-- ===== demo ===== -->
+  <div class="demo-wrap view-panel active" id="demo-p04">
+    <div class="prd04-inner">
+
+      <div class="prd04-row">
+        <div class="card-tag">桃園出發</div>
+        <div class="card-text">
+          <div class="card-name">【精選關西】保住溫泉飯店‧átoa水族館‧和牛龍蝦螃蟹‧關西三都5日</div>
+          <div class="card-sale">日本限量優惠:前16名付訂，第二人省$10,000</div>
+          <div class="card-detail">• 保證入住御宿野乃京都七條(天然溫泉飯店)<br>• 長腳蟹吃到飽+龍蝦和牛+燒肉吃到飽</div>
+        </div>
+        <div class="card-price-wrap">
+          <div class="card-price">天數 <span class="price-num">$34,900</span>起</div>
+        </div>
+      </div>
+
+      <div class="prd04-row">
+        <div class="card-tag">桃園出發</div>
+        <div class="card-text">
+          <div class="card-name">【精選關西】保住溫泉飯店‧átoa水族館‧和牛龍蝦螃蟹‧關西三都5日</div>
+          <div class="card-sale">日本限量優惠:前16名付訂，第二人省$10,000</div>
+          <div class="card-detail">• 保證入住御宿野乃京都七條(天然溫泉飯店)<br>• 長腳蟹吃到飽+龍蝦和牛+燒肉吃到飽</div>
+        </div>
+        <div class="card-price-wrap">
+          <div class="card-price">天數 <span class="price-num">$34,900</span>起</div>
+        </div>
+      </div>
+
+      <div class="prd04-row">
+        <div class="card-tag">桃園出發</div>
+        <div class="card-text">
+          <div class="card-name">【精選關西】保住溫泉飯店‧átoa水族館‧和牛龍蝦螃蟹‧關西三都5日</div>
+          <div class="card-sale">日本限量優惠:前16名付訂，第二人省$10,000</div>
+          <div class="card-detail">• 保證入住御宿野乃京都七條(天然溫泉飯店)<br>• 長腳蟹吃到飽+龍蝦和牛+燒肉吃到飽</div>
+        </div>
+        <div class="card-price-wrap">
+          <div class="card-price">天數 <span class="price-num">$34,900</span>起</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 架構 ===== -->
+  <div class="wireframe-wrap view-panel" id="wf-p04">
+    <div class="prd04-inner">
+
+      <div class="prd04-row">
+        <div class="card-tag">標籤字數限八字元</div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+        </div>
+        <div class="card-price-wrap">
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+      <div class="prd04-row">
+        <div class="card-tag">標籤字數限八字元</div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+        </div>
+        <div class="card-price-wrap">
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+      <div class="prd04-row">
+        <div class="card-tag">標籤字數限八字元</div>
+        <div class="card-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+        </div>
+        <div class="card-price-wrap">
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div data-include="footer"></div>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('topBtn');
+    if (window.scrollY > 300) { btn.classList.add('visible'); }
+    else { btn.classList.remove('visible'); }
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>

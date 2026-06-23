@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <style>
+
+    /* ===== 副選單 ===== */
+    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
+    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
+    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 81px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
+    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
+
+    /* ===== Section ===== */
+    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
+    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
+    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
+    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== wrap ===== */
+    .demo-wrap      { width: 1400px; min-height: 700px; background: #FFF4F9; box-sizing: border-box; padding: 55px 0; }
+    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 55px 0; border: 0.5px solid #333333; }
+
+    /* ===== QA 列表容器 ===== */
+    .qa02-inner {
+      width: 1162px;
+      display: flex; flex-direction: column;
+      gap: 16px;
+    }
+
+    /* ===== QA 單筆卡片 ===== */
+    .qa02-item {
+      width: 1162px;
+      display: flex; flex-direction: column;
+      align-items: flex-start;
+      padding: 20px;
+      gap: 6px;
+      background: #FFFFFF;
+      box-sizing: border-box;
+    }
+
+    /* Q 標題 */
+    .qa02-item .item-name {
+      width: 100%;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700; font-size: 20px; line-height: 27px;
+    }
+    .demo-wrap      .qa02-item .item-name { color: #E9308F; }
+    .wireframe-wrap .qa02-item .item-name { color: #333333; }
+
+    /* A 內文 */
+    .qa02-item .item-detail {
+      width: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 17px;
+      color: #333333;
+    }
+
+    /* ===== TOP ===== */
+    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1919px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .demo-wrap, .wireframe-wrap { width: 100%; }
+      .qa02-inner { width: 100%; max-width: 1162px; }
+      .qa02-item { width: 100%; }
+    }
+    @media (max-width: 1024px) {
+      .int-section { padding: 40px 20px; }
+      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
+    }
+    @media (max-width: 767px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
+      .qa02-inner { width: 278px; }
+      .qa02-item { width: 278px; padding: 16px; }
+      .qa02-item .item-name { font-size: 16px; }
+    }
+  </style>
+</head>
+<body data-id="qa" data-page="qa">
+
+<div data-include="header"></div>
+<div data-include="banner"></div>
+<div data-include="nav"></div>
+
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab" href="QA_01.html#content">QA_01</a>
+    <a class="sub-tab active" href="QA_02.html#content">QA_02</a>
+  </div>
+</div>
+
+<div class="int-section">
+  <div class="int-section-title">QA_02</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-qa02">demo</button>
+    <button class="toggle-btn" data-view="wf-qa02">架構</button>
+  </div>
+
+  <!-- ===== DEMO ===== -->
+  <div class="demo-wrap view-panel active" id="demo-qa02">
+    <div class="qa02-inner">
+
+      <div class="qa02-item">
+        <div class="item-name">Q: 我是一個人參加獨旅團，會和陌生人同住嗎？</div>
+        <div class="item-detail">A：不會。單人旅行行程全程安排一人一房，享有完全的隱私與舒適，不需配對室友。若您願意與他人合住，也可在報名時主動告知服務專員為您安排。</div>
+      </div>
+
+      <div class="qa02-item">
+        <div class="item-name">Q: 我是一個人參加獨旅團，會和陌生人同住嗎？</div>
+        <div class="item-detail">A：不會。單人旅行行程全程安排一人一房，享有完全的隱私與舒適，不需配對室友。若您願意與他人合住，也可在報名時主動告知服務專員為您安排。</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== 架構 ===== -->
+  <div class="wireframe-wrap view-panel" id="wf-qa02">
+    <div class="qa02-inner">
+
+      <div class="qa02-item">
+        <div class="item-name">Q: 標題標題標題標題標題標題標題標題標題標題標題</div>
+        <div class="item-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+      </div>
+
+      <div class="qa02-item">
+        <div class="item-name">Q: 標題標題標題標題標題標題標題標題標題標題標題</div>
+        <div class="item-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div data-include="footer"></div>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('topBtn');
+    if (window.scrollY > 300) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <style>
+
+    /* ===== 副選單 ===== */
+    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
+    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
+    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 83px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
+    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
+
+    /* ===== Section ===== */
+    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
+    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
+    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
+    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== wrap ===== */
+    .demo-wrap      { width: 1400px; min-height: 700px; background: #FFE0A5; box-sizing: border-box; padding: 55px 0; }
+    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 55px 0; border: 0.5px solid #333333; }
+
+    /* ===== QA 卡片容器 ===== */
+    .qa01-inner {
+      width: 1162px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+
+    /* ===== QA 卡片 ===== */
+    .qa01-card {
+      width: 1162px;
+      display: flex; flex-direction: column;
+    }
+
+    /* name 列（標題列） */
+    .qa01-card .card-name {
+      width: 100%;
+      display: flex; justify-content: center; align-items: center;
+      padding: 14px 0;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700; font-size: 20px; line-height: 27px;
+      letter-spacing: 0.02em;
+      color: #FFFFFF;
+      box-sizing: border-box;
+    }
+    .demo-wrap      .qa01-card .card-name { background: #FF6C02; border-radius: 20px 20px 0 0; height: 55px; }
+    .wireframe-wrap .qa01-card .card-name { background: #333333; border-radius: 0; height: 55px; }
+
+    /* detail 列（內文列） */
+    .qa01-card .card-detail {
+      width: 100%;
+      display: flex; justify-content: center; align-items: center;
+      padding: 24px 94px;
+      background: #FFFFFF;
+      box-sizing: border-box;
+    }
+    .demo-wrap      .qa01-card .card-detail { border-radius: 0 0 20px 20px; height: 128px; }
+    .wireframe-wrap .qa01-card .card-detail { border-radius: 0; height: 88px; }
+
+    .qa01-card .card-detail p {
+      width: 974px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 400; font-size: 14px; line-height: 20px;
+    }
+    .demo-wrap      .qa01-card .card-detail p { color: #515151; }
+    .wireframe-wrap .qa01-card .card-detail p { color: #333333; }
+
+    /* ===== TOP ===== */
+    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1919px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .demo-wrap, .wireframe-wrap { width: 100%; }
+      .qa01-inner { width: 100%; max-width: 1162px; }
+      .qa01-card { width: 100%; }
+    }
+    @media (max-width: 1024px) {
+      .int-section { padding: 40px 20px; }
+      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
+      .qa01-card .card-detail { padding: 20px 40px; height: auto; }
+      .qa01-card .card-detail p { width: 100%; }
+    }
+    @media (max-width: 767px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
+      .qa01-inner { width: 278px; }
+      .qa01-card { width: 278px; }
+      .qa01-card .card-name { font-size: 16px; padding: 12px 16px; height: auto; text-align: center; }
+      .qa01-card .card-detail { padding: 16px 20px; height: auto; }
+      .demo-wrap      .qa01-card .card-name { border-radius: 12px 12px 0 0; }
+      .demo-wrap      .qa01-card .card-detail { border-radius: 0 0 12px 12px; }
+    }
+  </style>
+</head>
+<body data-id="qa" data-page="qa">
+
+<div data-include="header"></div>
+<div data-include="banner"></div>
+<div data-include="nav"></div>
+
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab active" href="QA_01.html#content">QA_01</a>
+    <a class="sub-tab" href="QA_02.html#content">QA_02</a>
+  </div>
+</div>
+
+<div class="int-section">
+  <div class="int-section-title">QA_01</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-qa01">demo</button>
+    <button class="toggle-btn" data-view="wf-qa01">架構</button>
+  </div>
+
+  <!-- ===== DEMO ===== -->
+  <div class="demo-wrap view-panel active" id="demo-qa01">
+    <div class="qa01-inner">
+      <div class="qa01-card">
+        <div class="card-name">活動說明</div>
+        <div class="card-detail">
+          <p>●ITF線上旅展逢二搶購為10/21-11/11每週二上午10:00起，於當日23:59截止。<br>
+          ●逢二限海外團旅及台灣團旅商品須於活動期間內訂購且4小時內完成付款或全額付款，逾時如有任何變更，包含更改付款方式、任一方因素轉團、加減人數等原因，皆表示放棄ITF活動優惠資格，敬請留意。<br>
+          ●東南旅遊保留取消、終止、修改或暫停本活動之權利，並保有最終解釋權。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 架構 ===== -->
+  <div class="wireframe-wrap view-panel" id="wf-qa01">
+    <div class="qa01-inner">
+      <div class="qa01-card">
+        <div class="card-name">標題標題標題標題標題標題</div>
+        <div class="card-detail">
+          <p>介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-include="footer"></div>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('topBtn');
+    if (window.scrollY > 300) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
+  <link rel="stylesheet" href="css/common.css" type="text/css">
+  <style>
+
+    /* ===== 副選單 ===== */
+    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
+    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
+    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
+    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
+
+    /* ===== Section ===== */
+    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
+    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
+    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
+    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== wrap ===== */
+    .demo-wrap      { width: 1400px; min-height: 700px; background: #FFE0A5; box-sizing: border-box; padding: 55px 0; }
+    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 55px 0; border: 0.5px solid #333333; }
+
+    /* ===== 票券 inner 容器 ===== */
+    .cpn-inner { display: flex; flex-direction: row; align-items: center; justify-content: center; }
+    .cpn4-inner { gap: 16px; width: 1162px; }
+    .cpn3-inner { gap: 16px; width: 1162px; }
+    .cpn2-inner { gap: 24px; width: 1162px; }
+
+    /* ===== 票券卡片基礎 ===== */
+    /* 用 position:relative + overflow:hidden + 偽元素做缺口 */
+    .cpn-card {
+      position: relative;
+      background: #FFFFFF;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      filter: drop-shadow(0px 4px 0px rgba(0,0,0,0.25));
+    }
+
+    /* 左右缺口：用 before/after 圓形，背景色跟 wrap 一致 */
+    .cpn-card::before,
+    .cpn-card::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      z-index: 2;
+    }
+
+    /* demo 版缺口顏色 */
+    .demo-wrap .cpn-card::before,
+    .demo-wrap .cpn-card::after { background: #FFE0A5; }
+    /* 架構版缺口顏色 */
+    .wireframe-wrap .cpn-card::before,
+    .wireframe-wrap .cpn-card::after { background: #E5E5E5; }
+
+    /* 卡片內容區 */
+    .cpn-card .card-text {
+      position: absolute;
+      left: 50%; top: 50%;
+      transform: translate(-50%, -50%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+
+    .cpn-card .card-name {
+      text-align: center; color: #333333;
+    }
+    .cpn-card .card-border {
+      width: 100%; height: 0;
+    }
+    .demo-wrap .cpn-card .card-border { border-top: 1.5px solid #FF6C02; }
+    .wireframe-wrap .cpn-card .card-border { border-top: 1.5px solid #333333; }
+
+    .cpn-card .card-detail {
+      text-align: center; color: #333333;
+      font-family: 'Noto Sans TC', sans-serif; font-weight: 400;
+    }
+    .cpn-card .card-price {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .demo-wrap .cpn-card .card-price { background: #FF6C02; }
+    .wireframe-wrap .cpn-card .card-price { background: #333333; }
+
+    .cpn-card .card-price span {
+      font-family: 'Manrope', sans-serif; font-weight: 800;
+      color: #FFFFFF; text-align: center;
+    }
+
+    /* ══════════════════════
+       一排四個 (CPN4)
+    ══════════════════════ */
+    .cpn4-card {
+      width: 278px; height: 155px;
+    }
+    /* 缺口：垂直置中，直徑 30px，左右各伸出一半 */
+    .cpn4-card::before { width: 30px; height: 30px; left: -15px; top: 62px; }
+    .cpn4-card::after  { width: 30px; height: 30px; right: -15px; top: 62px; }
+
+    .cpn4-card .card-text { width: 213px; gap: 8px; }
+    .cpn4-card .card-name {
+      font-family: 'Manrope', sans-serif; font-weight: 700;
+      font-size: 26px; line-height: 36px; width: 211px;
+    }
+    .wireframe-wrap .cpn4-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif; font-size: 24px;
+    }
+    .cpn4-card .card-border { width: 211px; }
+    .cpn4-card .card-detail { font-size: 16px; line-height: 19px; width: 211px; }
+    .cpn4-card .card-price  { width: 211px; height: 45px; padding: 2px 0; }
+    .cpn4-card .card-price span { font-size: 30px; line-height: 41px; }
+    .demo-wrap      .cpn4-card .card-border { border-top-width: 1.5px; }
+    .wireframe-wrap .cpn4-card .card-border { border-top-width: 1.5px; }
+
+    /* ══════════════════════
+       一排三個 (CPN3)
+    ══════════════════════ */
+    .cpn3-card {
+      width: 376px; height: 188px;
+    }
+    .cpn3-card::before { width: 45px; height: 45px; left: -22.5px; top: 71px; }
+    .cpn3-card::after  { width: 45px; height: 45px; right: -22.5px; top: 71px; }
+
+    .cpn3-card .card-text { width: 261px; gap: 8px; }
+    .cpn3-card .card-name {
+      font-family: 'Manrope', sans-serif; font-weight: 700;
+      font-size: 32px; line-height: 44px; width: 260px;
+    }
+    .wireframe-wrap .cpn3-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif; font-size: 32px;
+    }
+    .cpn3-card .card-border { width: 260px; }
+    .cpn3-card .card-detail { font-size: 18px; line-height: 22px; width: 260px; letter-spacing: 1px; }
+    .cpn3-card .card-price  { width: 260px; height: 57px; padding: 4px 0; }
+    .cpn3-card .card-price span { font-size: 36px; line-height: 49px; }
+    .demo-wrap      .cpn3-card .card-border { border-top-width: 2px; }
+    .wireframe-wrap .cpn3-card .card-border { border-top-width: 2px; }
+
+    /* ══════════════════════
+       一排二個 (CPN2)
+    ══════════════════════ */
+    .cpn2-card {
+      width: 569px; height: 286px;
+    }
+    .cpn2-card::before { width: 60px; height: 60px; left: -30px; top: 113px; }
+    .cpn2-card::after  { width: 60px; height: 60px; right: -30px; top: 113px; }
+
+    .cpn2-card .card-text { width: 396px; gap: 12px; }
+    .cpn2-card .card-name {
+      font-family: 'Manrope', sans-serif; font-weight: 700;
+      font-size: 48px; line-height: 66px; width: 396px;
+    }
+    .wireframe-wrap .cpn2-card .card-name {
+      font-family: 'Noto Sans TC', sans-serif; font-size: 48px; line-height: 58px;
+    }
+    .cpn2-card .card-border { width: 396px; }
+    .cpn2-card .card-detail { font-size: 28px; line-height: 34px; width: 396px; letter-spacing: 1px; }
+    .cpn2-card .card-price  { width: 396px; height: 78px; padding: 6px 0; }
+    .cpn2-card .card-price span { font-size: 48px; line-height: 66px; }
+    .demo-wrap      .cpn2-card .card-border { border-top-width: 2px; }
+    .wireframe-wrap .cpn2-card .card-border { border-top-width: 2px; }
+
+    /* ===== TOP ===== */
+    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+    #topBtn:hover { background: #555555; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1919px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .demo-wrap, .wireframe-wrap { width: 100%; }
+      .cpn4-inner, .cpn3-inner, .cpn2-inner { width: 100%; max-width: 1162px; }
+    }
+    @media (max-width: 1024px) {
+      .int-section { padding: 40px 20px; }
+      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
+      .cpn4-inner, .cpn3-inner, .cpn2-inner { flex-wrap: wrap; justify-content: center; }
+    }
+    @media (max-width: 767px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
+      .cpn2-card { width: 278px; height: 200px; }
+      .cpn2-card::before { width: 36px; height: 36px; left: -18px; top: 80px; }
+      .cpn2-card::after  { width: 36px; height: 36px; right: -18px; top: 80px; }
+      .cpn2-card .card-text { width: 220px; gap: 8px; }
+      .cpn2-card .card-name { font-size: 28px; line-height: 38px; width: 220px; }
+      .cpn2-card .card-border { width: 220px; }
+      .cpn2-card .card-detail { font-size: 16px; line-height: 20px; width: 220px; }
+      .cpn2-card .card-price { width: 220px; height: 52px; }
+      .cpn2-card .card-price span { font-size: 28px; line-height: 38px; }
+    }
+  </style>
+</head>
+<body data-id="cpn" data-page="cpn">
+
+<div data-include="header"></div>
+<div data-include="banner"></div>
+<div data-include="nav"></div>
+
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab active" href="CPN_01.html#content">票券_01</a>
+    <a class="sub-tab" href="CPN_02.html#content">票券_02</a>
+    <a class="sub-tab" href="CPN_03.html#content">票券_03</a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     一排四個
+══════════════════════════════ -->
+<div class="int-section">
+  <div class="int-section-title">一排四個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-cpn4">demo</button>
+    <button class="toggle-btn" data-view="wf-cpn4">架構</button>
+  </div>
+
+  <!-- DEMO -->
+  <div class="demo-wrap view-panel active" id="demo-cpn4">
+    <div class="cpn-inner cpn4-inner">
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-cpn4">
+    <div class="cpn-inner cpn4-inner">
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">介紹介紹介紹介紹介紹</div>
+          <div class="card-price"><span>價格價格</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">介紹介紹介紹介紹介紹</div>
+          <div class="card-price"><span>價格價格</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">介紹介紹介紹介紹介紹</div>
+          <div class="card-price"><span>價格價格</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn4-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">介紹介紹介紹介紹介紹</div>
+          <div class="card-price"><span>價格價格</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     一排三個
+══════════════════════════════ -->
+<div class="int-section">
+  <div class="int-section-title">一排三個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-cpn3">demo</button>
+    <button class="toggle-btn" data-view="wf-cpn3">架構</button>
+  </div>
+
+  <!-- DEMO -->
+  <div class="demo-wrap view-panel active" id="demo-cpn3">
+    <div class="cpn-inner cpn3-inner">
+      <div class="cpn-card cpn3-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn3-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn3-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-cpn3">
+    <div class="cpn-inner cpn3-inner">
+      <div class="cpn-card cpn3-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">介紹介紹介紹介紹介紹</div>
+          <div class="card-price"><span>價格價格</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn3-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">介紹介紹介紹介紹介紹</div>
+          <div class="card-price"><span>價格價格</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn3-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">介紹介紹介紹介紹介紹</div>
+          <div class="card-price"><span>價格價格</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     一排二個
+══════════════════════════════ -->
+<div class="int-section">
+  <div class="int-section-title">一排二個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-cpn2">demo</button>
+    <button class="toggle-btn" data-view="wf-cpn2">架構</button>
+  </div>
+
+  <!-- DEMO -->
+  <div class="demo-wrap view-panel active" id="demo-cpn2">
+    <div class="cpn-inner cpn2-inner">
+      <div class="cpn-card cpn2-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn2-card">
+        <div class="card-text">
+          <div class="card-name">5/20</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>TRAIN400</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-cpn2">
+    <div class="cpn-inner cpn2-inner">
+      <div class="cpn-card cpn2-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>價格價格價格</span></div>
+        </div>
+      </div>
+      <div class="cpn-card cpn2-card">
+        <div class="card-text">
+          <div class="card-name">標題標題標題</div>
+          <div class="card-border"></div>
+          <div class="card-detail">結帳輸入折扣碼</div>
+          <div class="card-price"><span>價格價格價格</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div data-include="footer"></div>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('topBtn');
+    if (window.scrollY > 300) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>

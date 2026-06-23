@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link rel="stylesheet" href="css/all.css?v=20240808-3">
+  <link rel="stylesheet" href="css/common.css">
+  <style>
+    /* ===== 副選單 ===== */
+    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
+    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
+    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
+    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
+
+    /* ===== Section ===== */
+    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
+    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
+    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
+    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+
+    /* ===== view-panel ===== */
+    .view-panel { display: none !important; }
+    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+
+    /* ===== wrap ===== */
+    .demo-wrap      { width: 1400px; min-height: 700px; background: #144067; box-sizing: border-box; padding: 50px 0; display: flex; align-items: center; justify-content: center; }
+    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 50px 0; border: 0.5px solid #333333; display: flex; align-items: center; justify-content: center; }
+
+    /* ===== 輪播外框 ===== */
+    .fbk-outer {
+      position: relative;
+      width: 1107px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 內框（米白 / 灰） */
+    .fbk-stage {
+      width: 974px;
+      height: 459px;
+      overflow: hidden;
+      position: relative;
+    }
+    .demo-wrap .fbk-stage {
+      background: #F5EEE5;
+      border-radius: 15px;
+    }
+    .wireframe-wrap .fbk-stage {
+      background: #999999;
+      border-radius: 0;
+    }
+
+    /* 卡片軌道 */
+    .fbk-track {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 24px;
+      padding: 12px 25px;
+      height: 100%;
+      box-sizing: border-box;
+      transition: transform 0.4s ease;
+    }
+
+    /* ===== 評價卡片 ===== */
+    .fbk-card {
+      flex-shrink: 0;
+      width: 250px;
+      height: 427px;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.15);
+      background: #FFFFFF;
+    }
+    .demo-wrap .fbk-card { border-radius: 15px; }
+    .wireframe-wrap .fbk-card { border-radius: 0; }
+
+    /* title 列 */
+    .fbk-card .card-title {
+      display: flex; flex-direction: row;
+      align-items: center; justify-content: space-between;
+      width: 100%; height: 50px;
+    }
+    .fbk-card .card-name {
+      display: flex; flex-direction: row;
+      align-items: center; gap: 10px;
+    }
+
+    /* 對話框圖示 SVG */
+    .fbk-card .icon-bubble {
+      width: 50px; height: 50px;
+      border-radius: 200px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .demo-wrap      .fbk-card .icon-bubble { background: #144067; }
+    .wireframe-wrap .fbk-card .icon-bubble { background: #333333; }
+
+    .fbk-card .card-author {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700; font-size: 20px; line-height: 24px;
+      letter-spacing: 1px;
+    }
+    .demo-wrap      .fbk-card .card-author { color: #000000; }
+    .wireframe-wrap .fbk-card .card-author { color: #333333; }
+
+    /* date */
+    .fbk-card .card-date {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 350; font-size: 14px; line-height: 17px;
+      text-align: justify; letter-spacing: 0.01em;
+      width: 100%; height: 34px;
+      display: flex; align-items: center;
+    }
+    .demo-wrap      .fbk-card .card-date { color: #000000; }
+    .wireframe-wrap .fbk-card .card-date { color: #333333; }
+
+    /* 星星 */
+    .fbk-card .card-stars {
+      display: flex; flex-direction: row;
+      align-items: center; gap: 2px;
+      height: 16px;
+    }
+    .fbk-card .card-stars .star {
+      width: 16px; height: 15px;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+    .fbk-card .card-stars .star-full { background: #FFD32B; }
+    .fbk-card .card-stars .star-half { background: #FFE890; }
+
+    /* 內文 */
+    .fbk-card .card-body {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 350; font-size: 16px; line-height: 19px;
+      text-align: justify; letter-spacing: 0.01em;
+      width: 100%;
+      height: 209px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .demo-wrap      .fbk-card .card-body { color: #000000; }
+    .wireframe-wrap .fbk-card .card-body { color: #333333; }
+
+    /* link */
+    .fbk-card .card-link {
+      display: flex; flex-direction: column;
+      align-items: flex-end; gap: 1px;
+      margin-top: auto;
+    }
+    .fbk-card .card-link span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 350; font-size: 14px; line-height: 17px;
+      text-align: right; letter-spacing: 0.01em;
+      color: #123CB2;
+    }
+    .fbk-card .card-link hr {
+      width: 124px; height: 0;
+      border: 0.5px solid #123CB2;
+      margin: 0; align-self: flex-end;
+    }
+
+    /* ===== 左右箭頭按鈕 ===== */
+    .fbk-btn {
+      position: absolute;
+      width: 35px; height: 35px;
+      border-radius: 100px;
+      background: #FFFFFF;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 10; top: 50%; transform: translateY(-50%);
+      flex-shrink: 0;
+    }
+    .fbk-btn-prev { left: 0; }
+    .fbk-btn-next { right: 0; }
+    .fbk-btn svg { width: 14px; height: 14px; }
+    .demo-wrap      .fbk-btn svg path { fill: #144067; }
+    .wireframe-wrap .fbk-btn svg path { fill: #333333; }
+
+    /* ===== TOP ===== */
+    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
+    #topBtn.visible { opacity: 1; transform: translateY(0); }
+    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
+
+    /* ===== RWD ===== */
+    @media (max-width: 1919px) {
+      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+      .demo-wrap, .wireframe-wrap { width: 100%; }
+    }
+    @media (max-width: 1200px) {
+      .fbk-outer { width: 100%; max-width: 1107px; }
+      .fbk-stage { width: calc(100% - 80px); }
+    }
+    @media (max-width: 1024px) {
+      .int-section { padding: 40px 20px; }
+    }
+    @media (max-width: 767px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; flex-shrink: 0; height: auto; }
+      .int-section { padding: 30px 16px; }
+      .int-section-title { font-size: 24px; }
+      .demo-wrap, .wireframe-wrap { padding: 30px 16px; min-height: auto; }
+      .fbk-card { width: 220px; }
+    }
+  </style>
+</head>
+<body data-id="fbk" data-page="fbk">
+
+<div data-include="header"></div>
+<div data-include="banner"></div>
+<div data-include="nav"></div>
+
+<div id="content"></div>
+<div class="int-sub-nav-sticky">
+  <div class="int-sub-nav">
+    <a class="sub-tab active" href="FBK_01.html#content">評價_01</a>
+  </div>
+</div>
+
+<!-- ══ 一排四個 ══ -->
+<div class="int-section">
+  <div class="int-section-title">一排四個</div>
+  <div class="view-toggle">
+    <button class="toggle-btn active" data-view="demo-fbk">demo</button>
+    <button class="toggle-btn" data-view="wf-fbk">架構</button>
+  </div>
+
+  <!-- DEMO -->
+  <div class="demo-wrap view-panel active" id="demo-fbk">
+    <div class="fbk-outer">
+      <button class="fbk-btn fbk-btn-prev" data-dir="-1" data-target="track-demo">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="fbk-stage">
+        <div class="fbk-track" id="track-demo">
+          <!-- 卡片 x6 -->
+          <div class="fbk-card">
+            <div class="card-title">
+              <div class="card-name">
+                <div class="icon-bubble">
+                  <svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#144067"/><circle cx="16" cy="12" r="2" fill="#144067"/><circle cx="24" cy="12" r="2" fill="#144067"/></svg>
+                </div>
+                <span class="card-author">林**</span>
+              </div>
+            </div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars">
+              <div class="star star-full"></div>
+              <div class="star star-full"></div>
+              <div class="star star-full"></div>
+              <div class="star star-full"></div>
+              <div class="star star-half"></div>
+            </div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#144067"/><circle cx="16" cy="12" r="2" fill="#144067"/><circle cx="24" cy="12" r="2" fill="#144067"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#144067"/><circle cx="16" cy="12" r="2" fill="#144067"/><circle cx="24" cy="12" r="2" fill="#144067"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#144067"/><circle cx="16" cy="12" r="2" fill="#144067"/><circle cx="24" cy="12" r="2" fill="#144067"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#144067"/><circle cx="16" cy="12" r="2" fill="#144067"/><circle cx="24" cy="12" r="2" fill="#144067"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#144067"/><circle cx="16" cy="12" r="2" fill="#144067"/><circle cx="24" cy="12" r="2" fill="#144067"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+        </div>
+      </div>
+      <button class="fbk-btn fbk-btn-next" data-dir="1" data-target="track-demo">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 架構 -->
+  <div class="wireframe-wrap view-panel" id="wf-fbk">
+    <div class="fbk-outer">
+      <button class="fbk-btn fbk-btn-prev" data-dir="-1" data-target="track-wf">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="fbk-stage">
+        <div class="fbk-track" id="track-wf">
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#333333"/><circle cx="16" cy="12" r="2" fill="#333333"/><circle cx="24" cy="12" r="2" fill="#333333"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#333333"/><circle cx="16" cy="12" r="2" fill="#333333"/><circle cx="24" cy="12" r="2" fill="#333333"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#333333"/><circle cx="16" cy="12" r="2" fill="#333333"/><circle cx="24" cy="12" r="2" fill="#333333"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#333333"/><circle cx="16" cy="12" r="2" fill="#333333"/><circle cx="24" cy="12" r="2" fill="#333333"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#333333"/><circle cx="16" cy="12" r="2" fill="#333333"/><circle cx="24" cy="12" r="2" fill="#333333"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+          <div class="fbk-card">
+            <div class="card-title"><div class="card-name"><div class="icon-bubble"><svg width="32" height="28" viewBox="0 0 32 28" fill="none"><path d="M28 0H4C1.8 0 0 1.8 0 4V20C0 22.2 1.8 24 4 24H8V28L14 24H28C30.2 24 32 22.2 32 20V4C32 1.8 30.2 0 28 0Z" fill="white"/><circle cx="8" cy="12" r="2" fill="#333333"/><circle cx="16" cy="12" r="2" fill="#333333"/><circle cx="24" cy="12" r="2" fill="#333333"/></svg></div><span class="card-author">林**</span></div></div>
+            <div class="card-date">2025-03-26 東南旅遊 台北總公司</div>
+            <div class="card-stars"><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-full"></div><div class="star star-half"></div></div>
+            <div class="card-body">此次越南蜆港旅遊，帶上媽媽出國，感覺非常開心，很多話透過這次的密集相處，把彼此心裡的話說出來，同時也與媽媽和解，母子的感情更深了，非常感謝此次出遊。 領隊KELLY很用心 負責任 感恩把我家人還有我照顧的很好。.....</div>
+            <div class="card-link"><span>節錄自 Google 評論</span><hr></div>
+          </div>
+        </div>
+      </div>
+      <button class="fbk-btn fbk-btn-next" data-dir="1" data-target="track-wf">
+        <svg viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div data-include="footer"></div>
+<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
+  <span>TOP</span>
+</button>
+
+<script>
+  // demo/架構切換
+  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var section = toggle.closest('.int-section');
+        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var targetId = btn.dataset.view;
+        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+        section.querySelector('#' + targetId).classList.add('active');
+      });
+    });
+  });
+
+  // 輪播
+  var offsets = {};
+  document.querySelectorAll('.fbk-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var trackId = btn.dataset.target;
+      var track = document.getElementById(trackId);
+      var cardW = 250 + 24; // card width + gap
+      if (!offsets[trackId]) offsets[trackId] = 0;
+      var dir = parseInt(btn.dataset.dir);
+      var cards = track.querySelectorAll('.fbk-card');
+      var maxOffset = -(cards.length - 4) * cardW;
+      offsets[trackId] = Math.min(0, Math.max(maxOffset, offsets[trackId] - dir * cardW));
+      track.style.transform = 'translateX(' + offsets[trackId] + 'px)';
+    });
+  });
+
+  window.addEventListener('scroll', function() {
+    var btn = document.getElementById('topBtn');
+    if (window.scrollY > 300) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+</script>
+<script src="js/include.js"></script>
+</body>
+</html>
