@@ -198,3 +198,11 @@ body { width: 100%; animation: fadeIn 0.2s ease-in; }
   .footer-main { flex-direction: column; padding: 32px 24px; gap: 28px; }
   .footer-col-contact, .footer-col-follow { min-width: unset; width: 100%; }
 }
+
+
+#content {
+  display: block;
+  position: relative;
+  top: -120px;
+  visibility: hidden;
+}
