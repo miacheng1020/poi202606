@@ -173,14 +173,40 @@ body { width: 100%; animation: fadeIn 0.2s ease-in; }
 }
 #topBtn:hover { background: #555555; }
 
+/* ===== 模組中層容器（1400px）& 標題 ===== */
+.int-section {
+  position: relative;
+  width: 1400px;
+  margin: 0 auto;
+  padding: 50px 0 60px;
+}
+.int-section-title {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  text-align: center;
+  letter-spacing: 1px;
+  color: #333333;
+  margin-bottom: 18px;
+}
+
 /* ===== RWD ===== */
+@media (max-width: 1399px) {
+  .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+}
 @media (max-width: 1199px) {
   #site-header { padding: 0 24px; }
   .footer-main { padding: 40px 24px; }
   .site-nav { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
   .site-nav .type-tab { width: auto; flex-shrink: 0; }
 }
+@media (max-width: 1024px) {
+  .int-section { padding: 40px 20px; }
+}
 @media (max-width: 767px) {
+  .int-section { padding: 30px 16px; }
+  .int-section-title { font-size: 24px; }
   #site-header { height: 52px; padding: 0 16px; }
   #site-header .header-hamburger { display: flex; }
   #site-header .header-user { display: none; }
