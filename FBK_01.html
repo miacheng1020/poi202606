@@ -14,8 +14,6 @@
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
 
     /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
 
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
@@ -27,8 +25,8 @@
     .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
 
     /* ===== wrap ===== */
-    .demo-wrap      { width: 1400px; min-height: 700px; background: #144067; box-sizing: border-box; padding: 50px 0; display: flex; align-items: center; justify-content: center; }
-    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 50px 0; border: 0.5px solid #333333; display: flex; align-items: center; justify-content: center; }
+    .demo-wrap      { width: 100%; min-height: 700px; background: #144067; box-sizing: border-box; padding: 50px 0; display: flex; align-items: center; justify-content: center; }
+    .wireframe-wrap { width: 100%; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 50px 0; border: 0.5px solid #333333; display: flex; align-items: center; justify-content: center; }
 
     /* ===== 輪播外框 ===== */
     .fbk-outer {
@@ -37,6 +35,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    
+      margin: 0 auto;
     }
 
     /* 內框（米白 / 灰） */
@@ -135,6 +135,8 @@
     }
     .fbk-card .card-stars .star-full { background: #FFD32B; }
     .fbk-card .card-stars .star-half { background: #FFE890; }
+    .wireframe-wrap .fbk-card .card-stars .star-full { background: #666666; }
+    .wireframe-wrap .fbk-card .card-stars .star-half { background: #999999; }
 
     /* 內文 */
     .fbk-card .card-body {
@@ -161,11 +163,13 @@
       text-align: right; letter-spacing: 0.01em;
       color: #123CB2;
     }
+    .wireframe-wrap .fbk-card .card-link span { color: #333333; }
     .fbk-card .card-link hr {
       width: 124px; height: 0;
       border: 0.5px solid #123CB2;
       margin: 0; align-self: flex-end;
     }
+    .wireframe-wrap .fbk-card .card-link hr { border-color: #333333; }
 
     /* ===== 左右箭頭按鈕 ===== */
     .fbk-btn {
@@ -191,24 +195,73 @@
 
     /* ===== RWD ===== */
     @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
       .demo-wrap, .wireframe-wrap { width: 100%; }
     }
     @media (max-width: 1200px) {
-      .fbk-outer { width: 100%; max-width: 1107px; }
-      .fbk-stage { width: calc(100% - 80px); }
+      .fbk-outer {
+        width: 100%;
+        max-width: 1107px;
+        margin: 0 auto;
+        padding: 0 44px;
+        box-sizing: border-box;
+      }
+      .fbk-stage {
+        width: 100%;
+        height: auto;
+        min-height: 459px;
+      }
+      .fbk-track { align-items: stretch; }
     }
     @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
+      .fbk-stage { min-height: 430px; }
+      .fbk-card { width: 240px; }
+      .fbk-card .card-body { height: 190px; }
     }
     @media (max-width: 767px) {
       .int-sub-nav { justify-content: flex-start; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
       .int-sub-nav::-webkit-scrollbar { display: none; }
       .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; flex-shrink: 0; height: auto; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 16px; min-height: auto; }
-      .fbk-card { width: 220px; }
+      .demo-wrap, .wireframe-wrap {
+        padding: 30px 16px;
+        min-height: auto;
+        align-items: flex-start;
+      }
+      .fbk-outer { padding: 0 34px; }
+      .fbk-stage {
+        width: 100%;
+        min-height: 0;
+        height: auto;
+      }
+      .fbk-track {
+        gap: 16px;
+        padding: 12px;
+        height: auto;
+        align-items: stretch;
+      }
+      .fbk-card {
+        width: calc(100vw - 124px);
+        max-width: 260px;
+        min-width: 210px;
+        height: auto;
+        min-height: 390px;
+      }
+      .fbk-card .card-title { height: auto; min-height: 50px; }
+      .fbk-card .card-date { height: auto; min-height: 34px; }
+      .fbk-card .card-body { height: auto; min-height: 180px; }
+      .fbk-btn {
+        width: 34px;
+        height: 34px;
+      }
+      .fbk-btn-prev { left: 0; }
+      .fbk-btn-next { right: 0; }
+    }
+    @media (max-width: 390px) {
+      .fbk-outer { padding: 0 30px; }
+      .fbk-card {
+        width: calc(100vw - 112px);
+        min-width: 200px;
+      }
+      .fbk-card .card-body { min-height: 170px; }
     }
   </style>
 </head>
@@ -391,11 +444,16 @@
     btn.addEventListener('click', function() {
       var trackId = btn.dataset.target;
       var track = document.getElementById(trackId);
-      var cardW = 250 + 24; // card width + gap
+      var firstCard = track.querySelector('.fbk-card');
+      var trackStyle = window.getComputedStyle(track);
+      var gap = parseFloat(trackStyle.columnGap || trackStyle.gap || 0) || 0;
+      var cardW = firstCard ? firstCard.getBoundingClientRect().width + gap : 274; // card width + current gap
       if (!offsets[trackId]) offsets[trackId] = 0;
       var dir = parseInt(btn.dataset.dir);
       var cards = track.querySelectorAll('.fbk-card');
-      var maxOffset = -(cards.length - 4) * cardW;
+      var stage = track.closest('.fbk-stage');
+      var visibleCount = stage ? Math.max(1, Math.floor(stage.clientWidth / cardW)) : 4;
+      var maxOffset = -Math.max(0, cards.length - visibleCount) * cardW;
       offsets[trackId] = Math.min(0, Math.max(maxOffset, offsets[trackId] - dir * cardW));
       track.style.transform = 'translateX(' + offsets[trackId] + 'px)';
     });

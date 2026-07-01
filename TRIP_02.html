@@ -17,8 +17,6 @@
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
 
     /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
 
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
@@ -30,12 +28,14 @@
     .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
 
     /* ===== wrap ===== */
-    .demo-wrap      { width: 1400px; min-height: 700px; background: #D8FFAC; box-sizing: border-box; padding: 95px 0; }
-    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 95px 0; border: 0.5px solid #333333; }
+    .demo-wrap      { width: 100%; min-height: 700px; background: #D8FFAC; box-sizing: border-box; padding: 95px 0; }
+    .wireframe-wrap { width: 100%; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 95px 0; border: 0.5px solid #333333; }
 
     /* ===== 主容器 ===== */
     .trip02-inner { display: flex; flex-direction: row; align-items: flex-start; }
-    .demo-wrap      .trip02-inner { width: 1162px; gap: 5px; }
+    .demo-wrap      .trip02-inner { width: 1162px; gap: 5px; 
+      margin: 0 auto;
+    }
     .wireframe-wrap .trip02-inner { width: 1154px; gap: 16px; }
 
     /* ===== 卡片外層 ===== */
@@ -194,12 +194,12 @@
 
     /* ===== RWD ===== */
     @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
       .demo-wrap, .wireframe-wrap { width: 100%; }
-      .trip02-inner { width: 100%; max-width: 1162px; }
+      .trip02-inner { width: 100%; max-width: 1162px; 
+      margin: 0 auto;
+    }
     }
     @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
       .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
       .trip02-inner { flex-wrap: wrap; justify-content: center; gap: 24px; }
       .demo-wrap      .trip02-card { width: calc(50% - 12px); max-width: 374px; }
@@ -209,8 +209,6 @@
       .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
       .int-sub-nav::-webkit-scrollbar { display: none; }
       .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
       .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
       .trip02-inner { width: 278px; flex-direction: column; align-items: center; }
       .demo-wrap      .trip02-card,

@@ -16,10 +16,6 @@
     .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
-
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
     .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
@@ -30,148 +26,201 @@
     .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
 
     /* ===== wrap ===== */
-    .demo-wrap      { width: 1400px; min-height: 700px; background: #FFE0A5; box-sizing: border-box; padding: 55px 0; }
-    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 55px 0; border: 0.5px solid #333333; }
-
-    /* ===== 票券 inner 容器 ===== */
-    .cpn-inner { display: flex; flex-direction: row; align-items: center; justify-content: center; }
-    .cpn4-inner { gap: 16px; width: 1162px; }
-    .cpn3-inner { gap: 16px; width: 1162px; }
-    .cpn2-inner { gap: 24px; width: 1162px; }
-
-    /* ===== 票券卡片基礎 ===== */
-    /* 用 position:relative + overflow:hidden + 偽元素做缺口 */
-    .cpn-card {
-      position: relative;
-      background: #FFFFFF;
-      border-radius: 10px;
-      overflow: hidden;
-      flex-shrink: 0;
-      filter: drop-shadow(0px 4px 0px rgba(0,0,0,0.25));
+    .demo-wrap {
+      --ticket-bg: #FFE0A5;
+      --ticket-accent: #FF6C02;
+      width: 100%;
+      min-height: 700px;
+      background: var(--ticket-bg);
+      box-sizing: border-box;
+      padding: 55px 0;
+    }
+    .wireframe-wrap {
+      --ticket-bg: #E5E5E5;
+      --ticket-accent: #333333;
+      width: 100%;
+      min-height: 700px;
+      background: var(--ticket-bg);
+      box-sizing: border-box;
+      padding: 55px 0;
+      border: 0.5px solid #333333;
     }
 
-    /* 左右缺口：用 before/after 圓形，背景色跟 wrap 一致 */
-    .cpn-card::before,
-    .cpn-card::after {
-      content: '';
+    /* ===== 票券 inner 容器 ===== */
+    .cpn-inner {
+      width: 1162px;
+      max-width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    .cpn4-inner { gap: 16px; }
+    .cpn3-inner { gap: 16px; }
+    .cpn2-inner { gap: 24px; }
+
+    /* =========================================================
+       CPN_01 Ticket Component
+       - 同一個元件，依 ticket--sm / md / lg 控制比例
+       - 左右圓圈與背景同色，製造凹洞錯覺
+       - 圓圈永遠跟整張票券垂直置中，且跟卡牌等比縮放
+       - 高度由內容撐開，PC 使用 min-height 保留 Figma 初始比例
+    ========================================================= */
+    .ticket {
+      --ticket-width: 278px;
+      --ticket-min-h: 155px;
+      --ticket-radius: 10px;
+      --ticket-hole-size: 30px;
+      --ticket-content-width: 211px;
+      --ticket-content-gap: 8px;
+      --ticket-pad-y: 20px;
+      --ticket-pad-x: 32px;
+      --ticket-title-fs: 26px;
+      --ticket-title-lh: 36px;
+      --ticket-detail-fs: 16px;
+      --ticket-detail-lh: 19px;
+      --ticket-link-h: 45px;
+      --ticket-link-fs: 30px;
+      --ticket-link-lh: 41px;
+      --ticket-divider-w: 211px;
+      --ticket-divider-bw: 1.5px;
+
+      position: relative;
+      width: var(--ticket-width);
+      min-height: var(--ticket-min-h);
+      height: auto;
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--ticket-pad-y) var(--ticket-pad-x);
+      background: #FFFFFF;
+      border-radius: var(--ticket-radius);
+      box-sizing: border-box;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+
+    .ticket-hole {
       position: absolute;
+      top: 50%;
+      width: var(--ticket-hole-size);
+      height: var(--ticket-hole-size);
+      aspect-ratio: 1 / 1;
       border-radius: 50%;
+      background: var(--ticket-bg);
+      z-index: 3;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+    .ticket-hole-left { left: 0; transform: translate(-50%, -50%); }
+    .ticket-hole-right { right: 0; transform: translate(50%, -50%); }
+
+    .ticket-content {
+      width: min(100%, var(--ticket-content-width));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ticket-content-gap);
+      box-sizing: border-box;
+      text-align: center;
       z-index: 2;
     }
 
-    /* demo 版缺口顏色 */
-    .demo-wrap .cpn-card::before,
-    .demo-wrap .cpn-card::after { background: #FFE0A5; }
-    /* 架構版缺口顏色 */
-    .wireframe-wrap .cpn-card::before,
-    .wireframe-wrap .cpn-card::after { background: #E5E5E5; }
-
-    /* 卡片內容區 */
-    .cpn-card .card-text {
-      position: absolute;
-      left: 50%; top: 50%;
-      transform: translate(-50%, -50%);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-    }
-
-    .cpn-card .card-name {
-      text-align: center; color: #333333;
-    }
-    .cpn-card .card-border {
-      width: 100%; height: 0;
-    }
-    .demo-wrap .cpn-card .card-border { border-top: 1.5px solid #FF6C02; }
-    .wireframe-wrap .cpn-card .card-border { border-top: 1.5px solid #333333; }
-
-    .cpn-card .card-detail {
-      text-align: center; color: #333333;
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 400;
-    }
-    .cpn-card .card-price {
+    .ticket-title {
       width: 100%;
-      display: flex; align-items: center; justify-content: center;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: var(--ticket-title-fs);
+      line-height: var(--ticket-title-lh);
+      color: #333333;
+      text-align: center;
+      box-sizing: border-box;
     }
-    .demo-wrap .cpn-card .card-price { background: #FF6C02; }
-    .wireframe-wrap .cpn-card .card-price { background: #333333; }
+    .wireframe-wrap .ticket-title {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
 
-    .cpn-card .card-price span {
-      font-family: 'Manrope', sans-serif; font-weight: 800;
-      color: #FFFFFF; text-align: center;
+    .ticket-divider {
+      width: min(100%, var(--ticket-divider-w));
+      height: 0;
+      border-top: var(--ticket-divider-bw) solid var(--ticket-accent);
+      box-sizing: border-box;
     }
 
-    /* ══════════════════════
-       一排四個 (CPN4)
-    ══════════════════════ */
-    .cpn4-card {
-      width: 278px; height: 155px;
+    .ticket-detail {
+      width: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: var(--ticket-detail-fs);
+      line-height: var(--ticket-detail-lh);
+      letter-spacing: 1px;
+      color: #333333;
+      text-align: center;
+      box-sizing: border-box;
     }
-    /* 缺口：垂直置中，直徑 30px，左右各伸出一半 */
-    .cpn4-card::before { width: 30px; height: 30px; left: -15px; top: 62px; }
-    .cpn4-card::after  { width: 30px; height: 30px; right: -15px; top: 62px; }
 
-    .cpn4-card .card-text { width: 213px; gap: 8px; }
-    .cpn4-card .card-name {
-      font-family: 'Manrope', sans-serif; font-weight: 700;
-      font-size: 26px; line-height: 36px; width: 211px;
+    .ticket-link {
+      width: 100%;
+      min-height: var(--ticket-link-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 0;
+      background: var(--ticket-accent);
+      color: #FFFFFF;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: var(--ticket-link-fs);
+      line-height: var(--ticket-link-lh);
+      text-align: center;
+      box-sizing: border-box;
+      word-break: break-word;
     }
-    .wireframe-wrap .cpn4-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-size: 24px;
-    }
-    .cpn4-card .card-border { width: 211px; }
-    .cpn4-card .card-detail { font-size: 16px; line-height: 19px; width: 211px; }
-    .cpn4-card .card-price  { width: 211px; height: 45px; padding: 2px 0; }
-    .cpn4-card .card-price span { font-size: 30px; line-height: 41px; }
-    .demo-wrap      .cpn4-card .card-border { border-top-width: 1.5px; }
-    .wireframe-wrap .cpn4-card .card-border { border-top-width: 1.5px; }
 
-    /* ══════════════════════
-       一排三個 (CPN3)
-    ══════════════════════ */
-    .cpn3-card {
-      width: 376px; height: 188px;
+    .ticket--md {
+      --ticket-width: 376px;
+      --ticket-min-h: 188px;
+      --ticket-hole-size: 45px;
+      --ticket-content-width: 260px;
+      --ticket-content-gap: 8px;
+      --ticket-pad-y: 23px;
+      --ticket-pad-x: 58px;
+      --ticket-title-fs: 32px;
+      --ticket-title-lh: 44px;
+      --ticket-detail-fs: 18px;
+      --ticket-detail-lh: 22px;
+      --ticket-link-h: 57px;
+      --ticket-link-fs: 36px;
+      --ticket-link-lh: 49px;
+      --ticket-divider-w: 260px;
+      --ticket-divider-bw: 2px;
     }
-    .cpn3-card::before { width: 45px; height: 45px; left: -22.5px; top: 71px; }
-    .cpn3-card::after  { width: 45px; height: 45px; right: -22.5px; top: 71px; }
 
-    .cpn3-card .card-text { width: 261px; gap: 8px; }
-    .cpn3-card .card-name {
-      font-family: 'Manrope', sans-serif; font-weight: 700;
-      font-size: 32px; line-height: 44px; width: 260px;
+    .ticket--lg {
+      --ticket-width: 569px;
+      --ticket-min-h: 286px;
+      --ticket-hole-size: 60px;
+      --ticket-content-width: 396px;
+      --ticket-content-gap: 12px;
+      --ticket-pad-y: 43px;
+      --ticket-pad-x: 86px;
+      --ticket-title-fs: 48px;
+      --ticket-title-lh: 66px;
+      --ticket-detail-fs: 28px;
+      --ticket-detail-lh: 34px;
+      --ticket-link-h: 78px;
+      --ticket-link-fs: 48px;
+      --ticket-link-lh: 66px;
+      --ticket-divider-w: 396px;
+      --ticket-divider-bw: 2px;
     }
-    .wireframe-wrap .cpn3-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-size: 32px;
+    .wireframe-wrap .ticket--lg {
+      --ticket-title-lh: 58px;
     }
-    .cpn3-card .card-border { width: 260px; }
-    .cpn3-card .card-detail { font-size: 18px; line-height: 22px; width: 260px; letter-spacing: 1px; }
-    .cpn3-card .card-price  { width: 260px; height: 57px; padding: 4px 0; }
-    .cpn3-card .card-price span { font-size: 36px; line-height: 49px; }
-    .demo-wrap      .cpn3-card .card-border { border-top-width: 2px; }
-    .wireframe-wrap .cpn3-card .card-border { border-top-width: 2px; }
-
-    /* ══════════════════════
-       一排二個 (CPN2)
-    ══════════════════════ */
-    .cpn2-card {
-      width: 569px; height: 286px;
-    }
-    .cpn2-card::before { width: 60px; height: 60px; left: -30px; top: 113px; }
-    .cpn2-card::after  { width: 60px; height: 60px; right: -30px; top: 113px; }
-
-    .cpn2-card .card-text { width: 396px; gap: 12px; }
-    .cpn2-card .card-name {
-      font-family: 'Manrope', sans-serif; font-weight: 700;
-      font-size: 48px; line-height: 66px; width: 396px;
-    }
-    .wireframe-wrap .cpn2-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-size: 48px; line-height: 58px;
-    }
-    .cpn2-card .card-border { width: 396px; }
-    .cpn2-card .card-detail { font-size: 28px; line-height: 34px; width: 396px; letter-spacing: 1px; }
-    .cpn2-card .card-price  { width: 396px; height: 78px; padding: 6px 0; }
-    .cpn2-card .card-price span { font-size: 48px; line-height: 66px; }
-    .demo-wrap      .cpn2-card .card-border { border-top-width: 2px; }
-    .wireframe-wrap .cpn2-card .card-border { border-top-width: 2px; }
 
     /* ===== TOP ===== */
     #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
@@ -180,33 +229,121 @@
     #topBtn:hover { background: #555555; }
 
     /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .cpn4-inner, .cpn3-inner, .cpn2-inner { width: 100%; max-width: 1162px; }
+    /*
+      CPN_01 RWD 原則：
+      1. PC 初始版依原設計欄數使用不同尺寸：4欄=sm、3欄=md、2欄=lg。
+      2. RWD 過程中，同一 viewport 的欄數規則必須一致。
+         - Tablet / 兩欄狀態：一排四個=2+2，一排三個=2+1，一排二個=2。
+         - Mobile / 單欄狀態：一排四個=1+1+1+1，一排三個=1+1+1，一排二個=1+1。
+      3. 同欄數＝同規格：同一欄數狀態下，票券尺寸、字級、padding、圓圈尺寸、divider、link 視覺比例必須一致。
+      4. 欄數切換依 viewport 可容納欄數決定，不依原始版型決定。
+    */
+
+    @media (max-width: 1200px) {
+      .demo-wrap, .wireframe-wrap {
+        width: 100%;
+      }
+
+      .demo-wrap, .wireframe-wrap {
+        padding: 30px 20px;
+      }
+
+      .cpn4-inner,
+      .cpn3-inner,
+      .cpn2-inner {
+        width: 100%;
+        max-width: 768px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .cpn4-inner .ticket,
+      .cpn3-inner .ticket,
+      .cpn2-inner .ticket {
+        --ticket-width: 376px;
+        --ticket-min-h: 188px;
+        --ticket-hole-size: 45px;
+        --ticket-content-width: 260px;
+        --ticket-content-gap: 8px;
+        --ticket-pad-y: 23px;
+        --ticket-pad-x: 58px;
+        --ticket-title-fs: 32px;
+        --ticket-title-lh: 44px;
+        --ticket-detail-fs: 18px;
+        --ticket-detail-lh: 22px;
+        --ticket-link-h: 57px;
+        --ticket-link-fs: 36px;
+        --ticket-link-lh: 49px;
+        --ticket-divider-w: 260px;
+        --ticket-divider-bw: 2px;
+        width: var(--ticket-width);
+        max-width: 100%;
+      }
     }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .cpn4-inner, .cpn3-inner, .cpn2-inner { flex-wrap: wrap; justify-content: center; }
-    }
+
     @media (max-width: 767px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
       .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .cpn2-card { width: 278px; height: 200px; }
-      .cpn2-card::before { width: 36px; height: 36px; left: -18px; top: 80px; }
-      .cpn2-card::after  { width: 36px; height: 36px; right: -18px; top: 80px; }
-      .cpn2-card .card-text { width: 220px; gap: 8px; }
-      .cpn2-card .card-name { font-size: 28px; line-height: 38px; width: 220px; }
-      .cpn2-card .card-border { width: 220px; }
-      .cpn2-card .card-detail { font-size: 16px; line-height: 20px; width: 220px; }
-      .cpn2-card .card-price { width: 220px; height: 52px; }
-      .cpn2-card .card-price span { font-size: 28px; line-height: 38px; }
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+      }
+
+      .demo-wrap, .wireframe-wrap {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+
+      .cpn4-inner,
+      .cpn3-inner,
+      .cpn2-inner {
+        width: 100%;
+        max-width: 278px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .cpn4-inner .ticket,
+      .cpn3-inner .ticket,
+      .cpn2-inner .ticket {
+        --ticket-width: 100%;
+        --ticket-min-h: 155px;
+        --ticket-hole-size: 30px;
+        --ticket-content-width: 211px;
+        --ticket-content-gap: 8px;
+        --ticket-pad-y: 20px;
+        --ticket-pad-x: 32px;
+        --ticket-title-fs: 26px;
+        --ticket-title-lh: 36px;
+        --ticket-detail-fs: 16px;
+        --ticket-detail-lh: 20px;
+        --ticket-link-h: 45px;
+        --ticket-link-fs: 28px;
+        --ticket-link-lh: 38px;
+        --ticket-divider-w: 211px;
+        --ticket-divider-bw: 1.5px;
+        width: 100%;
+        max-width: 278px;
+      }
     }
+
   </style>
 </head>
 <body data-id="cpn" data-page="cpn">
@@ -237,36 +374,44 @@
   <!-- DEMO -->
   <div class="demo-wrap view-panel active" id="demo-cpn4">
     <div class="cpn-inner cpn4-inner">
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
     </div>
@@ -275,36 +420,44 @@
   <!-- 架構 -->
   <div class="wireframe-wrap view-panel" id="wf-cpn4">
     <div class="cpn-inner cpn4-inner">
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹介紹</div>
+          <div class="ticket-link">價格價格</div>
         </div>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹介紹</div>
+          <div class="ticket-link">價格價格</div>
         </div>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹介紹</div>
+          <div class="ticket-link">價格價格</div>
         </div>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket ticket--sm">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹介紹</div>
+          <div class="ticket-link">價格價格</div>
         </div>
       </div>
     </div>
@@ -324,28 +477,34 @@
   <!-- DEMO -->
   <div class="demo-wrap view-panel active" id="demo-cpn3">
     <div class="cpn-inner cpn3-inner">
-      <div class="cpn-card cpn3-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--md">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--md">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--md">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
     </div>
@@ -354,28 +513,34 @@
   <!-- 架構 -->
   <div class="wireframe-wrap view-panel" id="wf-cpn3">
     <div class="cpn-inner cpn3-inner">
-      <div class="cpn-card cpn3-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket ticket--md">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹介紹</div>
+          <div class="ticket-link">價格價格</div>
         </div>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket ticket--md">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹介紹</div>
+          <div class="ticket-link">價格價格</div>
         </div>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket ticket--md">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹介紹</div>
+          <div class="ticket-link">價格價格</div>
         </div>
       </div>
     </div>
@@ -395,20 +560,24 @@
   <!-- DEMO -->
   <div class="demo-wrap view-panel active" id="demo-cpn2">
     <div class="cpn-inner cpn2-inner">
-      <div class="cpn-card cpn2-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--lg">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
-      <div class="cpn-card cpn2-card">
-        <div class="card-text">
-          <div class="card-name">5/20</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket ticket--lg">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">5/20</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">TRAIN400</div>
         </div>
       </div>
     </div>
@@ -417,20 +586,24 @@
   <!-- 架構 -->
   <div class="wireframe-wrap view-panel" id="wf-cpn2">
     <div class="cpn-inner cpn2-inner">
-      <div class="cpn-card cpn2-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>價格價格價格</span></div>
+      <div class="ticket ticket--lg">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">價格價格價格</div>
         </div>
       </div>
-      <div class="cpn-card cpn2-card">
-        <div class="card-text">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>價格價格價格</span></div>
+      <div class="ticket ticket--lg">
+        <span class="ticket-hole ticket-hole-left"></span>
+        <span class="ticket-hole ticket-hole-right"></span>
+        <div class="ticket-content">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-link">價格價格價格</div>
         </div>
       </div>
     </div>

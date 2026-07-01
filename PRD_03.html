@@ -7,264 +7,587 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
-  <link rel="stylesheet" href="css/common.css" type="text/css">
-  <style>
+  <link rel="stylesheet" href="css/common.css" type="text/css"><style>
 
     /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+    .int-sub-nav {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+
+    .int-sub-nav .sub-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      height: 48px;
+      min-width: 91px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
+      box-sizing: border-box;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+    }
+
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+      min-width: 92px;
+    }
 
     /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+    .view-toggle {
+      display: flex;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
 
     /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+    .view-panel {
+      display: none !important;
+    }
+
+    .view-panel.active {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ===== wrap ===== */
-    .demo-wrap {
-      width: 1400px; min-height: 700px;
-      background: #DFF1FB;
-      box-sizing: border-box; padding: 55px 0;
-    }
+    .demo-wrap,
     .wireframe-wrap {
-      width: 1400px; min-height: 700px;
-      background: #E5E5E5; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
+      width: 100%;
+      min-height: 700px;
+      box-sizing: border-box;
+      padding: 55px 0;
+    }
+
+    .demo-wrap {
+      background: #DFF1FB;
+    }
+
+    .wireframe-wrap {
+      background: #E5E5E5;
+      border: 0.5px solid #333333;
     }
 
     /* ===== 主容器 ===== */
     .prd03-inner {
       width: 1162px;
+      max-width: 1162px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 16px;
-    }
-
-    /* ============================================
-       上層：一排三個垂直卡片
-    ============================================ */
-    .prd03-row {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      width: 1162px;
-      gap: 16px;
-    }
-
-    .prd03-card {
-      position: relative;
-      width: 376px; height: auto;
-      flex-shrink: 0;
-      background: #FFFFFF;
-      display: flex; flex-direction: column;
-      align-items: flex-start;
-      padding: 16px; gap: 0;
-      box-sizing: border-box; overflow: hidden;
-    }
-    .wireframe-wrap .prd03-card { height: auto; overflow: visible; }
-
-    /* 圖片容器：344×229px 固定 */
-    .prd03-card .card-img {
-      position: relative;
-      width: 100%; aspect-ratio: 3 / 2;
-      flex-shrink: 0; overflow: hidden; margin-bottom: 8px;
-    }
-    .prd03-card .card-img img,
-    .prd03-card .card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .prd03-card .card-img .img-grey { background: #999999; }
-
-    /* tag：卡片層級 */
-    .prd03-card .card-tag {
-      position: absolute; left: 0; top: 0; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
-      padding: 8px 16px; height: 30px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; font-weight: 400; color: #FFFFFF;
-      white-space: nowrap; box-sizing: border-box;
-      border-radius: 0 20px 20px 0;
-    }
-    .demo-wrap .prd03-card .card-tag { background: #14A483; }
-    .wireframe-wrap .prd03-card .card-tag { background: #333333; }
-
-    .prd03-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
-      color: #333333; width: 100%; margin-bottom: 8px;
-    }
-    .demo-wrap .prd03-card .card-name { height: 44px; overflow: hidden; }
-
-    .prd03-card .card-sale {
-      display: flex; align-items: center;
-      padding: 8px; gap: 8px; width: 100%; min-height: 33px; height: auto;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 14px; line-height: 17px;
-      box-sizing: border-box; margin-bottom: 8px;
-    }
-    .demo-wrap .prd03-card .card-sale { background: #FE6011; color: #FCFB00; }
-    .wireframe-wrap .prd03-card .card-sale { background: #333333; color: #FFFFFF; }
-
-    .prd03-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 20px;
-      color: #333333; width: 100%;
-    }
-    .demo-wrap .prd03-card .card-detail { flex: 1; }
-
-    .prd03-card .card-price {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 1.2;
-      text-align: right; width: 100%;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
-    }
-    .prd03-card .card-price .price-num { font-size: 24px !important; font-weight: 700; line-height: 1; }
-    .demo-wrap .prd03-card .card-price { color: #FE6011; margin-top: auto; }
-    .wireframe-wrap .prd03-card .card-price { color: #333333; }
-
-    /* ============================================
-       下層：列表橫條卡片（1162×121px）
-    ============================================ */
-    .prd03-list-card {
-      position: relative;
-      width: 1162px;
-      background: #FFFFFF;
-      display: flex; flex-direction: row;
-      align-items: flex-start;
-      padding: 16px 0; gap: 16px;
+      margin: 0 auto;
       box-sizing: border-box;
     }
 
-    /* tag：左側固定 144×30px */
-    .prd03-list-card .card-tag {
-      display: flex; align-items: center; justify-content: center;
-      padding: 8px 16px;
-      width: 144px; height: 30px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; font-weight: 400; color: #FFFFFF;
-      white-space: nowrap; box-sizing: border-box;
-      border-radius: 0 20px 20px 0;
-      flex-shrink: 0;
+    .prd03-row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      gap: 16px;
+      box-sizing: border-box;
     }
-    .demo-wrap .prd03-list-card .card-tag { background: #14A483; }
-    .wireframe-wrap .prd03-list-card .card-tag { background: #333333; }
 
-    /* 中間文字區 */
-    .prd03-list-card .card-text {
-      display: flex; flex-direction: column;
-      align-items: flex-start; gap: 8px;
-      flex: 1; min-width: 0;
+    /* ============================================
+       上層：一排三個圖文卡，對齊 PRD01/PRD02 的 PRD3 邏輯
+    ============================================ */
+    .prd03-card {
+      position: relative;
+      width: calc((100% - 32px) / 3);
+      flex-shrink: 0;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding: 16px;
+      gap: 0;
+      box-sizing: border-box;
+      overflow: visible;
+      font-family: 'Noto Sans TC', sans-serif;
     }
+
+    .demo-wrap .prd03-card,
+    .demo-wrap .prd03-list-card {
+      border-radius: 10px;
+    }
+
+    .prd03-card .card-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      flex-shrink: 0;
+      overflow: hidden;
+      margin-bottom: 8px;
+      background: #999999;
+    }
+
+    .prd03-card .card-img img,
+    .prd03-card .card-img .img-grey {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .prd03-card .card-img .img-grey {
+      background: #999999;
+    }
+
+    .prd03-card .card-tag,
+    .prd03-list-card .card-tag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #FFFFFF;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      box-sizing: border-box;
+      border-radius: 0 20px 20px 0;
+    }
+
+    .prd03-card .card-tag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 3;
+      padding: 8px 16px;
+      height: 30px;
+    }
+
+    .demo-wrap .prd03-card .card-tag,
+    .demo-wrap .prd03-list-card .card-tag {
+      background: #14A483;
+    }
+
+    .wireframe-wrap .prd03-card .card-tag,
+    .wireframe-wrap .prd03-list-card .card-tag {
+      background: #333333;
+    }
+
+    .prd03-card .card-name,
     .prd03-list-card .card-name {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
-      color: #333333; width: 100%;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+      color: #333333;
+      width: 100%;
+      box-sizing: border-box;
     }
+
+    .prd03-card .card-name {
+      margin-bottom: 8px;
+    }
+
+    .demo-wrap .prd03-card .card-name {
+      height: 52px;
+      overflow: hidden;
+    }
+
+    .prd03-card .card-sale {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      gap: 8px;
+      width: 100%;
+      min-height: 36px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
+      color: #FFFFFF;
+      box-sizing: border-box;
+      margin-bottom: 8px;
+    }
+
+    .demo-wrap .prd03-card .card-sale {
+      background: #FE6011;
+      color: #FCFB00;
+    }
+
+    .wireframe-wrap .prd03-card .card-sale {
+      background: #333333;
+      color: #FFFFFF;
+    }
+
+    .prd03-card .card-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+      width: 100%;
+      flex: 1;
+      margin-bottom: 8px;
+      box-sizing: border-box;
+    }
+
+    .prd03-card .card-price,
+    .prd03-list-card .card-price {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.2;
+      text-align: right;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 2px;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      box-sizing: border-box;
+    }
+
+    .prd03-card .card-price {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    .prd03-card .card-price .price-num,
+    .prd03-list-card .card-price .price-num {
+      font-size: 24px !important;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .demo-wrap .prd03-card .card-price,
+    .demo-wrap .prd03-list-card .card-price {
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .prd03-card .card-price,
+    .wireframe-wrap .prd03-list-card .card-price {
+      color: #333333;
+    }
+
+    /* ============================================
+       下層：無圖列表橫條卡片
+    ============================================ */
+    .prd03-list-card {
+      position: relative;
+      width: 100%;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      padding: 16px;
+      gap: 16px;
+      box-sizing: border-box;
+      overflow: visible;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .prd03-list-card .card-tag {
+      flex: 0 0 144px;
+      width: 144px;
+      height: 30px;
+      padding: 8px 16px;
+      align-self: flex-start;
+    }
+
+    .prd03-list-card .card-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .prd03-list-card .card-name {
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+
     .prd03-list-card .card-sale {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 14px; line-height: 17px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
       width: 100%;
+      box-sizing: border-box;
     }
-    .demo-wrap .prd03-list-card .card-sale { color: #FE6011; }
-    .wireframe-wrap .prd03-list-card .card-sale { color: #333333; }
+
+    .demo-wrap .prd03-list-card .card-sale {
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .prd03-list-card .card-sale {
+      color: #333333;
+    }
 
     .prd03-list-card .card-detail {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 17px;
-      color: #333333; width: 100%;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    /* 右側 price 靠右靠底 */
     .prd03-list-card .card-price-wrap {
-      display: flex; flex-direction: column;
-      justify-content: flex-end; align-items: flex-end;
-      padding: 16px 16px 0;
-      width: 192px; height: 89px;
-      flex-shrink: 0; box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex: 0 0 192px;
+      min-width: 160px;
+      padding: 0;
+      box-sizing: border-box;
     }
+
     .prd03-list-card .card-price {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 1.2;
-      text-align: right;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+      width: 100%;
     }
-    .prd03-list-card .card-price .price-num { font-size: 24px !important; font-weight: 700; line-height: 1; }
-    .demo-wrap .prd03-list-card .card-price { color: #FE6011; }
-    .wireframe-wrap .prd03-list-card .card-price { color: #333333; }
 
     /* ===== TOP ===== */
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
+    #topBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    #topBtn:hover {
+      background: #555555;
+    }
 
     /* ===== RWD ===== */
-    /* ===== 大平板 ≤1200 ===== */
     @media (max-width: 1200px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .prd03-inner { width: 100%; max-width: 1162px; }
-      .prd03-row { width: 100%; max-width: 1162px; }
-      .prd03-list-card { width: 100%; max-width: 1162px; }
+      .demo-wrap,
+      .wireframe-wrap {
+        width: 100%;
+      }
+
+      .prd03-inner {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+        margin: 0 auto;
+      }
     }
 
-    /* ===== 平板 ≤992：卡片版 3→2欄 ===== */
     @media (max-width: 992px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .prd03-row { flex-wrap: wrap; justify-content: center; }
-      .prd03-card { width: calc(50% - 8px); }
-      .prd03-list-card { flex-wrap: wrap; }
-      .prd03-list-card .card-price-wrap { width: auto; height: auto; padding: 8px 0 0; }
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 30px 20px;
+      }
+
+      .prd03-inner {
+        width: 100%;
+      }
+
+      .prd03-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .prd03-card {
+        width: calc(50% - 8px);
+      }
+
+      .prd03-list-card {
+        align-items: flex-start;
+      }
+
+      .prd03-list-card .card-price-wrap {
+        flex: 0 0 160px;
+        min-width: 140px;
+      }
     }
 
-    /* ===== 手機橫向 ≤768（主力，套 M 版字級）===== */
     @media (max-width: 768px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      /* demo 標題不裁切 */
-      .demo-wrap .prd03-card .card-name, .demo-wrap .prd03-list-card .card-name { height: auto !important; overflow: visible !important; }
-      /* === M版字級下限 === */
-      .prd03-card .card-name, .prd03-list-card .card-name { font-size: 20px; line-height: 1.3; height: auto; }
-      .prd03-card .card-sale, .prd03-list-card .card-sale { font-size: 16px; line-height: 1.3; height: auto !important; min-height: 33px; }
-      .prd03-card .card-detail, .prd03-list-card .card-detail { font-size: 16px; line-height: 1.5; }
-      .prd03-card .card-price, .prd03-list-card .card-price { font-size: 16px; }
-      .prd03-card .card-price .price-num, .prd03-list-card .card-price .price-num { font-size: 26px !important; }
-      /* 卡片版 → 2欄 */
-      .prd03-card { width: calc(50% - 8px); height: auto; }
-      /* 列表版 → 維持橫式但可換行 */
-      .prd03-list-card { flex-wrap: wrap; padding: 16px; border-radius: 10px; }
-      .prd03-list-card .card-name { white-space: normal; }
-      .prd03-list-card .card-price-wrap { width: auto; height: auto; padding: 8px 0 0; }
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .int-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+        line-height: 1.2;
+      }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+
+      .demo-wrap .prd03-card .card-name,
+      .demo-wrap .prd03-list-card .card-name,
+      .demo-wrap .prd03-card .card-detail,
+      .demo-wrap .prd03-list-card .card-detail {
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      .prd03-card .card-name,
+      .prd03-list-card .card-name {
+        font-size: 20px;
+        line-height: 1.3;
+        height: auto;
+      }
+
+      .prd03-card .card-sale,
+      .prd03-list-card .card-sale {
+        font-size: 16px;
+        line-height: 1.3;
+        height: auto !important;
+      }
+
+      .prd03-card .card-detail,
+      .prd03-list-card .card-detail {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .prd03-card .card-price,
+      .prd03-list-card .card-price {
+        font-size: 16px;
+      }
+
+      .prd03-card .card-price .price-num,
+      .prd03-list-card .card-price .price-num {
+        font-size: 26px !important;
+      }
+
+      .prd03-list-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .prd03-list-card .card-tag {
+        width: auto;
+        max-width: 100%;
+        flex: 0 0 auto;
+      }
+
+      .prd03-list-card .card-text {
+        width: 100%;
+      }
+
+      .prd03-list-card .card-price-wrap {
+        width: 100%;
+        min-width: 0;
+        flex: 0 0 auto;
+        align-items: flex-end;
+      }
     }
 
-    /* ===== 手機直向 ≤576：全部單欄 278 ===== */
     @media (max-width: 576px) {
-      .prd03-inner { width: 278px; }
-      .prd03-row { width: 278px; flex-direction: column; align-items: center; }
-      .prd03-card { width: 278px; height: auto; }
-      .prd03-list-card { width: 278px; flex-direction: column; padding: 16px; border-radius: 10px; }
-      .prd03-list-card .card-name { white-space: normal; }
-      .prd03-list-card .card-price-wrap { width: 100%; height: auto; padding: 8px 0 0; justify-content: flex-end; }
+      .prd03-inner {
+        width: 100%;
+        max-width: 278px;
+        align-items: center;
+      }
+
+      .prd03-row {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .prd03-card,
+      .prd03-list-card {
+        width: 100%;
+        max-width: 278px;
+      }
     }
-  </style>
+  
+</style>
 </head>
 <body data-id="prd" data-page="product">
 
@@ -359,24 +682,24 @@
           <div class="card-img"><div class="img-grey"></div></div>
           <div class="card-tag">標籤字數限八字元</div>
           <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
           <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
         </div>
         <div class="prd03-card">
           <div class="card-img"><div class="img-grey"></div></div>
           <div class="card-tag">標籤字數限八字元</div>
           <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
           <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
         </div>
         <div class="prd03-card">
           <div class="card-img"><div class="img-grey"></div></div>
           <div class="card-tag">標籤字數限八字元</div>
           <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
           <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
         </div>
       </div>
@@ -386,8 +709,8 @@
         <div class="card-tag">標籤字數限八字元</div>
         <div class="card-text">
           <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹　介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
         </div>
         <div class="card-price-wrap">
           <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
@@ -398,8 +721,8 @@
         <div class="card-tag">標籤字數限八字元</div>
         <div class="card-text">
           <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹　介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
         </div>
         <div class="card-price-wrap">
           <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>

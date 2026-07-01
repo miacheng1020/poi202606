@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -7,38 +8,109 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
-  <link rel="stylesheet" href="css/common.css" type="text/css">
-  <style>
-
+  <link rel="stylesheet" href="css/common.css" type="text/css"><style>
     /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
+
+    .int-sub-nav {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+
+    .int-sub-nav .sub-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      height: 48px;
+      min-width: 91px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+      min-width: 92px;
+    }
 
     /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
 
     /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+    .view-toggle {
+      display: flex;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+    }
+
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
 
     /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+    .view-panel {
+      display: none !important;
+    }
+
+    .view-panel.active {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ===== wrap ===== */
     .demo-wrap {
-      width: 1400px; min-height: 700px;
-      background: #FFE7E7; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
+      width: 100%;
+      min-height: 0;
+      height: auto;
+      background: #FFE7E7;
+      border: 0.5px solid #333333;
+      box-sizing: border-box;
+      padding: 20px 0;
     }
+
     .wireframe-wrap {
-      width: 1400px; min-height: 700px;
-      background: #E5E5E5; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
+      width: 100%;
+      min-height: 0;
+      height: auto;
+      background: #E5E5E5;
+      border: 0.5px solid #333333;
+      box-sizing: border-box;
+      padding: 20px 0;
     }
 
     /* ===== 共用 inner 容器 ===== */
@@ -48,12 +120,16 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
+
+      margin: 0 auto;
     }
 
     /* ===========================================
        BLOG3：一排三個
     =========================================== */
-    .blog3-inner { gap: 24px; }
+    .blog3-inner {
+      gap: 24px;
+    }
 
     .blog3-card {
       position: relative;
@@ -75,24 +151,41 @@
       overflow: hidden;
       position: relative;
     }
+
     .blog3-card .card-img img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
+
     .blog3-card .card-img .card-grey {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       background: #999999;
     }
+
     /* tag */
     .blog3-card .card-tag {
-      position: absolute; left: 0; top: 0; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
       padding: 6px 16px;
       background: #333333;
       border-radius: 0 0 10px 0;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; font-weight: 400; color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 130%;
+      color: #FFFFFF;
       white-space: nowrap;
+      box-sizing: border-box;
     }
 
     /* 文字區 */
@@ -105,6 +198,7 @@
       gap: 8px;
       box-sizing: border-box;
     }
+
     .blog3-card .card-name {
       width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
@@ -113,6 +207,7 @@
       line-height: 130%;
       text-align: center;
     }
+
     .blog3-card .card-detail {
       width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
@@ -120,28 +215,50 @@
       font-size: 18px;
       line-height: 150%;
     }
+
     .blog3-card .card-btn {
-      display: flex; justify-content: center; align-items: center;
-      width: 100%; height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 44px;
       border-radius: 100px;
-      border: none; cursor: pointer;
+      border: none;
+      cursor: pointer;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 20px; font-weight: 400; color: #FFFFFF;
+      font-size: 20px;
+      font-weight: 400;
+      color: #FFFFFF;
     }
 
     /* demo 樣式 */
-    .demo-wrap .blog3-card .card-name { color: #FF5353; }
-    .demo-wrap .blog3-card .card-btn { background: #FF5353; }
+    .demo-wrap .blog3-card .card-name {
+      color: #FF5353;
+    }
+
+    .demo-wrap .blog3-card .card-btn {
+      background: #FF5353;
+    }
 
     /* 架構樣式 */
-    .wireframe-wrap .blog3-card { border-radius: 0; }
-    .wireframe-wrap .blog3-card .card-name { color: #333333; }
-    .wireframe-wrap .blog3-card .card-btn { background: #333333; }
+    .wireframe-wrap .blog3-card {
+      border-radius: 0;
+    }
+
+    .wireframe-wrap .blog3-card .card-name {
+      color: #333333;
+    }
+
+    .wireframe-wrap .blog3-card .card-btn {
+      background: #333333;
+    }
 
     /* ===========================================
        BLOG2：一排二個
     =========================================== */
-    .blog2-inner { gap: 24px; }
+    .blog2-inner {
+      gap: 24px;
+    }
 
     .blog2-card {
       position: relative;
@@ -162,23 +279,40 @@
       overflow: hidden;
       position: relative;
     }
+
     .blog2-card .card-img img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
+
     .blog2-card .card-img .card-grey {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       background: #999999;
     }
+
     .blog2-card .card-tag {
-      position: absolute; left: 0; top: 0; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
       padding: 10px 16px;
       background: #333333;
       border-radius: 0 0 15px 0;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 18px; font-weight: 500; color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 130%;
+      color: #FFFFFF;
       white-space: nowrap;
+      box-sizing: border-box;
     }
 
     .blog2-card .card-text {
@@ -190,6 +324,7 @@
       gap: 10px;
       box-sizing: border-box;
     }
+
     .blog2-card .card-name {
       width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
@@ -198,6 +333,7 @@
       line-height: 130%;
       text-align: center;
     }
+
     .blog2-card .card-detail {
       width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
@@ -205,25 +341,54 @@
       font-size: 20px;
       line-height: 150%;
     }
+
     .blog2-card .card-btn {
-      display: flex; justify-content: center; align-items: center;
-      width: 325px; height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 325px;
+      height: 50px;
       border-radius: 100px;
-      border: none; cursor: pointer;
+      border: none;
+      cursor: pointer;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 22px; font-weight: 400; color: #FFFFFF;
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFFFFF;
     }
 
-    .demo-wrap .blog2-card .card-name { color: #FF5353; }
-    .demo-wrap .blog2-card .card-btn { background: #FF5353; }
-    .wireframe-wrap .blog2-card { border-radius: 0; }
-    .wireframe-wrap .blog2-card .card-name { color: #333333; }
-    .wireframe-wrap .blog2-card .card-btn { background: #333333; }
+    .demo-wrap .blog2-card .card-name {
+      color: #FF5353;
+    }
+
+    .demo-wrap .blog2-card .card-btn {
+      background: #FF5353;
+    }
+
+    .wireframe-wrap .blog2-card {
+      border-radius: 0;
+    }
+
+    .wireframe-wrap .blog2-card .card-name {
+      color: #333333;
+    }
+
+    .wireframe-wrap .blog2-card .card-btn {
+      background: #333333;
+    }
 
     /* ===========================================
        BLOG1：一排一個（左圖右文）
     =========================================== */
-    .blog1-inner { gap: 0; align-items: flex-start; }
+    .blog1-inner {
+      gap: 0;
+      align-items: stretch;
+    }
+
+    .demo-wrap .blog1-inner {
+      border-radius: 20px;
+      overflow: hidden;
+    }
 
     .blog1-img {
       position: relative;
@@ -232,23 +397,40 @@
       flex-shrink: 0;
       overflow: hidden;
     }
+
     .blog1-img img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
+
     .blog1-img .card-grey {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       background: #999999;
     }
+
     .blog1-img .card-tag {
-      position: absolute; left: 0; top: 0; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
-      padding: 12px 16px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      padding: 10px 16px;
       background: #333333;
       border-radius: 0 0 10px 0;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px; font-weight: 500; color: #FFFFFF;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 130%;
+      color: #FFFFFF;
       white-space: nowrap;
+      box-sizing: border-box;
     }
 
     .blog1-text {
@@ -264,6 +446,7 @@
       gap: 12px;
       box-sizing: border-box;
     }
+
     .blog1-text .card-name {
       width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
@@ -272,6 +455,7 @@
       line-height: 130%;
       text-align: center;
     }
+
     .blog1-text .card-detail {
       width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
@@ -280,294 +464,609 @@
       line-height: 150%;
       padding-bottom: 14px;
     }
+
     .blog1-text .card-btn {
-      display: flex; justify-content: center; align-items: center;
-      width: 325px; height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 325px;
+      height: 50px;
       border-radius: 100px;
-      border: none; cursor: pointer;
+      border: none;
+      cursor: pointer;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 22px; font-weight: 400; color: #FFFFFF;
+      font-size: 22px;
+      font-weight: 400;
+      color: #FFFFFF;
     }
 
-    .demo-wrap .blog1-text .card-name { color: #FF5353; }
-    .demo-wrap .blog1-text .card-btn { background: #FF5353; }
-    .wireframe-wrap .blog1-text .card-name { color: #333333; }
-    .wireframe-wrap .blog1-text .card-btn { background: #333333; }
+    .demo-wrap .blog1-text .card-name {
+      color: #FF5353;
+    }
+
+    .demo-wrap .blog1-text .card-btn {
+      background: #FF5353;
+    }
+
+    .wireframe-wrap .blog1-text .card-name {
+      color: #333333;
+    }
+
+    .wireframe-wrap .blog1-text .card-btn {
+      background: #333333;
+    }
 
     /* ===== TOP ===== */
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
+    #topBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    #topBtn:hover {
+      background: #555555;
+    }
 
     /* ===== RWD ===== */
     @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .blog-inner { width: 100%; max-width: 1162px; }
-      /* blog3 */
-      .blog3-card { width: calc(33.3% - 16px); }
-      .blog3-card .card-img { width: 100%; }
-      /* blog2 */
-      .blog2-card { width: calc(50% - 12px); }
-      .blog2-card .card-img { width: 100%; }
-      /* blog1 */
-      .blog1-img { width: 59%; height: auto; min-height: 360px; }
-      .blog1-text { width: 41%; height: auto; min-height: 360px; }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        width: 100%;
+      }
+
+      .blog-inner {
+        width: 100%;
+        max-width: 1162px;
+        margin: 0 auto;
+      }
+
+      .blog3-card {
+        width: calc((100% - 48px) / 3);
+      }
+
+      .blog3-card .card-img,
+      .blog2-card .card-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+      }
+
+      .blog2-card {
+        width: calc((100% - 24px) / 2);
+      }
+
+      .blog1-inner {
+        align-items: stretch;
+      }
+
+      .blog1-img {
+        width: 688px;
+        height: auto;
+        aspect-ratio: 688 / 460;
+      }
+
+      .blog1-text {
+        width: 474px;
+        min-height: 0;
+        height: auto;
+        align-self: stretch;
+      }
     }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      /* blog3 → 單欄 */
-      .blog3-inner { flex-direction: column; align-items: center; gap: 20px; }
-      .blog3-card { width: 100%; max-width: 420px; }
-      .blog3-card .card-img { height: 220px; }
-      /* blog2 → 單欄 */
-      .blog2-inner { flex-direction: column; align-items: center; gap: 20px; }
-      .blog2-card { width: 100%; max-width: 560px; }
-      .blog2-card .card-img { height: 300px; }
-      /* blog1 → 單欄 */
-      .blog1-inner { flex-direction: column; align-items: center; }
-      .blog1-img { width: 100%; max-width: 600px; height: 340px; }
-      .blog1-text { width: 100%; max-width: 600px; height: auto; }
+
+    @media (max-width: 1199px) {
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 20px;
+      }
+
+      .blog-inner {
+        width: 100%;
+        max-width: 1162px;
+      }
+
+      .blog3-inner {
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .blog3-card {
+        width: calc((100% - 20px) / 2);
+        max-width: none;
+      }
+
+      .blog2-inner {
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .blog2-card {
+        width: calc((100% - 20px) / 2);
+        max-width: none;
+      }
+
+      .blog1-inner {
+        align-items: stretch;
+      }
+
+      .blog1-img {
+        width: 59%;
+      }
+
+      .blog1-text {
+        width: 41%;
+        min-height: 0;
+        height: auto;
+        align-self: stretch;
+      }
     }
+
+    @media (max-width: 900px) {
+
+      .blog3-inner,
+      .blog2-inner {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .blog3-card,
+      .blog2-card {
+        width: calc((100% - 16px) / 2);
+      }
+
+      .blog1-inner {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .blog1-img,
+      .blog1-text {
+        width: 100%;
+        max-width: 600px;
+      }
+
+      .demo-wrap .blog1-inner {
+        max-width: 600px;
+      }
+    }
+
     @media (max-width: 767px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .blog-inner { width: 278px; flex-direction: column; align-items: center; }
-      /* blog3 */
-      .blog3-card { width: 278px; }
-      .blog3-card .card-img { height: 185px; }
-      .blog3-card .card-name { font-size: 18px; }
-      .blog3-card .card-detail { font-size: 15px; }
-      /* blog2 */
-      .blog2-card { width: 278px; }
-      .blog2-card .card-img { height: 185px; }
-      .blog2-card .card-name { font-size: 20px; }
-      .blog2-card .card-detail { font-size: 16px; }
-      .blog2-card .card-btn { width: 100%; }
-      /* blog1 */
-      .blog1-img { width: 278px; height: 185px; max-width: none; }
-      .blog1-text { width: 278px; height: auto; max-width: none; padding: 20px 16px; }
-      .blog1-text .card-name { font-size: 20px; }
-      .blog1-text .card-detail { font-size: 16px; }
-      .blog1-text .card-btn { width: 100%; }
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .int-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+        line-height: 1.2;
+      }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 16px;
+        min-height: 0;
+        height: auto;
+      }
+
+      .blog-inner {
+        width: 100%;
+        max-width: 560px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .blog3-card,
+      .blog2-card,
+      .blog1-img,
+      .blog1-text {
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .blog3-card .card-img,
+      .blog2-card .card-img,
+      .blog1-img {
+        height: auto;
+        aspect-ratio: 3 / 2;
+      }
+
+      .blog3-card .card-text,
+      .blog2-card .card-text,
+      .blog1-text {
+        padding: 20px 16px;
+      }
+
+      .blog3-card .card-tag,
+      .blog2-card .card-tag,
+      .blog1-img .card-tag {
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 130%;
+        border-radius: 0 0 8px 0;
+      }
+
+      .blog3-card .card-name,
+      .blog2-card .card-name,
+      .blog1-text .card-name {
+        font-size: 20px;
+        line-height: 130%;
+      }
+
+      .blog3-card .card-detail,
+      .blog2-card .card-detail,
+      .blog1-text .card-detail {
+        font-size: 16px;
+        line-height: 150%;
+      }
+
+      .blog3-card .card-btn,
+      .blog2-card .card-btn,
+      .blog1-text .card-btn {
+        width: 100%;
+        height: 42px;
+        font-size: 16px;
+      }
     }
+
+    @media (max-width: 390px) {
+      .blog-inner {
+        max-width: 278px;
+      }
+
+      .blog3-card,
+      .blog2-card,
+      .blog1-img,
+      .blog1-text {
+        width: 278px;
+        max-width: 278px;
+      }
+
+      .blog3-card .card-img,
+      .blog2-card .card-img,
+      .blog1-img {
+        height: 185px;
+        aspect-ratio: auto;
+      }
+    }
+
+
+    /* ===== BLOG_01 一排一個 RWD 修正 =====
+       只修 BLOG1 橫式卡在 Output / RWD 時的收合；不影響 BLOG2、BLOG3。
+    */
+    @media (max-width: 900px) {
+      .blog1-inner {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+        box-sizing: border-box;
+        overflow: visible;
+      }
+
+      .blog1-img,
+      .blog1-text {
+        width: 100%;
+        max-width: 600px;
+        flex-shrink: 1;
+        box-sizing: border-box;
+      }
+
+      .blog1-img {
+        height: auto;
+        aspect-ratio: 3 / 2;
+      }
+
+      .blog1-text {
+        height: auto;
+        min-height: 0;
+        align-self: auto;
+        overflow: visible;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .blog1-inner {
+        max-width: 420px;
+      }
+
+      .blog1-img,
+      .blog1-text {
+        max-width: 420px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .blog1-inner {
+        width: 100%;
+        max-width: 278px;
+      }
+
+      .blog1-img,
+      .blog1-text {
+        width: 100%;
+        max-width: 278px;
+      }
+    }
+
   </style>
 </head>
+
 <body data-id="blog" data-page="blog">
 
-<div data-include="header"></div>
-<div data-include="banner"></div>
-<div data-include="nav"></div>
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
 
-<div id="content"></div>
-<div class="int-sub-nav-sticky">
-  <div class="int-sub-nav">
-    <a class="sub-tab active" href="BLOG_01.html#content">部落格_01</a>
-    <a class="sub-tab" href="BLOG_02.html#content">部落格_02</a>
+  <div id="content"></div>
+  <div class="int-sub-nav-sticky">
+    <div class="int-sub-nav">
+      <a class="sub-tab active" href="BLOG_01.html#content">部落格_01</a>
+      <a class="sub-tab" href="BLOG_02.html#content">部落格_02</a>
+    </div>
   </div>
-</div>
 
-<!-- =============================================
+  <!-- =============================================
      模組一：一排三個
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排三個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-blog3">demo</button>
-    <button class="toggle-btn" data-view="wf-blog3">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排三個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-blog3">demo</button>
+      <button class="toggle-btn" data-view="wf-blog3">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-blog3">
-    <div class="blog-inner blog3-inner">
-      <!-- 卡片 1 -->
-      <div class="blog3-card">
-        <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
-        <div class="card-text">
-          <div class="card-name">2025九州賞櫻</div>
-          <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
-          <button class="card-btn">價格價格價格</button>
+    <!-- demo -->
+    <div class="demo-wrap view-panel active" id="demo-blog3">
+      <div class="blog-inner blog3-inner">
+        <!-- 卡片 1 -->
+        <div class="blog3-card">
+          <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
+          <div class="card-text">
+            <div class="card-name">2025九州賞櫻</div>
+            <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
+        </div>
+        <!-- 卡片 2 -->
+        <div class="blog3-card">
+          <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
+          <div class="card-text">
+            <div class="card-name">2025九州賞櫻</div>
+            <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
+        </div>
+        <!-- 卡片 3 -->
+        <div class="blog3-card">
+          <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
+          <div class="card-text">
+            <div class="card-name">2025九州賞櫻</div>
+            <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
         </div>
       </div>
-      <!-- 卡片 2 -->
-      <div class="blog3-card">
-        <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
-        <div class="card-text">
-          <div class="card-name">2025九州賞櫻</div>
-          <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
-          <button class="card-btn">價格價格價格</button>
+    </div>
+
+    <!-- 架構 -->
+    <div class="wireframe-wrap view-panel" id="wf-blog3">
+      <div class="blog-inner blog3-inner">
+        <div class="blog3-card">
+          <div class="card-img">
+            <div class="card-grey"></div>
+            <div class="card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
         </div>
-      </div>
-      <!-- 卡片 3 -->
-      <div class="blog3-card">
-        <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
-        <div class="card-text">
-          <div class="card-name">2025九州賞櫻</div>
-          <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
-          <button class="card-btn">價格價格價格</button>
+        <div class="blog3-card">
+          <div class="card-img">
+            <div class="card-grey"></div>
+            <div class="card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
+        </div>
+        <div class="blog3-card">
+          <div class="card-img">
+            <div class="card-grey"></div>
+            <div class="card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-blog3">
-    <div class="blog-inner blog3-inner">
-      <div class="blog3-card">
-        <div class="card-img"><div class="card-grey"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-btn">價格價格價格</button>
-        </div>
-      </div>
-      <div class="blog3-card">
-        <div class="card-img"><div class="card-grey"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-btn">價格價格價格</button>
-        </div>
-      </div>
-      <div class="blog3-card">
-        <div class="card-img"><div class="card-grey"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題ＱＡ標題標題標題</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-btn">價格價格價格</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
+  <!-- =============================================
      模組二：一排二個
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排二個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-blog2">demo</button>
-    <button class="toggle-btn" data-view="wf-blog2">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排二個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-blog2">demo</button>
+      <button class="toggle-btn" data-view="wf-blog2">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-blog2">
-    <div class="blog-inner blog2-inner">
-      <div class="blog2-card">
-        <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
-        <div class="card-text">
-          <div class="card-name">2025九州賞櫻</div>
-          <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
-          <button class="card-btn">點我閱讀</button>
+    <!-- demo -->
+    <div class="demo-wrap view-panel active" id="demo-blog2">
+      <div class="blog-inner blog2-inner">
+        <div class="blog2-card">
+          <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
+          <div class="card-text">
+            <div class="card-name">2025九州賞櫻</div>
+            <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
+            <button class="card-btn">點我閱讀</button>
+          </div>
+        </div>
+        <div class="blog2-card">
+          <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
+          <div class="card-text">
+            <div class="card-name">2025九州賞櫻</div>
+            <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
+            <button class="card-btn">點我閱讀</button>
+          </div>
         </div>
       </div>
-      <div class="blog2-card">
-        <div class="card-img"><img src="images/img_BLOG_01.jpg" alt=""></div>
-        <div class="card-text">
-          <div class="card-name">2025九州賞櫻</div>
-          <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」…</div>
-          <button class="card-btn">點我閱讀</button>
+    </div>
+
+    <!-- 架構 -->
+    <div class="wireframe-wrap view-panel" id="wf-blog2">
+      <div class="blog-inner blog2-inner">
+        <div class="blog2-card">
+          <div class="card-img">
+            <div class="card-grey"></div>
+            <div class="card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
+        </div>
+        <div class="blog2-card">
+          <div class="card-img">
+            <div class="card-grey"></div>
+            <div class="card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+            <button class="card-btn">價格價格價格</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-blog2">
-    <div class="blog-inner blog2-inner">
-      <div class="blog2-card">
-        <div class="card-img"><div class="card-grey"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-btn">價格價格價格</button>
-        </div>
-      </div>
-      <div class="blog2-card">
-        <div class="card-img"><div class="card-grey"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-btn">價格價格價格</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
+  <!-- =============================================
      模組三：一排一個
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排一個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-blog1">demo</button>
-    <button class="toggle-btn" data-view="wf-blog1">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排一個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-blog1">demo</button>
+      <button class="toggle-btn" data-view="wf-blog1">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-blog1">
-    <div class="blog-inner blog1-inner">
-      <div class="blog1-img">
-        <img src="images/img_BLOG_01.jpg" alt="">
+    <!-- demo -->
+    <div class="demo-wrap view-panel active" id="demo-blog1">
+      <div class="blog-inner blog1-inner">
+        <div class="blog1-img">
+          <img src="images/img_BLOG_01.jpg" alt="">
+        </div>
+        <div class="blog1-text">
+          <div class="card-name">2025九州賞櫻</div>
+          <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」，將於全台各…</div>
+          <button class="card-btn">點我閱讀</button>
+        </div>
       </div>
-      <div class="blog1-text">
-        <div class="card-name">2025九州賞櫻</div>
-        <div class="card-detail">春暖花開的季節就是要賞花，十大賞桐花秘境出爐囉！每年4、5月正是賞「桐花」的最佳時節，俗稱「五月雪」，將於全台各…</div>
-        <button class="card-btn">點我閱讀</button>
+    </div>
+
+    <!-- 架構 -->
+    <div class="wireframe-wrap view-panel" id="wf-blog1">
+      <div class="blog-inner blog1-inner">
+        <div class="blog1-img">
+          <div class="card-grey"></div>
+          <div class="card-tag">標籤字數限八字元</div>
+        </div>
+        <div class="blog1-text">
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <button class="card-btn">價格價格價格</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-blog1">
-    <div class="blog-inner blog1-inner">
-      <div class="blog1-img">
-        <div class="card-grey"></div>
-        <div class="card-tag">標籤字數限八字元</div>
-      </div>
-      <div class="blog1-text">
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        <button class="card-btn">價格價格價格</button>
-      </div>
-    </div>
-  </div>
-</div>
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+      <path d="M7 0L14 12H0L7 0Z" fill="white" />
+    </svg>
+    <span>TOP</span>
+  </button>
 
-<div data-include="footer"></div>
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
-  <span>TOP</span>
-</button>
-
-<script>
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+  <script>
+    document.querySelectorAll('.view-toggle').forEach(function (toggle) {
+      toggle.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var section = toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var targetId = btn.dataset.view;
+          section.querySelectorAll('.view-panel').forEach(function (p) { p.classList.remove('active'); });
+          section.querySelector('#' + targetId).classList.add('active');
+        });
       });
     });
-  });
 
-  window.addEventListener('scroll', function() {
-    var btn = document.getElementById('topBtn');
-    if (window.scrollY > 300) { btn.classList.add('visible'); }
-    else { btn.classList.remove('visible'); }
-  });
-</script>
-<script src="js/include.js"></script>
+    window.addEventListener('scroll', function () {
+      var btn = document.getElementById('topBtn');
+      if (window.scrollY > 300) { btn.classList.add('visible'); }
+      else { btn.classList.remove('visible'); }
+    });
+  </script>
+  <script src="js/include.js"></script>
 </body>
+
 </html>

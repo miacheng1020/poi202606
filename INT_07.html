@@ -1,385 +1,709 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>POI頁面模組版型｜東南旅遊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <style>
-
     /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
-
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
-
-    /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
-
-    /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
-
-    /* ===== wrap ===== */
-    .demo-wrap {
-      width: 1400px; min-height: 700px;
-      background: #F1F3F2; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
-    }
-    .wireframe-wrap {
-      width: 1400px; min-height: 700px;
-      background: #E5E5E5; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
     }
 
-    /* ===== 1162px 內容容器 ===== */
-    .int07-inner {
-      width: 1162px;
+    .int-sub-nav {
       display: flex;
-      flex-direction: row;
-      gap: 35px;
-      align-items: flex-start;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
     }
 
-    /* ===========================================
-       左半：488px
-    =========================================== */
-    .int07-left {
-      width: 488px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* 標題（架構專用）*/
-    .int07-title {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 130%;
-      color: #333333;
-    }
-
-    /* sale bar（架構專用）*/
-    .int07-sale {
+    .int-sub-nav .sub-tab {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 8px 0;
-      width: 100%;
-      height: 52px;
-      background: #333333;
+      padding: 16px;
+      height: 48px;
+      min-width: 91px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
       box-sizing: border-box;
     }
-    .int07-sale span {
+
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+      min-width: 92px;
+    }
+
+    /* ===== 切換按鈕 ===== */
+    .view-toggle {
+      display: flex;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
       font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+    }
+
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
+
+    .view-panel {
+      display: none !important;
+    }
+
+    .view-panel.active {
+      display: flex !important;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    /* ===== INT07 artboard ===== */
+    .int07-wrap {
+      --int07-title-size: 28px;
+      --int07-sale-size: 24px;
+      --int07-detail-size: 20px;
+      width: min(1400px, 100%);
+      min-height: 700px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 100px 0;
+      border: 0.5px solid #333333;
+      overflow: hidden;
+    }
+
+    .demo-wrap {
+      background: #FFFFFF;
+    }
+
+    .wireframe-wrap {
+      background: #E5E5E5;
+    }
+
+    .int07-inner {
+      width: 1162px;
+      height: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 36px;
+      box-sizing: border-box;
+    }
+
+    /* ===== 左側資訊區 =====
+       Typography：依 Responsive Typography Token 控制
+       1920 / 1366：一排 1 / 2 個字級（title 28、sale 24、detail 20）
+       1024：降一級（title 24、sale 20、detail 18）
+       768 / 390：M / 小版字級（title 20、sale 16、detail 16）
+    ===== */
+    .int07-info {
+      width: 488px;
+      flex: 0 0 488px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-sizing: border-box;
+    }
+
+    .int07-title {
+      width: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: var(--int07-title-size);
+      font-weight: 700;
+      line-height: 130%;
+      color: #333333;
+      text-align: left;
+    }
+
+    .int07-sale {
+      width: 100%;
+      min-height: 52px;
+      padding: 8px 0;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #333333;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: var(--int07-sale-size);
       font-weight: 500;
-      font-size: 24px;
       line-height: 150%;
       color: #FFFFFF;
       text-align: center;
     }
 
-    /* 文字內容 */
     .int07-detail {
+      width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
+      font-size: var(--int07-detail-size);
       font-weight: 400;
-      font-size: 20px;
       line-height: 150%;
-      text-align: justify;
       color: #333333;
+      text-align: justify;
     }
 
-    /* demo 平面圖 */
-    .int07-floorplan {
+    .int07-floorplan-frame {
       width: 100%;
+      height: 268px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    .int07-floorplan-frame img {
       display: block;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
     }
 
-    /* 架構 平面圖灰底 */
-    .int07-floorplan-wf {
-      width: 100%;
-      height: 268px;
+    .wireframe-wrap .int07-floorplan-frame {
       background: #999999;
     }
 
-    /* ===========================================
-       右半：638px 大圖 + 縮圖
-    =========================================== */
-    .int07-right {
-      flex: 1;
-      min-width: 0;
+    .wireframe-wrap .int07-floorplan-frame img {
+      display: none;
+    }
+
+    .demo-wrap .int07-title,
+    .demo-wrap .int07-sale {
+      display: none;
+    }
+
+    /* ===== 右側 Gallery ===== */
+    .int07-gallery {
+      width: 638px;
+      flex: 0 0 638px;
       display: flex;
       flex-direction: column;
       gap: 11px;
+      box-sizing: border-box;
     }
 
-    /* 大圖固定高度 */
     .int07-main {
       position: relative;
-      width: 100%;
+      width: 638px;
       height: 424px;
       overflow: hidden;
-      flex-shrink: 0;
+      background: #999999;
+      box-sizing: border-box;
     }
-    .int07-main .main-img {
-      position: absolute;
-      inset: 0;
+
+    .int07-main-img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
-    .int07-main .main-grey {
+
+    .int07-tag {
       position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      background: #999999;
-    }
-    .int07-main .main-tag-wf {
-      position: absolute;
-      left: 0; top: 0; z-index: 2;
+      left: 0;
+      top: 0;
+      z-index: 2;
       display: flex;
       justify-content: center;
       align-items: center;
+      width: 160px;
+      min-height: 43px;
       padding: 12px 16px;
-      height: 43px;
+      box-sizing: border-box;
       background: #333333;
       border-radius: 0 0 10px 0;
       font-family: 'Noto Sans TC', sans-serif;
       font-size: 16px;
       font-weight: 500;
+      line-height: 19px;
       color: #FFFFFF;
+      text-align: center;
       white-space: nowrap;
     }
 
-    /* 縮圖列：固定 98×65，gap 10px，6張 */
-    .int07-thumbs {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 10px;
-      width: 100%;
+    .demo-wrap .int07-tag {
+      display: none;
     }
+
+    .wireframe-wrap .int07-main-img {
+      display: none;
+    }
+
+    .int07-thumbs {
+      width: 638px;
+      display: grid;
+      grid-template-columns: repeat(6, 98px);
+      gap: 10px;
+      box-sizing: border-box;
+    }
+
     .int07-thumb {
       position: relative;
       width: 98px;
       height: 65px;
-      flex-shrink: 0;
       overflow: hidden;
+      background: #999999;
+      border: none;
+      padding: 0;
       cursor: pointer;
+      box-sizing: border-box;
+      appearance: none;
     }
-    .int07-thumb .thumb-img {
+
+    .int07-thumb-img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
-    .int07-thumb .thumb-grey {
-      width: 100%;
-      height: 100%;
-      background: #999999;
-    }
-    .int07-thumb .thumb-overlay {
+
+    .int07-thumb::after {
+      content: '';
       position: absolute;
       inset: 0;
-      background: rgba(51,51,51,0.6);
       z-index: 1;
+      background: rgba(51, 51, 51, 0.6);
+      transition: opacity .2s ease;
+      pointer-events: none;
+    }
+
+    .int07-thumb:hover::after {
+      opacity: .55;
+    }
+
+    .int07-thumb.is-active::after {
+      opacity: 0;
+    }
+
+    .demo-wrap .int07-thumb.is-active {
+      outline: 2px solid rgba(51, 51, 51, .35);
+      outline-offset: 0;
+    }
+
+    .wireframe-wrap .int07-thumb-img {
+      display: none;
+    }
+
+    .wireframe-wrap .int07-thumb.is-active {
+      outline: none;
+    }
+
+    /* ===== 1024 / iPad 橫向：正式驗收斷點，維持左右配置 ===== */
+    @media (min-width: 901px) and (max-width: 1199px) {
+      .int07-wrap {
+        --int07-title-size: 24px;
+        --int07-sale-size: 20px;
+        --int07-detail-size: 18px;
+        width: 100%;
+        min-height: 0;
+        padding: 72px 32px;
+      }
+
+      .int07-inner {
+        width: 100%;
+        max-width: 960px;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+      }
+
+      .int07-info {
+        order: 1;
+        width: 40.5%;
+        flex: 0 0 40.5%;
+      }
+
+      .int07-gallery {
+        order: 2;
+        width: calc(59.5% - 24px);
+        flex: 0 0 calc(59.5% - 24px);
+      }
+
+      .int07-main {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 638 / 424;
+      }
+
+      .int07-thumbs {
+        width: 100%;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+      }
+
+      .int07-thumb {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 98 / 65;
+      }
+
+      .int07-floorplan-frame {
+        height: auto;
+        aspect-ratio: 488 / 268;
+      }
+
+    }
+
+    /* ===== 768 / 390：Gallery 優先，縮圖 2×3 ===== */
+    @media (max-width: 900px) {
+      .int07-wrap {
+        --int07-title-size: 20px;
+        --int07-sale-size: 16px;
+        --int07-detail-size: 16px;
+        width: 100%;
+        min-height: 0;
+        padding: 56px 20px;
+      }
+
+      .int07-inner {
+        width: 100%;
+        max-width: 664px;
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+
+      .int07-gallery {
+        order: 1;
+        width: 100%;
+        flex: none;
+      }
+
+      .int07-main {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 638 / 424;
+      }
+
+      .int07-thumbs {
+        width: 100%;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      .int07-thumb {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 98 / 65;
+      }
+
+      .int07-info {
+        order: 2;
+        width: 100%;
+        flex: none;
+      }
+
+
+      .int07-floorplan-frame {
+        height: auto;
+        aspect-ratio: 488 / 268;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .int07-wrap {
+        padding: 40px 0;
+      }
+
+      .int07-inner {
+        width: 312px;
+        gap: 28px;
+      }
+
+      .int07-gallery {
+        width: 312px;
+      }
+
+      .int07-main {
+        width: 312px;
+        height: 207px;
+      }
+
+      .int07-thumbs {
+        width: 312px;
+        gap: 6px;
+      }
+
+      .int07-thumb {
+        aspect-ratio: 98 / 65;
+      }
+
+      .int07-info {
+        width: 312px;
+        gap: 14px;
+      }
+
+      .int07-title {
+        font-size: var(--int07-title-size);
+      }
+
+      .int07-sale {
+        min-height: 35px;
+        font-size: var(--int07-sale-size);
+        line-height: 150%;
+        padding: 5px 0;
+      }
+
+      .int07-detail {
+        font-size: var(--int07-detail-size);
+        line-height: 150%;
+      }
+
+      .int07-floorplan-frame {
+        width: 312px;
+        height: 171px;
+      }
+
+      .int07-tag {
+        width: auto;
+        min-height: 35px;
+        padding: 8px 12px;
+        font-size: 14px;
+        line-height: 17px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .int-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+        line-height: 1.2;
+      }
     }
 
     /* ===== TOP ===== */
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
+    #topBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
 
-    /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .int07-inner { width: 100%; max-width: 1162px; }
-      .int07-left { width: 42%; }
-      .int07-sale { width: 100%; }
-      .int07-thumbs { flex-wrap: wrap; }
-      .int07-thumb { flex: 1; width: auto; min-width: 60px; }
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .int07-inner { flex-direction: column; align-items: center; gap: 24px; width: 100%; }
-      .int07-left { width: 100%; }
-      .int07-right { width: 100%; }
-      .int07-main { height: 340px; }
-      .int07-sale { width: 100%; }
-      .int07-thumb { flex: 1; width: auto; }
+
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
     }
-    @media (max-width: 767px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .int07-inner { width: 278px; flex-direction: column; align-items: center; gap: 20px; }
-      .int07-left { width: 278px; }
-      .int07-title { font-size: 20px; }
-      .int07-sale { width: 278px; }
-      .int07-sale span { font-size: 18px; }
-      .int07-detail { font-size: 16px; }
-      .int07-floorplan-wf { height: 160px; }
-      .int07-right { width: 278px; }
-      .int07-main { height: 185px; }
-      .int07-thumbs { flex-wrap: wrap; gap: 6px; }
-      .int07-thumb { flex: none; width: calc(33.3% - 4px); height: 52px; }
+
+    #topBtn:hover {
+      background: #555555;
     }
   </style>
 </head>
+
 <body data-id="int" data-page="intro">
 
-<div data-include="header"></div>
-<div data-include="banner"></div>
-<div data-include="nav"></div>
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
 
-<div id="content"></div>
-<div class="int-sub-nav-sticky">
-  <div class="int-sub-nav">
-    <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
-    <a class="sub-tab" href="INT_02.html#content">介紹_02</a>
-    <a class="sub-tab" href="INT_03.html#content">介紹_03</a>
-    <a class="sub-tab" href="INT_04.html#content">介紹_04</a>
-    <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
-    <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
-    <a class="sub-tab active" href="INT_07.html#content">介紹_07</a>
-    <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
-  </div>
-</div>
-
-<div class="int-section">
-  <div class="int-section-title">介紹_07</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-7">demo</button>
-    <button class="toggle-btn" data-view="wf-7">架構</button>
+  <div id="content"></div>
+  <div class="int-sub-nav-sticky">
+    <div class="int-sub-nav">
+      <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
+      <a class="sub-tab" href="INT_02.html#content">介紹_02</a>
+      <a class="sub-tab" href="INT_03.html#content">介紹_03</a>
+      <a class="sub-tab" href="INT_04.html#content">介紹_04</a>
+      <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
+      <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
+      <a class="sub-tab active" href="INT_07.html#content">介紹_07</a>
+      <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
+    </div>
   </div>
 
-  <!-- ===== demo：左無標題/sale，右實際圖 ===== -->
-  <div class="demo-wrap view-panel active" id="demo-7">
-    <div class="int07-inner">
-      <!-- 左：文字 + 平面圖 -->
-      <div class="int07-left">
-        <div class="int07-detail">融合巴洛克與洛可可美學，艙房以手工織品、金箔鏡框與古典畫作妝點，展現皇室格調。公共空間如水晶吊燈大廳、藝術長廊與典雅餐廳，更營造出富麗堂皇的氛圍，彷彿置身歐洲宮殿。</div>
-        <img class="int07-floorplan" src="images/img_INT_07_2.jpg" alt="">
-      </div>
-      <!-- 右：大圖 + 縮圖 -->
-      <div class="int07-right">
-        <div class="int07-main">
-          <img class="main-img" id="int07-main-img" src="images/img_INT_07.png" alt="">
+  <div class="int-section">
+    <div class="int-section-title">介紹_07</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-7">demo</button>
+      <button class="toggle-btn" data-view="wf-7">架構</button>
+    </div>
+
+    <div class="int07-wrap demo-wrap view-panel active" id="demo-7">
+      <div class="int07-inner">
+        <div class="int07-info">
+          <div class="int07-title">標題標題標題標題標題標題標題標題</div>
+          <div class="int07-sale">額外資訊額外資訊額外資訊</div>
+          <div class="int07-detail">融合巴洛克與洛可可美學，艙房以手工織品、金箔鏡框與古典畫作妝點，展現皇室格調。公共空間如水晶吊燈大廳、藝術長廊與典雅餐廳，更營造出富麗堂皇的氛圍，彷彿置身歐洲宮殿。
+          </div>
+          <div class="int07-floorplan-frame"><img src="images/img_INT_07-0.jpg" alt="S.S. Maria Theresa 船艙配置圖"></div>
         </div>
-        <div class="int07-thumbs">
-          <div class="int07-thumb" data-switch="images/img_INT_07.png">
-            <img class="thumb-img" src="images/img_INT_07.png" alt="">
-            <div class="thumb-overlay"></div>
+
+        <div class="int07-gallery" data-gallery>
+          <div class="int07-main">
+            <img class="int07-main-img" src="images/img_INT_07-1.jpg" alt="S.S. Maria Theresa 室內大廳">
+            <div class="int07-tag">標籤字數限八字元</div>
           </div>
-          <div class="int07-thumb" data-switch="images/img_INT_07-1.jpg">
-            <img class="thumb-img" src="images/img_INT_07-1.jpg" alt="">
-            <div class="thumb-overlay"></div>
+          <div class="int07-thumbs">
+            <button class="int07-thumb is-active" type="button" data-src="images/img_INT_07-1.jpg"
+              aria-label="切換至第 1 張圖片"><img class="int07-thumb-img" src="images/img_INT_07-1.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-2.jpg" aria-label="切換至第 2 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-2.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-3.jpg" aria-label="切換至第 3 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-3.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-4.jpg" aria-label="切換至第 4 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-4.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-5.jpg" aria-label="切換至第 5 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-5.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-6.jpg" aria-label="切換至第 6 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-6.jpg" alt=""></button>
           </div>
-          <div class="int07-thumb" data-switch="images/img_INT_07-1.jpg">
-            <img class="thumb-img" src="images/img_INT_07-1.jpg" alt="">
-            <div class="thumb-overlay"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="int07-wrap wireframe-wrap view-panel" id="wf-7">
+      <div class="int07-inner">
+        <div class="int07-info">
+          <div class="int07-title">標題標題標題標題標題標題標題</div>
+          <div class="int07-sale">額外資訊額外資訊額外資訊</div>
+          <div class="int07-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+          <div class="int07-floorplan-frame"><img src="images/img_INT_07-0.jpg" alt=""></div>
+        </div>
+
+        <div class="int07-gallery" data-gallery>
+          <div class="int07-main">
+            <img class="int07-main-img" src="images/img_INT_07-1.jpg" alt="">
+            <div class="int07-tag">標籤字數限八字元</div>
           </div>
-          <div class="int07-thumb" data-switch="images/img_INT_07-1.jpg">
-            <img class="thumb-img" src="images/img_INT_07-1.jpg" alt="">
-            <div class="thumb-overlay"></div>
-          </div>
-          <div class="int07-thumb" data-switch="images/img_INT_07-1.jpg">
-            <img class="thumb-img" src="images/img_INT_07-1.jpg" alt="">
-            <div class="thumb-overlay"></div>
-          </div>
-          <div class="int07-thumb" data-switch="images/img_INT_07-1.jpg">
-            <img class="thumb-img" src="images/img_INT_07-1.jpg" alt="">
-            <div class="thumb-overlay"></div>
+          <div class="int07-thumbs">
+            <button class="int07-thumb is-active" type="button" data-src="images/img_INT_07-1.jpg"
+              aria-label="切換至第 1 張圖片"><img class="int07-thumb-img" src="images/img_INT_07-1.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-2.jpg" aria-label="切換至第 2 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-2.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-3.jpg" aria-label="切換至第 3 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-3.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-4.jpg" aria-label="切換至第 4 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-4.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-5.jpg" aria-label="切換至第 5 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-5.jpg" alt=""></button>
+            <button class="int07-thumb" type="button" data-src="images/img_INT_07-6.jpg" aria-label="切換至第 6 張圖片"><img
+                class="int07-thumb-img" src="images/img_INT_07-6.jpg" alt=""></button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ===== 架構：左有標題/sale，右灰底 ===== -->
-  <div class="wireframe-wrap view-panel" id="wf-7">
-    <div class="int07-inner">
-      <!-- 左：標題 + sale + 文字 + 灰底圖 -->
-      <div class="int07-left">
-        <div class="int07-title">標題標題標題標題標題標標題標題標題</div>
-        <div class="int07-sale"><span>額外資訊額外資訊額外資訊</span></div>
-        <div class="int07-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="int07-floorplan-wf"></div>
-      </div>
-      <!-- 右：灰底大圖（含tag）+ 灰底縮圖 -->
-      <div class="int07-right">
-        <div class="int07-main">
-          <div class="main-grey"></div>
-          <div class="main-tag-wf">標籤字數限八字元</div>
-        </div>
-        <div class="int07-thumbs">
-          <div class="int07-thumb"><div class="thumb-grey"></div><div class="thumb-overlay"></div></div>
-          <div class="int07-thumb"><div class="thumb-grey"></div><div class="thumb-overlay"></div></div>
-          <div class="int07-thumb"><div class="thumb-grey"></div><div class="thumb-overlay"></div></div>
-          <div class="int07-thumb"><div class="thumb-grey"></div><div class="thumb-overlay"></div></div>
-          <div class="int07-thumb"><div class="thumb-grey"></div><div class="thumb-overlay"></div></div>
-          <div class="int07-thumb"><div class="thumb-grey"></div><div class="thumb-overlay"></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+      <path d="M7 0L14 12H0L7 0Z" fill="white" />
+    </svg>
+    <span>TOP</span>
+  </button>
 
-</div>
+  <script>
+    document.querySelectorAll('[data-gallery]').forEach(function (gallery) {
+      var mainImg = gallery.querySelector('.int07-main-img');
+      var thumbs = gallery.querySelectorAll('.int07-thumb[data-src]');
 
-<div data-include="footer"></div>
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
-  <span>TOP</span>
-</button>
-
-<script>
-  // 縮圖點擊切換大圖（demo only）
-  document.querySelectorAll('#demo-7 .int07-thumb[data-switch]').forEach(function(thumb) {
-    thumb.addEventListener('click', function() {
-      document.getElementById('int07-main-img').src = this.dataset.switch;
-    });
-  });
-
-  // demo / 架構切換
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+      thumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+          var src = thumb.dataset.src;
+          mainImg.src = src;
+          thumbs.forEach(function (item) { item.classList.remove('is-active'); });
+          thumb.classList.add('is-active');
+        });
       });
     });
-  });
 
-  window.addEventListener('scroll', function() {
-    var btn = document.getElementById('topBtn');
-    if (window.scrollY > 300) { btn.classList.add('visible'); }
-    else { btn.classList.remove('visible'); }
-  });
-</script>
-<script src="js/include.js"></script>
+    document.querySelectorAll('.view-toggle').forEach(function (toggle) {
+      toggle.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var section = toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var targetId = btn.dataset.view;
+          section.querySelectorAll('.view-panel').forEach(function (p) { p.classList.remove('active'); });
+          section.querySelector('#' + targetId).classList.add('active');
+        });
+      });
+    });
+
+    window.addEventListener('scroll', function () {
+      var btn = document.getElementById('topBtn');
+      if (window.scrollY > 300) { btn.classList.add('visible'); }
+      else { btn.classList.remove('visible'); }
+    });
+  </script>
+  <script src="js/include.js"></script>
 </body>
+
 </html>

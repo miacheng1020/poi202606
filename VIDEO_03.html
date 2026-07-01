@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-
 <html lang="zh-Hant-TW">
+
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<title>POI頁面模組版型｜東南旅遊</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;family=Noto+Serif+HK:wght@500;700&amp;display=swap" rel="stylesheet"/>
-<link href="css/all.css?v=20240808-3" rel="stylesheet" type="text/css"/>
-<link href="css/common.css" rel="stylesheet" type="text/css"/>
-<style>
+  <meta charset="utf-8" />
+  <meta content="width=device-width,initial-scale=1" name="viewport" />
+  <title>POI頁面模組版型｜東南旅遊</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&amp;family=Noto+Serif+HK:wght@500;700&amp;display=swap"
+    rel="stylesheet" />
+  <link href="css/all.css?v=20240808-3" rel="stylesheet" type="text/css" />
+  <link href="css/common.css" rel="stylesheet" type="text/css" />
+  <style>
     /* ===== 內層 Tab ===== */
     .vid-sub-nav-sticky {
       position: sticky;
@@ -18,16 +20,16 @@
       width: 100%;
       background: #333333;
     }
+
     .vid-sub-nav {
       display: flex;
-      flex-direction: row;
       justify-content: center;
       align-items: stretch;
-      padding: 0;
       width: 100%;
       min-height: 48px;
       background: #333333;
     }
+
     .vid-sub-nav .sub-tab {
       display: flex;
       justify-content: center;
@@ -44,7 +46,11 @@
       white-space: nowrap;
       text-decoration: none;
     }
-    .vid-sub-nav .sub-tab:first-child { min-width: 92px; }
+
+    .vid-sub-nav .sub-tab:first-child {
+      min-width: 92px;
+    }
+
     .vid-sub-nav .sub-tab.active {
       background: #FFFFFF;
       font-weight: 700;
@@ -52,15 +58,29 @@
     }
 
     /* ===== Panel ===== */
-    .vid-sub-panel { display: none; }
-    .vid-sub-panel.active { display: block; }
+    .vid-sub-panel {
+      display: none;
+    }
+
+    .vid-sub-panel.active {
+      display: block;
+    }
 
     /* ===== Section ===== */
     .vid-section {
-      width: 1400px;
+      width: 100%;
       margin: 0 auto;
       padding: 50px 0 60px;
+      box-sizing: border-box;
     }
+
+    .vid-content-container {
+      width: 1162px;
+      max-width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
     .vid-section-title {
       font-family: 'Noto Sans TC', sans-serif;
       font-weight: 700;
@@ -75,13 +95,12 @@
     /* ===== 架構/demo 切換 ===== */
     .view-toggle {
       display: flex;
-      flex-direction: row;
       align-items: center;
-      padding: 0;
       width: 152px;
       height: 32px;
       margin: 0 auto 10px;
     }
+
     .view-toggle .toggle-btn {
       display: flex;
       justify-content: center;
@@ -99,95 +118,114 @@
       color: #333333;
       font-weight: 400;
     }
+
     .view-toggle .toggle-btn.active {
       background: #E5E5E5;
       font-weight: 700;
     }
 
-    /* ===== Demo / 架構 wrap ===== */
+    /* ===== Demo / 架構 wrap：大容器，只負責背景與上下留白 ===== */
     .wireframe-wrap {
-      width: 1400px;
+      width: 100%;
       min-height: 700px;
       background: #E5E5E5;
       display: flex;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      padding: 30px;
+      padding: 50px 0;
     }
+
     .demo-wrap {
-      width: 1400px;
+      width: 100%;
       min-height: 700px;
       background: #FFF0EB;
       display: flex;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      padding: 30px;
-    }
-    .view-panel { display: none; }
-    .view-panel.active { display: flex; align-items: center; justify-content: center; }
-
-    /* ===== VIDEO_03 圖文並排 ===== */
-    .vid3-layout {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 1162px;
-      height: 440px;
+      padding: 50px 0;
     }
 
-    /* 左側：影片圖 */
-    .vid3-img-wrap {
-      position: relative;
-      width: 779px;
-      height: 440px;
-      flex-shrink: 0;
-      overflow: hidden;
+    .view-panel {
+      display: none;
     }
-    .vid3-img-wrap img.vid-thumb {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .vid3-img-wrap img.play-icon {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 59px; height: 59px;
-      pointer-events: none;
-    }
-    .vid3-img-wrap .vid3-tag,
-    .vid3-img-placeholder .vid3-tag {
-      position: absolute;
-      left: 0; top: 0;
-      width: 160px; height: 43px;
-      background: #333333;
-      border-radius: 0 0 10px 0;
+
+    .view-panel.active {
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      white-space: nowrap;
     }
 
-    /* 架構版圖佔位 */
+    /* ===== VIDEO_03 小容器：整組圖文排列，總寬 1162 ===== */
+    .vid3-layout {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      max-width: 1162px;
+      min-height: 440px;
+    }
+
+    /* 左側：影片圖 */
+    .vid3-img-wrap,
     .vid3-img-placeholder {
       position: relative;
       width: 779px;
-      height: 440px;
-      background: #999999;
+      min-height: 440px;
       flex-shrink: 0;
+      overflow: hidden;
     }
-    /* 架構版播放按鈕（深灰圓形）*/
+
+    .vid3-img-wrap img.vid-thumb {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .vid3-img-wrap img.play-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 59px;
+      height: 59px;
+      pointer-events: none;
+    }
+
+    .vid3-img-placeholder {
+      background: #999999;
+    }
+
+    /* 架構 tag：依附影片容器左上角，寬高 hug content */
+    .vid3-tag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      height: auto;
+      padding: 10px 16px;
+      background: #333333;
+      border-radius: 0 0 10px 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 130%;
+      color: #FFFFFF;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    /* 架構版播放按鈕 */
     .vid3-play-wf {
       position: absolute;
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       width: 59px;
       height: 59px;
@@ -197,7 +235,10 @@
       align-items: center;
       justify-content: center;
     }
-    .vid3-play-wf svg { margin-left: 4px; }
+
+    .vid3-play-wf svg {
+      margin-left: 4px;
+    }
 
     /* 右側：文字框 */
     .vid3-text {
@@ -208,22 +249,28 @@
       padding: 0 22px;
       gap: 12px;
       width: 383px;
-      height: 440px;
+      min-height: 440px;
       background: #FFFFFF;
       flex-shrink: 0;
       box-sizing: border-box;
     }
+
     .vid3-name {
       font-weight: 700;
       font-size: 28px;
       line-height: 130%;
       color: #333333;
-      align-self: stretch;
+      width: 100%;
+      text-align: left;
     }
-    /* demo：Noto Serif HK */
-    .demo-wrap .vid3-name { font-family: 'Noto Serif HK', serif; }
-    /* 架構：Noto Sans TC */
-    .wireframe-wrap .vid3-name { font-family: 'Noto Sans TC', sans-serif; }
+
+    .demo-wrap .vid3-name {
+      font-family: 'Noto Serif HK', serif;
+    }
+
+    .wireframe-wrap .vid3-name {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
 
     .vid3-sale {
       display: flex;
@@ -235,9 +282,9 @@
       font-weight: 500;
       line-height: 150%;
       text-align: center;
-      align-self: stretch;
+      box-sizing: border-box;
     }
-    /* demo：金色邊框 */
+
     .demo-wrap .vid3-sale {
       font-family: 'Noto Serif HK', serif;
       color: #C59D34;
@@ -245,7 +292,7 @@
       border-bottom: 1px solid #C59D34;
       background: transparent;
     }
-    /* 架構：黑底白字 */
+
     .wireframe-wrap .vid3-sale {
       font-family: 'Noto Sans TC', sans-serif;
       color: #FFFFFF;
@@ -258,15 +305,17 @@
       font-size: 20px;
       line-height: 150%;
       color: #333333;
-      align-self: stretch;
+      width: 100%;
+      text-align: left;
     }
 
     .vid3-btn {
-      display: flex;
+      display: inline-flex;
+      align-self: center;
       align-items: center;
       justify-content: center;
       gap: 7px;
-      height: 50px;
+      min-height: 50px;
       border-radius: 500px;
       border: none;
       cursor: pointer;
@@ -275,175 +324,309 @@
       font-weight: 400;
       color: #FFFFFF;
       padding: 0 26px;
-      align-self: flex-start;
+      box-sizing: border-box;
     }
-    /* demo：橘色按鈕 */
-    .demo-wrap .vid3-btn { background: #F06C3C; }
-    /* 架構：黑色按鈕 */
-    .wireframe-wrap .vid3-btn { background: #333333; }
+
+    .vid3-btn svg {
+      flex-shrink: 0;
+    }
+
+    .demo-wrap .vid3-btn {
+      background: #F06C3C;
+    }
+
+    .wireframe-wrap .vid3-btn {
+      background: #333333;
+    }
 
     /* ===== TOP 按鈕 ===== */
     #topBtn {
       position: fixed;
-      right: 24px; bottom: 32px;
-      width: 60px; height: 60px;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       background: #333333;
-      border: none; cursor: pointer;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 2px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      opacity: 0; transform: translateY(10px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(10px);
       transition: opacity 0.3s, transform 0.3s;
       z-index: 999;
     }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
+
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     #topBtn span {
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 13px; font-weight: 700;
-      color: #FFFFFF; line-height: 1;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
     }
-    #topBtn:hover { background: #555555; }
+
+    #topBtn:hover {
+      background: #555555;
+    }
 
     /* ===== RWD ===== */
-    @media (max-width: 1024px) {
-      .vid-section { width: 100%; padding: 40px 20px; box-sizing: border-box; }
-      .wireframe-wrap, .demo-wrap { width: 100%; min-height: auto; padding: 20px; box-sizing: border-box; }
-      .vid3-layout { width: 100%; height: auto; flex-direction: column; }
-      .vid3-img-wrap, .vid3-img-placeholder {
-        width: 100%; height: 0;
-        padding-bottom: 56.25%;
+    @media (max-width: 1199px) {
+      .vid-section {
+        padding: 40px 0 50px;
       }
+
+      .wireframe-wrap,
+      .demo-wrap {
+        min-height: auto;
+        padding: 40px 20px;
+      }
+
+      .vid3-layout {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        min-height: auto;
+      }
+
+      .vid3-img-wrap,
+      .vid3-img-placeholder {
+        width: 100%;
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+      }
+
       .vid3-img-wrap img.play-icon,
-      .vid3-img-placeholder .vid3-play-wf { width: 48px; height: 48px; }
-      .vid3-text { width: 100%; height: auto; padding: 24px 20px; }
+      .vid3-play-wf {
+        width: 48px;
+        height: 48px;
+      }
+
+      .vid3-text {
+        width: 100%;
+        min-height: auto;
+        padding: 28px 24px;
+      }
     }
+
     @media (max-width: 767px) {
       .vid-sub-nav {
         justify-content: flex-start;
-        overflow-x: auto; overflow-y: hidden;
+        overflow-x: auto;
+        overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; flex-wrap: nowrap;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
       }
-      .vid-sub-nav::-webkit-scrollbar { display: none; }
-      .vid-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .vid-section { padding: 30px 16px; }
-      .vid-section-title { font-size: 24px; }
-      .wireframe-wrap, .demo-wrap { padding: 20px 16px; }
-      .vid3-btn { font-size: 18px; height: 44px; }
+
+      .vid-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .vid-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+      }
+
+      .vid-section {
+        padding: 30px 16px;
+      }
+
+      .vid-section-title {
+        font-size: 24px;
+        line-height: 130%;
+      }
+
+      .wireframe-wrap,
+      .demo-wrap {
+        padding: 30px 16px;
+      }
+
+      .vid3-text {
+        padding: 24px 20px;
+        gap: 10px;
+      }
+
+      .vid3-tag {
+        padding: 8px 12px;
+        font-size: 14px;
+        border-radius: 0 0 8px 0;
+      }
+
+      .vid3-name {
+        font-size: 20px;
+        line-height: 130%;
+      }
+
+      .vid3-sale {
+        font-size: 16px;
+        line-height: 150%;
+        padding: 7px 0;
+      }
+
+      .vid3-detail {
+        font-size: 16px;
+        line-height: 150%;
+      }
+
+      .vid3-btn {
+        font-size: 16px;
+        min-height: 42px;
+        padding: 0 22px;
+      }
     }
   </style>
 </head>
+
 <body data-id="video" data-page="video">
-<!-- Header -->
-<div data-include="header"></div>
-<!-- Banner -->
-<div data-include="banner"></div>
-<!-- 外層 Nav（sticky）-->
-<div data-include="nav"></div>
-<!-- 內層 Tab（sticky）-->
-<div class="vid-sub-nav-sticky">
-<div class="vid-sub-nav">
-<a class="sub-tab" href="VIDEO_01.html#content">影片_01</a>
-<a class="sub-tab" href="VIDEO_02.html#content">影片_02</a>
-<a class="sub-tab active" href="VIDEO_03.html#content">影片_03</a>
-</div>
-</div>
-<!-- 影片_01 placeholder -->
-<div class="vid-sub-panel" id="subpanel-vid01">
-<div style="min-height:400px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans TC',sans-serif;font-size:24px;color:#999;letter-spacing:2px;">影片_01 內容待規劃</div>
-</div>
-<!-- 影片_02 placeholder -->
-<div class="vid-sub-panel" id="subpanel-vid02">
-<div style="min-height:400px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans TC',sans-serif;font-size:24px;color:#999;letter-spacing:2px;">影片_02 內容待規劃</div>
-</div>
-<!-- 影片_03 -->
-<div class="vid-sub-panel active int-section" id="subpanel-vid03"><div class="int-section-title">影片_03</div>
-<div class="vid-section">
-<div class="vid-section-title">影片_03</div>
-<div class="view-toggle">
-<button class="toggle-btn active" data-view="demo-v3">demo</button>
-<button class="toggle-btn" data-view="wf-v3">架構</button>
-</div>
-<!-- demo -->
-<div class="demo-wrap view-panel active" id="demo-v3">
-<div class="vid3-layout">
-<div class="vid3-img-wrap">
-<img alt="影片_03" class="vid-thumb" src="images/img_VIDEO_03.jpg"/>
-<img alt="播放" class="play-icon" src="images/img_VIDEO_03_play.svg"/>
-</div>
-<div class="vid3-text">
-<div class="vid3-name">歐洲最美童話小鎮—特爾曲</div>
-<div class="vid3-sale">額外資訊額外資訊額外資訊</div>
-<div class="vid3-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-<button class="vid3-btn">
-            立即觀看
-            <svg fill="none" height="16" viewbox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 8L13 8M13 8L9 4M13 8L9 12" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-</div>
-</div>
-<!-- 架構 -->
-<div class="wireframe-wrap view-panel" id="wf-v3">
-<div class="vid3-layout">
-<div class="vid3-img-placeholder">
-<div class="vid3-tag">標籤字數限八字元</div>
-<div class="vid3-play-wf">
-<svg fill="none" height="20" viewbox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 3L17 10L5 17V3Z" fill="white"></path>
-</svg>
-</div>
-</div>
-<div class="vid3-text">
-<div class="vid3-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-<div class="vid3-sale">額外資訊額外資訊額外資訊</div>
-<div class="vid3-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-<button class="vid3-btn">
-            價格價格價格
-            <svg fill="none" height="16" viewbox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
-<path d="M3 8L13 8M13 8L9 4M13 8L9 12" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-</svg>
-</button>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer -->
-<div data-include="footer"></div>
-<!-- TOP 按鈕 -->
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-<svg fill="none" height="12" viewbox="0 0 14 12" width="14" xmlns="http://www.w3.org/2000/svg">
-<path d="M7 0L14 12H0L7 0Z" fill="white"></path>
-</svg>
-<span>TOP</span>
-</button>
-<script>
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
+
+  <div class="vid-sub-nav-sticky">
+    <div class="vid-sub-nav">
+      <a class="sub-tab" href="VIDEO_01.html#content" data-sub="vid01">影片_01</a>
+      <a class="sub-tab" href="VIDEO_02.html#content" data-sub="vid02">影片_02</a>
+      <a class="sub-tab active" href="VIDEO_03.html#content" data-sub="vid03">影片_03</a>
+    </div>
+  </div>
+
+  <div id="content"></div>
+
+  <div class="vid-sub-panel" id="subpanel-vid01">
+    <div
+      style="min-height:400px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans TC',sans-serif;font-size:24px;color:#999;letter-spacing:2px;">
+      影片_01 內容待規劃</div>
+  </div>
+
+  <div class="vid-sub-panel" id="subpanel-vid02">
+    <div
+      style="min-height:400px;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans TC',sans-serif;font-size:24px;color:#999;letter-spacing:2px;">
+      影片_02 內容待規劃</div>
+  </div>
+
+  <div class="vid-sub-panel active int-section" id="subpanel-vid03">
+    <div class="vid-section">
+      <div class="vid-section-title">影片_03</div>
+      <div class="view-toggle">
+        <button class="toggle-btn active" data-view="demo-v3">demo</button>
+        <button class="toggle-btn" data-view="wf-v3">架構</button>
+      </div>
+
+      <div class="demo-wrap view-panel active" id="demo-v3">
+        <div class="vid-content-container">
+          <div class="vid3-layout">
+            <div class="vid3-img-wrap">
+              <img alt="影片_03" class="vid-thumb" src="images/img_VIDEO_03.jpg" />
+              <img alt="播放" class="play-icon" src="images/img_VIDEO_03_play.svg" />
+            </div>
+            <div class="vid3-text">
+              <div class="vid3-name">歐洲最美童話小鎮特爾奇</div>
+              <div class="vid3-sale">漫遊中世紀古城</div>
+              <div class="vid3-detail">彩色山牆、石板街道與古典廣場交織出最迷人的歐洲風景，跟著鏡頭走進如童話般的歷史小鎮。</div>
+              <button class="vid3-btn">
+                立即觀看
+                <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8L13 8M13 8L9 4M13 8L9 12" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wireframe-wrap view-panel" id="wf-v3">
+        <div class="vid-content-container">
+          <div class="vid3-layout">
+            <div class="vid3-img-placeholder">
+              <div class="vid3-tag">標籤字數限八字元</div>
+              <div class="vid3-play-wf">
+                <svg fill="none" height="20" viewBox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 3L17 10L5 17V3Z" fill="white"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="vid3-text">
+              <div class="vid3-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+              <div class="vid3-sale">額外資訊額外資訊額外資訊</div>
+              <div class="vid3-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+              <button class="vid3-btn">
+                價格價格價格
+                <svg fill="none" height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8L13 8M13 8L9 4M13 8L9 12" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg fill="none" height="12" viewBox="0 0 14 12" width="14" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 0L14 12H0L7 0Z" fill="white"></path>
+    </svg>
+    <span>TOP</span>
+  </button>
+
+  <script>
+      // 影片副選單：不同影片頁直接照 href 換頁；只有同頁錨點才阻止預設並切 panel
   document.querySelectorAll('.vid-sub-nav .sub-tab').forEach(function(tab) {
-    tab.addEventListener('click', function() {
+    tab.addEventListener('click', function(e) {
+      var href = tab.getAttribute('href') || '';
+      var targetUrl = href ? new URL(href, window.location.href) : null;
+      var samePage = targetUrl && targetUrl.pathname === window.location.pathname;
+
+      if (!samePage) return; // 讓 VIDEO_01 / VIDEO_02 / VIDEO_03 正常換頁
+
+      e.preventDefault();
       document.querySelectorAll('.vid-sub-nav .sub-tab').forEach(function(t) { t.classList.remove('active'); });
       tab.classList.add('active');
+      if (!tab.dataset.sub) return;
       document.querySelectorAll('.vid-sub-panel').forEach(function(p) { p.classList.remove('active'); });
-      document.getElementById('subpanel-' + tab.dataset.sub).classList.add('active');
+      var target = document.getElementById('subpanel-' + tab.dataset.sub);
+      if (target) target.classList.add('active');
     });
   });
 
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.vid-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+    document.querySelectorAll('.view-toggle').forEach(function (toggle) {
+      toggle.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var section = toggle.closest('.vid-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var targetId = btn.dataset.view;
+          section.querySelectorAll('.view-panel').forEach(function (p) { p.classList.remove('active'); });
+          var target = section.querySelector('#' + targetId);
+          if (target) target.classList.add('active');
+        });
       });
     });
-  });
-</script>
-<script src="js/include.js"></script>
+
+    window.addEventListener('scroll', function () {
+      var btn = document.getElementById('topBtn');
+      if (!btn) return;
+      if (window.scrollY > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    });
+  </script>
+  <script src="js/include.js"></script>
 </body>
+
 </html>

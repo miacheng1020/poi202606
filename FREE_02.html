@@ -9,61 +9,207 @@
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <style>
-
     /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 107px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 108px; }
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
+
+    .int-sub-nav {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+
+    .int-sub-nav .sub-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      height: 48px;
+      min-width: 107px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
+      box-sizing: border-box;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+    }
+
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+      min-width: 108px;
+    }
 
     /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+    .int-section {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 50px 0 60px;
+      box-sizing: border-box;
+    }
+
+    .int-section-title {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 32px;
+      line-height: 38px;
+      text-align: center;
+      letter-spacing: 1px;
+      color: #333333;
+      margin-bottom: 18px;
+    }
 
     /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
-
-    /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
-
-    /* ===== wrap ===== */
-    .demo-wrap {
-      width: 1400px; min-height: 700px;
-      background: #8E49AC;
-      box-sizing: border-box; padding: 55px 0;
+    .view-toggle {
+      display: flex;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
     }
-    .wireframe-wrap {
-      width: 1400px; min-height: 700px;
+
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .view-toggle .toggle-btn.active {
       background: #E5E5E5;
-      box-sizing: border-box; padding: 55px 0;
+      font-weight: 700;
     }
 
-    /* ===== 主容器 ===== */
+    .view-panel {
+      display: none !important;
+    }
+
+    .view-panel.active {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .demo-wrap,
+    .wireframe-wrap {
+      width: 100%;
+      min-height: 700px;
+      box-sizing: border-box;
+      padding: 55px 0;
+    }
+
+    .demo-wrap {
+      background: #8E49AC;
+    }
+
+    .wireframe-wrap {
+      background: #E5E5E5;
+      border: 0.5px solid #333333;
+    }
+
+    /* ===== FREE02 Family：共同容器 ===== */
     .free02-inner {
       width: 1162px;
+      max-width: 1162px;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: stretch;
       gap: 8px;
+      box-sizing: border-box;
     }
 
-    /* ============================================
-       上層：一排三張卡片
-    ============================================ */
-    .free02-cards-row {
+    .free02-card-row {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: stretch;
+      justify-content: center;
       gap: 8px;
-      width: 1162px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
+    /* ===== 圖片共用：Demo 可用 JPG，Wireframe 一律灰塊 ===== */
+    .free02-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #999999;
+      flex-shrink: 0;
+    }
+
+    .free02-img img,
+    .free02-img .img-grey {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .free02-img .img-grey {
+      background: #999999;
+    }
+
+    /* ===== HOT 標章：Demo 用圖；Wireframe 用 CSS 占位 ===== */
+    .free02-hot {
+      position: absolute;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+    }
+
+    .free02-hot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .free02-hot-placeholder {
+      font-family: 'Montserrat', 'Noto Sans TC', sans-serif;
+      font-weight: 800;
+      line-height: .9;
+      color: #FFFFFF;
+      background: #333333;
+      border-radius: 50%;
+      letter-spacing: 0;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* ===== 上方三張卡片 ===== */
     .free02-card {
       position: relative;
-      width: 382px;
+      width: calc((100% - 16px) / 3);
       background: #FFFFFF;
       border-radius: 10px;
       padding: 20px;
@@ -72,158 +218,424 @@
       flex-direction: column;
       gap: 10px;
       overflow: hidden;
+      font-family: 'Noto Sans TC', sans-serif;
     }
 
-    /* 圖片容器：固定 342×228px */
-    .free02-card .card-img {
-      position: relative;
-      width: 342px;
-      height: 228px;
-      flex-shrink: 0;
-      overflow: hidden;
-      border-radius: 4px;
-    }
-    .free02-card .card-img img,
-    .free02-card .card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .free02-card .card-img .img-grey { background: #999999; }
-
-    /* HOT tag：左上角覆蓋在圖片上 */
-    .free02-card .card-hot {
-      position: absolute;
-      left: 12px; top: 14px;
-      width: 50px; height: 51px;
-      z-index: 2;
-    }
-    .free02-card .card-hot img {
-      width: 100%; height: 100%;
-      object-fit: contain;
+    .free02-card .free02-hot {
+      left: 12px;
+      top: 14px;
+      width: 50px;
+      height: 51px;
     }
 
-    /* name */
+    .free02-card .free02-hot-placeholder {
+      width: 50px;
+      height: 50px;
+      font-size: 12px;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .free02-card .free02-hot-placeholder .num {
+      font-size: 16px;
+    }
+
     .free02-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
       width: 100%;
-    }
-    .demo-wrap .free02-card .card-name { color: #000000; }
-    .wireframe-wrap .free02-card .card-name { color: #333333; }
-
-    /* price */
-    .free02-card .card-price {
-      text-align: right; width: 100%;
-    }
-    .demo-wrap .free02-card .card-price {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 700; font-size: 24px; line-height: 33px;
-      color: #FE6011;
-    }
-    .wireframe-wrap .free02-card .card-price {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 17px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
       color: #333333;
-    }
-    .demo-wrap .free02-card .card-price .price-num {
-      font-size: 24px; font-weight: 700;
-    }
-    .wireframe-wrap .free02-card .card-price .price-num {
-      font-size: 18px !important; font-weight: 700;
+      box-sizing: border-box;
+      writing-mode: horizontal-tb;
+      white-space: normal;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
     }
 
-    /* ============================================
-       下層：列表橫條卡片（84px）
-    ============================================ */
-    .free02-list-card {
+    .demo-wrap .free02-card .card-name {
+      color: #000000;
+    }
+
+    .free02-card .card-price {
+      width: 100%;
+      margin-top: auto;
       display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 12px 20px;
-      gap: 25px;
-      width: 1162px;
-      height: 84px;
-      background: #FFFFFF;
-      border-radius: 10px;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 2px;
+      text-align: right;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
       box-sizing: border-box;
     }
 
-    /* HOT icon 左側 */
-    .free02-list-card .list-hot {
-      width: 58px; height: 60px;
-      flex-shrink: 0;
-    }
-    .free02-list-card .list-hot img {
-      width: 100%; height: 100%;
-      object-fit: contain;
-    }
-
-    /* name 中間 */
-    .free02-list-card .list-name {
-      flex: 1; min-width: 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 36px;
-    }
-    .demo-wrap .free02-list-card .list-name { color: #000000; }
-    .wireframe-wrap .free02-list-card .list-name { color: #333333; }
-
-    /* price 右側 */
-    .free02-list-card .list-price {
-      flex-shrink: 0;
-      text-align: right;
-    }
-    .demo-wrap .free02-list-card .list-price {
+    .demo-wrap .free02-card .card-price {
       font-family: 'Manrope', sans-serif;
-      font-weight: 700; font-size: 24px; line-height: 33px;
+      font-weight: 700;
       color: #FE6011;
     }
-    .wireframe-wrap .free02-list-card .list-price {
+
+    .wireframe-wrap .free02-card .card-price {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 17px;
       color: #333333;
     }
-    .demo-wrap .free02-list-card .list-price .price-num { font-size: 24px; font-weight: 700; }
-    .wireframe-wrap .free02-list-card .list-price .price-num { font-size: 18px !important; font-weight: 700; }
+
+    .free02-card .price-num {
+      font-size: 24px;
+      line-height: 33px;
+      font-weight: 700;
+    }
+
+    .wireframe-wrap .free02-card .price-num {
+      font-size: 24px !important;
+      line-height: 1;
+    }
+
+    .free02-card .price-unit {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 400;
+    }
+
+    /* ===== 下方列表橫條 ===== */
+    .free02-list-card {
+      position: relative;
+      width: 100%;
+      min-height: 84px;
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 12px 20px;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 25px;
+      row-gap: 8px;
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+
+    .free02-list-card .free02-hot {
+      position: static;
+      width: 58px;
+      height: 60px;
+      grid-column: 1;
+    }
+
+    .free02-list-card .free02-hot-placeholder {
+      width: 58px;
+      height: 58px;
+      font-size: 13px;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .free02-list-card .list-name {
+      flex: 1;
+      min-width: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 36px;
+      color: #333333;
+      box-sizing: border-box;
+      writing-mode: horizontal-tb;
+      white-space: normal;
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
+
+    .demo-wrap .free02-list-card .list-name {
+      color: #000000;
+    }
+
+    .free02-list-card .list-price {
+      flex-shrink: 0;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 2px;
+      text-align: right;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      min-width: max-content;
+    }
+
+    .demo-wrap .free02-list-card .list-price {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .free02-list-card .list-price {
+      font-family: 'Noto Sans TC', sans-serif;
+      color: #333333;
+    }
+
+    .free02-list-card .price-num {
+      font-size: 24px;
+      line-height: 33px;
+      font-weight: 700;
+    }
+
+    .wireframe-wrap .free02-list-card .price-num {
+      font-size: 24px !important;
+      line-height: 1;
+    }
+
+    .free02-list-card .price-unit {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      line-height: 1.2;
+      font-weight: 400;
+    }
 
     /* ===== TOP ===== */
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
+    #topBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
 
-    /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .free02-inner { width: 100%; max-width: 1162px; }
-      .free02-cards-row { width: 100%; max-width: 1162px; }
-      .free02-list-card { width: 100%; max-width: 1162px; }
-      .free02-card { width: calc(33.33% - 6px); }
-      .free02-card .card-img { width: 100%; }
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .free02-cards-row { flex-wrap: wrap; justify-content: center; }
-      .free02-card { width: calc(50% - 4px); }
-      .free02-list-card { flex-wrap: wrap; height: auto; gap: 12px; }
-      .free02-list-card .list-name { width: 100%; }
+
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
     }
-    @media (max-width: 767px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .free02-inner { width: 278px; }
-      .free02-cards-row { width: 278px; flex-direction: column; align-items: center; }
-      .free02-card { width: 278px; }
-      .free02-card .card-img { width: 238px; height: 160px; }
-      .free02-list-card { width: 278px; height: auto; flex-wrap: wrap; gap: 8px; padding: 12px; }
+
+    #topBtn:hover {
+      background: #555555;
     }
+
+    /* ===== RWD：對齊 PRD / FREE_01 邏輯 ===== */
+    @media (max-width: 1200px) {
+      .int-section {
+        padding: 50px 24px 60px;
+      }
+
+      .free02-inner {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 30px 20px;
+      }
+
+      .free02-inner {
+        width: 100%;
+      }
+
+      .free02-card-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+      }
+
+      .free02-card {
+        width: calc((100% - 16px) / 2);
+      }
+
+      .free02-list-card {
+        align-items: center;
+        column-gap: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .int-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+        line-height: 1.2;
+      }
+
+      .int-section {
+        padding: 40px 16px;
+      }
+
+      .int-section-title {
+        font-size: 24px;
+        line-height: 1.3;
+      }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+
+      .free02-card .card-name,
+      .free02-list-card .list-name {
+        font-size: 18px;
+        line-height: 1.35;
+      }
+
+      .free02-card .price-num,
+      .free02-list-card .price-num {
+        font-size: 24px !important;
+        line-height: 1;
+      }
+
+      .free02-card .price-unit,
+      .free02-list-card .price-unit {
+        font-size: 14px;
+      }
+
+      .free02-card {
+        width: calc((100% - 16px) / 2);
+      }
+
+      .free02-list-card {
+        grid-template-columns: 58px minmax(0, 1fr) auto;
+        column-gap: 16px;
+        min-height: auto;
+      }
+
+      .free02-list-card .list-name {
+        line-height: 1.4;
+      }
+
+      /* iPad / 平板：橫條卡 HOT 維持 58px，欄寬也同步 58px，避免撞到標題 */
+      .free02-list-card .free02-hot {
+        width: 58px;
+        height: 58px;
+      }
+
+      .free02-list-card .free02-hot-placeholder {
+        width: 58px;
+        height: 58px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .free02-inner {
+        width: 100%;
+        max-width: 278px;
+        gap: 16px;
+      }
+
+      .free02-card-row {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .free02-card {
+        width: 100%;
+        max-width: 278px;
+        padding: 12px;
+        gap: 8px;
+      }
+
+      .free02-card .free02-hot {
+        width: 46px;
+        height: 46px;
+      }
+
+      .free02-card .free02-hot-placeholder {
+        width: 46px;
+        height: 46px;
+        font-size: 11px;
+      }
+
+      .free02-list-card {
+        width: 100%;
+        max-width: 278px;
+        grid-template-columns: 46px minmax(0, 1fr);
+        align-items: center;
+        column-gap: 10px;
+        row-gap: 8px;
+        padding: 12px;
+      }
+
+      .free02-list-card .free02-hot {
+        width: 46px;
+        height: 46px;
+      }
+
+      .free02-list-card .free02-hot-placeholder {
+        width: 46px;
+        height: 46px;
+        font-size: 11px;
+      }
+
+      .free02-list-card .list-name {
+        grid-column: 2;
+        min-width: 0;
+      }
+
+      .free02-list-card .list-price {
+        grid-column: 1 / -1;
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    /* ===== FREE02 修正：避免中文被擠成直排 ===== */
+    .free02-card,
+    .free02-list-card,
+    .free02-card .card-name,
+    .free02-list-card .list-name,
+    .free02-card .card-price,
+    .free02-list-card .list-price {
+      writing-mode: horizontal-tb;
+    }
+
+    .free02-card .card-name,
+    .free02-list-card .list-name {
+      text-align: left;
+    }
+
+    .free02-list-card .list-price,
+    .free02-card .card-price {
+      overflow: visible;
+    }
+
   </style>
 </head>
 <body data-id="free" data-page="free">
@@ -252,37 +664,40 @@
     <div class="free02-inner">
 
       <!-- 三張卡片 -->
-      <div class="free02-cards-row">
+      <div class="free02-card-row">
         <div class="free02-card">
-          <div class="card-hot"><img src="images/hot1.svg" alt="HOT 01"></div>
-          <div class="card-img"><img src="images/img_FREE_02-1.jpg" alt=""></div>
+          <div class="free02-hot"><img src="images/hot1.svg" alt="HOT 01"></div>
+          <div class="free02-img"><img src="images/img_FREE_02-1.jpg" alt=""></div>
           <div class="card-name">【買一送一】日本上網卡</div>
-          <div class="card-price"><span class="price-num">$999,999</span>起</div>
+          <div class="card-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
         </div>
+
         <div class="free02-card">
-          <div class="card-hot"><img src="images/hot2.svg" alt="HOT 02"></div>
-          <div class="card-img"><img src="images/img_FREE_02-2.jpg" alt=""></div>
+          <div class="free02-hot"><img src="images/hot2.svg" alt="HOT 02"></div>
+          <div class="free02-img"><img src="images/img_FREE_02-2.jpg" alt=""></div>
           <div class="card-name">【買一送一】日本上網卡</div>
-          <div class="card-price"><span class="price-num">$999,999</span>起</div>
+          <div class="card-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
         </div>
+
         <div class="free02-card">
-          <div class="card-hot"><img src="images/hot3.svg" alt="HOT 03"></div>
-          <div class="card-img"><img src="images/img_FREE_02-3.jpg" alt=""></div>
+          <div class="free02-hot"><img src="images/hot3.svg" alt="HOT 03"></div>
+          <div class="free02-img"><img src="images/img_FREE_02-3.jpg" alt=""></div>
           <div class="card-name">【買一送一】日本上網卡</div>
-          <div class="card-price"><span class="price-num">$999,999</span>起</div>
+          <div class="card-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
         </div>
       </div>
 
       <!-- 兩列橫條 -->
       <div class="free02-list-card">
-        <div class="list-hot"><img src="images/hot.svg" alt="HOT"></div>
+        <div class="free02-hot"><img src="images/hot.svg" alt="HOT"></div>
         <div class="list-name">【新加坡】時光之翼燈光水舞秀門票 (需自行預約)</div>
-        <div class="list-price"><span class="price-num">$999,999</span>起</div>
+        <div class="list-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
       </div>
+
       <div class="free02-list-card">
-        <div class="list-hot"><img src="images/hot.svg" alt="HOT"></div>
+        <div class="free02-hot"><img src="images/hot.svg" alt="HOT"></div>
         <div class="list-name">【新加坡】時光之翼燈光水舞秀門票 (需自行預約)</div>
-        <div class="list-price"><span class="price-num">$999,999</span>起</div>
+        <div class="list-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
       </div>
 
     </div>
@@ -293,37 +708,40 @@
     <div class="free02-inner">
 
       <!-- 三張卡片 -->
-      <div class="free02-cards-row">
+      <div class="free02-card-row">
         <div class="free02-card">
-          <div class="card-hot"><img src="images/hot1.svg" alt="HOT 01"></div>
-          <div class="card-img"><div class="img-grey"></div></div>
-          <div class="card-name">標題標題標題標題標題標題標題標</div>
-          <div class="card-price"><span class="price-num">$999,999</span>起</div>
+          <div class="free02-hot free02-hot-placeholder"><span>HOT</span><span class="num">01</span></div>
+          <div class="free02-img"><div class="img-grey"></div></div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
         </div>
+
         <div class="free02-card">
-          <div class="card-hot"><img src="images/hot2.svg" alt="HOT 02"></div>
-          <div class="card-img"><div class="img-grey"></div></div>
-          <div class="card-name">標題標題標題標題標題標題標題標</div>
-          <div class="card-price"><span class="price-num">$999,999</span>起</div>
+          <div class="free02-hot free02-hot-placeholder"><span>HOT</span><span class="num">02</span></div>
+          <div class="free02-img"><div class="img-grey"></div></div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
         </div>
+
         <div class="free02-card">
-          <div class="card-hot"><img src="images/hot3.svg" alt="HOT 03"></div>
-          <div class="card-img"><div class="img-grey"></div></div>
-          <div class="card-name">標題標題標題標題標題標題標題標</div>
-          <div class="card-price"><span class="price-num">$999,999</span>起</div>
+          <div class="free02-hot free02-hot-placeholder"><span>HOT</span><span class="num">03</span></div>
+          <div class="free02-img"><div class="img-grey"></div></div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
         </div>
       </div>
 
       <!-- 兩列橫條 -->
       <div class="free02-list-card">
-        <div class="list-hot"><img src="images/hot.svg" alt="HOT"></div>
-        <div class="list-name">標題標題標題標題標題標題標題標題標題</div>
-        <div class="list-price"><span class="price-num">$999,999</span>起</div>
+        <div class="free02-hot free02-hot-placeholder"><span>HOT</span></div>
+        <div class="list-name">標題標題標題標題標題標題標題標題標題標題</div>
+        <div class="list-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
       </div>
+
       <div class="free02-list-card">
-        <div class="list-hot"><img src="images/hot.svg" alt="HOT"></div>
-        <div class="list-name">標題標題標題標題標題標題標題標題標題</div>
-        <div class="list-price"><span class="price-num">$999,999</span>起</div>
+        <div class="free02-hot free02-hot-placeholder"><span>HOT</span></div>
+        <div class="list-name">標題標題標題標題標題標題標題標題標題標題</div>
+        <div class="list-price"><span class="price-num">$999,999</span><span class="price-unit">起</span></div>
       </div>
 
     </div>
@@ -349,6 +767,7 @@
       });
     });
   });
+
   window.addEventListener('scroll', function() {
     var btn = document.getElementById('topBtn');
     if (window.scrollY > 300) btn.classList.add('visible');

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,1372 +10,1280 @@
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <style>
+    /* INT02 Component System - rebuild */
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0 auto;
+      font-family: 'Noto Sans TC', sans-serif;
+      color: #333
+    }
+
     /* ===== 內層 Tab ===== */
     .int-sub-nav-sticky {
       position: sticky;
       top: 52px;
       z-index: 89;
       width: 100%;
-      background: #333333;
+      background: #333
     }
+
     .int-sub-nav {
       display: flex;
-      flex-direction: row;
+      flex-flow: row nowrap;
       justify-content: center;
       align-items: stretch;
-      padding: 0;
       width: 100%;
       min-height: 48px;
-      background: #333333;
+      padding: 0;
+      background: #333;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none
     }
+
+    .int-sub-nav::-webkit-scrollbar {
+      display: none
+    }
+
     .int-sub-nav .sub-tab {
+      flex: 0 0 auto;
       display: flex;
-      flex-direction: row;
       justify-content: center;
       align-items: center;
-      padding: 16px;
-      height: 48px;
       min-width: 91px;
-      cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
+      height: 48px;
+      padding: 16px;
       font-weight: 400;
       font-size: 16px;
       line-height: 16px;
-      color: #FFFFFF;
-      box-sizing: border-box;
+      color: #fff;
       text-decoration: none;
-    }
-    .int-sub-nav .sub-tab:first-child { min-width: 92px; }
-    .int-sub-nav .sub-tab.active {
-      background: #FFFFFF;
-      font-weight: 700;
-      color: #333333;
+      cursor: pointer
     }
 
-    /* ===== Section 共用 ===== */
-    .int-section {
-      width: 1400px;
-      margin: 0 auto;
-      padding: 50px 0 60px;
+    .int-sub-nav .sub-tab:first-child {
+      min-width: 92px
     }
+
+    .int-sub-nav .sub-tab.active {
+      background: #fff;
+      font-weight: 700;
+      color: #333
+    }
+
+    /* ===== Section / Toggle ===== */
+    .int-section {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 50px 0 60px
+    }
+
     .int-section-title {
-      font-family: 'Noto Sans TC', sans-serif;
+      margin: 0 0 18px;
       font-weight: 700;
       font-size: 32px;
       line-height: 38px;
       text-align: center;
       letter-spacing: 1px;
-      color: #333333;
-      margin-bottom: 18px;
+      color: #333
     }
 
-    /* ===== 切換按鈕 ===== */
     .view-toggle {
       display: flex;
-      flex-direction: row;
       align-items: center;
       width: 152px;
       height: 32px;
       margin: 0 auto 10px;
+      padding: 0
     }
+
     .view-toggle .toggle-btn {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 8px 16px;
       width: 76px;
       height: 32px;
-      cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
+      padding: 8px 16px;
+      border: 0;
+      background: #fff;
+      color: #333;
       font-size: 16px;
       line-height: 16px;
-      box-sizing: border-box;
-      border: none;
-      background: #FFFFFF;
-      color: #333333;
       font-weight: 400;
+      cursor: pointer
     }
+
     .view-toggle .toggle-btn.active {
-      background: #E5E5E5;
-      font-weight: 700;
+      background: #e5e5e5;
+      font-weight: 700
     }
 
-    /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+    .view-panel {
+      display: none !important
+    }
 
-    /* ===== Demo wrap ===== */
+    .view-panel.active {
+      display: flex !important;
+      justify-content: center;
+      align-items: center
+    }
+
+    .wireframe-wrap,
     .demo-wrap {
-      width: 1400px;
+      width: 100%;
       min-height: 700px;
-      background: #FFF9F0;
-      border: 0.5px solid #333333;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
       padding: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+      border: .5px solid #333
     }
 
-    /* ===== Wireframe wrap ===== */
     .wireframe-wrap {
-      width: 1400px;
-      min-height: 700px;
-      background: #E5E5E5;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      padding: 30px;
+      background: #E5E5E5
     }
 
-    /* ===================================
-       INT4 — 一排四個
-    =================================== */
-    .int4-row {
+    .demo-wrap {
+      background: #FFF9F0
+    }
+
+    /* ===== INT02 tokens ===== */
+    .int02-grid {
+      --container-w: 1162px;
+      --card-gap: 16px;
+      --card-w: 278px;
+      --media-w: 252px;
+      --media-h: 176.62px;
+      --media-pad: 7px;
+      --media-border: 1.5px;
+      --media-radius: 10px;
+      --content-w: 278px;
+      --content-lip: 26px;
+      --content-pad-y: 10px;
+      --content-pad-x: 14px;
+      --content-pad-b: 15px;
+      --content-gap: 8px;
+      --title-size: 20px;
+      --sale-size: 16px;
+      --detail-size: 16px;
+      --btn-size: 16px;
+      --btn-py: 6px;
+      --btn-px: 24px;
+      --btn-gap: 3px;
+      --btn-icon: 11px;
+      --btn-triangle: 5px;
+      --tag-size: 14px;
+      --tag-py: 4px;
+      --tag-px: 16px;
+      --tag-h: 25px;
+      --divider-h: 1px;
+      width: var(--container-w);
+      max-width: var(--container-w);
       display: flex;
-      flex-direction: row;
+      flex-flow: row nowrap;
+      justify-content: center;
       align-items: flex-start;
-      gap: 17px;
+      gap: var(--card-gap)
     }
 
-    /* demo 卡片 */
-    .int4-demo-card {
-      width: 278px;
-      display: flex;
-      flex-direction: column;
+    .int02-grid--4 {
+      --card-gap: 16px;
+      --card-w: 278px;
+      --media-w: 252px;
+      --media-h: 176.62px;
+      --media-pad: 7px;
+      --media-border: 1.5px;
+      --content-w: 278px;
+      --content-lip: 26px;
+      --content-pad-y: 10px;
+      --content-pad-x: 14px;
+      --content-pad-b: 15px;
+      --content-gap: 8px;
+      --title-size: 20px;
+      --sale-size: 16px;
+      --detail-size: 16px;
+      --detail-min-h: 72px;
+      --btn-size: 16px;
+      --btn-py: 6px;
+      --btn-px: 24px;
+      --btn-gap: 3px;
+      --btn-icon: 11px;
+      --btn-triangle: 5px;
+      --tag-size: 14px;
+      --tag-h: 25px;
+      --tag-py: 4px;
+      --tag-px: 16px;
+      --divider-h: 1px
     }
-    .int4-demo-card .card-img {
-      width: 278px;
-      height: 177px;
-      background: #FFFFFF;
-      border: 1.5px solid #FFB06B;
-      border-radius: 10px;
-      overflow: hidden;
+
+    .int02-grid--3 {
+      --card-gap: 17px;
+      --card-w: 376px;
+      --media-w: 342px;
+      --media-h: 238.95px;
+      --media-pad: 10px;
+      --media-border: 1px;
+      --content-w: 376px;
+      --content-lip: 36px;
+      --content-pad-y: 16px;
+      --content-pad-x: 18px;
+      --content-pad-b: 20px;
+      --content-gap: 10px;
+      --title-size: 24px;
+      --sale-size: 20px;
+      --detail-size: 18px;
+      --detail-min-h: 81px;
+      --btn-size: 20px;
+      --btn-py: 8px;
+      --btn-px: 28px;
+      --btn-gap: 5px;
+      --btn-icon: 15.5px;
+      --btn-triangle: 7px;
+      --tag-size: 14px;
+      --tag-h: 30px;
+      --tag-py: 6px;
+      --tag-px: 16px;
+      --divider-h: 2px
+    }
+
+    .int02-grid--2 {
+      --card-gap: 24px;
+      --card-w: 569px;
+      --media-w: 517px;
+      --media-h: 361px;
+      --media-pad: 14px;
+      --media-border: 2px;
+      --content-w: 569px;
+      --content-lip: 54px;
+      --content-pad-y: 20px;
+      --content-pad-x: 26px;
+      --content-pad-b: 20px;
+      --content-gap: 10px;
+      --title-size: 28px;
+      --sale-size: 24px;
+      --detail-size: 20px;
+      --detail-min-h: 60px;
+      --btn-size: 22px;
+      --btn-py: 10px;
+      --btn-px: 28px;
+      --btn-gap: 6px;
+      --btn-icon: 20px;
+      --btn-triangle: 9px;
+      --tag-size: 16px;
+      --tag-h: 35px;
+      --tag-py: 8px;
+      --tag-px: 16px;
+      --divider-h: 2px
+    }
+
+    .int02-grid--single {
+      --card-w: 1162px;
+      --media-w: 569px;
+      --media-h: 390px;
+      --media-pad: 16px;
+      --media-border: 1px;
+      --content-w: 645px;
+      --content-text-w: 593px;
+      --content-pad-y: 25px;
+      --content-pad-x: 24px;
+      --content-gap: 12px;
+      --title-size: 28px;
+      --sale-size: 24px;
+      --detail-size: 20px;
+      --detail-min-h: 90px;
+      --btn-size: 22px;
+      --btn-py: 8px;
+      --btn-px: 32px;
+      --btn-gap: 5px;
+      --btn-icon: 20px;
+      --btn-triangle: 9px;
+      --tag-size: 16px;
+      --tag-h: 43px;
+      --tag-py: 12px;
+      --tag-px: 16px;
+      --divider-h: 3px
+    }
+
+    /* ===== Card component ===== */
+    .int02-card {
       position: relative;
-    }
-    .int4-demo-card .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .int4-demo-card .card-tag {
-      position: absolute;
-      left: 0; top: 0;
-      padding: 4px 16px;
-      background: #FE6011;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int4-demo-card .card-rect { width: 278px; height: 26px; background: #FFEEC9; }
-    .int4-demo-card .card-text {
-      width: 278px;
-      background: #FFEEC9;
+      width: var(--card-w);
+      flex: 0 0 var(--card-w);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 10px 14px 15px;
-      gap: 8px;
-      box-sizing: border-box;
+      color: var(--text-color)
     }
-    .int4-demo-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 130%;
-      text-align: center;
-      color: #FE6011;
-      width: 100%;
-    }
-    .int4-demo-card .card-line { width: 100%; height: 1px; background: #FFB06B; }
-    .int4-demo-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 150%;
-      color: #563823;
-      width: 100%;
-    }
-    .int4-demo-card .card-price {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      padding: 6px 24px;
-      background: #FE6011;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-    }
-    .int4-demo-card .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      line-height: 23px;
-    }
-    .int4-demo-card .card-price-btn {
-      width: 11px; height: 11px;
-      background: #FFFFFF;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .int4-demo-card .card-price-btn svg { width: 5px; height: 5px; }
 
-    /* 架構 卡片 */
-    .int4-wf-card {
-      width: 278px;
-      display: flex;
-      flex-direction: column;
-    }
-    .int4-wf-card .card-img {
-      width: 278px;
-      height: 177px;
-      background: #FFFFFF;
-      border: 1.5px solid #333333;
-      border-radius: 10px;
-      overflow: hidden;
+    .int02-card__media {
       position: relative;
-    }
-    .int4-wf-card .card-img-inner { width: 237px; height: 161px; background: #999999; margin: auto; }
-    .int4-wf-card .card-tag {
-      position: absolute;
-      left: 0; top: 0;
-      padding: 4px 16px;
-      background: #333333;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px;
-      font-weight: 400;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int4-wf-card .card-rect { width: 278px; height: 26px; background: #FFFFFF; }
-    .int4-wf-card .card-text {
-      width: 278px;
-      background: #FFFFFF;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px 14px 15px;
-      gap: 8px;
-      box-sizing: border-box;
-    }
-    .int4-wf-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 130%;
-      text-align: center;
-      color: #333333;
-      width: 100%;
-    }
-    .int4-wf-card .card-sale {
-      width: 100%;
-      background: #333333;
-      padding: 4px 0;
-      text-align: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      line-height: 150%;
-    }
-    .int4-wf-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 150%;
-      color: #333333;
-      width: 100%;
-    }
-    .int4-wf-card .card-price {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      padding: 6px 24px;
-      background: #333333;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-    }
-    .int4-wf-card .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-    }
-    .int4-wf-card .card-price-btn {
-      width: 11px; height: 11px;
-      background: #FFFFFF;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* ===================================
-       INT3 — 一排三個
-    =================================== */
-    .int3-row {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 17px;
-    }
-
-    /* demo */
-    .int3-demo-card {
-      width: 376px;
-      display: flex;
-      flex-direction: column;
-    }
-    .int3-demo-card .card-img {
-      width: 376px;
-      height: 239px;
-      background: #FFFFFF;
-      border: 1px solid #FFB06B;
-      border-radius: 10px;
+      width: var(--media-w);
+      height: var(--media-h);
+      padding: var(--media-pad);
+      border: var(--media-border) solid var(--border-color);
+      border-radius: var(--media-radius);
+      background: #fff;
       overflow: hidden;
-      position: relative;
-    }
-    .int3-demo-card .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .int3-demo-card .card-tag {
-      position: absolute;
-      left: 0; top: 0;
-      padding: 6px 16px;
-      background: #FE6011;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int3-demo-card .card-rect { width: 376px; height: 36px; background: #FFEEC9; }
-    .int3-demo-card .card-text {
-      width: 376px;
-      background: #FFEEC9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px 18px 20px;
-      gap: 10px;
-      box-sizing: border-box;
-    }
-    .int3-demo-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 130%;
-      text-align: center;
-      color: #FE6011;
-      width: 100%;
-    }
-    .int3-demo-card .card-line { width: 100%; height: 2px; background: #FFB06B; }
-    .int3-demo-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 150%;
-      text-align: center;
-      color: #563823;
-      width: 100%;
-    }
-    .int3-demo-card .card-price {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 8px 28px;
-      background: #FE6011;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-    }
-    .int3-demo-card .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: #FFFFFF;
-    }
-    .int3-demo-card .card-price-btn {
-      width: 15px; height: 15px;
-      background: #FFFFFF;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* 架構 */
-    .int3-wf-card {
-      width: 376px;
-      display: flex;
-      flex-direction: column;
-    }
-    .int3-wf-card .card-img {
-      width: 376px;
-      height: 239px;
-      background: #FFFFFF;
-      border: 1px solid #333333;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-    .int3-wf-card .card-img-inner { width: 321px; height: 217px; background: #999999; margin: auto; }
-    .int3-wf-card .card-tag {
-      position: absolute;
-      left: 0; top: 0;
-      padding: 6px 16px;
-      background: #333333;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int3-wf-card .card-rect { width: 376px; height: 36px; background: #FFFFFF; }
-    .int3-wf-card .card-text {
-      width: 376px;
-      background: #FFFFFF;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px 18px 20px;
-      gap: 10px;
-      box-sizing: border-box;
-    }
-    .int3-wf-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 130%;
-      text-align: center;
-      color: #333333;
-      width: 100%;
-    }
-    .int3-wf-card .card-sale {
-      width: 100%;
-      background: #333333;
-      padding: 6px 0;
-      text-align: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      color: #FFFFFF;
-    }
-    .int3-wf-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 150%;
-      text-align: center;
-      color: #333333;
-      width: 100%;
-    }
-    .int3-wf-card .card-price {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      padding: 8px 28px;
-      background: #333333;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-    }
-    .int3-wf-card .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 20px;
-      font-weight: 400;
-      color: #FFFFFF;
-    }
-    .int3-wf-card .card-price-btn {
-      width: 15px; height: 15px;
-      background: #FFFFFF;
-      border-radius: 50%;
-    }
-
-    /* ===================================
-       INT2 — 一排二個
-    =================================== */
-    .int2-row {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 24px;
-    }
-
-    /* demo */
-    .int2-demo-card {
-      width: 569px;
-      display: flex;
-      flex-direction: column;
-    }
-    .int2-demo-card .card-img {
-      width: 569px;
-      height: 361px;
-      background: #FFFFFF;
-      border: 2px solid #FFB06B;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-    .int2-demo-card .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .int2-demo-card .card-tag {
-      position: absolute;
-      left: 0; top: 0;
-      padding: 8px 16px;
-      background: #333333;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      white-space: nowrap;
-      visibility: hidden;
-    }
-    .int2-demo-card .card-rect { width: 569px; height: 54px; background: #FFEEC9; }
-    .int2-demo-card .card-text {
-      width: 569px;
-      background: #FFEEC9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 26px;
-      gap: 10px;
-      box-sizing: border-box;
-    }
-    .int2-demo-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 130%;
-      text-align: center;
-      color: #FE6011;
-      width: 100%;
-    }
-    .int2-demo-card .card-line { width: 100%; height: 2px; background: #FFB06B; }
-    .int2-demo-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 150%;
-      color: #563823;
-      width: 100%;
-    }
-    .int2-demo-card .card-price {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 28px;
-      background: #FE6011;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-    }
-    .int2-demo-card .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: #FFFFFF;
-    }
-    .int2-demo-card .card-price-btn {
-      width: 20px; height: 20px;
-      background: #FFFFFF;
-      border-radius: 50%;
-    }
-
-    /* 架構 */
-    .int2-wf-card {
-      width: 569px;
-      display: flex;
-      flex-direction: column;
-    }
-    .int2-wf-card .card-img {
-      width: 569px;
-      height: 361px;
-      background: #FFFFFF;
-      border: 2px solid #333333;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
-    }
-    .int2-wf-card .card-img-inner { width: 486px; height: 329px; background: #999999; margin: auto; }
-    .int2-wf-card .card-tag {
-      position: absolute;
-      left: 0; top: 0;
-      padding: 8px 16px;
-      background: #333333;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int2-wf-card .card-rect { width: 569px; height: 54px; background: #FFFFFF; }
-    .int2-wf-card .card-text {
-      width: 569px;
-      background: #FFFFFF;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px 26px;
-      gap: 10px;
-      box-sizing: border-box;
-    }
-    .int2-wf-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 130%;
-      text-align: center;
-      color: #333333;
-      width: 100%;
-    }
-    .int2-wf-card .card-sale {
-      width: 100%;
-      background: #333333;
-      padding: 6px 0;
-      text-align: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 24px;
-      font-weight: 500;
-      color: #FFFFFF;
-    }
-    .int2-wf-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 150%;
-      color: #333333;
-      width: 100%;
-    }
-    .int2-wf-card .card-price {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 10px 28px;
-      background: #333333;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-    }
-    .int2-wf-card .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: #FFFFFF;
-    }
-    .int2-wf-card .card-price-btn {
-      width: 20px; height: 20px;
-      background: #FFFFFF;
-      border-radius: 50%;
-    }
-
-    /* ===================================
-       INT1 — 一排一個
-    =================================== */
-    /* demo */
-    .int1-demo-wrap {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 1162px;
-    }
-    .int1-demo-img {
-      width: 569px;
-      height: 390px;
-      background: #FFFFFF;
-      border: 1px solid #FFB06B;
-      border-radius: 10px;
-      overflow: hidden;
-      position: relative;
       flex-shrink: 0;
+      z-index: 2
     }
-    .int1-demo-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .int1-demo-tag {
+
+    .int02-card__media img,
+    .int02-card__media-placeholder {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border: 0;
+      background: #999
+    }
+
+    .int02-card__tag {
       position: absolute;
-      left: 0; top: 0;
-      padding: 12px 16px;
-      background: #FE6011;
-      border-radius: 0 0 15px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int1-demo-content {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 645px;
-    }
-    .int1-demo-spacer { width: 52px; height: 287px; background: #FFFFFF; flex-shrink: 0; }
-    .int1-demo-text {
-      width: 593px;
-      height: 287px;
-      background: #FFEEC9;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 25px 24px;
-      gap: 12px;
-      box-sizing: border-box;
-    }
-    .int1-demo-text .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 130%;
-      text-align: center;
-      color: #FE6011;
-      width: 100%;
-    }
-    .int1-demo-text .card-line { width: 100%; height: 3px; background: #FFB06B; }
-    .int1-demo-text .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 150%;
-      color: #563823;
-      width: 100%;
-    }
-    .int1-demo-text .card-price {
+      left: 0;
+      top: 0;
+      z-index: 4;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-      padding: 8px 32px;
-      background: #FE6011;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-      align-self: flex-start;
-    }
-    .int1-demo-text .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 22px;
-      font-weight: 400;
-      color: #FFFFFF;
-    }
-    .int1-demo-text .card-price-btn {
-      width: 20px; height: 20px;
-      background: #FFFFFF;
-      border-radius: 50%;
+      min-width: 142px;
+      height: var(--tag-h);
+      padding: var(--tag-py) var(--tag-px);
+      border-radius: 0 0 10px 0;
+      background: var(--primary-color);
+      font-size: var(--tag-size);
+      font-weight: var(--tag-weight, 400);
+      line-height: 1.2;
+      color: #fff;
+      white-space: nowrap
     }
 
-    /* 架構 */
-    .int1-wf-wrap {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 1162px;
+    .int02-card__tag[hidden] {
+      display: none
     }
-    .int1-wf-img {
-      width: 569px;
-      height: 390px;
-      background: #FFFFFF;
-      border: 1px solid #333333;
-      border-radius: 10px;
-      overflow: hidden;
+
+    .int02-card__content {
       position: relative;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      z-index: 1;
+      width: var(--content-w);
+      margin-top: calc(var(--content-lip, 0px) * -1);
+      padding-top: var(--content-lip, 0px);
+      background: var(--content-bg);
+      color: var(--text-color)
     }
-    .int1-wf-img-inner { width: 536px; height: 358px; background: #999999; }
-    .int1-wf-tag {
-      position: absolute;
-      left: 0; top: 0;
-      padding: 12px 16px;
-      background: #333333;
-      border-radius: 0 0 15px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int1-wf-content {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 645px;
-    }
-    .int1-wf-spacer { width: 52px; height: 342px; background: #FFFFFF; flex-shrink: 0; }
-    .int1-wf-text {
-      width: 593px;
-      height: 342px;
-      background: #FFFFFF;
+
+    .int02-card__body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 25px 24px;
-      gap: 12px;
-      box-sizing: border-box;
+      width: 100%;
+      padding: var(--content-pad-y) var(--content-pad-x) var(--content-pad-b, var(--content-pad-y));
+      gap: var(--content-gap);
+      background: var(--content-bg)
     }
-    .int1-wf-text .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
+
+    .int02-card__title {
+      width: 100%;
+      margin: 0;
       font-weight: 700;
-      font-size: 28px;
+      font-size: var(--title-size);
       line-height: 130%;
       text-align: center;
-      color: #333333;
-      width: 100%;
+      color: var(--title-color)
     }
-    .int1-wf-text .card-sale {
+
+    .int02-card__divider {
       width: 100%;
-      background: #333333;
-      padding: 8px 0;
-      text-align: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 24px;
-      font-weight: 500;
-      color: #FFFFFF;
+      height: var(--divider-h);
+      background: var(--divider-color);
+      flex-shrink: 0
     }
-    .int1-wf-text .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 20px;
-      line-height: 150%;
-      color: #333333;
-      width: 100%;
+
+    .is-demo .int02-card__divider {
+      height: 0;
+      border-top: 3px dashed var(--divider-color);
+      background: transparent
     }
-    .int1-wf-text .card-price {
+
+    .int02-card__sale {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
-      padding: 8px 32px;
-      background: #333333;
-      border-radius: 100px;
-      border: none;
-      cursor: pointer;
-      align-self: flex-start;
+      width: 100%;
+      min-height: calc(var(--sale-size) * 1.5 + 12px);
+      padding: 6px 0;
+      background: #333;
+      font-weight: 500;
+      font-size: var(--sale-size);
+      line-height: 150%;
+      text-align: center;
+      color: #fff
     }
-    .int1-wf-text .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 22px;
+
+    .int02-card__sale[hidden] {
+      display: none
+    }
+
+    .int02-card__detail {
+      width: 100%;
+      min-height: var(--detail-min-h);
+      margin: 0;
       font-weight: 400;
-      color: #FFFFFF;
+      font-size: var(--detail-size);
+      line-height: 150%;
+      text-align: var(--detail-align, left);
+      color: var(--detail-color)
     }
-    .int1-wf-text .card-price-btn {
-      width: 20px; height: 20px;
-      background: #FFFFFF;
+
+    .int02-card__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--btn-gap);
+      min-width: 0;
+      height: auto;
+      padding: var(--btn-py) var(--btn-px);
+      border: 0;
+      border-radius: 100px;
+      background: var(--primary-color);
+      font-weight: 400;
+      font-size: var(--btn-size);
+      line-height: 1.18;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap
+    }
+
+    .int02-card__button-icon {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--btn-icon);
+      height: var(--btn-icon);
       border-radius: 50%;
+      background: #fff;
+      flex: 0 0 var(--btn-icon)
     }
 
-    /* ===== TOP 按鈕 ===== */
-    #topBtn {
-      position: fixed;
-      right: 24px; bottom: 32px;
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      background: #333333;
-      border: none; cursor: pointer;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 2px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      opacity: 0; transform: translateY(10px);
-      transition: opacity 0.3s, transform 0.3s;
-      z-index: 999;
-    }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
-
-    /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .wireframe-wrap, .demo-wrap { width: 100%; box-sizing: border-box; overflow-x: auto; }
+    .int02-card__button-icon::before {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: calc(var(--btn-triangle) * .62) solid var(--primary-color);
+      border-top: calc(var(--btn-triangle) * .45) solid transparent;
+      border-bottom: calc(var(--btn-triangle) * .45) solid transparent;
+      margin-left: 1px
     }
 
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .wireframe-wrap, .demo-wrap { padding: 20px; }
+    .is-demo {
+      --primary-color: #FE6011;
+      --border-color: #FFB06B;
+      --divider-color: #FFB06B;
+      --content-bg: #FFEEC9;
+      --title-color: #FE6011;
+      --detail-color: #563823;
+      --text-color: #563823
+    }
 
-      /* 4欄 → 2欄 */
-      .int4-row { width: 100%; flex-wrap: wrap; justify-content: center; gap: 16px; }
-      .int4-demo-card, .int4-wf-card {
-        width: calc(50% - 8px); min-width: 240px;
-        display: flex; flex-direction: column;
+    .is-wireframe {
+      --primary-color: #333;
+      --border-color: #333;
+      --divider-color: #333;
+      --content-bg: #fff;
+      --title-color: #333;
+      --detail-color: #333;
+      --text-color: #333
+    }
+
+    .is-wireframe .int02-card__divider {
+      display: none
+    }
+
+    .is-wireframe .int02-card__button {
+      min-width: calc(var(--btn-size) * 6 + var(--btn-px) * 2 + var(--btn-icon) + var(--btn-gap))
+    }
+
+    .is-demo .int02-card__sale {
+      display: none
+    }
+
+    /* Single / horizontal PC variant */
+    .int02-grid--single {
+      position: relative;
+      display: block;
+      height: 390px
+    }
+
+    .int02-grid--single .int02-card {
+      width: 1162px;
+      height: 390px;
+      display: block
+    }
+
+    .int02-grid--single .int02-card__media {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: var(--media-w);
+      height: var(--media-h)
+    }
+
+    .int02-grid--single .int02-card__content {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: var(--content-w);
+      margin-top: 0;
+      padding-top: 0;
+      background: #fff;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: stretch;
+      min-height: auto
+    }
+
+    .int02-grid--single .int02-card__content::before {
+      content: "";
+      display: block;
+      width: 52px;
+      flex: 0 0 52px;
+      background: #fff
+    }
+
+    .int02-grid--single .int02-card__body {
+      width: var(--content-text-w);
+      min-height: 287px;
+      padding: var(--content-pad-y) var(--content-pad-x);
+      gap: var(--content-gap)
+    }
+
+    .int02-grid--single.is-demo .int02-card__body {
+      background: #FFEEC9
+    }
+
+    .int02-grid--single.is-wireframe .int02-card__body {
+      min-height: 342px;
+      background: #fff
+    }
+
+    .int02-grid--single .int02-card__detail {
+      min-height: var(--detail-min-h)
+    }
+
+    .int02-grid--single.is-demo .int02-card__sale {
+      display: none
+    }
+
+    .int02-grid--single.is-demo .int02-card__tag {
+      display: flex
+    }
+
+    .int02-grid--single .int02-card__tag {
+      border-radius: 0 0 15px 0
+    }
+
+    /* Demo visibility by layout */
+    .int02-grid--4.is-demo .int02-card__tag,
+    .int02-grid--3.is-demo .int02-card__tag,
+    .int02-grid--2.is-demo .int02-card__tag {
+      display: none
+    }
+
+    @media (min-width:1366px) {
+      .int02-grid--4 {
+        width: 1160px;
+        max-width: 1160px
       }
-      .int4-demo-card .card-img, .int4-wf-card .card-img { width: 100%; height: auto; aspect-ratio: 3/2; }
-      .int4-demo-card .card-rect, .int4-demo-card .card-text,
-      .int4-wf-card .card-rect, .int4-wf-card .card-text { width: 100%; }
-
-      /* 3欄 → 1欄 */
-      .int3-row { width: 100%; flex-wrap: wrap; justify-content: center; gap: 24px; }
-      .int3-demo-card, .int3-wf-card { width: 100%; max-width: 480px; }
-      .int3-demo-card .card-img, .int3-wf-card .card-img { width: 100%; height: auto; aspect-ratio: 3/2; }
-      .int3-demo-card .card-rect, .int3-demo-card .card-text,
-      .int3-wf-card .card-rect, .int3-wf-card .card-text { width: 100%; }
-
-      /* 2欄 → 1欄 */
-      .int2-row { width: 100%; flex-wrap: wrap; justify-content: center; gap: 24px; }
-      .int2-demo-card, .int2-wf-card { width: 100%; max-width: 560px; }
-      .int2-demo-card .card-img, .int2-wf-card .card-img { width: 100%; height: auto; aspect-ratio: 3/2; }
-      .int2-demo-card .card-rect, .int2-demo-card .card-text,
-      .int2-wf-card .card-rect, .int2-wf-card .card-text { width: 100%; }
-
-      /* 1欄 */
-      .int1-demo-wrap, .int1-wf-wrap {
-        width: 100%; max-width: 640px; height: auto;
-        margin: 0 auto; flex-direction: column; align-items: center;
-      }
-      .int1-demo-img, .int1-wf-img {
-        width: 100%; height: 0; padding-bottom: 68%; border-radius: 12px;
-      }
-      .int1-demo-content, .int1-wf-content { width: 100%; }
-      .int1-demo-spacer, .int1-wf-spacer { display: none; }
-      .int1-demo-text, .int1-wf-text { width: 100%; height: auto; }
     }
 
-    @media (max-width: 767px) {
-      .int-sub-nav {
+    @media (max-width:1365px) and (min-width:768px) {
+      .int-section {
+        padding: 40px 24px 56px
+      }
+
+      .wireframe-wrap,
+      .demo-wrap {
+        min-height: auto;
+        padding: 30px 20px
+      }
+
+      .int02-grid,
+      .int02-grid--single {
+        width: 100%;
+        max-width: 760px;
+        height: auto;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 24px 16px;
+        --card-w: calc((100% - 16px)/2);
+        --media-w: 100%;
+        --media-h: auto;
+        --media-pad: 8px;
+        --media-border: 1.5px;
+        --content-w: 100%;
+        --content-lip: 24px;
+        --content-pad-y: 16px;
+        --content-pad-x: 16px;
+        --content-pad-b: 18px;
+        --content-gap: 10px;
+        --title-size: 20px;
+        --sale-size: 16px;
+        --detail-size: 16px;
+        --btn-size: 16px;
+        --btn-py: 7px;
+        --btn-px: 24px;
+        --btn-gap: 4px;
+        --btn-icon: 13px;
+        --btn-triangle: 6px;
+        --tag-size: 14px;
+        --tag-h: 28px;
+        --tag-py: 5px;
+        --tag-px: 16px;
+        --divider-h: 1px;
+        --detail-min-h: auto
+      }
+
+      .int02-card,
+      .int02-grid--single .int02-card {
+        position: relative;
+        width: var(--card-w);
+        height: auto;
+        flex: 0 0 var(--card-w);
+        display: flex;
+        flex-direction: column;
+        align-items: center
+      }
+
+      .int02-card__media,
+      .int02-grid--single .int02-card__media {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 252/176.62
+      }
+
+      .int02-card__content,
+      .int02-grid--single .int02-card__content {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        display: block;
+        width: 100%;
+        margin-top: calc(var(--content-lip) * -1);
+        padding-top: var(--content-lip);
+        background: var(--content-bg)
+      }
+
+      .int02-grid--single .int02-card__content::before {
+        display: none
+      }
+
+      .int02-card__body,
+      .int02-grid--single .int02-card__body {
+        width: 100%;
+        min-height: 0;
+        padding: var(--content-pad-y) var(--content-pad-x) var(--content-pad-b);
+        background: var(--content-bg)
+      }
+
+      .is-demo.int02-grid--single .int02-card__body {
+        background: #FFEEC9
+      }
+
+      .int02-card__detail {
+        text-align: left;
+        min-height: 0
+      }
+    }
+
+    @media (max-width:767px) {
+      .int-section {
+        max-width: none;
+        padding: 36px 16px 48px
+      }
+
+      .int-section-title {
+        font-size: 26px;
+        line-height: 32px;
+        margin-bottom: 16px
+      }
+
+      .wireframe-wrap,
+      .demo-wrap {
+        min-height: auto;
+        padding: 24px 14px;
+        overflow-x: auto
+      }
+
+      .int02-grid,
+      .int02-grid--single {
+        width: 312px;
+        max-width: 312px;
+        min-width: 312px;
+        height: auto;
+        display: flex;
+        flex-flow: column nowrap;
         justify-content: flex-start;
-        overflow-x: auto; overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; flex-wrap: nowrap; height: auto; align-items: stretch;
-      }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .wireframe-wrap, .demo-wrap { padding: 20px 16px; min-height: auto; }
-
-      /* 全部1欄，卡片統一 278px */
-      .int4-row, .int3-row, .int2-row {
-        flex-direction: column; align-items: center; width: 100%; gap: 32px;
-      }
-
-      /* ===== M版 demo 卡片（橘色系）===== */
-      .int4-demo-card, .int3-demo-card, .int2-demo-card {
-        width: 278px !important; flex-shrink: 0;
-        display: flex; flex-direction: column;
-      }
-      .int4-demo-card .card-img, .int3-demo-card .card-img, .int2-demo-card .card-img {
-        width: 278px !important; height: 0 !important;
-        padding-bottom: 76.98% !important;
-        position: relative !important; overflow: hidden; flex-shrink: 0;
-      }
-      .int4-demo-card .card-img img, .int3-demo-card .card-img img, .int2-demo-card .card-img img {
-        position: absolute; top: 0; left: 0;
-        width: 100% !important; height: 100% !important; object-fit: cover;
-      }
-      .int4-demo-card .card-rect, .int3-demo-card .card-rect, .int2-demo-card .card-rect {
-        width: 278px !important;
-      }
-      .int4-demo-card .card-text, .int3-demo-card .card-text, .int2-demo-card .card-text {
-        width: 278px !important; box-sizing: border-box;
-      }
-      .int4-demo-card .card-name, .int3-demo-card .card-name, .int2-demo-card .card-name {
-        font-size: 20px !important; width: 100%;
-      }
-      .int4-demo-card .card-detail, .int3-demo-card .card-detail, .int2-demo-card .card-detail {
-        font-size: 16px !important; width: 100%;
+        align-items: center;
+        gap: 24px;
+        --card-w: 312px;
+        --media-w: 284px;
+        --media-h: 198px;
+        --media-pad: 8px;
+        --media-border: 1px;
+        --content-w: 312px;
+        --content-lip: 30px;
+        --content-pad-y: 14px;
+        --content-pad-x: 22px;
+        --content-pad-b: 20px;
+        --content-gap: 8px;
+        --title-size: 20px;
+        --sale-size: 16px;
+        --detail-size: 16px;
+        --btn-size: 16px;
+        --btn-py: 0px;
+        --btn-px: 22.6909px;
+        --btn-gap: 4px;
+        --btn-icon: 18px;
+        --btn-triangle: 8.1px;
+        --tag-size: 14px;
+        --tag-h: 25px;
+        --tag-py: 4px;
+        --tag-px: 16px;
+        --divider-h: 3px;
+        --detail-min-h: auto
       }
 
-      /* ===== M版 架構 卡片（黑色系）===== */
-      .int4-wf-card, .int3-wf-card, .int2-wf-card {
-        width: 278px !important; flex-shrink: 0;
-        display: flex; flex-direction: column;
-      }
-      .int4-wf-card .card-img, .int3-wf-card .card-img, .int2-wf-card .card-img {
-        width: 278px !important; height: 0 !important;
-        padding-bottom: 76.98% !important;
-        position: relative !important; overflow: hidden; flex-shrink: 0;
-      }
-      .int4-wf-card .card-img-inner, .int3-wf-card .card-img-inner, .int2-wf-card .card-img-inner {
-        position: absolute; top: 0; left: 0;
-        width: 100% !important; height: 100% !important;
-      }
-      .int4-wf-card .card-rect, .int3-wf-card .card-rect, .int2-wf-card .card-rect {
-        width: 278px !important;
-      }
-      .int4-wf-card .card-text, .int3-wf-card .card-text, .int2-wf-card .card-text {
-        width: 278px !important; box-sizing: border-box;
-      }
-      .int4-wf-card .card-name, .int3-wf-card .card-name, .int2-wf-card .card-name {
-        font-size: 20px !important; width: 100%;
-      }
-      .int4-wf-card .card-sale, .int3-wf-card .card-sale, .int2-wf-card .card-sale {
-        font-size: 16px !important; width: 100%;
-      }
-      .int4-wf-card .card-detail, .int3-wf-card .card-detail, .int2-wf-card .card-detail {
-        font-size: 16px !important; width: 100%;
+      .int02-card,
+      .int02-grid--single .int02-card {
+        position: relative;
+        width: 312px;
+        height: auto;
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center
       }
 
-      /* ===== 一排一個 M版 ===== */
-      .int1-demo-wrap, .int1-wf-wrap {
-        width: 278px !important; height: auto; margin: 0 auto;
-        flex-direction: column; align-items: center;
+      .int02-card__media,
+      .int02-grid--single .int02-card__media {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: var(--media-w);
+        height: var(--media-h);
+        aspect-ratio: auto;
+        padding: var(--media-pad);
+        border-width: var(--media-border)
       }
-      .int1-demo-img, .int1-wf-img {
-        width: 278px !important; height: 0 !important;
-        padding-bottom: 76.98% !important;
-        border-radius: 10px; overflow: hidden;
+
+      .int02-card__content,
+      .int02-grid--single .int02-card__content {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        display: block;
+        width: var(--content-w);
+        margin-top: calc(var(--content-lip) * -1);
+        padding-top: var(--content-lip);
+        background: var(--content-bg)
       }
-      .int1-demo-img img {
-        position: absolute; top: 0; left: 0;
-        width: 100% !important; height: 100% !important; object-fit: cover;
+
+      .int02-grid--single .int02-card__content::before {
+        display: none
       }
-      .int1-wf-img-inner {
-        position: absolute; top: 0; left: 0;
-        width: 100% !important; height: 100% !important;
+
+      .int02-card__body,
+      .int02-grid--single .int02-card__body {
+        width: 100%;
+        min-height: 0;
+        padding: var(--content-pad-y) var(--content-pad-x) var(--content-pad-b);
+        gap: var(--content-gap);
+        background: var(--content-bg)
       }
-      .int1-demo-content, .int1-wf-content { width: 278px; }
-      .int1-demo-spacer, .int1-wf-spacer { display: none; }
-      .int1-demo-text, .int1-wf-text {
-        width: 260px !important; height: auto !important;
-        margin-top: -26px; padding: 14px; gap: 8px; box-sizing: border-box;
+
+      .int02-card__title {
+        line-height: 24px
       }
-      .int1-demo-text .card-name, .int1-wf-text .card-name {
-        font-size: 20px !important; width: 100%;
+
+      .int02-card__sale {
+        min-height: 27px;
+        padding: 4px 0;
+        font-size: 16px;
+        line-height: 19px
       }
-      .int1-demo-text .card-detail, .int1-wf-text .card-detail {
-        font-size: 16px !important; width: 100%;
+
+      .int02-card__detail {
+        min-height: 0;
+        font-size: 16px;
+        line-height: 22px;
+        text-align: left;
+        color: #515151
       }
-      .int1-wf-text .card-sale { font-size: 16px !important; width: 100%; }
+
+      .int02-card__button {
+        height: 40px;
+        padding: 0 var(--btn-px);
+        font-size: 16px;
+        line-height: 19px
+      }
+
+      .int02-card__button-icon {
+        width: 18px;
+        height: 18px;
+        flex-basis: 18px
+      }
+
+      .int02-card__tag {
+        width: 144px;
+        min-width: 144px;
+        height: 25px;
+        padding: 4px 16px;
+        font-size: 14px;
+        line-height: 17px
+      }
+
+      .is-demo {
+        --border-color: #FFB06B;
+        --detail-color: #515151
+      }
+
+      .is-wireframe {
+        --border-color: #515151;
+        --detail-color: #515151
+      }
+
+      .is-demo.int02-grid--single .int02-card__body {
+        background: #FFEEC9
+      }
+
+      .int02-grid--single .int02-card__content,
+      .int02-grid--single .int02-card__body {
+        height: auto !important;
+        min-height: 0 !important
+      }
+
+      .int02-grid--single .int02-card__detail {
+        min-height: 0 !important
+      }
+
+      .int-sub-nav {
+        justify-content: flex-start
+      }
     }
+  
+
+    /* ===== INT_01-04 page-level centering fix =====
+       Only fixes the outer 1400px display-page container.
+       Does not change card component layout.
+    */
+    .int-type-panel,
+    .int-sub-panel { width: 100%; box-sizing: border-box; }
+
+    @media (min-width: 1400px) {
+      .int-section {
+        position: relative !important;
+        width: 1400px !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+      }
+    }
+
+    @media (max-width: 1399px) {
+      .int-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+      }
+    }
+
   </style>
 </head>
+
 <body data-id="int" data-page="intro">
 
-<!-- Header -->
-<div data-include="header"></div>
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
+  <div id="content"></div>
 
-<!-- Banner -->
-<div data-include="banner"></div>
-
-<!-- 外層 Nav -->
-<div data-include="nav"></div>
-
-<!-- 內層 Tab -->
-<div id="content"></div>
-<div class="int-sub-nav-sticky">
-  <div class="int-sub-nav">
-    <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
-    <a class="sub-tab active" href="INT_02.html#content">介紹_02</a>
-    <a class="sub-tab" href="INT_03.html#content">介紹_03</a>
-    <a class="sub-tab" href="INT_04.html#content">介紹_04</a>
-    <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
-    <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
-    <a class="sub-tab" href="INT_07.html#content">介紹_07</a>
-    <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
-  </div>
-</div>
-
-<!-- ===== 一排四個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排四個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-4">demo</button>
-    <button class="toggle-btn" data-view="wf-4">架構</button>
-  </div>
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-4">
-    <div class="int4-row">
-      <div class="int4-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
-        </div>
-      </div>
-      <div class="int4-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
-        </div>
-      </div>
-      <div class="int4-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
-        </div>
-      </div>
-      <div class="int4-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝結合現代舒適和當地文化特色設計。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 5 5"><path d="M0 0L5 2.5L0 5V0Z" fill="#FE6011"/></svg></div></button>
-        </div>
-      </div>
+  <div class="int-sub-nav-sticky">
+    <div class="int-sub-nav">
+      <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
+      <a class="sub-tab active" href="INT_02.html#content">介紹_02</a>
+      <a class="sub-tab" href="INT_03.html#content">介紹_03</a>
+      <a class="sub-tab" href="INT_04.html#content">介紹_04</a>
+      <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
+      <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
+      <a class="sub-tab" href="INT_07.html#content">介紹_07</a>
+      <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
     </div>
   </div>
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-4">
-    <div class="int4-row">
-      <div class="int4-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-      <div class="int4-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-      <div class="int4-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-      <div class="int4-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ===== 一排三個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排三個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-3">demo</button>
-    <button class="toggle-btn" data-view="wf-3">架構</button>
-  </div>
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-3">
-    <div class="int3-row">
-      <div class="int3-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝，結合現代舒適和當地文化特色設計，戶外提供大片游泳池。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 7 7" width="7" height="7"><path d="M0 0L7 3.5L0 7V0Z" fill="#FE6011"/></svg></div></button>
-        </div>
-      </div>
-      <div class="int3-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝，結合現代舒適和當地文化特色設計，戶外提供大片游泳池。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 7 7" width="7" height="7"><path d="M0 0L7 3.5L0 7V0Z" fill="#FE6011"/></svg></div></button>
-        </div>
-      </div>
-      <div class="int3-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞約1300英畝，結合現代舒適和當地文化特色設計，戶外提供大片游泳池。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"><svg viewBox="0 0 7 7" width="7" height="7"><path d="M0 0L7 3.5L0 7V0Z" fill="#FE6011"/></svg></div></button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-3">
-    <div class="int3-row">
-      <div class="int3-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-      <div class="int3-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-      <div class="int3-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <div class="int-type-panel active" id="panel-intro">
+    <div class="int-sub-panel active" id="subpanel-intro02">
 
-<!-- ===== 一排二個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排二個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-2">demo</button>
-    <button class="toggle-btn" data-view="wf-2">架構</button>
-  </div>
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-2">
-    <div class="int2-row">
-      <div class="int2-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。戶外提供大片游泳池、健身中心和兒童遊樂區等豐富的休閒設施。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"></div></button>
+      <!-- 一排四個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排四個</h2>
+        <div class="view-toggle">
+          <button class="toggle-btn active" data-view="demo-4">demo</button>
+          <button class="toggle-btn" data-view="wf-4">架構</button>
         </div>
-      </div>
-      <div class="int2-demo-card">
-        <div class="card-img"><img src="images/img_INT_02.jpg" alt=""></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。戶外提供大片游泳池、健身中心和兒童遊樂區等豐富的休閒設施。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"></div></button>
+        <div class="demo-wrap view-panel active" id="demo-4">
+          <div class="int02-grid int02-grid--4 is-demo">
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
         </div>
-      </div>
+        <div class="wireframe-wrap view-panel" id="wf-4">
+          <div class="int02-grid int02-grid--4 is-wireframe">
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 一排三個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排三個</h2>
+        <div class="view-toggle"><button class="toggle-btn active" data-view="demo-3">demo</button><button
+            class="toggle-btn" data-view="wf-3">架構</button></div>
+        <div class="demo-wrap view-panel active" id="demo-3">
+          <div class="int02-grid int02-grid--3 is-demo">
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="wireframe-wrap view-panel" id="wf-3">
+          <div class="int02-grid int02-grid--3 is-wireframe">
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 一排兩個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排兩個</h2>
+        <div class="view-toggle"><button class="toggle-btn active" data-view="demo-2">demo</button><button
+            class="toggle-btn" data-view="wf-2">架構</button></div>
+        <div class="demo-wrap view-panel active" id="demo-2">
+          <div class="int02-grid int02-grid--2 is-demo">
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag" hidden>標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。</p><a
+                    class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="wireframe-wrap view-panel" id="wf-2">
+          <div class="int02-grid int02-grid--2 is-wireframe">
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a class="int02-card__button"
+                    href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 一排一個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排一個</h2>
+        <div class="view-toggle"><button class="toggle-btn active" data-view="demo-1">demo</button><button
+            class="toggle-btn" data-view="wf-1">架構</button></div>
+        <div class="demo-wrap view-panel active" id="demo-1">
+          <div class="int02-grid int02-grid--single is-demo">
+            <article class="int02-card">
+              <div class="int02-card__media"><img src="images/img_INT_02.jpg" alt="六一溜阿寬馬來西亞"><span
+                  class="int02-card__tag">標籤字數限八字元</span></div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">六一溜阿寬馬來西亞</h3>
+                  <div class="int02-card__divider"></div>
+                  <p class="int02-card__detail">
+                    位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。戶外提供大片游泳池、健身中心和兒童遊樂區等豐富的休閒設施，提供免費wi-fi及免費的空間乾淨享受。</p>
+                  <a class="int02-card__button" href="#"><span>詳情閱讀</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="wireframe-wrap view-panel" id="wf-1">
+          <div class="int02-grid int02-grid--single is-wireframe">
+            <article class="int02-card">
+              <div class="int02-card__media">
+                <div class="int02-card__media-placeholder"></div><span class="int02-card__tag">標籤字數限八字元</span>
+              </div>
+              <div class="int02-card__content">
+                <div class="int02-card__body">
+                  <h3 class="int02-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int02-card__sale">額外資訊額外資訊額外資訊額外資訊訊額外資訊訊額外資訊額外</div>
+                  <p class="int02-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p><a
+                    class="int02-card__button" href="#"><span>價格價格價格</span><i class="int02-card__button-icon"></i></a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-2">
-    <div class="int2-row">
-      <div class="int2-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-      <div class="int2-wf-card">
-        <div class="card-img"><div class="card-img-inner"></div><div class="card-tag">標籤字數限八字元</div></div>
-        <div class="card-rect"></div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ===== 一排一個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排一個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-1">demo</button>
-    <button class="toggle-btn" data-view="wf-1">架構</button>
-  </div>
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-1">
-    <div class="int1-demo-wrap">
-      <div class="int1-demo-img">
-        <img src="images/img_INT_02.jpg" alt="">
-        <div class="int1-demo-tag">標籤字數限八字元</div>
-      </div>
-      <div class="int1-demo-content">
-        <div class="int1-demo-spacer"></div>
-        <div class="int1-demo-text">
-          <div class="card-name">六一溜阿寬馬來西亞</div>
-          <div class="card-line"></div>
-          <div class="card-detail">位於馬六甲河區豪華渡假村！四周受峭野環境圍繞地地約1300英畝結合現代舒適和當地文化特色設計。戶外提供大片游泳池、健身中心和兒童遊樂區等豐富的休閒設施，提供免費wi-fi及免費的空間乾淨享受。</div>
-          <button class="card-price"><span>詳情閱讀</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-1">
-    <div class="int1-wf-wrap">
-      <div class="int1-wf-img">
-        <div class="int1-wf-img-inner"></div>
-        <div class="int1-wf-tag">標籤字數限八字元</div>
-      </div>
-      <div class="int1-wf-content">
-        <div class="int1-wf-spacer"></div>
-        <div class="int1-wf-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <button class="card-price"><span>價格價格價格</span><div class="card-price-btn"></div></button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+      <path d="M7 0L14 12H0L7 0Z" fill="white" />
+    </svg>
+    <span>TOP</span>
+  </button>
 
-<!-- Footer -->
-<div data-include="footer"></div>
-
-<!-- TOP 按鈕 -->
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
-  <span>TOP</span>
-</button>
-
-<script>
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+  <script>
+    document.querySelectorAll('.view-toggle').forEach(function (toggle) {
+      toggle.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var section = toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function (b) { b.classList.remove('active') });
+          btn.classList.add('active');
+          section.querySelectorAll('.view-panel').forEach(function (p) { p.classList.remove('active') });
+          section.querySelector('#' + btn.dataset.view).classList.add('active');
+        });
       });
     });
-  });
-</script>
-
-<script src="js/include.js"></script>
+  </script>
+  <script src="js/include.js"></script>
 </body>
+
 </html>

@@ -16,10 +16,6 @@
     .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
-
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
     .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
@@ -30,163 +26,246 @@
     .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
 
     /* ===== wrap ===== */
-    .demo-wrap      { width: 1400px; min-height: 700px; background: #0131DF; box-sizing: border-box; padding: 55px 0; }
-    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 55px 0; border: 0.5px solid #333333; }
+    .demo-wrap {
+      --ticket-bg: #0131DF;
+      --ticket-accent: #FF3B00;
+      --ticket-side-bg: linear-gradient(180deg, #FFF946 0%, #FF7E57 100%);
+      --ticket-side-label-color: rgba(255, 255, 255, 0.58);
+      width: 100%;
+      min-height: 700px;
+      background: var(--ticket-bg);
+      box-sizing: border-box;
+      padding: 55px 0;
+    }
+    .wireframe-wrap {
+      --ticket-bg: #E5E5E5;
+      --ticket-accent: #333333;
+      --ticket-side-bg: #333333;
+      --ticket-side-label-color: #999999;
+      width: 100%;
+      min-height: 700px;
+      background: var(--ticket-bg);
+      box-sizing: border-box;
+      padding: 55px 0;
+      border: 0.5px solid #333333;
+    }
 
-    /* ===== inner ===== */
-    .cpn-inner { display: flex; flex-direction: row; align-items: center; justify-content: center; }
-    .cpn4-inner { gap: 16px; width: 1162px; }
-    .cpn3-inner { gap: 17px; width: 1162px; }
-    .cpn2-inner { gap: 32px; width: 1162px; }
-    .wireframe-wrap .cpn2-inner { gap: 33px; }
-
-    /* ══════════════════════════════
-       票券卡片 — 左內容 + 右裝飾條
-       注意：overflow:visible 才能讓缺口圓形突出邊緣
-    ══════════════════════════════ */
-    .cpn-card {
-      position: relative;
-      background: #FFFFFF;
-      border-radius: 10px;
-      overflow: visible;   /* ← 不能 hidden，缺口圓形要突出 */
-      flex-shrink: 0;
+    /* ===== 票券 inner 容器 ===== */
+    .cpn-inner {
+      width: 1162px;
+      max-width: 100%;
+      margin: 0 auto;
       display: flex;
       flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
     }
-    /* 左側白色區要有圓角（卡片自己不裁切） */
-    .cpn-card .card-left {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      border-radius: 10px 0 0 10px;
-      background: #FFFFFF;
-      overflow: hidden;
-      z-index: 1;
-    }
+    .cpn4-inner { gap: 16px; }
+    .cpn3-inner { gap: 17px; }
+    .cpn2-inner { gap: 32px; }
 
-    .cpn-card .card-name {
-      text-align: center; color: #333333;
-    }
-    .demo-wrap .cpn-card .card-name {
-      font-family: 'Manrope', sans-serif; font-weight: 700; color: #000000;
-    }
-    .wireframe-wrap .cpn-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 700;
-    }
+    /* =========================================================
+       CPN_03 Ticket Side Component
+       - 左側白色內容區 + 右側 COUPON 漸層直條同層、同高
+       - 上下圓圈圓心固定於「白色內容區 / 右側直條 / 上下邊界」交點
+       - 圓圈使用外層背景色，形成凹洞視覺
+       - COUPON 使用 CSS 文字，不使用 SVG
+       - RWD：同欄數＝同規格
+    ========================================================= */
+    .ticket-side-card {
+      --ticket-width: 279px;
+      --ticket-min-h: 153px;
+      --ticket-radius: 10px;
+      --ticket-side-w: 45px;
+      --ticket-hole-size: 18px;
+      --ticket-content-gap: 7px;
+      --ticket-body-pad-x: 10px;
+      --ticket-title-w: 177px;
+      --ticket-title-fs: 24px;
+      --ticket-title-lh: 33px;
+      --ticket-detail-fs: 16px;
+      --ticket-detail-lh: 19px;
+      --ticket-price-w: 175px;
+      --ticket-price-h: 40px;
+      --ticket-price-fs: 26px;
+      --ticket-price-lh: 36px;
+      --ticket-divider-w: 177px;
+      --ticket-divider-bw: 1px;
+      --ticket-label-fs: 20px;
 
-    .cpn-card .card-border { width: 100%; height: 0; }
-    .demo-wrap      .cpn-card .card-border { border-top: 2px solid #FF3B00; }
-    .wireframe-wrap .cpn-card .card-border { border-top: 2px solid #333333; }
-
-    .cpn-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 400;
-      text-align: center; color: #333333; letter-spacing: 1px;
-      white-space: nowrap; /* ← 單行不換行 */
-    }
-
-    .cpn-card .card-price {
-      display: flex; align-items: center; justify-content: center;
-      width: 100%;
-    }
-    .demo-wrap      .cpn-card .card-price { background: #FF3B00; }
-    .wireframe-wrap .cpn-card .card-price { background: #333333; }
-
-    .cpn-card .card-price span {
-      font-family: 'Manrope', sans-serif; font-weight: 800;
-      color: #FFFFFF; text-align: center;
-    }
-
-    /* 右側裝飾條：overflow:hidden 裁掉超出圓角 */
-    .cpn-card .card-deco {
       position: relative;
-      flex-shrink: 0;
+      width: var(--ticket-width);
+      min-height: var(--ticket-min-h);
+      height: auto;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      flex: 0 0 auto;
+      overflow: visible;
+      border-radius: var(--ticket-radius);
+      box-sizing: border-box;
+    }
+
+    .ticket-side-body {
+      width: calc(var(--ticket-width) - var(--ticket-side-w));
+      min-height: var(--ticket-min-h);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--ticket-content-gap);
+      padding: 0 var(--ticket-body-pad-x);
+      background: #FFFFFF;
+      border-radius: var(--ticket-radius) 0 0 var(--ticket-radius);
+      box-sizing: border-box;
       overflow: hidden;
-      border-radius: 0 10px 10px 0;
+      z-index: 1;
+      text-align: center;
+    }
+
+    .ticket-side-panel {
+      position: relative;
+      width: var(--ticket-side-w);
+      min-height: var(--ticket-min-h);
+      flex: 0 0 var(--ticket-side-w);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 0 var(--ticket-radius) var(--ticket-radius) 0;
+      background: var(--ticket-side-bg);
       z-index: 1;
     }
-    .cpn-card .card-deco .deco-bar {
-      position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
-    }
-    .demo-wrap      .cpn-card .card-deco .deco-bar { background: linear-gradient(180deg, #FFF946 0%, #FF7E57 100%); }
-    .wireframe-wrap .cpn-card .card-deco .deco-bar { background: #333333; }
 
-    /* 缺口圓形 — 相對整張卡片定位，放在左右交界邊緣
-       left 值 = card-left 寬度 - 圓形半徑，讓圓形跨在邊界上 */
-    .cpn-card .cut-top,
-    .cpn-card .cut-bot {
+    .ticket-side-label {
       position: absolute;
-      border-radius: 50%;
-      z-index: 3;
-    }
-    .demo-wrap      .cpn-card .cut-top,
-    .demo-wrap      .cpn-card .cut-bot { background: #0131DF; }
-    .wireframe-wrap .cpn-card .cut-top,
-    .wireframe-wrap .cpn-card .cut-bot { background: #EAEAEA; }
-
-    /* COUPON 文字（在裝飾條內直向旋轉） */
-    .cpn-card .card-deco .coupon-text {
-      position: absolute;
-      font-family: 'Montserrat', sans-serif; font-weight: 800;
-      text-align: center; letter-spacing: 0.16em; text-transform: uppercase;
-      transform: rotate(-90deg);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg);
       transform-origin: center center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: var(--ticket-label-fs);
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
       white-space: nowrap;
+      color: var(--ticket-side-label-color);
+      pointer-events: none;
     }
-    .demo-wrap      .cpn-card .card-deco .coupon-text { color: #FFFFFF; mix-blend-mode: soft-light; }
-    .wireframe-wrap .cpn-card .card-deco .coupon-text { color: #999999; }
 
-    /* ══════════════════════
-       一排四個 CPN4
-       card: 279×153, deco: 45px, cut: 18px
-       cut left = 234 - 9 = 225px
-    ══════════════════════ */
-    .cpn4-card { width: 279px; height: 153px; }
-    .cpn4-card .card-left { width: 234px; gap: 7px; padding: 0 0 0 10px; }
-    .cpn4-card .card-name { font-size: 24px; line-height: 33px; width: 177px; }
-    .wireframe-wrap .cpn4-card .card-name { font-size: 24px; }
-    .cpn4-card .card-border { width: 177px; }
-    .demo-wrap      .cpn4-card .card-border { border-top-width: 1px; }
-    .wireframe-wrap .cpn4-card .card-border { border-top-width: 1px; }
-    .cpn4-card .card-detail { font-size: 16px; line-height: 19px; }
-    .cpn4-card .card-price  { height: 40px; padding: 2px 0; width: 175px; }
-    .cpn4-card .card-price span { font-size: 26px; line-height: 36px; }
-    .cpn4-card .card-deco { width: 45px; }
-    .cpn4-card .cut-top { width: 18px; height: 18px; left: 225px; top: calc(50% - 76px); }
-    .cpn4-card .cut-bot { width: 18px; height: 18px; left: 225px; top: calc(50% + 58px); }
-    .cpn4-card .card-deco .coupon-text { font-size: 20px; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); }
+    .ticket-circle-top,
+    .ticket-circle-bottom {
+      position: absolute;
+      left: calc(var(--ticket-width) - var(--ticket-side-w));
+      width: var(--ticket-hole-size);
+      height: var(--ticket-hole-size);
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      background: var(--ticket-bg);
+      z-index: 3;
+      pointer-events: none;
+    }
+    .ticket-circle-top { top: 0; transform: translate(-50%, -50%); }
+    .ticket-circle-bottom { bottom: 0; transform: translate(-50%, 50%); }
 
-    /* ══════════════════════
-       一排三個 CPN3
-       card: 376×206, deco: 60px, cut: 24px
-       cut left = 316 - 12 = 304px
-    ══════════════════════ */
-    .cpn3-card { width: 376px; height: 206px; }
-    .cpn3-card .card-left { width: 316px; gap: 10px; padding: 0 0 0 10px; }
-    .cpn3-card .card-name { font-size: 32px; line-height: 44px; width: 260px; }
-    .cpn3-card .card-border { width: 239px; }
-    .cpn3-card .card-detail { font-size: 20px; line-height: 24px; }
-    .cpn3-card .card-price  { height: 53px; padding: 2px 0; width: 236px; }
-    .cpn3-card .card-price span { font-size: 36px; line-height: 49px; }
-    .cpn3-card .card-deco { width: 60px; }
-    .cpn3-card .cut-top { width: 24px; height: 24px; left: 304px; top: calc(50% - 103px); }
-    .cpn3-card .cut-bot { width: 24px; height: 24px; left: 304px; top: calc(50% + 79px); }
-    .cpn3-card .card-deco .coupon-text { font-size: 28px; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); }
+    .ticket-title {
+      width: min(100%, var(--ticket-title-w));
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: var(--ticket-title-fs);
+      line-height: var(--ticket-title-lh);
+      color: #333333;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .wireframe-wrap .ticket-title {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+    }
 
-    /* ══════════════════════
-       一排二個 CPN2
-    ══════════════════════ */
-    .cpn2-card { width: 565px; height: 309px; }
-    .cpn2-card .card-left { width: 475px; gap: 16px; padding: 0 0 0 20px; }
-    .cpn2-card .card-name { font-size: 46px; line-height: 63px; width: 391px; }
-    .wireframe-wrap .cpn2-card .card-name { font-size: 46px; line-height: 55px; }
-    .cpn2-card .card-border { width: 359px; }
-    .cpn2-card .card-detail { font-size: 30px; line-height: 36px; }
-    .cpn2-card .card-price  { height: 75px; padding: 2px 0; width: 355px; }
-    .cpn2-card .card-price span { font-size: 52px; line-height: 71px; }
-    .cpn2-card .card-deco { width: 90px; }
-    .cpn2-card .cut-top { width: 34px; height: 34px; left: 458px; top: calc(50% - 155px); }
-    .cpn2-card .cut-bot { width: 34px; height: 34px; left: 458px; top: calc(50% + 121px); }
-    .cpn2-card .card-deco .coupon-text { font-size: 40px; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); }
+    .ticket-divider {
+      width: min(100%, var(--ticket-divider-w));
+      height: 0;
+      border-top: var(--ticket-divider-bw) solid var(--ticket-accent);
+      box-sizing: border-box;
+    }
+
+    .ticket-detail {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: var(--ticket-detail-fs);
+      line-height: var(--ticket-detail-lh);
+      color: #333333;
+      text-align: center;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+
+    .ticket-price {
+      width: min(100%, var(--ticket-price-w));
+      min-height: var(--ticket-price-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px 0;
+      background: var(--ticket-accent);
+      color: #FFFFFF;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: var(--ticket-price-fs);
+      line-height: var(--ticket-price-lh);
+      text-align: center;
+      box-sizing: border-box;
+      word-break: break-word;
+    }
+
+    .ticket-side-card.ticket--md {
+      --ticket-width: 376px;
+      --ticket-min-h: 206px;
+      --ticket-side-w: 60px;
+      --ticket-hole-size: 24px;
+      --ticket-content-gap: 10px;
+      --ticket-body-pad-x: 10px;
+      --ticket-title-w: 260px;
+      --ticket-title-fs: 32px;
+      --ticket-title-lh: 44px;
+      --ticket-detail-fs: 20px;
+      --ticket-detail-lh: 24px;
+      --ticket-price-w: 236px;
+      --ticket-price-h: 53px;
+      --ticket-price-fs: 36px;
+      --ticket-price-lh: 49px;
+      --ticket-divider-w: 239px;
+      --ticket-divider-bw: 2px;
+      --ticket-label-fs: 28px;
+    }
+
+    .ticket-side-card.ticket--lg {
+      --ticket-width: 565px;
+      --ticket-min-h: 309px;
+      --ticket-side-w: 90px;
+      --ticket-hole-size: 34px;
+      --ticket-content-gap: 16px;
+      --ticket-body-pad-x: 20px;
+      --ticket-title-w: 391px;
+      --ticket-title-fs: 46px;
+      --ticket-title-lh: 63px;
+      --ticket-detail-fs: 30px;
+      --ticket-detail-lh: 36px;
+      --ticket-price-w: 355px;
+      --ticket-price-h: 75px;
+      --ticket-price-fs: 52px;
+      --ticket-price-lh: 71px;
+      --ticket-divider-w: 359px;
+      --ticket-divider-bw: 2px;
+      --ticket-label-fs: 40px;
+    }
+    .wireframe-wrap .ticket-side-card.ticket--lg {
+      --ticket-title-lh: 55px;
+    }
 
     /* ===== TOP ===== */
     #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
@@ -195,24 +274,87 @@
     #topBtn:hover { background: #555555; }
 
     /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+    @media (max-width: 1200px) {
       .demo-wrap, .wireframe-wrap { width: 100%; }
-      .cpn4-inner, .cpn3-inner, .cpn2-inner { width: 100%; max-width: 1162px; }
+      .cpn4-inner, .cpn3-inner, .cpn2-inner {
+        width: calc(100% - 40px);
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0 auto;
+      }
     }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
+
+    /* 2欄狀態：所有票券模組都統一 md 規格；一排二個維持 2，不提早變 1+1 */
+    @media (max-width: 1200px) and (min-width: 768px) {
       .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .cpn4-inner, .cpn3-inner, .cpn2-inner { flex-wrap: wrap; justify-content: center; }
+      .cpn4-inner, .cpn3-inner, .cpn2-inner {
+        width: 100%;
+        max-width: 768px;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .cpn4-inner .ticket-side-card,
+      .cpn3-inner .ticket-side-card,
+      .cpn2-inner .ticket-side-card {
+        --ticket-width: 376px;
+        --ticket-min-h: 206px;
+        --ticket-side-w: 60px;
+        --ticket-hole-size: 24px;
+        --ticket-content-gap: 10px;
+        --ticket-body-pad-x: 10px;
+        --ticket-title-w: 260px;
+        --ticket-title-fs: 32px;
+        --ticket-title-lh: 44px;
+        --ticket-detail-fs: 20px;
+        --ticket-detail-lh: 24px;
+        --ticket-price-w: 236px;
+        --ticket-price-h: 53px;
+        --ticket-price-fs: 36px;
+        --ticket-price-lh: 49px;
+        --ticket-divider-w: 239px;
+        --ticket-divider-bw: 2px;
+        --ticket-label-fs: 28px;
+      }
     }
+
+    /* 1欄狀態：所有票券模組都統一 mobile/sm 規格 */
     @media (max-width: 767px) {
       .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
       .int-sub-nav::-webkit-scrollbar { display: none; }
       .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
       .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .cpn4-inner, .cpn3-inner, .cpn2-inner { flex-wrap: wrap; justify-content: center; }
+      .cpn4-inner, .cpn3-inner, .cpn2-inner {
+        width: 100%;
+        max-width: 279px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .cpn4-inner .ticket-side-card,
+      .cpn3-inner .ticket-side-card,
+      .cpn2-inner .ticket-side-card {
+        --ticket-width: 100%;
+        --ticket-min-h: 153px;
+        --ticket-side-w: 45px;
+        --ticket-hole-size: 18px;
+        --ticket-content-gap: 7px;
+        --ticket-body-pad-x: 10px;
+        --ticket-title-w: 177px;
+        --ticket-title-fs: 24px;
+        --ticket-title-lh: 33px;
+        --ticket-detail-fs: 16px;
+        --ticket-detail-lh: 19px;
+        --ticket-price-w: 175px;
+        --ticket-price-h: 40px;
+        --ticket-price-fs: 26px;
+        --ticket-price-lh: 36px;
+        --ticket-divider-w: 177px;
+        --ticket-divider-bw: 1px;
+        --ticket-label-fs: 20px;
+        width: 100%;
+        max-width: 279px;
+      }
     }
   </style>
 </head>
@@ -241,122 +383,90 @@
 
   <div class="demo-wrap view-panel active" id="demo-cpn4">
     <div class="cpn-inner cpn4-inner">
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
     </div>
   </div>
 
   <div class="wireframe-wrap view-panel" id="wf-cpn4">
     <div class="cpn-inner cpn4-inner">
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題標</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題標</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題標</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題標</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題標</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題標</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn4-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題標</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--sm">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題標</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
     </div>
   </div>
@@ -372,94 +482,70 @@
 
   <div class="demo-wrap view-panel active" id="demo-cpn3">
     <div class="cpn-inner cpn3-inner">
-      <div class="cpn-card cpn3-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--md">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--md">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--md">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
     </div>
   </div>
 
   <div class="wireframe-wrap view-panel" id="wf-cpn3">
     <div class="cpn-inner cpn3-inner">
-      <div class="cpn-card cpn3-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題標</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--md">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題標</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題標</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--md">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題標</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn3-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題標</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--md">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題標</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
     </div>
   </div>
@@ -475,66 +561,50 @@
 
   <div class="demo-wrap view-panel active" id="demo-cpn2">
     <div class="cpn-inner cpn2-inner">
-      <div class="cpn-card cpn2-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--lg">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn2-card">
-        <div class="card-left">
-          <div class="card-name">5/20折扣碼</div>
-          <div class="card-border"></div>
-          <div class="card-detail">結帳輸入折扣碼</div>
-          <div class="card-price"><span>TRAIN400</span></div>
+      <div class="ticket-side-card ticket--lg">
+        <div class="ticket-side-body">
+          <div class="ticket-title">5/20折扣碼</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">結帳輸入折扣碼</div>
+          <div class="ticket-price">TRAIN400</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
     </div>
   </div>
 
   <div class="wireframe-wrap view-panel" id="wf-cpn2">
     <div class="cpn-inner cpn2-inner">
-      <div class="cpn-card cpn2-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--lg">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
-      <div class="cpn-card cpn2-card">
-        <div class="card-left">
-          <div class="card-name">標題標題標題</div>
-          <div class="card-border"></div>
-          <div class="card-detail">介紹介紹介紹介紹</div>
-          <div class="card-price"><span>價格價格</span></div>
+      <div class="ticket-side-card ticket--lg">
+        <div class="ticket-side-body">
+          <div class="ticket-title">標題標題標題</div>
+          <div class="ticket-divider"></div>
+          <div class="ticket-detail">介紹介紹介紹介紹</div>
+          <div class="ticket-price">價格價格</div>
         </div>
-        <div class="cut-top"></div>
-        <div class="cut-bot"></div>
-        <div class="card-deco">
-          <div class="deco-bar"></div>
-          <div class="coupon-text">COUPON</div>
-        </div>
+        <div class="ticket-side-panel"><div class="ticket-side-label">COUPON</div></div>
+        <span class="ticket-circle-top"></span><span class="ticket-circle-bottom"></span>
       </div>
     </div>
   </div>

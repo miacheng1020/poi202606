@@ -25,8 +25,8 @@ const INCLUDES = {
   <a class="type-tab" data-type="builder" href="BUILDER.html" style="background:#F3473D;color:#fff;font-weight:700;">⭐ 組合器</a>
   <a class="type-tab" data-type="product" href="PRD_01.html#content">產品卡牌</a>
   <a class="type-tab" data-type="free" href="FREE_01.html#content">自由行卡牌</a>
-  <a class="type-tab" data-type="member" href="MBR_01.html#content">會員卡牌</a>
-  <a class="type-tab" data-type="travel" href="TRIP_01.html#content">旅展卡牌</a>
+  <a class="type-tab" data-type="member" href="MBR_01.html#content" style="display:none">會員卡牌</a>
+  <a class="type-tab" data-type="travel" href="TRIP_01.html#content" style="display:none">旅展卡牌</a>
   <a class="type-tab" data-type="intro" href="INT_01.html#content">介紹卡牌</a>
   <a class="type-tab" data-type="video" href="VIDEO_01.html#content">影片卡牌</a>
   <a class="type-tab" data-type="blog" href="BLOG_01.html#content">部落格卡牌</a>

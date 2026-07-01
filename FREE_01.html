@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,1114 +10,1466 @@
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <style>
-
     /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 107px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 108px; }
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+    .int-sub-nav {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+
+    .int-sub-nav .sub-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      height: 48px;
+      min-width: 107px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
+      box-sizing: border-box;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+    }
+
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+      min-width: 108px;
+    }
 
     /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
-
-    /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
-
-    /* ===== wrap ===== */
-    .demo-wrap {
-      width: 1400px; max-width: 100%; min-height: 700px;
-      background: #8E49AC;
-      box-sizing: border-box; padding: 55px 0;
-    }
-    .wireframe-wrap {
-      width: 1400px; max-width: 100%; min-height: 700px;
-      background: #E5E5E5; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
-    }
-
-    /* ===== inner ===== */
-    .free-inner {
-      width: 1162px; max-width: 100%;
+    .view-toggle {
       display: flex;
-      flex-direction: row;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
+
+    .view-panel {
+      display: none !important;
+    }
+
+    .view-panel.active {
+      display: flex !important;
       align-items: center;
       justify-content: center;
+    }
+
+    .demo-wrap,
+    .wireframe-wrap {
+      width: 100%;
+      min-height: 700px;
+      box-sizing: border-box;
+      padding: 55px 0;
+    }
+
+    .demo-wrap {
+      background: #8E49AC;
+    }
+
+    .wireframe-wrap {
+      background: #E5E5E5;
+      border: 0.5px solid #333333;
+    }
+
+    /* ===== FREE Family：共同容器 ===== */
+    .free-inner {
+      width: 1162px;
+      max-width: 1162px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      justify-content: center;
       gap: 16px;
-    }
-
-    /* ============================================
-       共用：tag 樣式
-    ============================================ */
-    .free-tag {
-      position: absolute; z-index: 3;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; font-weight: 400; color: #FFFFFF;
-      white-space: nowrap; box-sizing: border-box;
-      border: 2px solid #FFFFFF;
-    }
-    .demo-wrap .free-tag { background: #FE6011; }
-    .wireframe-wrap .free-tag { background: #333333; }
-
-    /* ============================================
-       FREE4：一排四個
-       卡片總高 387px：圖頂出 82px，白底 305px
-    ============================================ */
-    .free4-inner { gap: 16px; }
-
-    .free4-card {
-      position: relative;
-      width: 278px;
-      height: auto;
-      padding-top: 82px;
-      flex-shrink: 1;
-    }
-    /* 白底：從圖頂出位置延伸到底部 */
-    .free4-card .card-bg {
-      position: absolute;
-      left: 0; top: 82px; bottom: 0;
-      width: 100%;
-      background: #FFFFFF;
-      border-radius: 10px;
-    }
-    /* 圖片容器（頂出白底上方）*/
-    .free4-card .card-img {
-      position: absolute;
-      left: 16px; top: 0;
-      width: calc(100% - 32px); aspect-ratio: 3 / 2;
-      border-radius: 19px;
-      overflow: hidden; z-index: 1;
-    }
-    .free4-card .card-img img,
-    .free4-card .card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .free4-card .card-img .img-grey { background: #999999; }
-    /* tag 在圖片下緣置中 */
-    .free4-card .free-tag {
-      left: 50%; top: 153px;
-      transform: translateX(-50%);
-      padding: 4px 12px;
-      height: auto; border-radius: 100px;
-    }
-    /* 文字區塊：padding-top 撐過圖片伸入白卡的距離 */
-    .free4-card .card-content {
-      position: relative;
-      padding: 105px 16px 16px 16px;
-      width: 100%; box-sizing: border-box;
-      display: flex; flex-direction: column;
-      align-items: flex-start; gap: 8px;
-      z-index: 2;
-    }
-    .free4-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
-      text-align: center; width: 100%;
-    }
-    .demo-wrap .free4-card .card-name { color: #8E49AC; }
-    .wireframe-wrap .free4-card .card-name { color: #333333; }
-
-    .free4-card .card-sale {
-      display: flex; align-items: center; justify-content: center;
-      padding: 4px 0; width: 100%; height: auto; min-height: 28px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 14px; line-height: 17px;
-      text-align: center;
-    }
-    .demo-wrap .free4-card .card-sale { background: #F6FF00; color: #FE6011; }
-    .wireframe-wrap .free4-card .card-sale { background: #333333; color: #FFFFFF; }
-
-    .free4-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 17px;
-      color: #333333; width: 100%;
-    }
-    .free4-card .card-links {
-      display: flex; flex-wrap: wrap; gap: 8px; width: 100%;
-    }
-    .demo-wrap .free4-card .card-links { display: none; }
-    .free4-card .card-links a {
-      display: flex; align-items: center; justify-content: center;
-      padding: 4px 12px; height: 25px;
-      border: 1px solid #333333; border-radius: 100px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; color: #333333; text-decoration: none;
-    }
-    .free4-card .card-price {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 1.2;
-      text-align: right; width: 100%;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
-    }
-    .free4-card .card-price .price-num { font-size: 24px !important; font-weight: 700; }
-    .demo-wrap .free4-card .card-price { color: #FE6011; }
-    .wireframe-wrap .free4-card .card-price { color: #333333; }
-
-    /* ============================================
-       FREE3：一排三個
-       卡片總高 480px：圖頂出 111px，白底 369px
-    ============================================ */
-    .free3-inner { gap: 16px; }
-
-    .free3-card {
-      position: relative;
-      width: 376px; height: auto;
-      padding-top: 111px;
-      flex-shrink: 1;
-    }
-    .free3-card .card-bg {
-      position: absolute;
-      left: 0; top: 111px; bottom: 0;
-      width: 100%;
-      background: #FFFFFF; border-radius: 10px;
-    }
-    .free3-card .card-img {
-      position: absolute;
-      left: 22px; top: 0;
-      width: calc(100% - 44px); aspect-ratio: 3 / 2;
-      border-radius: 20px; overflow: hidden; z-index: 1;
-    }
-    .free3-card .card-img img,
-    .free3-card .card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .free3-card .card-img .img-grey { background: #999999; }
-    /* tag 置中於圖片下緣 */
-    .free3-card .free-tag {
-      left: 50%; top: 207px;
-      transform: translateX(-50%);
-      padding: 4px 16px; height: auto;
-      border-radius: 135px;
-    }
-    .free3-card .card-content {
-      position: relative;
-      padding: 134px 22px 16px 22px;
-      width: 100%; box-sizing: border-box;
-      display: flex; flex-direction: column;
-      align-items: flex-start; gap: 8px;
-      z-index: 2;
-    }
-    .free3-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
-      text-align: center; width: 100%;
-    }
-    .demo-wrap .free3-card .card-name { color: #8E49AC; }
-    .wireframe-wrap .free3-card .card-name { color: #333333; }
-
-    .free3-card .card-sale {
-      display: flex; align-items: center; justify-content: center;
-      padding: 8px; width: 100%; height: auto; min-height: 33px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 14px; line-height: 17px;
-      text-align: center;
-    }
-    .demo-wrap .free3-card .card-sale { background: #F6FF00; color: #FE6011; }
-    .wireframe-wrap .free3-card .card-sale { background: #333333; color: #FFFFFF; }
-
-    .free3-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 17px;
-      color: #333333; width: 100%;
-    }
-    .free3-card .card-links {
-      display: flex; flex-wrap: wrap; gap: 8px; width: 100%;
-    }
-    .demo-wrap .free3-card .card-links { display: none; }
-    .free3-card .card-links a {
-      display: flex; align-items: center; justify-content: center;
-      padding: 4px 12px; height: 25px;
-      border: 1px solid #333333; border-radius: 135px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; color: #333333; text-decoration: none;
-    }
-    .free3-card .card-price {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 1.2;
-      text-align: right; width: 100%;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
-    }
-    .free3-card .card-price .price-num { font-size: 24px !important; font-weight: 700; }
-    .demo-wrap .free3-card .card-price { color: #FE6011; }
-    .wireframe-wrap .free3-card .card-price { color: #333333; }
-
-    /* ============================================
-       FREE2A：一排二個A（橫式小卡）
-       左圖 299×227px + 右文字白底 304×199px
-    ============================================ */
-    .free2a-inner { gap: 24px; }
-
-    /* free2a：圖片比白卡高、左側突出、垂直置中 */
-    .free2a-card {
-      position: relative;
-      width: 569px; height: auto;
-      flex-shrink: 0;
-      display: flex; flex-direction: row;
-      align-items: center;   /* 圖與白卡垂直置中 */
-      padding: 20px 0;       /* 上下留空間讓圖片突出 */
-    }
-    .free2a-card .card-bg { display: none; }
-    /* 左圖：固定尺寸（比白卡高），壓在白卡左側上層 */
-    .free2a-card .card-img {
-      position: relative; z-index: 2;
-      width: 299px; height: 227px; aspect-ratio: auto;
-      flex-shrink: 0; overflow: hidden;
-      border-radius: 20px;
-      margin-right: -34px;   /* 右側壓進白卡 */
-    }
-    .free2a-card .card-img img,
-    .free2a-card .card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .free2a-card .card-img .img-grey { background: #999999; }
-    .free2a-card .free-tag {
-      position: absolute;
-      left: 12px; top: 12px;
-      padding: 8px 16px; height: 30px;
-      border-radius: 20px; z-index: 3;
-    }
-    /* 右白卡：被文字撐高，字少時比圖矮 */
-    .free2a-card .card-content {
-      flex: 1; min-width: 0; z-index: 1;
-      background: #FFFFFF; border-radius: 10px;
-      padding: 16px 18px 16px 48px;   /* 左 padding 留給圖片壓入 */
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: flex-start;
-      gap: 8px;
-    }
-    .wireframe-wrap .free2a-card .card-content { background: #FFFFFF; }
-    .free2a-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
-      width: 100%;
-    }
-    .demo-wrap .free2a-card .card-name { color: #8E49AC; }
-    .wireframe-wrap .free2a-card .card-name { color: #333333; }
-
-    .free2a-card .card-sale {
-      display: flex; align-items: center; justify-content: center;
-      padding: 8px; width: 100%; min-height: 33px; height: auto;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 14px; line-height: 17px;
-    }
-    .demo-wrap .free2a-card .card-sale { background: #F6FF00; color: #FE6011; }
-    .wireframe-wrap .free2a-card .card-sale { background: #333333; color: #FFFFFF; }
-
-    .free2a-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 17px;
-      color: #333333; width: 100%;
-    }
-    .free2a-card .card-links {
-      display: flex; flex-wrap: wrap; gap: 8px; width: 100%;
-    }
-    .demo-wrap .free2a-card .card-links { display: none; }
-    .free2a-card .card-links a {
-      display: flex; align-items: center; justify-content: center;
-      padding: 4px 12px; height: 25px;
-      border: 1px solid #333333; border-radius: 135px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; color: #333333; text-decoration: none;
-    }
-    .free2a-card .card-price {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 1.2;
-      text-align: right; width: 100%;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
-    }
-    .free2a-card .card-price .price-num { font-size: 24px !important; font-weight: 700; }
-    .demo-wrap .free2a-card .card-price { color: #FE6011; }
-    .wireframe-wrap .free2a-card .card-price { color: #333333; }
-
-    /* ============================================
-       FREE2B：一排二個B（大圖直式卡）
-       卡片總高 655px：圖頂出 168px，白底 487px
-    ============================================ */
-    .free2b-inner { gap: 24px; align-items: flex-start; }
-
-    .free2b-card {
-      position: relative;
-      width: 569px; height: auto;
-      padding-top: 168px;
-      flex-shrink: 1;
-    }
-    .free2b-card .card-bg {
-      position: absolute;
-      left: 0; top: 168px; bottom: 0;
-      width: 100%;
-      background: #FFFFFF; border-radius: 10px;
-    }
-    .free2b-card .card-img {
-      position: absolute;
-      left: 33px; top: 0;
-      width: calc(100% - 66px); aspect-ratio: 3 / 2;
-      border-radius: 20px; overflow: hidden; z-index: 1;
-    }
-    .free2b-card .card-img img,
-    .free2b-card .card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .free2b-card .card-img .img-grey { background: #999999; }
-    /* tag 置中於圖片下緣 */
-    .free2b-card .free-tag {
-      left: 50%; top: 314px;
-      transform: translateX(-50%);
-      padding: 10px 32px; height: auto;
-      border-radius: 50px; font-size: 18px;
-    }
-    .free2b-card .card-content {
-      position: relative;
-      padding: 198px 33px 16px 33px;
-      width: 100%; box-sizing: border-box;
-      display: flex; flex-direction: column;
-      align-items: flex-start; gap: 8px;
-      z-index: 2;
-    }
-    .free2b-card .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 24px; line-height: 29px;
-      text-align: center; width: 100%;
-    }
-    .demo-wrap .free2b-card .card-name { color: #8E49AC; }
-    .wireframe-wrap .free2b-card .card-name { color: #333333; }
-
-    .free2b-card .card-sale {
-      display: flex; align-items: center; justify-content: center;
-      padding: 12px; width: 100%; height: auto; min-height: 48px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 20px; line-height: 24px;
-      text-align: center;
-    }
-    .demo-wrap .free2b-card .card-sale { background: #F6FF00; color: #FE6011; }
-    .wireframe-wrap .free2b-card .card-sale { background: #333333; color: #FFFFFF; }
-
-    .free2b-card .card-detail {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 18px; line-height: 22px;
-      color: #333333; width: 100%;
-    }
-    .free2b-card .card-links {
-      display: flex; flex-wrap: wrap; gap: 12px; width: 100%;
-    }
-    .demo-wrap .free2b-card .card-links { display: none; }
-    .free2b-card .card-links a {
-      display: flex; align-items: center; justify-content: center;
-      padding: 6px 18px; height: 34px;
-      border: 1px solid #333333; border-radius: 100px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 18px; color: #333333; text-decoration: none;
-    }
-    .free2b-card .card-price {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 16px; line-height: 1.2;
-      text-align: right; width: 100%;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
-    }
-    .free2b-card .card-price .price-num { font-size: 34px !important; font-weight: 700; }
-    .demo-wrap .free2b-card .card-price { color: #FE6011; }
-    .wireframe-wrap .free2b-card .card-price { color: #333333; }
-
-    /* ============================================
-       FREE1：一排一個（全寬大卡）
-       結構同 free2a：左圖壓右白卡，align-items:center
-    ============================================ */
-    .free1-inner {
-      width: 1130px;
-      display: flex; flex-direction: row;
-      align-items: center;
-      padding: 30px 0;
-      flex-shrink: 0;
-    }
-    .free1-card-bg { display: none; }
-
-    /* 左圖包裝層：讓 tag 定位在圖片上但不被 overflow:hidden 裁切 */
-    .free1-img-wrap {
-      position: relative; z-index: 2;
-      flex-shrink: 0;
-      width: 551px;
-      margin-right: -50px;
-    }
-
-    /* 左圖：3:2，四邊圓角 */
-    .free1-card-img {
-      position: relative;
-      width: 100%; aspect-ratio: 3 / 2;
-      flex-shrink: 0; overflow: hidden;
-      border-radius: 20px;
-    }
-    .free1-card-img img,
-    .free1-card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .free1-card-img .img-grey { background: #999999; }
-
-    /* tag 在圖片左上角，相對於 img-wrap 定位（不被 overflow:hidden 裁切） */
-    .free1-tag {
-      position: absolute;
-      left: 16px; top: 16px;
-      padding: 10px 32px; height: 42px;
-      border-radius: 50px; font-size: 18px;
-      border: 2px solid #FFFFFF; z-index: 4;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; color: #FFFFFF; white-space: nowrap;
-    }
-    .demo-wrap .free1-tag { background: #FE6011; }
-    .wireframe-wrap .free1-tag { background: #333333; }
-
-    /* 右白卡：flex 撐高，左 padding 留給圖片壓入 */
-    .free1-card-content {
-      flex: 1; min-width: 0; z-index: 1;
-      background: #FFFFFF; border-radius: 10px;
-      padding: 30px 30px 16px 74px;
-      display: flex; flex-direction: column;
-      align-items: flex-start; gap: 8px;
-    }
-    .free1-card-content .card-name {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 24px; line-height: 1.3;
-      width: 100%;
-    }
-    .demo-wrap .free1-card-content .card-name { color: #8E49AC; }
-    .wireframe-wrap .free1-card-content .card-name { color: #333333; }
-
-    .free1-card-content .card-sale {
-      display: flex; align-items: center;
-      padding: 12px; width: 100%; min-height: 48px; height: auto;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 20px; line-height: 1.3;
+      margin: 0 auto;
       box-sizing: border-box;
     }
-    .demo-wrap .free1-card-content .card-sale { background: #F6FF00; color: #FE6011; }
-    .wireframe-wrap .free1-card-content .card-sale { background: #333333; color: #FFFFFF; }
 
-    .free1-card-content .card-detail {
+    .free-inner--2a,
+    .free-inner--2b {
+      gap: 24px;
+    }
+
+    /* ===== FREE Card：共同結構 ===== */
+    .free-card {
+      --card-pad: 16px;
+      --lift: 82px;
+      --tag-offset: -15px;
+      --tag-font: 14px;
+      --tag-px: 12px;
+      --tag-py: 4px;
+      position: relative;
+      flex-shrink: 0;
+      margin-top: var(--lift);
+      padding: 0 var(--card-pad) 16px;
+      background: #FFFFFF;
+      border-radius: 10px;
+      box-sizing: border-box;
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 18px; line-height: 28px;
-      color: #515151; width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
     }
-    .free1-card-content .card-links {
-      display: flex; flex-wrap: wrap; gap: 10px; width: 100%;
+
+    .free-card-media {
+      position: relative;
+      z-index: 2;
+      margin-top: calc(var(--lift) * -1);
     }
-    .demo-wrap .free1-card-content .card-links { display: none; }
-    .free1-card-content .card-links a {
-      display: flex; align-items: center; justify-content: center;
-      padding: 6px 20px; height: 34px;
-      border: 1px solid #333333; border-radius: 100px;
+
+    .free-card-img {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 3 / 2;
+      overflow: hidden;
+      border-radius: 19px;
+      background: #999999;
+    }
+
+    .free-card-img img,
+    .free-card-img .img-grey {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .free-card-img .img-grey {
+      background: #999999;
+    }
+
+    .free-card-tag {
+      position: absolute;
+      left: 50%;
+      bottom: var(--tag-offset);
+      transform: translateX(-50%);
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--tag-py) var(--tag-px);
+      border: 2px solid #FFFFFF;
+      border-radius: 100px;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 18px; color: #333333; text-decoration: none;
+      font-size: var(--tag-font);
+      font-weight: 400;
+      line-height: 1.2;
+      color: #FFFFFF;
+      white-space: nowrap;
+      box-sizing: border-box;
     }
-    .free1-card-content .card-price {
+
+    .demo-wrap .free-card-tag {
+      background: #FE6011;
+    }
+
+    .wireframe-wrap .free-card-tag {
+      background: #333333;
+    }
+
+    .free-card-body {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      flex: 1;
+      padding-top: 24px;
+      box-sizing: border-box;
+    }
+
+    .free-card .card-name {
+      width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 16px; line-height: 1.2;
-      text-align: right; width: 100%; margin-top: auto;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+      font-weight: 700;
+      text-align: center;
+      color: #333333;
+      box-sizing: border-box;
     }
-    .free1-card-content .card-price .price-num { font-size: 34px !important; font-weight: 700; }
-    .demo-wrap .free1-card-content .card-price { color: #FE6011; }
-    .wireframe-wrap .free1-card-content .card-price { color: #333333; }
+
+    .demo-wrap .free-card .card-name {
+      color: #8E49AC;
+    }
+
+    .free-card .card-sale {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 28px;
+      padding: 4px 8px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 700;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    .demo-wrap .free-card .card-sale {
+      background: #F6FF00;
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .free-card .card-sale {
+      background: #333333;
+      color: #FFFFFF;
+    }
+
+    .free-card .card-detail {
+      width: 100%;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      color: #333333;
+      box-sizing: border-box;
+    }
+
+    .free-card .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+    }
+
+    .demo-wrap .free-card .card-links {
+      display: none;
+    }
+
+    .free-card .card-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 25px;
+      padding: 4px 12px;
+      border: 1px solid #333333;
+      border-radius: 100px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      line-height: 1;
+      color: #333333;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    .free-card .card-price {
+      width: 100%;
+      margin-top: auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 2px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      line-height: 1.2;
+      text-align: right;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      box-sizing: border-box;
+    }
+
+    .free-card .card-price .price-num {
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .demo-wrap .free-card .card-price {
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .free-card .card-price {
+      color: #333333;
+    }
+
+    /* ===== FREE4：PC 四欄 ===== */
+    .free-card--4 {
+      width: calc((100% - 48px) / 4);
+      --card-pad: 16px;
+      --lift: 82px;
+      --tag-font: 14px;
+      --tag-px: 12px;
+    }
+
+    .free-card--4 .card-name {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .free-card--4 .card-sale {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .free-card--4 .card-detail {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .free-card--4 .card-price {
+      font-size: 14px;
+    }
+
+    .free-card--4 .card-price .price-num {
+      font-size: 24px !important;
+    }
+
+    /* ===== FREE3：PC 三欄 ===== */
+    .free-card--3 {
+      width: calc((100% - 32px) / 3);
+      --card-pad: 22px;
+      --lift: 111px;
+      --tag-font: 14px;
+      --tag-px: 16px;
+      --tag-offset: -16px;
+    }
+
+    .free-card--3 .free-card-img {
+      border-radius: 20px;
+    }
+
+    .free-card--3 .card-name {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .free-card--3 .card-sale {
+      min-height: 33px;
+      padding: 8px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .free-card--3 .card-detail {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .free-card--3 .card-price {
+      font-size: 14px;
+    }
+
+    .free-card--3 .card-price .price-num {
+      font-size: 24px !important;
+    }
+
+    /* ===== FREE2A：PC 二欄橫式 ===== */
+    .free-card--2a {
+      width: calc((100% - 24px) / 2);
+      margin-top: 0;
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      display: grid;
+      grid-template-columns: 299px 1fr;
+      align-items: center;
+      min-height: 267px;
+    }
+
+    .free-card--2a .free-card-media {
+      grid-column: 1 / 2;
+      grid-row: 1;
+      margin-top: 0;
+      z-index: 2;
+    }
+
+    .free-card--2a .free-card-img {
+      width: 299px;
+      aspect-ratio: auto;
+      height: 227px;
+      border-radius: 20px;
+    }
+
+    /* 左圖右文狀態：tag 完全貼齊圖片容器左上角 */
+    .free-card--2a .free-card-tag {
+      left: 0;
+      top: 0;
+      bottom: auto;
+      transform: none;
+      padding: 8px 16px;
+      height: 30px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    .free-card--2a .free-card-body {
+      grid-column: 1 / 3;
+      grid-row: 1;
+      margin-left: 265px;
+      min-height: 199px;
+      padding: 16px 18px 16px 48px;
+      background: #FFFFFF;
+      border-radius: 10px;
+      justify-content: center;
+    }
+
+    .free-card--2a .card-name {
+      text-align: left;
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .free-card--2a .card-sale {
+      min-height: 33px;
+      padding: 8px;
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .free-card--2a .card-detail {
+      font-size: 14px;
+      line-height: 17px;
+    }
+
+    .free-card--2a .card-price {
+      font-size: 14px;
+    }
+
+    .free-card--2a .card-price .price-num {
+      font-size: 24px !important;
+    }
+
+    /* ===== FREE2B：PC 二欄大圖直式 ===== */
+    .free-card--2b {
+      width: calc((100% - 24px) / 2);
+      --card-pad: 33px;
+      --lift: 168px;
+      --tag-font: 18px;
+      --tag-px: 32px;
+      --tag-py: 10px;
+      --tag-offset: -23px;
+      padding-bottom: 16px;
+    }
+
+    .free-card--2b .free-card-img {
+      border-radius: 20px;
+    }
+
+    .free-card--2b .free-card-body {
+      padding-top: 34px;
+    }
+
+    .free-card--2b .card-name {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    .free-card--2b .card-sale {
+      min-height: 48px;
+      padding: 12px;
+      font-size: 20px;
+      line-height: 24px;
+    }
+
+    .free-card--2b .card-detail {
+      font-size: 18px;
+      line-height: 22px;
+    }
+
+    .free-card--2b .card-links {
+      gap: 12px;
+    }
+
+    .free-card--2b .card-links a {
+      height: 34px;
+      padding: 6px 18px;
+      font-size: 18px;
+    }
+
+    .free-card--2b .card-price {
+      font-size: 16px;
+    }
+
+    .free-card--2b .card-price .price-num {
+      font-size: 34px !important;
+    }
+
+    /* ===== FREE1：PC 一欄橫式大卡 ===== */
+    .free-inner--1 {
+      width: 1130px;
+      max-width: 1130px;
+    }
+
+    .free-card--1 {
+      width: 100%;
+      margin-top: 0;
+      padding: 30px 0;
+      background: transparent;
+      border-radius: 0;
+      display: grid;
+      grid-template-columns: 551px 1fr;
+      align-items: center;
+      min-height: 388px;
+    }
+
+    .free-card--1 .free-card-media {
+      grid-column: 1 / 2;
+      grid-row: 1;
+      margin-top: 0;
+      z-index: 2;
+    }
+
+    .free-card--1 .free-card-img {
+      width: 551px;
+      aspect-ratio: 3 / 2;
+      border-radius: 20px;
+    }
+
+    /* 左圖右文狀態：tag 完全貼齊圖片容器左上角 */
+    .free-card--1 .free-card-tag {
+      left: 0;
+      top: 0;
+      bottom: auto;
+      transform: none;
+      padding: 10px 32px;
+      height: 42px;
+      border-radius: 50px;
+      font-size: 18px;
+    }
+
+    .free-card--1 .free-card-body {
+      grid-column: 1 / 3;
+      grid-row: 1;
+      margin-left: 501px;
+      padding: 30px 30px 16px 74px;
+      background: #FFFFFF;
+      border-radius: 10px;
+      min-height: 260px;
+      justify-content: center;
+    }
+
+    .free-card--1 .card-name {
+      text-align: left;
+      font-size: 24px;
+      line-height: 1.3;
+    }
+
+    .free-card--1 .card-sale {
+      justify-content: flex-start;
+      min-height: 48px;
+      padding: 12px;
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .free-card--1 .card-detail {
+      font-size: 18px;
+      line-height: 28px;
+      color: #515151;
+    }
+
+    .free-card--1 .card-price {
+      font-size: 16px;
+    }
+
+    .free-card--1 .card-price .price-num {
+      font-size: 34px !important;
+    }
 
 
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
 
-    /* ===== RWD ===== */
+    /* ===== Title 對齊規則：依卡牌型態控制 ===== */
+    /* 上圖下文：標題置中 */
+    .free-card--4 .card-name,
+    .free-card--3 .card-name,
+    .free-card--2b .card-name {
+      text-align: center;
+    }
+
+    /* 左圖右文：標題靠左 */
+    .free-card--2a .card-name,
+    .free-card--1 .card-name {
+      text-align: left;
+    }
+
+    /* ===== TOP ===== */
+    #topBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    /* ===== RWD：對齊 PRD Family ===== */
     @media (max-width: 1200px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .free-inner { width: 100%; max-width: 1162px; }
-      .free1-inner { width: 100%; max-width: 1130px; }
+
+      .free-inner,
+      .free-inner--1 {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+      }
+
+      /* 左圖右文卡片跟著容器縮，不使用固定寬導致爆版 */
+      .free-card--1 {
+        grid-template-columns: 50% 1fr;
+      }
+
+      .free-card--1 .free-card-img {
+        width: 100%;
+      }
+
+      .free-card--1 .free-card-body {
+        margin-left: calc(50% - 50px);
+      }
     }
 
     @media (max-width: 992px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .free-inner { flex-wrap: wrap; justify-content: center; }
-      .free4-card { width: calc(50% - 8px); }
-      .free3-card { width: calc(50% - 8px); max-width: none; }
-      .free2a-card, .free2b-card { width: 100%; max-width: 569px; }
-      .free1-inner { width: 100%; }
-      .free1-img-wrap { width: 45%; border-radius: 20px; }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 30px 20px;
+      }
+
+      .free-inner {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        gap: 16px;
+      }
+
+      .free-inner--2a,
+      .free-inner--2b {
+        gap: 16px;
+      }
+
+      /* iPad：FREE4 / FREE3 / FREE2A / FREE2B 都收斂為兩欄 */
+      .free-card--4,
+      .free-card--3,
+      .free-card--2a,
+      .free-card--2b {
+        width: calc((100% - 16px) / 2);
+        max-width: none;
+      }
+
+      /* iPad：FREE2A 改為兩欄上圖下文，避免左圖右文時圖片過小 */
+      .free-card--2a {
+        --card-pad: 16px;
+        --lift: 82px;
+        --tag-font: 14px;
+        --tag-px: 12px;
+        --tag-py: 4px;
+        --tag-offset: -15px;
+        margin-top: var(--lift);
+        padding: 0 var(--card-pad) 16px;
+        background: #FFFFFF;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        min-height: auto;
+      }
+
+      .free-card--2a .free-card-media {
+        position: relative;
+        z-index: 2;
+        width: auto;
+        margin-top: calc(var(--lift) * -1);
+      }
+
+      .free-card--2a .free-card-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+        border-radius: 19px;
+      }
+
+      .free-card--2a .free-card-tag {
+        left: 50%;
+        top: auto;
+        bottom: var(--tag-offset);
+        transform: translateX(-50%);
+        padding: var(--tag-py) var(--tag-px);
+        height: auto;
+        border-radius: 100px;
+        font-size: var(--tag-font);
+      }
+
+      .free-card--2a .free-card-body {
+        margin-left: 0;
+        min-height: 0;
+        padding: 24px 0 0;
+        background: transparent;
+        border-radius: 0;
+        justify-content: flex-start;
+      }
+
+      .free-card--2a .card-name {
+        text-align: center;
+      }
+
+      /* iPad：FREE1 維持一欄左圖右文 */
+      .free-inner--1 {
+        width: 100%;
+        max-width: 1162px;
+      }
+
+      .free-card--1 {
+        grid-template-columns: 50% 1fr;
+        min-height: auto;
+      }
+
+      .free-card--1 .free-card-img {
+        width: 100%;
+      }
+
+      .free-card--1 .free-card-body {
+        margin-left: calc(50% - 50px);
+      }
     }
 
     @media (max-width: 768px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 60px 16px 24px; min-height: auto; }
-      /* demo 標題不裁切 */
-      .demo-wrap .free4-card .card-name, .demo-wrap .free3-card .card-name,
-      .demo-wrap .free2a-card .card-name, .demo-wrap .free2b-card .card-name { height: auto !important; overflow: visible !important; }
-      /* === M版字級下限 === */
-      .free4-card .card-name, .free3-card .card-name, .free2a-card .card-name, .free2b-card .card-name { font-size: 20px; line-height: 1.3; height: auto; }
-      .free4-card .card-sale, .free3-card .card-sale, .free2a-card .card-sale, .free2b-card .card-sale { font-size: 16px; line-height: 1.3; }
-      .free4-card .card-detail, .free3-card .card-detail, .free2a-card .card-detail, .free2b-card .card-detail { font-size: 16px; line-height: 1.5; }
-      .free4-card .card-price, .free3-card .card-price, .free2a-card .card-price, .free2b-card .card-price { font-size: 16px; }
-      .free4-card .card-price .price-num, .free3-card .card-price .price-num,
-      .free2a-card .card-price .price-num, .free2b-card .card-price .price-num { font-size: 26px !important; }
-      /* free1 字級下限 */
-      .free1-card-content .card-name { font-size: 20px; line-height: 1.3; }
-      .free1-card-content .card-sale { font-size: 16px; line-height: 1.3; }
-      .free1-card-content .card-detail { font-size: 16px; line-height: 1.5; }
-      .free1-card-content .card-price { font-size: 16px; }
-      .free1-card-content .card-price .price-num { font-size: 26px !important; }
-      /* 排列：free4 → 2欄 */
-      .free-inner { flex-wrap: wrap; justify-content: center; }
-      .free4-card { width: calc(50% - 8px); }
-      .free3-card { width: 100%; max-width: 480px; }
-      /* free2a/2b 維持橫式，撐滿寬度 */
-      .free2a-card { width: 100%; max-width: 600px; height: auto; }
-      .free2b-card { width: 100%; max-width: 600px; height: auto; }
-      .free2a-card .card-img { width: 40%; }
-      /* free1 維持橫式 */
-      .free1-inner { width: 100%; max-width: 700px; padding: 20px 0; }
-      .free1-img-wrap { width: 45%; margin-right: -30px; }
-      .free1-card-content { padding: 20px 20px 20px 50px; }
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .int-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+        line-height: 1.2;
+      }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 60px 16px 24px;
+        min-height: auto;
+      }
+
+      /* 字級進入 M 版下限，但欄數仍維持到 576 才全部單欄 */
+      .free-card .card-name {
+        font-size: 20px;
+        line-height: 1.3;
+        height: auto;
+      }
+
+      .free-card .card-sale {
+        font-size: 16px;
+        line-height: 1.3;
+        height: auto;
+      }
+
+      .free-card .card-detail {
+        font-size: 16px;
+        line-height: 1.5;
+        height: auto;
+      }
+
+      .free-card .card-price {
+        font-size: 16px;
+      }
+
+      .free-card .card-price .price-num {
+        font-size: 26px !important;
+      }
+
+      /* 768：仍依 iPad 邏輯，FREE4/FREE3/FREE2A/FREE2B 維持兩欄；FREE2A 為上圖下文 */
+      .free-card--4,
+      .free-card--3,
+      .free-card--2a,
+      .free-card--2b {
+        width: calc((100% - 16px) / 2);
+        max-width: none;
+      }
+
+      .free-card--3,
+      .free-card--2b {
+        --card-pad: 16px;
+        --lift: 82px;
+        --tag-font: 14px;
+        --tag-px: 12px;
+        --tag-py: 4px;
+        --tag-offset: -15px;
+      }
+
+      .free-card--3 .free-card-img,
+      .free-card--2b .free-card-img {
+        border-radius: 19px;
+      }
+
+      .free-card--2b .free-card-body {
+        padding-top: 24px;
+      }
+
+      .free-card--2b .card-links a {
+        height: 25px;
+        padding: 4px 12px;
+        font-size: 14px;
+      }
+
+      /* 768：FREE1 仍維持一欄左圖右文 */
+      .free-inner--1 {
+        width: 100%;
+        max-width: 700px;
+      }
+
+      .free-card--1 {
+        grid-template-columns: 45% 1fr;
+      }
+
+      .free-card--1 .free-card-body {
+        margin-left: calc(45% - 30px);
+        padding: 20px 20px 20px 50px;
+      }
     }
 
     @media (max-width: 576px) {
-      .free-inner { width: 278px; flex-direction: column; align-items: center; }
-      .free4-card, .free3-card { width: 278px; }
-      /* free3 縮成 278px，數值跟 free4 一樣 */
-      .free3-card { padding-top: 82px; }
-      .free3-card .card-bg { top: 82px; width: 100%; }
-      .free3-card .card-img { left: 16px; width: calc(100% - 32px); border-radius: 19px; }
-      .free3-card .free-tag { top: 153px; padding: 4px 12px; border-radius: 100px; }
-      .free3-card .card-content { padding: 105px 16px 16px; }
-      /* free2b 縮成 278px，同上 */
-      .free2b-card { width: 278px; max-width: 278px; padding-top: 82px; flex-shrink: 1; }
-      .free2b-card .card-bg { top: 82px; width: 100%; }
-      .free2b-card .card-img { left: 16px; width: calc(100% - 32px); border-radius: 19px; }
-      .free2b-card .free-tag { top: 153px; padding: 4px 12px; border-radius: 100px; font-size: 14px; }
-      .free2b-card .card-content { padding: 105px 16px 16px; }
-      /* free2a → free4 邏輯 */
-      .free2a-card {
-        width: 278px; max-width: 278px;
-        display: block !important;
-        position: relative;
-        padding-top: 82px;
-        height: auto;
-      }
-      .free2a-card .card-bg { display: none; }
-      .free2a-card .card-img {
-        position: absolute !important;
-        left: 16px !important; top: 0 !important;
-        width: calc(100% - 32px) !important;
-        height: auto !important;
-        aspect-ratio: 3 / 2 !important;
-        border-radius: 19px !important;
-        overflow: hidden !important; z-index: 2;
-        margin-right: 0 !important;
-      }
-      .free2a-card .free-tag {
-        left: 50% !important; top: 153px !important;
-        transform: translateX(-50%) !important;
-        padding: 4px 12px !important;
-        height: auto !important; border-radius: 100px !important;
-        font-size: 14px; z-index: 3;
-      }
-      .free2a-card .card-content {
-        display: flex !important;
-        position: relative !important;
-        padding: 105px 16px 16px !important;
-        width: 100% !important; box-sizing: border-box !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        background: #FFFFFF !important;
-        border-radius: 10px !important;
-        z-index: 1;
-        flex: none !important;
-      }
-      /* free1 → free4 邏輯 */
-      .free1-inner {
-        width: 278px;
+
+      .free-inner,
+      .free-inner--1 {
+        width: 100%;
+        max-width: 278px;
         flex-direction: column;
-        padding: 82px 0 0;
-        position: relative;
+        align-items: center;
+        gap: 16px;
       }
-      .free1-img-wrap {
-        position: absolute;
-        left: 16px; top: 0;
-        width: calc(100% - 32px);
-        margin-right: 0;
-        z-index: 2;
+
+      .free-card--4,
+      .free-card--3,
+      .free-card--2a,
+      .free-card--2b,
+      .free-card--1 {
+        width: 100%;
+        max-width: 278px;
+        --card-pad: 16px;
+        --lift: 82px;
+        --tag-font: 14px;
+        --tag-px: 12px;
+        --tag-py: 4px;
+        --tag-offset: -15px;
       }
-      .free1-card-img { border-radius: 19px; }
-      .free1-tag {
-        top: 153px !important; left: 50% !important;
-        transform: translateX(-50%) !important;
-        font-size: 14px !important;
-        padding: 4px 12px !important;
-        height: auto !important;
-        border-radius: 100px !important;
-        z-index: 3;
-      }
-      .free1-card-bg { display: none; }
-      .free1-card-content {
-        position: relative;
-        padding: 105px 16px 16px !important;
-        border-radius: 10px;
+
+      /* M 版：所有 FREE 卡片統一成上圖下文 */
+      .free-card--2a,
+      .free-card--1 {
+        margin-top: var(--lift);
+        padding: 0 var(--card-pad) 16px;
         background: #FFFFFF;
-        z-index: 1;
-        margin-top: 0 !important;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .free-card--2a .free-card-media,
+      .free-card--1 .free-card-media {
+        width: 100%;
+        margin-top: calc(var(--lift) * -1);
+      }
+
+      .free-card--2a .free-card-img,
+      .free-card--1 .free-card-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 3 / 2;
+        border-radius: 19px;
+      }
+
+      .free-card--2a .free-card-tag,
+      .free-card--1 .free-card-tag {
+        left: 50%;
+        top: auto;
+        bottom: var(--tag-offset);
+        transform: translateX(-50%);
+        padding: 4px 12px;
+        height: auto;
+        border-radius: 100px;
+        font-size: 14px;
+      }
+
+      .free-card--2a .free-card-body,
+      .free-card--1 .free-card-body {
+        width: 100%;
+        margin-left: 0;
+        min-height: 0;
+        padding: 24px 0 0;
+        background: transparent;
+        border-radius: 0;
+      }
+
+      .free-card--2a .card-name,
+      .free-card--1 .card-name {
+        text-align: center;
+      }
+
+      .free-card--1 .card-sale {
+        justify-content: center;
+      }
+
+      .free-card--1 .card-detail {
+        color: #333333;
+      }
+
+      .free-card--3 .free-card-img,
+      .free-card--2b .free-card-img,
+      .free-card--1 .free-card-img {
+        border-radius: 19px;
+      }
+
+      .free-card--2b .free-card-body,
+      .free-card--1 .free-card-body {
+        padding-top: 24px;
       }
     }
   </style>
 </head>
+
 <body data-id="free" data-page="free">
 
-<div data-include="header"></div>
-<div data-include="banner"></div>
-<div data-include="nav"></div>
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
 
-<div id="content"></div>
-<div class="int-sub-nav-sticky">
-  <div class="int-sub-nav">
-    <a class="sub-tab active" href="FREE_01.html#content">自由行_01</a>
-    <a class="sub-tab" href="FREE_02.html#content">自由行_02</a>
+  <div id="content"></div>
+  <div class="int-sub-nav-sticky">
+    <div class="int-sub-nav">
+      <a class="sub-tab active" href="FREE_01.html#content">自由行_01</a>
+      <a class="sub-tab" href="FREE_02.html#content">自由行_02</a>
+    </div>
   </div>
-</div>
 
-<!-- =============================================
-     一排四個（FREE4）
+  <!-- =============================================
+     一排四個
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排四個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-f4">demo</button>
-    <button class="toggle-btn" data-view="wf-f4">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排四個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-f4">demo</button>
+      <button class="toggle-btn" data-view="wf-f4">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-f4">
-    <div class="free-inner free4-inner">
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+    <div class="demo-wrap view-panel active" id="demo-f4">
+      <div class="free-inner free-inner--4">
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
         </div>
       </div>
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+    </div>
+
+    <div class="wireframe-wrap view-panel" id="wf-f4">
+      <div class="free-inner free-inner--4">
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
-      </div>
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
-      </div>
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--4">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-f4">
-    <div class="free-inner free4-inner">
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="free4-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
-     一排三個（FREE3）
+  <!-- =============================================
+     一排三個
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排三個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-f3">demo</button>
-    <button class="toggle-btn" data-view="wf-f3">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排三個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-f3">demo</button>
+      <button class="toggle-btn" data-view="wf-f3">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-f3">
-    <div class="free-inner free3-inner">
-      <div class="free3-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+    <div class="demo-wrap view-panel active" id="demo-f3">
+      <div class="free-inner free-inner--3">
+        <div class="free-card free-card--3">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--3">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--3">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
         </div>
       </div>
-      <div class="free3-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+    </div>
+
+    <div class="wireframe-wrap view-panel" id="wf-f3">
+      <div class="free-inner free-inner--3">
+        <div class="free-card free-card--3">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
-      </div>
-      <div class="free3-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+        <div class="free-card free-card--3">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--3">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-f3">
-    <div class="free-inner free3-inner">
-      <div class="free3-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="free3-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="free3-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
-     一排二個A（FREE2A 橫式小卡）
+  <!-- =============================================
+     一排二個A
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排二個A</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-f2a">demo</button>
-    <button class="toggle-btn" data-view="wf-f2a">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排二個A</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-f2a">demo</button>
+      <button class="toggle-btn" data-view="wf-f2a">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-f2a">
-    <div class="free-inner free2a-inner">
-      <div class="free2a-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+    <div class="demo-wrap view-panel active" id="demo-f2a">
+      <div class="free-inner free-inner--2a">
+        <div class="free-card free-card--2a">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--2a">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$99,999</span>起</div>
+          </div>
         </div>
       </div>
-      <div class="free2a-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+    </div>
+
+    <div class="wireframe-wrap view-panel" id="wf-f2a">
+      <div class="free-inner free-inner--2a">
+        <div class="free-card free-card--2a">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--2a">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-f2a">
-    <div class="free-inner free2a-inner">
-      <div class="free2a-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="free2a-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
-     一排二個B（FREE2B 大圖直式）
+  <!-- =============================================
+     一排二個B
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排二個B</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-f2b">demo</button>
-    <button class="toggle-btn" data-view="wf-f2b">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排二個B</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-f2b">demo</button>
+      <button class="toggle-btn" data-view="wf-f2b">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-f2b">
-    <div class="free-inner free2b-inner">
-      <div class="free2b-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+    <div class="demo-wrap view-panel active" id="demo-f2b">
+      <div class="free-inner free-inner--2b">
+        <div class="free-card free-card--2b">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--2b">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
       </div>
-      <div class="free2b-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">【曼谷】2天1夜_機+酒</div>
-          <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-          <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+    </div>
+
+    <div class="wireframe-wrap view-panel" id="wf-f2b">
+      <div class="free-inner free-inner--2b">
+        <div class="free-card free-card--2b">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+        <div class="free-card free-card--2b">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-f2b">
-    <div class="free-inner free2b-inner">
-      <div class="free2b-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="free2b-card">
-        <div class="card-bg"></div>
-        <div class="card-img"><div class="img-grey"></div></div>
-        <div class="free-tag">標籤字數限八字元</div>
-        <div class="card-content">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
-     一排一個（FREE1）
+  <!-- =============================================
+     一排一個
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排一個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-f1">demo</button>
-    <button class="toggle-btn" data-view="wf-f1">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排一個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-f1">demo</button>
+      <button class="toggle-btn" data-view="wf-f1">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active free1-wrap" id="demo-f1">
-    <div class="free-inner free1-inner">
-      <div class="free1-card-bg"></div>
-      <div class="free1-img-wrap">
-        <div class="free1-card-img">
-          <img src="images/img_FREE_01.jpg" alt="">
+    <div class="demo-wrap view-panel active" id="demo-f1">
+      <div class="free-inner free-inner--1">
+        <div class="free-card free-card--1">
+          <div class="free-card-media">
+            <div class="free-card-img"><img src="images/img_FREE_01.jpg" alt=""></div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">【曼谷】2天1夜_機+酒</div>
+            <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
+            <div class="card-detail">• 來回機票含一晚住宿(可續住加夜)<br>• 線上有位有房<br>• 即訂即開</div>
+
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
-        <div class="free1-tag">標籤字數限八字元</div>
       </div>
-      <div class="free1-card-content">
-        <div class="card-name">【曼谷】2天1夜_機+酒</div>
-        <div class="card-sale">精選好禮-7-11禮券每人100元!</div>
-        <div class="card-detail">• 飯店集合一晚住宿(可選住加房)<br>• 網上有住房易<br>• 都訂房間<br>• 都訂房間</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+    </div>
+
+    <div class="wireframe-wrap view-panel" id="wf-f1">
+      <div class="free-inner free-inner--1">
+        <div class="free-card free-card--1">
+          <div class="free-card-media">
+            <div class="free-card-img">
+              <div class="img-grey"></div>
+            </div>
+            <div class="free-card-tag">標籤字數限八字元</div>
+          </div>
+          <div class="free-card-body">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹<br>• 介紹介紹介紹介紹介紹介介紹</div>
+            <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel free1-wrap" id="wf-f1">
-    <div class="free-inner free1-inner">
-      <div class="free1-card-bg"></div>
-      <div class="free1-img-wrap">
-        <div class="free1-card-img">
-          <div class="img-grey"></div>
-        </div>
-        <div class="free1-tag">標籤字數限八字元</div>
-      </div>
-      <div class="free1-card-content">
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外</div>
-        <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-links"><a href="#">次連結</a><a href="#">次連結</a></div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-    </div>
-  </div>
-</div>
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+      <path d="M7 0L14 12H0L7 0Z" fill="white" />
+    </svg>
+    <span>TOP</span>
+  </button>
 
-<div data-include="footer"></div>
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
-  <span>TOP</span>
-</button>
-
-<script>
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+  <script>
+    document.querySelectorAll('.view-toggle').forEach(function (toggle) {
+      toggle.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var section = toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var targetId = btn.dataset.view;
+          section.querySelectorAll('.view-panel').forEach(function (p) { p.classList.remove('active'); });
+          section.querySelector('#' + targetId).classList.add('active');
+        });
       });
     });
-  });
-  window.addEventListener('scroll', function() {
-    var btn = document.getElementById('topBtn');
-    if (window.scrollY > 300) btn.classList.add('visible');
-    else btn.classList.remove('visible');
-  });
-</script>
-<script src="js/include.js"></script>
+    window.addEventListener('scroll', function () {
+      var btn = document.getElementById('topBtn');
+      if (window.scrollY > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    });
+  </script>
+  <script src="js/include.js"></script>
 </body>
+
 </html>

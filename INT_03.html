@@ -7,502 +7,288 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
-  <link rel="stylesheet" href="css/common.css" type="text/css">
-  <style>
+  <link rel="stylesheet" href="css/common.css" type="text/css"><style>
+    /* INT03 Circle Overlay Card Component - rebuild */
+    *{box-sizing:border-box}
+    body{margin:0 auto;font-family:'Noto Sans TC',sans-serif;color:#333}
 
-    /* ===== 副選單 sticky ===== */
-    .int-sub-nav-sticky {
-      position: sticky;
-      top: 52px;
-      z-index: 89;
-      width: 100%;
-      background: #333333;
-    }
-    .int-sub-nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: stretch;
-      padding: 0;
-      width: 100%;
-      min-height: 48px;
-      background: #333333;
-    }
-    .int-sub-nav .sub-tab {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-      height: 48px;
-      min-width: 91px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 16px;
-      color: #FFFFFF;
-      text-decoration: none;
-      box-sizing: border-box;
-    }
-    .int-sub-nav .sub-tab.active {
-      background: #FFFFFF;
-      font-weight: 700;
-      color: #333333;
-      min-width: 92px;
-    }
+    /* ===== 內層 Tab ===== */
+    .int-sub-nav-sticky{position:sticky;top:52px;z-index:89;width:100%;background:#333}
+    .int-sub-nav{display:flex;flex-flow:row nowrap;justify-content:center;align-items:stretch;width:100%;min-height:48px;padding:0;background:#333;overflow-x:auto;overflow-y:hidden;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .int-sub-nav::-webkit-scrollbar{display:none}
+    .int-sub-nav .sub-tab{flex:0 0 auto;display:flex;justify-content:center;align-items:center;min-width:91px;height:48px;padding:16px;font-weight:400;font-size:16px;line-height:16px;color:#fff;text-decoration:none;cursor:pointer}
+    .int-sub-nav .sub-tab:first-child{min-width:92px}
+    .int-sub-nav .sub-tab.active{background:#fff;font-weight:700;color:#333}
 
-    /* ===== Section 共用 ===== */
-    .int-section {
-      width: 1400px;
-      margin: 0 auto;
-      padding: 50px 0 60px;
-    }
-    .int-section-title {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 32px;
-      line-height: 38px;
-      text-align: center;
-      letter-spacing: 1px;
-      color: #333333;
-      margin-bottom: 18px;
+    /* ===== Section / Toggle ===== */
+    .int-section{width:100%;max-width:1400px;margin:0 auto;padding:50px 0 60px}
+    .int-section-title{margin:0 0 18px;font-weight:700;font-size:32px;line-height:38px;text-align:center;letter-spacing:1px;color:#333}
+    .view-toggle{display:flex;align-items:center;width:152px;height:32px;margin:0 auto 10px;padding:0}
+    .view-toggle .toggle-btn{display:flex;justify-content:center;align-items:center;width:76px;height:32px;padding:8px 16px;border:0;background:#fff;color:#333;font-size:16px;line-height:16px;font-weight:400;cursor:pointer}
+    .view-toggle .toggle-btn.active{background:#e5e5e5;font-weight:700}
+    .view-panel{display:none!important}
+    .view-panel.active{display:flex!important;justify-content:center;align-items:center}
+    .wireframe-wrap,.demo-wrap{width:100%;min-height:700px;padding:30px;display:flex;justify-content:center;align-items:center;overflow:visible;border:.5px solid #333}
+    .wireframe-wrap{background:#E5E5E5}
+    .demo-wrap{background:#FFF9F0}
+
+    /* ===== INT03 tokens ===== */
+    .int03-grid{
+      --container-w:1162px;
+      --card-gap:20px;
+      --card-w:374px;
+      --card-h:auto;
+      --media-size:374px;
+      --media-inner-size:350px;
+      --media-pad:12px;
+      --media-border:1px;
+      --content-w:337px;
+      --content-overlap:49.86px;
+      --content-gap:12px;
+      --title-size:24px;
+      --title-line:130%;
+      --title-py:10px;
+      --title-px:28px;
+      --title-radius:100px;
+      --detail-size:18px;
+      --detail-line:150%;
+      --detail-color:#563823;
+      --letter-spacing:0;
+      width:var(--container-w);
+      max-width:var(--container-w);
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:center;
+      align-items:flex-start;
+      gap:var(--card-gap);
     }
 
-    /* ===== 切換按鈕 ===== */
-    .view-toggle {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 152px;
-      height: 32px;
-      margin: 0 auto 10px;
-    }
-    .view-toggle .toggle-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 16px;
-      width: 76px;
-      height: 32px;
-      cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      line-height: 16px;
-      box-sizing: border-box;
-      border: none;
-      background: #FFFFFF;
-      color: #333333;
-      font-weight: 400;
-    }
-    .view-toggle .toggle-btn.active {
-      background: #E5E5E5;
-      font-weight: 700;
+    .int03-grid--4{
+      --container-w:1165px;
+      --card-gap:15px;
+      --card-w:280px;
+      --media-size:280px;
+      --media-inner-size:261px;
+      --media-pad:8.95934px;
+      --media-border:1.10847px;
+      --content-w:252px;
+      --content-overlap:38.1px;
+      --content-gap:8.96px;
+      --title-size:20px;
+      --title-py:6px;
+      --title-px:16px;
+      --detail-size:16px;
     }
 
-    /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
-
-    /* ===== Demo wrap ===== */
-    .demo-wrap {
-      width: 1400px;
-      min-height: 700px;
-      background: #FFF9F0;
-      border: 0.5px solid #333333;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      padding: 40px 30px;
+    .int03-grid--3{
+      --container-w:1162px;
+      --card-gap:20px;
+      --card-w:374px;
+      --media-size:374px;
+      --media-inner-size:350px;
+      --media-pad:12px;
+      --media-border:1px;
+      --content-w:337px;
+      --content-overlap:49.86px;
+      --content-gap:12px;
+      --title-size:24px;
+      --title-py:10px;
+      --title-px:28px;
+      --detail-size:18px;
     }
 
-    /* ===== Wireframe wrap ===== */
-    .wireframe-wrap {
-      width: 1400px;
-      min-height: 700px;
-      background: #E5E5E5;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      padding: 40px 30px;
+    /* ===== Card component ===== */
+    .int03-card{position:relative;width:var(--card-w);flex:0 0 var(--card-w);display:flex;flex-direction:column;align-items:center;color:var(--detail-color)}
+    .int03-card__media{position:relative;z-index:1;width:var(--media-size);height:var(--media-size);padding:var(--media-pad);border:var(--media-border) solid var(--border-color);border-radius:50%;background:#fff;overflow:hidden;flex-shrink:0}
+    .int03-card__media img,.int03-card__media-placeholder{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center;background:#999}
+    .int03-card__content{position:relative;z-index:2;width:var(--content-w);margin-top:calc(var(--content-overlap) * -1);display:flex;flex-direction:column;align-items:center;gap:var(--content-gap);background:transparent;color:var(--detail-color)}
+    .int03-card__title{display:inline-flex;align-items:center;justify-content:center;max-width:100%;margin:0;padding:var(--title-py) var(--title-px);border-radius:var(--title-radius);background:var(--primary-color);font-weight:700;font-size:var(--title-size);line-height:var(--title-line);letter-spacing:var(--letter-spacing);color:#fff;text-align:center;white-space:nowrap}
+    .int03-card__detail{width:100%;margin:0;font-weight:400;font-size:var(--detail-size);line-height:var(--detail-line);letter-spacing:var(--letter-spacing);color:var(--detail-color);text-align:left}
+
+    .is-demo{--primary-color:#FE6011;--border-color:#FE6011;--detail-color:#563823}
+    .is-wireframe{--primary-color:#333;--border-color:#333;--detail-color:#333}
+    .is-wireframe .int03-card__media{--border-color:#333}
+    .is-wireframe .int03-card__title{min-width:272px}
+    .int03-grid--3.is-wireframe .int03-card__title{min-width:296px}
+
+    @media (max-width:1365px) and (min-width:768px){
+      .int-section{padding:40px 24px 56px}
+      .wireframe-wrap,.demo-wrap{min-height:auto;padding:30px 20px}
+      .int03-grid{width:100%;max-width:760px;height:auto;display:flex;flex-flow:row wrap;justify-content:center;align-items:flex-start;gap:32px 24px;--card-w:312px;--media-size:312px;--media-inner-size:292px;--media-pad:10px;--media-border:1px;--content-w:281px;--content-overlap:41.6px;--content-gap:10px;--title-size:20px;--title-py:10px;--title-px:24px;--detail-size:16px;--detail-line:22px;--letter-spacing:.06em}
+      .int03-card{width:var(--card-w);flex:0 0 var(--card-w)}
+      .int03-card__detail{text-align:center;color:var(--detail-color)}
+      .is-wireframe .int03-card__title,.int03-grid--3.is-wireframe .int03-card__title{min-width:174px}
     }
 
-    /* ===================================
-       INT4 — 一排四個（圓形卡片）
-    =================================== */
-    .int3-circle-row {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 15px;
-      width: 1162px;
-      max-width: 1162px;
+    @media (max-width:767px){
+      .int-section{max-width:none;padding:36px 16px 48px}
+      .int-section-title{font-size:26px;line-height:32px;margin-bottom:16px}
+      .wireframe-wrap,.demo-wrap{min-height:auto;padding:24px 14px;overflow-x:auto}
+      .int03-grid{width:312px;max-width:312px;min-width:312px;height:auto;display:flex;flex-flow:column nowrap;justify-content:flex-start;align-items:center;gap:28px;--card-w:312px;--media-size:312px;--media-inner-size:292px;--media-pad:10.0107px;--media-border:1px;--content-w:281.14px;--content-overlap:41.6px;--content-gap:10.01px;--title-size:20px;--title-line:24px;--title-py:10px;--title-px:24px;--detail-size:16px;--detail-line:22px;--letter-spacing:.06em}
+      .int03-card{position:relative;width:312px;height:auto;flex:0 0 auto;display:flex;flex-direction:column;align-items:center}
+      .int03-card__media{width:var(--media-size);height:var(--media-size);padding:var(--media-pad);border-width:var(--media-border)}
+      .int03-card__content{width:var(--content-w);margin-top:calc(var(--content-overlap) * -1);gap:var(--content-gap)}
+      .int03-card__title{height:44px;min-width:153px;padding:10px 24px;font-size:20px;line-height:24px}
+      .is-wireframe .int03-card__title,.int03-grid--3.is-wireframe .int03-card__title{min-width:174px}
+      .int03-card__detail{font-size:16px;line-height:22px;text-align:center;color:var(--detail-color)}
+      .is-demo{--border-color:#FE6011;--detail-color:#563823}
+      .is-wireframe{--border-color:#515151;--detail-color:#515151}
+      .int-sub-nav{justify-content:flex-start}
     }
+  
 
-    /* ── 共用圓形卡片結構 ── */
-    .circle-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 9px;
-    }
+    /* ===== INT_01-04 page-level centering fix =====
+       Only fixes the outer 1400px display-page container.
+       Does not change card component layout.
+    */
+    .int-type-panel,
+    .int-sub-panel { width: 100%; box-sizing: border-box; }
 
-    /* INT4 尺寸 */
-    .circle-card-4 { width: 280px; }
-    .circle-card-4 .card-circle {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      border: 1.1px solid #FE6011;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .circle-card-4 .card-circle img {
-      width: 261px;
-      height: 261px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-    .circle-card-4 .card-name {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 6px 16px;
-      background: #FE6011;
-      border-radius: 100px;
-      min-width: 132px;
-    }
-    .circle-card-4 .card-name span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 130%;
-      color: #FFFFFF;
-      text-align: center;
-    }
-    .circle-card-4 .card-detail {
-      width: 252px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 150%;
-      color: #563823;
-      text-align: left;
-    }
-
-    /* INT4 架構 */
-    .circle-card-4.wf .card-circle {
-      border-color: #333333;
-    }
-    .circle-card-4.wf .card-circle-inner {
-      width: 261px;
-      height: 261px;
-      border-radius: 50%;
-      background: #999999;
-    }
-    .circle-card-4.wf .card-name {
-      background: #333333;
-      width: 272px;
-    }
-    .circle-card-4.wf .card-detail {
-      color: #333333;
-    }
-
-    /* INT3 尺寸 */
-    .circle-card-3 { width: 374px; }
-    .circle-card-3 .card-circle {
-      width: 374px;
-      height: 374px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      border: 1px solid #FE6011;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .circle-card-3 .card-circle img {
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-    .circle-card-3 .card-name {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 28px;
-      background: #FE6011;
-      border-radius: 100px;
-      min-width: 176px;
-    }
-    .circle-card-3 .card-name span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 130%;
-      color: #FFFFFF;
-      text-align: center;
-    }
-    .circle-card-3 .card-detail {
-      width: 337px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 150%;
-      color: #563823;
-      text-align: left;
-    }
-
-    /* INT3 架構 */
-    .circle-card-3.wf .card-circle {
-      border-color: #515151;
-    }
-    .circle-card-3.wf .card-circle-inner {
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
-      background: #999999;
-    }
-    .circle-card-3.wf .card-name {
-      background: #333333;
-      width: 296px;
-    }
-    .circle-card-3.wf .card-detail {
-      color: #333333;
-    }
-
-    /* ===== TOP 按鈕 ===== */
-    #topBtn {
-      position: fixed;
-      right: 24px; bottom: 32px;
-      width: 60px; height: 60px;
-      border-radius: 50%;
-      background: #333333;
-      border: none; cursor: pointer;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 2px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-      opacity: 0; transform: translateY(10px);
-      transition: opacity 0.3s, transform 0.3s;
-      z-index: 999;
-    }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
-
-    /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; box-sizing: border-box; }
-      .int3-circle-row { width: 100%; max-width: 1162px; }
-    }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .int3-circle-row { flex-wrap: wrap; gap: 24px; width: 100%; }
-      .circle-card-4 { width: calc(50% - 12px); min-width: 200px; }
-      .circle-card-4 .card-circle { width: 100%; height: 0; padding-bottom: 100%; position: relative; }
-      .circle-card-4 .card-circle img { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 90%; height: 90%; }
-      .circle-card-3 { width: 100%; max-width: 374px; }
-      .circle-card-3 .card-detail { width: 100%; }
-    }
-    @media (max-width: 767px) {
-      .int-sub-nav {
-        justify-content: flex-start;
-        overflow-x: auto; overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none; flex-wrap: nowrap;
+    @media (min-width: 1400px) {
+      .int-section {
+        position: relative !important;
+        width: 1400px !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
       }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .int3-circle-row { flex-direction: column; align-items: center; gap: 32px; }
-      /* 一排四個 M版 → 278px 單欄 */
-      .circle-card-4 { width: 278px !important; }
-      .circle-card-4 .card-circle { width: 278px !important; height: 278px !important; padding-bottom: 0 !important; position: relative !important; }
-      .circle-card-4 .card-circle img { position: static !important; transform: none !important; width: 261px !important; height: 261px !important; }
-      .circle-card-4 .card-detail { width: 252px !important; }
-      /* 一排三個 M版 → 278px */
-      .circle-card-3 { width: 278px !important; max-width: 278px !important; }
-      .circle-card-3 .card-circle { width: 278px !important; height: 278px !important; }
-      .circle-card-3 .card-circle img { width: 254px !important; height: 254px !important; }
-      .circle-card-3 .card-circle-inner { width: 254px !important; height: 254px !important; }
-      .circle-card-3 .card-name span { font-size: 20px !important; }
-      .circle-card-3 .card-detail { width: 252px !important; font-size: 16px !important; }
     }
+
+    @media (max-width: 1399px) {
+      .int-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+      }
+    }
+
   </style>
 </head>
+
 <body data-id="int" data-page="intro">
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
+  <div id="content"></div>
 
-<!-- Header -->
-<div data-include="header"></div>
-<!-- Banner -->
-<div data-include="banner"></div>
-<!-- Nav -->
-<div data-include="nav"></div>
-
-<!-- 副選單 -->
-<div id="content"></div>
-<div class="int-sub-nav-sticky">
-  <div class="int-sub-nav">
-    <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
-    <a class="sub-tab" href="INT_02.html#content">介紹_02</a>
-    <a class="sub-tab active" href="INT_03.html#content">介紹_03</a>
-    <a class="sub-tab" href="INT_04.html#content">介紹_04</a>
-    <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
-    <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
-    <a class="sub-tab" href="INT_07.html#content">介紹_07</a>
-    <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
-  </div>
-</div>
-
-<!-- ===== 一排四個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排四個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-4">demo</button>
-    <button class="toggle-btn" data-view="wf-4">架構</button>
-  </div>
-
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-4">
-    <div class="int3-circle-row">
-      <div class="circle-card circle-card-4">
-        <div class="card-circle"><img src="images/img_INT_03.jpg" alt=""></div>
-        <div class="card-name"><span>麗豐啦啦米</span></div>
-        <div class="card-detail">全新開幕的五星飯店，位於馬六甲郊區豪華渡假村！四周受綠野環境抱佔地約1300英畝結合現代舒適和當地文化特色設計。</div>
-      </div>
-      <div class="circle-card circle-card-4">
-        <div class="card-circle"><img src="images/img_INT_03.jpg" alt=""></div>
-        <div class="card-name"><span>麗豐啦啦米</span></div>
-        <div class="card-detail">全新開幕的五星飯店，位於馬六甲郊區豪華渡假村！四周受綠野環境抱佔地約1300英畝結合現代舒適和當地文化特色設計。</div>
-      </div>
-      <div class="circle-card circle-card-4">
-        <div class="card-circle"><img src="images/img_INT_03.jpg" alt=""></div>
-        <div class="card-name"><span>麗豐啦啦米</span></div>
-        <div class="card-detail">全新開幕的五星飯店，位於馬六甲郊區豪華渡假村！四周受綠野環境抱佔地約1300英畝結合現代舒適和當地文化特色設計。</div>
-      </div>
-      <div class="circle-card circle-card-4">
-        <div class="card-circle"><img src="images/img_INT_03.jpg" alt=""></div>
-        <div class="card-name"><span>麗豐啦啦米</span></div>
-        <div class="card-detail">全新開幕的五星飯店，位於馬六甲郊區豪華渡假村！四周受綠野環境抱佔地約1300英畝結合現代舒適和當地文化特色設計。</div>
-      </div>
+  <div class="int-sub-nav-sticky">
+    <div class="int-sub-nav">
+      <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
+      <a class="sub-tab" href="INT_02.html#content">介紹_02</a>
+      <a class="sub-tab active" href="INT_03.html#content">介紹_03</a>
+      <a class="sub-tab" href="INT_04.html#content">介紹_04</a>
+      <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
+      <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
+      <a class="sub-tab" href="INT_07.html#content">介紹_07</a>
+      <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-4">
-    <div class="int3-circle-row">
-      <div class="circle-card circle-card-4 wf">
-        <div class="card-circle"><div class="card-circle-inner"></div></div>
-        <div class="card-name"><span>標題標題標題標題標題標題</span></div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
-      <div class="circle-card circle-card-4 wf">
-        <div class="card-circle"><div class="card-circle-inner"></div></div>
-        <div class="card-name"><span>標題標題標題標題標題標題</span></div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
-      <div class="circle-card circle-card-4 wf">
-        <div class="card-circle"><div class="card-circle-inner"></div></div>
-        <div class="card-name"><span>標題標題標題標題標題標題</span></div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
-      <div class="circle-card circle-card-4 wf">
-        <div class="card-circle"><div class="card-circle-inner"></div></div>
-        <div class="card-name"><span>標題標題標題標題標題標題</span></div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
+  <div class="int-type-panel active" id="panel-intro">
+    <div class="int-sub-panel active" id="subpanel-intro03">
+
+      <!-- 一排四個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排四個</h2>
+        <div class="view-toggle">
+          <button class="toggle-btn active" data-view="demo-4">demo</button>
+          <button class="toggle-btn" data-view="wf-4">架構</button>
+        </div>
+
+        <div class="demo-wrap view-panel active" id="demo-4">
+          <div class="int03-grid int03-grid--4 is-demo">
+            <article class="int03-card">
+              <div class="int03-card__media"><img src="images/img_INT_03.jpg" alt="麗豐啦啦米"></div>
+              <div class="int03-card__content"><h3 class="int03-card__title">麗豐啦啦米</h3><p class="int03-card__detail">全新開幕的五星飯店，位於馬六甲郊區區域性豪華渡假村！四周受綠野環抱佔地約1300英畝結合現代舒適和當地文化特色設計。</p></div>
+            </article>
+            <article class="int03-card">
+              <div class="int03-card__media"><img src="images/img_INT_03.jpg" alt="麗豐啦啦米"></div>
+              <div class="int03-card__content"><h3 class="int03-card__title">麗豐啦啦米</h3><p class="int03-card__detail">全新開幕的五星飯店，位於馬六甲郊區區域性豪華渡假村！四周受綠野環抱佔地約1300英畝結合現代舒適和當地文化特色設計。</p></div>
+            </article>
+            <article class="int03-card">
+              <div class="int03-card__media"><img src="images/img_INT_03.jpg" alt="麗豐啦啦米"></div>
+              <div class="int03-card__content"><h3 class="int03-card__title">麗豐啦啦米</h3><p class="int03-card__detail">全新開幕的五星飯店，位於馬六甲郊區區域性豪華渡假村！四周受綠野環抱佔地約1300英畝結合現代舒適和當地文化特色設計。</p></div>
+            </article>
+            <article class="int03-card">
+              <div class="int03-card__media"><img src="images/img_INT_03.jpg" alt="麗豐啦啦米"></div>
+              <div class="int03-card__content"><h3 class="int03-card__title">麗豐啦啦米</h3><p class="int03-card__detail">全新開幕的五星飯店，位於馬六甲郊區區域性豪華渡假村！四周受綠野環抱佔地約1300英畝結合現代舒適和當地文化特色設計。</p></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="wireframe-wrap view-panel" id="wf-4">
+          <div class="int03-grid int03-grid--4 is-wireframe">
+            <article class="int03-card"><div class="int03-card__media"><div class="int03-card__media-placeholder"></div></div><div class="int03-card__content"><h3 class="int03-card__title">標題標題標題標題標題標題</h3><p class="int03-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p></div></article>
+            <article class="int03-card"><div class="int03-card__media"><div class="int03-card__media-placeholder"></div></div><div class="int03-card__content"><h3 class="int03-card__title">標題標題標題標題標題標題</h3><p class="int03-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p></div></article>
+            <article class="int03-card"><div class="int03-card__media"><div class="int03-card__media-placeholder"></div></div><div class="int03-card__content"><h3 class="int03-card__title">標題標題標題標題標題標題</h3><p class="int03-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p></div></article>
+            <article class="int03-card"><div class="int03-card__media"><div class="int03-card__media-placeholder"></div></div><div class="int03-card__content"><h3 class="int03-card__title">標題標題標題標題標題標題</h3><p class="int03-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p></div></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 一排三個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排三個</h2>
+        <div class="view-toggle">
+          <button class="toggle-btn active" data-view="demo-3">demo</button>
+          <button class="toggle-btn" data-view="wf-3">架構</button>
+        </div>
+
+        <div class="demo-wrap view-panel active" id="demo-3">
+          <div class="int03-grid int03-grid--3 is-demo">
+            <article class="int03-card">
+              <div class="int03-card__media"><img src="images/img_INT_03.jpg" alt="麗豐啦啦米"></div>
+              <div class="int03-card__content"><h3 class="int03-card__title">麗豐啦啦米</h3><p class="int03-card__detail">全新開幕的五星飯店，位於馬六甲郊區豪華渡假村！四周受綠野環抱佔地約1300英畝結合現代舒適和當地文化特色設計。</p></div>
+            </article>
+            <article class="int03-card">
+              <div class="int03-card__media"><img src="images/img_INT_03.jpg" alt="麗豐啦啦米"></div>
+              <div class="int03-card__content"><h3 class="int03-card__title">麗豐啦啦米</h3><p class="int03-card__detail">全新開幕的五星飯店，位於馬六甲郊區豪華渡假村！四周受綠野環抱佔地約1300英畝結合現代舒適和當地文化特色設計。</p></div>
+            </article>
+            <article class="int03-card">
+              <div class="int03-card__media"><img src="images/img_INT_03.jpg" alt="麗豐啦啦米"></div>
+              <div class="int03-card__content"><h3 class="int03-card__title">麗豐啦啦米</h3><p class="int03-card__detail">全新開幕的五星飯店，位於馬六甲郊區豪華渡假村！四周受綠野環抱佔地約1300英畝結合現代舒適和當地文化特色設計。</p></div>
+            </article>
+          </div>
+        </div>
+
+        <div class="wireframe-wrap view-panel" id="wf-3">
+          <div class="int03-grid int03-grid--3 is-wireframe">
+            <article class="int03-card"><div class="int03-card__media"><div class="int03-card__media-placeholder"></div></div><div class="int03-card__content"><h3 class="int03-card__title">標題標題標題標題標題</h3><p class="int03-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p></div></article>
+            <article class="int03-card"><div class="int03-card__media"><div class="int03-card__media-placeholder"></div></div><div class="int03-card__content"><h3 class="int03-card__title">標題標題標題標題標題</h3><p class="int03-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p></div></article>
+            <article class="int03-card"><div class="int03-card__media"><div class="int03-card__media-placeholder"></div></div><div class="int03-card__content"><h3 class="int03-card__title">標題標題標題標題標題</h3><p class="int03-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p></div></article>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
-</div>
 
-<!-- ===== 一排三個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排三個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-3">demo</button>
-    <button class="toggle-btn" data-view="wf-3">架構</button>
-  </div>
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+      <path d="M7 0L14 12H0L7 0Z" fill="white"/>
+    </svg>
+    <span>TOP</span>
+  </button>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-3">
-    <div class="int3-circle-row">
-      <div class="circle-card circle-card-3">
-        <div class="card-circle"><img src="images/img_INT_03.jpg" alt=""></div>
-        <div class="card-name"><span>麗豐啦啦米</span></div>
-        <div class="card-detail">全新開幕的五星飯店，位於馬六甲豪華渡假村！四周受綠野環境抱佔地約1300英畝結合現代舒適和當地文化特色設計。</div>
-      </div>
-      <div class="circle-card circle-card-3">
-        <div class="card-circle"><img src="images/img_INT_03.jpg" alt=""></div>
-        <div class="card-name"><span>麗豐啦啦米</span></div>
-        <div class="card-detail">全新開幕的五星飯店，位於馬六甲豪華渡假村！四周受綠野環境抱佔地約1300英畝結合現代舒適和當地文化特色設計。</div>
-      </div>
-      <div class="circle-card circle-card-3">
-        <div class="card-circle"><img src="images/img_INT_03.jpg" alt=""></div>
-        <div class="card-name"><span>麗豐啦啦米</span></div>
-        <div class="card-detail">全新開幕的五星飯店，位於馬六甲豪華渡假村！四周受綠野環境抱佔地約1300英畝結合現代舒適和當地文化特色設計。</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-3">
-    <div class="int3-circle-row">
-      <div class="circle-card circle-card-3 wf">
-        <div class="card-circle"><div class="card-circle-inner"></div></div>
-        <div class="card-name"><span>標題標題標題標題標題</span></div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
-      <div class="circle-card circle-card-3 wf">
-        <div class="card-circle"><div class="card-circle-inner"></div></div>
-        <div class="card-name"><span>標題標題標題標題標題</span></div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
-      <div class="circle-card circle-card-3 wf">
-        <div class="card-circle"><div class="card-circle-inner"></div></div>
-        <div class="card-name"><span>標題標題標題標題標題</span></div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Footer -->
-<div data-include="footer"></div>
-
-<!-- TOP 按鈕 -->
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
-  <span>TOP</span>
-</button>
-
-<script>
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+  <script>
+    document.querySelectorAll('.view-toggle').forEach(function(toggle){
+      toggle.querySelectorAll('.toggle-btn').forEach(function(btn){
+        btn.addEventListener('click',function(){
+          var section=toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function(b){b.classList.remove('active')});
+          btn.classList.add('active');
+          section.querySelectorAll('.view-panel').forEach(function(p){p.classList.remove('active')});
+          section.querySelector('#'+btn.dataset.view).classList.add('active');
+        });
       });
     });
-  });
-</script>
-<script src="js/include.js"></script>
+  </script>
+  <script src="js/include.js"></script>
 </body>
 </html>

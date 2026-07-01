@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,36 +10,104 @@
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <style>
-
     /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
+
+    .int-sub-nav {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+
+    .int-sub-nav .sub-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      height: 48px;
+      min-width: 91px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+      min-width: 92px;
+    }
 
     /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
 
     /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+    .view-toggle {
+      display: flex;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+    }
+
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
 
     /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+    .view-panel {
+      display: none !important;
+    }
+
+    .view-panel.active {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ===== wrap ===== */
     .demo-wrap {
-      width: 1400px; min-height: 700px;
+      width: 100%;
+      min-height: 700px;
       background: #FFEEC9;
-      box-sizing: border-box; padding: 55px 0;
+      box-sizing: border-box;
+      padding: 55px 0;
     }
+
     .wireframe-wrap {
-      width: 1400px; min-height: 700px;
+      width: 100%;
+      min-height: 700px;
       background: #E5E5E5;
-      box-sizing: border-box; padding: 55px 0;
+      box-sizing: border-box;
+      padding: 55px 0;
     }
 
     /* ===== 共用 inner ===== */
@@ -48,6 +117,8 @@
       flex-direction: row;
       align-items: center;
       justify-content: center;
+
+      margin: 0 auto;
     }
 
     /* ============================================
@@ -56,16 +127,31 @@
 
     /* 卡片 tag */
     .prd-card .card-tag {
-      position: absolute; left: 0; top: 0; z-index: 2;
-      display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 8px 16px;
       height: 30px;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; font-weight: 400;
-      white-space: nowrap; box-sizing: border-box;
+      font-size: 14px;
+      font-weight: 400;
+      white-space: nowrap;
+      box-sizing: border-box;
     }
-    .demo-wrap .prd-card .card-tag { background: #FFE500; color: #333333; }
-    .wireframe-wrap .prd-card .card-tag { background: #333333; color: #FFFFFF; }
+
+    .demo-wrap .prd-card .card-tag {
+      background: #FFE500;
+      color: #333333;
+    }
+
+    .wireframe-wrap .prd-card .card-tag {
+      background: #333333;
+      color: #FFFFFF;
+    }
 
     /* 圖片容器 */
     .prd-card .card-img {
@@ -75,561 +161,1076 @@
       flex-shrink: 0;
       overflow: hidden;
     }
+
     .prd-card .card-img img,
     .prd-card .card-img .img-grey {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
-    .prd-card .card-img .img-grey { background: #999999; }
-    .demo-wrap .prd-card .card-img { background: #FE6011; }
-    .wireframe-wrap .prd-card .card-img { background: #999999; }
+
+    .prd-card .card-img .img-grey {
+      background: #999999;
+    }
+
+    .demo-wrap .prd-card .card-img {
+      background: #FE6011;
+    }
+
+    .wireframe-wrap .prd-card .card-img {
+      background: #999999;
+    }
 
     /* 文字欄 */
     .prd-card .card-name {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
-      color: #333333; width: 100%;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
+      color: #333333;
+      width: 100%;
     }
+
     .prd-card .card-sale {
-      display: flex; align-items: center;
-      padding: 8px; gap: 8px;
-      width: 100%; box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 14px; line-height: 17px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
       color: #FFFFFF;
     }
-    .demo-wrap .prd-card .card-sale { background: #FE6011; }
-    .wireframe-wrap .prd-card .card-sale { background: #333333; }
+
+    .demo-wrap .prd-card .card-sale {
+      background: #FE6011;
+    }
+
+    .wireframe-wrap .prd-card .card-sale {
+      background: #333333;
+    }
 
     .prd-card .card-detail {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 20px;
-      color: #333333; width: 100%;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+      width: 100%;
+      flex: 1;
+      margin-bottom: 8px;
     }
-    .demo-wrap .prd-card .card-detail { flex: 1; }
+
     .prd-card .card-price {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 1.2;
-      text-align: right; width: 100%;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.2;
+      text-align: right;
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 2px;
+      margin-top: auto;
     }
-    .demo-wrap .prd-card .card-price { margin-top: auto; }
+
+    .prd2-card .card-text,
+    .prd1-card .card-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
     .prd-card .card-price .price-num {
-      font-size: 24px !important; font-weight: 700; line-height: 1;
+      font-size: 24px !important;
+      font-weight: 700;
+      line-height: 1;
     }
-    .demo-wrap .prd-card .card-price { color: #FE6011; }
-    .wireframe-wrap .prd-card .card-price { color: #333333; }
+
+    .demo-wrap .prd-card .card-price {
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .prd-card .card-price {
+      color: #333333;
+    }
 
     /* ============================================
        PRD4：一排四個  278×420px  gap:16px
     ============================================ */
-    .prd4-inner { gap: 16px; }
+    .prd4-inner {
+      gap: 16px;
+    }
 
     .prd4-card {
       position: relative;
-      width: 278px; height: 420px;
+      width: 278px;
+      height: auto;
       flex-shrink: 0;
       background: #FFFFFF;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      padding: 16px; gap: 0;
+      padding: 16px;
+      gap: 0;
       box-sizing: border-box;
-      overflow: hidden;
+      overflow: visible;
     }
-    .wireframe-wrap .prd4-card { height: auto; overflow: visible; }
-    .prd4-card .card-tag { border-radius: 0 50px 50px 0; }
-    .prd4-card .card-img { margin-bottom: 8px; }
-    .demo-wrap .prd4-card .card-name { height: 66px; overflow: hidden; margin-bottom: 8px; }
-    .wireframe-wrap .prd4-card .card-name { margin-bottom: 8px; }
-    .prd4-card .card-sale { margin-bottom: 8px; }
+
+    .wireframe-wrap .prd4-card {
+      height: auto;
+      overflow: visible;
+    }
+
+    .prd4-card .card-tag {
+      border-radius: 0 50px 50px 0;
+    }
+
+    .prd4-card .card-img {
+      margin-bottom: 8px;
+    }
+
+    .demo-wrap .prd4-card .card-name {
+      height: 66px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .wireframe-wrap .prd4-card .card-name {
+      margin-bottom: 8px;
+    }
+
+    .prd4-card .card-sale {
+      margin-bottom: 8px;
+    }
+
+    .prd4-card .card-price {
+      margin-top: auto;
+    }
 
     /* ============================================
        PRD3：一排三個  376×474px  gap:16px
     ============================================ */
-    .prd3-inner { gap: 16px; }
+    .prd3-inner {
+      gap: 16px;
+    }
 
     .prd3-card {
       position: relative;
-      width: 376px; height: 474px;
+      width: 376px;
+      height: auto;
       flex-shrink: 0;
       background: #FFFFFF;
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      padding: 16px; gap: 0;
+      padding: 16px;
+      gap: 0;
       box-sizing: border-box;
-      overflow: hidden;
+      overflow: visible;
     }
-    .wireframe-wrap .prd3-card { height: auto; overflow: visible; }
-    .prd3-card .card-tag { border-radius: 0 20px 20px 0; }
-    .prd3-card .card-img { margin-bottom: 8px; }
-    .demo-wrap .prd3-card .card-name { height: 52px; overflow: hidden; margin-bottom: 8px; }
-    .wireframe-wrap .prd3-card .card-name { margin-bottom: 8px; }
-    .prd3-card .card-sale { min-height: 36px; height: auto; margin-bottom: 8px; }
+
+    .wireframe-wrap .prd3-card {
+      height: auto;
+      overflow: visible;
+    }
+
+    .prd3-card .card-tag {
+      border-radius: 0 20px 20px 0;
+    }
+
+    .prd3-card .card-img {
+      margin-bottom: 8px;
+    }
+
+    .demo-wrap .prd3-card .card-name {
+      height: 52px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .wireframe-wrap .prd3-card .card-name {
+      margin-bottom: 8px;
+    }
+
+    .prd3-card .card-sale {
+      min-height: 36px;
+      height: auto;
+      margin-bottom: 8px;
+    }
+
+    .prd3-card .card-price {
+      margin-top: auto;
+    }
 
     /* ============================================
        PRD2：一排二個  573×263px  橫式  gap:17px
     ============================================ */
-    .prd2-inner { gap: 17px; }
+    .prd2-inner {
+      gap: 17px;
+    }
 
     .prd2-card {
       position: relative;
-      width: 573px; height: 263px;
+      width: 573px;
+      height: auto;
       flex-shrink: 0;
       background: #FFFFFF;
-      display: flex; flex-direction: row;
-      align-items: flex-start;
-      padding: 16px; gap: 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      padding: 16px;
+      gap: 16px;
       box-sizing: border-box;
-      overflow: hidden;
+      overflow: visible;
     }
-    .wireframe-wrap .prd2-card { height: auto; overflow: visible; }
-    .prd2-card .card-tag { border-radius: 0 20px 20px 0; }
+
+    .wireframe-wrap .prd2-card {
+      height: auto;
+      overflow: visible;
+    }
+
+    .prd2-card .card-tag {
+      border-radius: 0 20px 20px 0;
+    }
+
     .prd2-card .card-img {
       width: 299px;
+      aspect-ratio: 3 / 2;
       flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
     }
+
+    .prd2-card .card-img img,
+    .prd2-card .card-img .img-grey {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .prd2-card .card-text {
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      gap: 0; flex: 1; min-width: 0;
+      gap: 0;
+      flex: 1;
+      min-width: 0;
+      height: 100%;
     }
-    .demo-wrap .prd2-card .card-text { gap: 8px; }
-    .demo-wrap .prd2-card .card-name { height: 78px; overflow: hidden; margin-bottom: 0; }
-    .wireframe-wrap .prd2-card .card-name { margin-bottom: 8px; }
-    .prd2-card .card-sale { min-height: 36px; height: auto; margin-bottom: 8px; }
-    .demo-wrap .prd2-card .card-detail { flex: 1; }
-    .demo-wrap .prd2-card .card-price { margin-top: auto; }
+
+    .demo-wrap .prd2-card .card-text {
+      gap: 8px;
+    }
+
+    .demo-wrap .prd2-card .card-name {
+      height: 78px;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+
+    .wireframe-wrap .prd2-card .card-name {
+      margin-bottom: 8px;
+    }
+
+    .prd2-card .card-sale {
+      min-height: 36px;
+      height: auto;
+      margin-bottom: 8px;
+    }
+
+    .prd2-card .card-detail {
+      flex: 1;
+    }
+
+    .prd2-card .card-price {
+      margin-top: auto;
+    }
 
     /* ============================================
        PRD1：一排一個  全寬橫式
     ============================================ */
-    .prd1-inner { width: 1162px; }
+    .prd1-inner {
+      width: 1162px;
+      margin: 0 auto;
+    }
 
     .prd1-card {
       position: relative;
       width: 1162px;
       background: #FFFFFF;
-      display: flex; flex-direction: row;
-      align-items: flex-start;
-      padding: 16px; gap: 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      padding: 16px;
+      gap: 16px;
       box-sizing: border-box;
       overflow: hidden;
     }
+
     .prd1-card .card-tag {
       border-radius: 0 20px 20px 0;
       padding: 10px 20px;
       height: 34px;
       font-size: 18px;
     }
+
     .prd1-card .card-img {
       width: 551px;
+      aspect-ratio: 3 / 2;
       flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
     }
+
+    .prd1-card .card-img img,
+    .prd1-card .card-img .img-grey {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     .prd1-card .card-text {
-      display: flex; flex-direction: column;
+      display: flex;
+      flex-direction: column;
       align-items: flex-start;
-      gap: 8px; flex: 1; min-width: 0;
+      justify-content: space-between;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+      align-self: stretch;
     }
-    .demo-wrap .prd1-card .card-text { height: 367px; gap: 8px; }
-    .demo-wrap .prd1-card .card-name { height: 58px; overflow: hidden; }
-    .wireframe-wrap .prd1-card .card-name { margin-bottom: 8px; }
-    .prd1-card .card-name { font-size: 24px; line-height: 29px; }
-    .prd1-card .card-sale { padding: 8px; font-size: 20px; line-height: 24px; min-height: 40px; height: auto; margin-bottom: 8px; }
-    .demo-wrap .prd1-card .card-detail { height: 84px; overflow: hidden; flex: 1; }
-    .prd1-card .card-detail { font-size: 18px; line-height: 28px; }
-    .demo-wrap .prd1-card .card-price { margin-top: auto; }
-    .prd1-card .card-price { font-size: 16px; display: flex; align-items: baseline; justify-content: flex-end; gap: 2px; }
+
+    .wireframe-wrap .prd1-card .card-name {
+      margin-bottom: 8px;
+    }
+
+    .prd1-card .card-name {
+      font-size: 24px;
+      line-height: 29px;
+    }
+
+    .prd1-card .card-sale {
+      padding: 8px;
+      font-size: 20px;
+      line-height: 24px;
+      min-height: 40px;
+      height: auto;
+      margin-bottom: 8px;
+    }
+
+    .prd1-card .card-detail {
+      font-size: 18px;
+      line-height: 28px;
+      color: #515151;
+      flex: 1;
+    }
+
+    .prd1-card .card-price {
+      font-size: 16px;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 2px;
+      margin-top: auto;
+    }
+
     .prd1-card .card-price .price-num {
-      font-size: 34px; font-weight: 700; line-height: 1;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
     }
-    .demo-wrap .prd1-card .card-detail { color: #515151; }
 
     /* ===== TOP ===== */
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
+    #topBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
 
-    /* ===== RWD ===== */
-    /* ===== 桌機以上基準（≥1201）使用上方原始字級 ===== */
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-    /* ===== 大平板 ≤1200 ===== */
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    #topBtn:hover {
+      background: #555555;
+    }
+
+    /* ===== RWD / 系統化版 ===== */
+    /*
+      原則：
+      1. PC 保留原本 PRD1/2/3/4 的固定視覺尺寸。
+      2. RWD 開始後，Layout 只負責欄數，Card 只負責橫式/直式。
+      3. demo-wrap / wireframe-wrap 機制不動，只透過外層 theme 控制顏色。
+    */
+
+    /* ===== 大平板以下：容器跟著螢幕縮，但仍保留 1162 最大內容寬 ===== */
     @media (max-width: 1200px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .prd-inner { width: 100%; max-width: 1162px; }
-      .prd4-card { width: calc(25% - 12px); height: auto; }
-      .prd3-card { width: calc(33.3% - 11px); height: auto; }
-      .prd2-card { width: calc(50% - 9px); height: auto; }
-      .prd2-card .card-img { width: 45%; }
-      .prd1-inner { width: 100%; max-width: 1162px; }
-      .prd1-card { width: 100%; }
-      .prd1-card .card-img { width: 55%; }
-      .prd1-card .card-text { height: auto; }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        width: 100%;
+      }
+
+      .prd-inner,
+      .prd1-inner {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+        margin: 0 auto;
+      }
+
+      /* 這裡只做等比例縮放，尚未改變卡片方向 */
+      .prd4-card {
+        width: calc((100% - 48px) / 4);
+        height: auto;
+      }
+
+      .prd3-card {
+        width: calc((100% - 32px) / 3);
+        height: auto;
+      }
+
+      .prd2-card {
+        width: calc((100% - 17px) / 2);
+        height: auto;
+      }
+
+      .prd2-card .card-img {
+        width: 45%;
+      }
+
+      .prd1-card {
+        width: 100%;
+      }
+
+      .prd1-card .card-img {
+        width: 55%;
+      }
     }
 
-    /* ===== 平板 ≤992：四欄→2欄、其餘單欄 ===== */
+    /* ===== 平板：PRD4 / PRD3 / PRD2 全部收斂成 2 欄直式卡 ===== */
     @media (max-width: 992px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      /* prd4 → 2欄 */
-      .prd4-inner { flex-wrap: wrap; justify-content: center; gap: 16px; }
-      .prd4-card { width: calc(50% - 8px); }
-      /* prd3 → 2欄 */
-      .prd3-inner { flex-wrap: wrap; justify-content: center; gap: 16px; }
-      .prd3-card { width: calc(50% - 8px); max-width: none; }
-      /* prd2 → 維持2欄 */
-      .prd2-card { width: calc(50% - 9px); }
-      .prd2-card .card-img { width: 45%; }
-      /* prd1 → 維持橫式 */
-      .prd1-card .card-img { width: 50%; }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 30px 20px;
+      }
+
+      .prd-inner,
+      .prd1-inner {
+        width: 100%;
+        max-width: 1162px;
+      }
+
+      .prd4-inner,
+      .prd3-inner,
+      .prd2-inner {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        gap: 16px;
+      }
+
+      /* Layout：平板兩欄 */
+      .prd4-card,
+      .prd3-card,
+      .prd2-card {
+        width: calc((100% - 16px) / 2);
+        max-width: none;
+        height: auto;
+      }
+
+      /* Card：PRD2 平板由橫式改成直式，樣式對齊 PRD4 平板 */
+      .prd2-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+        gap: 0;
+      }
+
+      .prd2-card .card-img {
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        margin-bottom: 8px;
+      }
+
+      .prd2-card .card-text {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        flex: 1;
+      }
+
+      /* demo 版 PRD2 平板標題高度對齊 PRD4，讓卡面節奏一致 */
+      .demo-wrap .prd2-card .card-name {
+        height: 66px;
+        overflow: hidden;
+        margin-bottom: 8px;
+      }
+
+      .wireframe-wrap .prd2-card .card-name {
+        margin-bottom: 8px;
+      }
+
+      .prd2-card .card-sale {
+        margin-bottom: 8px;
+      }
+
+      .prd2-card .card-detail {
+        flex: 1;
+        margin-bottom: 8px;
+      }
+
+      .prd2-card .card-price {
+        margin-top: auto;
+      }
+
+      /* PRD1 平板先保留橫式大卡 */
+      .prd1-card {
+        width: 100%;
+        flex-direction: row;
+      }
+
+      .prd1-card .card-img {
+        width: 50%;
+      }
     }
 
-    /* ===== 手機橫向 ≤768（主力斷點，套 M 版字級）===== */
+    /* ===== 手機橫向：主要調整字級與間距，欄數仍交給下一個斷點處理 ===== */
     @media (max-width: 768px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      /* === M版字級下限（所有卡片統一）=== */
-      /* demo 版固定高度全部解除，避免標題/內文被裁切 */
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .int-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+        line-height: 1.2;
+      }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+
+      /* 解除 demo 版固定高度，避免手機文字被裁切 */
       .demo-wrap .prd-card .card-name,
       .demo-wrap .prd1-card .card-name,
       .demo-wrap .prd2-card .card-name,
       .demo-wrap .prd3-card .card-name,
-      .demo-wrap .prd4-card .card-name { height: auto !important; overflow: visible !important; }
+      .demo-wrap .prd4-card .card-name {
+        height: auto !important;
+        overflow: visible !important;
+      }
+
       .demo-wrap .prd-card .card-detail,
       .demo-wrap .prd1-card .card-detail,
-      .demo-wrap .prd2-card .card-detail { height: auto !important; overflow: visible !important; }
+      .demo-wrap .prd2-card .card-detail {
+        height: auto !important;
+        overflow: visible !important;
+      }
+
       .demo-wrap .prd-card .card-text,
-      .demo-wrap .prd1-card .card-text { height: auto !important; }
-      .prd-card .card-tag { font-size: 14px; }
-      .prd-card .card-name { font-size: 20px; line-height: 1.3; height: auto; }
-      .prd-card .card-sale { font-size: 16px; line-height: 1.3; height: auto; }
-      .prd-card .card-detail { font-size: 16px; line-height: 1.5; height: auto; }
-      .prd-card .card-price { font-size: 16px; }
-      .prd-card .card-price .price-num { font-size: 26px !important; }
-      .prd1-card .card-name { font-size: 20px; line-height: 1.3; height: auto; }
-      .prd1-card .card-sale { font-size: 16px; line-height: 1.3; height: auto; }
-      .prd1-card .card-detail { font-size: 16px; line-height: 1.5; height: auto; }
-      .prd1-card .card-price { font-size: 16px; }
-      .prd1-card .card-price .price-num { font-size: 26px; }
-      /* prd4 → 2欄 */
-      .prd4-card { width: calc(50% - 8px); height: auto; }
-      /* prd3 → 1欄 */
-      .prd3-inner { flex-direction: column; align-items: center; }
-      .prd3-card { width: 100%; max-width: 420px; height: auto; }
-      /* prd2 → 1欄直式 */
-      .prd2-inner { flex-direction: column; align-items: center; }
-      .prd2-card { width: 100%; max-width: 420px; height: auto; flex-direction: column; }
-      .prd2-card .card-img { width: 100%; }
-      /* prd1 → 1欄直式 */
-      .prd1-card { flex-direction: column; }
-      .prd1-card .card-img { width: 100%; }
-      .prd1-card .card-text { height: auto; }
+      .demo-wrap .prd1-card .card-text,
+      .demo-wrap .prd2-card .card-text {
+        height: auto !important;
+      }
+
+      .prd-card .card-tag {
+        font-size: 14px;
+      }
+
+      .prd-card .card-name,
+      .prd1-card .card-name {
+        font-size: 20px;
+        line-height: 1.3;
+        height: auto;
+      }
+
+      .prd-card .card-sale,
+      .prd1-card .card-sale {
+        font-size: 16px;
+        line-height: 1.3;
+        height: auto;
+      }
+
+      .prd-card .card-detail,
+      .prd1-card .card-detail {
+        font-size: 16px;
+        line-height: 1.5;
+        height: auto;
+      }
+
+      .prd-card .card-price,
+      .prd1-card .card-price {
+        font-size: 16px;
+      }
+
+      .prd-card .card-price .price-num,
+      .prd1-card .card-price .price-num {
+        font-size: 26px !important;
+      }
     }
 
-    /* ===== 手機直向 ≤576：全部單欄 278 ===== */
+    /* ===== 手機直向：全部單欄，且 PRD1 也收斂成 PRD4 手機同款直式卡 ===== */
     @media (max-width: 576px) {
-      .prd-inner { width: 278px; flex-direction: column; align-items: center; gap: 16px; }
-      .prd4-inner { flex-direction: column; align-items: center; }
-      .prd4-card { width: 278px; height: auto; }
-      .prd3-card { width: 278px; max-width: 278px; height: auto; }
-      .prd2-card { width: 278px; max-width: 278px; }
-      .prd1-inner { width: 278px; }
-      .prd1-card { width: 278px; }
+      .prd-inner,
+      .prd1-inner {
+        width: 100%;
+        max-width: 278px;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .prd4-inner,
+      .prd3-inner,
+      .prd2-inner {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .prd4-card,
+      .prd3-card,
+      .prd2-card,
+      .prd1-card {
+        width: 100%;
+        max-width: 278px;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+        gap: 0;
+      }
+
+      .prd4-card .card-img,
+      .prd3-card .card-img,
+      .prd2-card .card-img,
+      .prd1-card .card-img {
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        margin-bottom: 8px;
+      }
+
+      .prd1-card .card-text,
+      .prd2-card .card-text {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        flex: 1;
+      }
+
+      /* PRD1 手機的視覺規格降回一般直式卡，對齊 PRD4 手機 */
+      .prd1-card .card-tag {
+        padding: 8px 16px;
+        height: 30px;
+        font-size: 14px;
+      }
+
+      .prd1-card .card-sale {
+        padding: 8px;
+        min-height: auto;
+        margin-bottom: 8px;
+      }
+
+      .prd1-card .card-detail {
+        color: #333333;
+        flex: 1;
+        margin-bottom: 8px;
+      }
+
+      .prd1-card .card-price {
+        margin-top: auto;
+      }
     }
   </style>
 </head>
+
 <body data-id="prd" data-page="product">
 
-<div data-include="header"></div>
-<div data-include="banner"></div>
-<div data-include="nav"></div>
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
 
-<div id="content"></div>
-<div class="int-sub-nav-sticky">
-  <div class="int-sub-nav">
-    <a class="sub-tab active" href="PRD_01.html#content">產品_01</a>
-    <a class="sub-tab" href="PRD_02.html#content">產品_02</a>
-    <a class="sub-tab" href="PRD_03.html#content">產品_03</a>
-    <a class="sub-tab" href="PRD_04.html#content">產品_04</a>
+  <div id="content"></div>
+  <div class="int-sub-nav-sticky">
+    <div class="int-sub-nav">
+      <a class="sub-tab active" href="PRD_01.html#content">產品_01</a>
+      <a class="sub-tab" href="PRD_02.html#content">產品_02</a>
+      <a class="sub-tab" href="PRD_03.html#content">產品_03</a>
+      <a class="sub-tab" href="PRD_04.html#content">產品_04</a>
+    </div>
   </div>
-</div>
 
-<!-- =============================================
+  <!-- =============================================
      模組一：一排四個（PRD4）
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排四個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-prd4">demo</button>
-    <button class="toggle-btn" data-view="wf-prd4">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排四個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-prd4">demo</button>
+      <button class="toggle-btn" data-view="wf-prd4">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-prd4">
-    <div class="prd-inner prd4-inner">
-      <div class="prd-card prd4-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
-        <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-        <div class="card-sale">兩人同行第二人減6000</div>
-        <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-        <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+    <!-- demo -->
+    <div class="demo-wrap view-panel active" id="demo-prd4">
+      <div class="prd-inner prd4-inner">
+        <div class="prd-card prd4-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
+          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+          <div class="card-sale">兩人同行第二人減6000</div>
+          <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+        </div>
+        <div class="prd-card prd4-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
+          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+          <div class="card-sale">兩人同行第二人減6000</div>
+          <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+        </div>
+        <div class="prd-card prd4-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
+          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+          <div class="card-sale">兩人同行第二人減6000</div>
+          <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+        </div>
+        <div class="prd-card prd4-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
+          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+          <div class="card-sale">兩人同行第二人減6000</div>
+          <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+        </div>
       </div>
-      <div class="prd-card prd4-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
-        <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-        <div class="card-sale">兩人同行第二人減6000</div>
-        <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-        <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
-      </div>
-      <div class="prd-card prd4-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
-        <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-        <div class="card-sale">兩人同行第二人減6000</div>
-        <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-        <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
-      </div>
-      <div class="prd-card prd4-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 50px 50px 0;">南非</div>
-        <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-        <div class="card-sale">兩人同行第二人減6000</div>
-        <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-        <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+    </div>
+
+    <!-- 架構 -->
+    <div class="wireframe-wrap view-panel" id="wf-prd4">
+      <div class="prd-inner prd4-inner">
+        <div class="prd-card prd4-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd-card prd4-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd-card prd4-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+        <div class="prd-card prd4-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-prd4">
-    <div class="prd-inner prd4-inner">
-      <div class="prd-card prd4-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-      <div class="prd-card prd4-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-      <div class="prd-card prd4-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-      <div class="prd-card prd4-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 50px 50px 0;">標籤字數限八字元</div>
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹<br>•介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
+  <!-- =============================================
      模組二：一排三個（PRD3）
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排三個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-prd3">demo</button>
-    <button class="toggle-btn" data-view="wf-prd3">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排三個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-prd3">demo</button>
+      <button class="toggle-btn" data-view="wf-prd3">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-prd3">
-    <div class="prd-inner prd3-inner">
-      <div class="prd-card prd3-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
-        <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-        <div class="card-sale">兩人同行第二人減6000</div>
-        <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-        <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+    <!-- demo -->
+    <div class="demo-wrap view-panel active" id="demo-prd3">
+      <div class="prd-inner prd3-inner">
+        <div class="prd-card prd3-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
+          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+          <div class="card-sale">兩人同行第二人減6000</div>
+          <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+        </div>
+        <div class="prd-card prd3-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
+          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+          <div class="card-sale">兩人同行第二人減6000</div>
+          <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+        </div>
+        <div class="prd-card prd3-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
+          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+          <div class="card-sale">兩人同行第二人減6000</div>
+          <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+        </div>
       </div>
-      <div class="prd-card prd3-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
-        <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-        <div class="card-sale">兩人同行第二人減6000</div>
-        <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-        <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
-      </div>
-      <div class="prd-card prd3-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
-        <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-        <div class="card-sale">兩人同行第二人減6000</div>
-        <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-        <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+    </div>
+
+    <!-- 架構 -->
+    <div class="wireframe-wrap view-panel" id="wf-prd3">
+      <div class="prd-inner prd3-inner">
+        <div class="prd-card prd3-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+         <div class="prd-card prd3-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
+         <div class="prd-card prd3-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
+          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-prd3">
-    <div class="prd-inner prd3-inner">
-      <div class="prd-card prd3-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-      <div class="prd-card prd3-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-      <div class="prd-card prd3-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
+  <!-- =============================================
      模組三：一排二個（PRD2）橫式
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排二個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-prd2">demo</button>
-    <button class="toggle-btn" data-view="wf-prd2">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排二個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-prd2">demo</button>
+      <button class="toggle-btn" data-view="wf-prd2">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-prd2">
-    <div class="prd-inner prd2-inner">
-      <div class="prd-card prd2-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
-        <div class="card-text">
-          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-          <div class="card-sale">兩人同行第二人減6000</div>
-          <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+    <!-- demo -->
+    <div class="demo-wrap view-panel active" id="demo-prd2">
+      <div class="prd-inner prd2-inner">
+        <div class="prd-card prd2-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
+          <div class="card-text">
+            <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+            <div class="card-sale">兩人同行第二人減6000</div>
+            <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+            <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+          </div>
+        </div>
+        <div class="prd-card prd2-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
+          <div class="card-text">
+            <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+            <div class="card-sale">兩人同行第二人減6000</div>
+            <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+            <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+          </div>
         </div>
       </div>
-      <div class="prd-card prd2-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag" style="border-radius:0 20px 20px 0;">南非</div>
-        <div class="card-text">
-          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-          <div class="card-sale">兩人同行第二人減6000</div>
-          <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-          <div class="card-price">10天數 <span class="price-num">$102,999</span>起</div>
+    </div>
+
+    <!-- 架構 -->
+    <div class="wireframe-wrap view-panel" id="wf-prd2">
+      <div class="prd-inner prd2-inner">
+        <div class="prd-card prd2-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+        <div class="prd-card prd2-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹</div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-prd2">
-    <div class="prd-inner prd2-inner">
-      <div class="prd-card prd2-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-      <div class="prd-card prd2-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag" style="border-radius:0 20px 20px 0;">標籤字數限八字元</div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- =============================================
+  <!-- =============================================
      模組四：一排一個（PRD1）
 ============================================= -->
-<div class="int-section">
-  <div class="int-section-title">一排一個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-prd1">demo</button>
-    <button class="toggle-btn" data-view="wf-prd1">架構</button>
-  </div>
+  <div class="int-section">
+    <div class="int-section-title">一排一個</div>
+    <div class="view-toggle">
+      <button class="toggle-btn active" data-view="demo-prd1">demo</button>
+      <button class="toggle-btn" data-view="wf-prd1">架構</button>
+    </div>
 
-  <!-- demo -->
-  <div class="demo-wrap view-panel active" id="demo-prd1">
-    <div class="prd-inner prd1-inner">
-      <div class="prd-card prd1-card">
-        <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div><div class="card-tag">南非</div>
-        <div class="card-text">
-          <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
-          <div class="card-sale">兩人同行第二人減6000</div>
-          <div class="card-detail">• 市場CP值最高南非豪華行程<br>• 國家住宿可彈式莊園及南部農場<br>• 關鍵贈送南非開園五行彩色黃石乙</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+    <!-- demo -->
+    <div class="demo-wrap view-panel active" id="demo-prd1">
+      <div class="prd-inner prd1-inner">
+        <div class="prd-card prd1-card">
+          <div class="card-img"><img src="images/img_PRD_01.jpg" alt=""></div>
+          <div class="card-tag">南非</div>
+          <div class="card-text">
+            <div class="card-name">【飛越南非】圓普敦.約堡.馬布拉.太陽城.荷蘭式莊園.南非尊寶趣10日</div>
+            <div class="card-sale">兩人同行第二人減6000</div>
+            <div class="card-detail">• 市場CP值最高南非行程<br>• 國家住宿可彈式莊園<br>• 贈送南非開園五行彩色黃石</div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 架構 -->
+    <div class="wireframe-wrap view-panel" id="wf-prd1">
+      <div class="prd-inner prd1-inner">
+        <div class="prd-card prd1-card">
+          <div class="card-img">
+            <div class="img-grey"></div>
+          </div>
+          <div class="card-tag">標籤字數限八字元</div>
+          <div class="card-text">
+            <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+            <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
+            <div class="card-detail">• 介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹<br>•
+              介紹介紹介紹介紹介紹介紹</div>
+            <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 架構 -->
-  <div class="wireframe-wrap view-panel" id="wf-prd1">
-    <div class="prd-inner prd1-inner">
-      <div class="prd-card prd1-card">
-        <div class="card-img"><div class="img-grey"></div></div><div class="card-tag">標籤字數限八字元</div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-          <div class="card-price">天數 <span class="price-num">$999,999</span>起</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+      <path d="M7 0L14 12H0L7 0Z" fill="white" />
+    </svg>
+    <span>TOP</span>
+  </button>
 
-<div data-include="footer"></div>
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
-  <span>TOP</span>
-</button>
-
-<script>
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+  <script>
+    document.querySelectorAll('.view-toggle').forEach(function (toggle) {
+      toggle.querySelectorAll('.toggle-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var section = toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var targetId = btn.dataset.view;
+          section.querySelectorAll('.view-panel').forEach(function (p) { p.classList.remove('active'); });
+          section.querySelector('#' + targetId).classList.add('active');
+        });
       });
     });
-  });
 
-  window.addEventListener('scroll', function() {
-    var btn = document.getElementById('topBtn');
-    if (window.scrollY > 300) { btn.classList.add('visible'); }
-    else { btn.classList.remove('visible'); }
-  });
-</script>
-<script src="js/include.js"></script>
+    window.addEventListener('scroll', function () {
+      var btn = document.getElementById('topBtn');
+      if (window.scrollY > 300) { btn.classList.add('visible'); }
+      else { btn.classList.remove('visible'); }
+    });
+  </script>
+  <script src="js/include.js"></script>
 </body>
+
 </html>

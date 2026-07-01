@@ -7,176 +7,471 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
-  <link rel="stylesheet" href="css/common.css" type="text/css">
-  <style>
-
+  <link rel="stylesheet" href="css/common.css" type="text/css"><style>
     /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+    .int-sub-nav-sticky {
+      position: sticky;
+      top: 52px;
+      z-index: 89;
+      width: 100%;
+      background: #333333;
+    }
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+    .int-sub-nav {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      width: 100%;
+      min-height: 48px;
+      background: #333333;
+    }
+
+    .int-sub-nav .sub-tab {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      height: 48px;
+      min-width: 91px;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      color: #FFFFFF;
+      text-decoration: none;
+      box-sizing: border-box;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+    }
+
+    .int-sub-nav .sub-tab.active {
+      background: #FFFFFF;
+      font-weight: 700;
+      color: #333333;
+      min-width: 92px;
+    }
 
     /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
+    .view-toggle {
+      display: flex;
+      width: 152px;
+      height: 32px;
+      margin: 0 auto 10px;
+    }
+
+    .view-toggle .toggle-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 8px 16px;
+      width: 76px;
+      height: 32px;
+      cursor: pointer;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 16px;
+      box-sizing: border-box;
+      border: none;
+      background: #FFFFFF;
+      color: #333333;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    .view-toggle .toggle-btn.active {
+      background: #E5E5E5;
+      font-weight: 700;
+    }
 
     /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+    .view-panel {
+      display: none !important;
+    }
+
+    .view-panel.active {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+    }
 
     /* ===== wrap ===== */
-    .demo-wrap {
-      width: 1400px; min-height: 700px;
-      background: #FFEEC9;
-      box-sizing: border-box; padding: 55px 0;
-    }
+    .demo-wrap,
     .wireframe-wrap {
-      width: 1400px; min-height: 700px;
+      width: 100%;
+      min-height: 700px;
+      box-sizing: border-box;
+      padding: 55px 0;
+    }
+
+    .demo-wrap {
+      background: #FFEEC9;
+    }
+
+    .wireframe-wrap {
       background: #E5E5E5;
-      box-sizing: border-box; padding: 55px 0;
     }
 
     /* ===== 主容器 ===== */
     .prd04-inner {
       width: 1162px;
+      max-width: 1162px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-    }
-
-    /* ============================================
-       列表橫條
-    ============================================ */
-    .prd04-row {
-      width: 1162px;
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      padding: 16px 0;
-      gap: 16px;
+      align-items: stretch;
+      margin: 0 auto;
       box-sizing: border-box;
     }
 
-    /* demo：奇偶列背景、圓角 */
-    .demo-wrap .prd04-row:first-child { background: #FFFFFF; border-radius: 10px 10px 0 0; }
-    .demo-wrap .prd04-row:nth-child(2) { background: #FFF4E6; }
-    .demo-wrap .prd04-row:last-child { background: #FFFFFF; border-radius: 0 0 10px 10px; }
-
-    /* 架構：全白，列間加分隔線 */
-    .wireframe-wrap .prd04-row { background: #FFFFFF; }
-    .wireframe-wrap .prd04-row:not(:last-child) { border-bottom: 1px solid #333333; }
-
-    /* tag */
-    .prd04-row .card-tag {
-      display: flex; align-items: center; justify-content: center;
-      padding: 8px 16px;
-      width: 144px; height: 30px;
+    /* ============================================
+       PRD04：無圖列表橫條卡片
+       依 PRD03 list-card 邏輯整理
+    ============================================ */
+    .prd04-row {
+      position: relative;
+      width: 100%;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      padding: 16px;
+      gap: 16px;
+      box-sizing: border-box;
+      overflow: visible;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; font-weight: 400; color: #FFFFFF;
-      white-space: nowrap; box-sizing: border-box;
-      border-radius: 0 20px 20px 0;
-      flex-shrink: 0;
     }
-    .demo-wrap .prd04-row .card-tag { background: #FE6011; }
-    .wireframe-wrap .prd04-row .card-tag { background: #333333; }
+
+    /* demo：奇偶列背景、圓角 */
+    .demo-wrap .prd04-row:first-child {
+      background: #FFFFFF;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .demo-wrap .prd04-row:nth-child(2) {
+      background: #FFF4E6;
+    }
+
+    .demo-wrap .prd04-row:last-child {
+      background: #FFFFFF;
+      border-radius: 0 0 10px 10px;
+    }
+
+    /* 架構：全白，列間分隔線 */
+    .wireframe-wrap .prd04-row {
+      background: #FFFFFF;
+    }
+
+    .wireframe-wrap .prd04-row:not(:last-child) {
+      border-bottom: 1px solid #333333;
+    }
+
+    /* 左側 tag */
+    .prd04-row .card-tag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 144px;
+      width: 144px;
+      height: 30px;
+      padding: 8px 16px;
+      align-self: flex-start;
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #FFFFFF;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      box-sizing: border-box;
+      border-radius: 0 20px 20px 0;
+    }
+
+    .demo-wrap .prd04-row .card-tag {
+      background: #FE6011;
+    }
+
+    .wireframe-wrap .prd04-row .card-tag {
+      background: #333333;
+    }
 
     /* 中間文字區 */
     .prd04-row .card-text {
-      display: flex; flex-direction: column;
-      align-items: flex-start; gap: 8px;
-      flex: 1; min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+      box-sizing: border-box;
     }
+
     .prd04-row .card-name {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 18px; line-height: 22px;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 22px;
       width: 100%;
+      box-sizing: border-box;
+      white-space: normal;
+      overflow-wrap: anywhere;
     }
-    .demo-wrap .prd04-row .card-name { color: #82463A; }
-    .wireframe-wrap .prd04-row .card-name { color: #333333; }
+
+    .demo-wrap .prd04-row .card-name {
+      color: #82463A;
+    }
+
+    .wireframe-wrap .prd04-row .card-name {
+      color: #333333;
+    }
 
     .prd04-row .card-sale {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 14px; line-height: 17px;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 17px;
       width: 100%;
+      box-sizing: border-box;
     }
-    .demo-wrap .prd04-row .card-sale { color: #FE6011; }
-    .wireframe-wrap .prd04-row .card-sale { color: #333333; }
+
+    .demo-wrap .prd04-row .card-sale {
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .prd04-row .card-sale {
+      color: #333333;
+    }
 
     .prd04-row .card-detail {
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 20px;
-      color: #333333; width: 100%;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #333333;
+      width: 100%;
+      box-sizing: border-box;
     }
 
-    /* 右側 price 靠右靠底 */
+    /* 右側 price */
     .prd04-row .card-price-wrap {
-      display: flex; flex-direction: column;
-      justify-content: flex-end; align-items: flex-end;
-      padding: 16px 16px 0;
-      width: 192px; height: 95px;
-      flex-shrink: 0; box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-end;
+      flex: 0 0 192px;
+      min-width: 160px;
+      padding: 0;
+      box-sizing: border-box;
     }
+
     .prd04-row .card-price {
+      width: 100%;
       font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 14px; line-height: 1.2;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 1.2;
       text-align: right;
-      display: flex; align-items: baseline; justify-content: flex-end; gap: 2px;
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-end;
+      gap: 2px;
+      white-space: nowrap;
+      writing-mode: horizontal-tb;
+      box-sizing: border-box;
     }
-    .prd04-row .card-price .price-num { font-size: 24px !important; font-weight: 700; line-height: 1; }
-    .demo-wrap .prd04-row .card-price { color: #FE6011; }
-    .wireframe-wrap .prd04-row .card-price { color: #333333; }
+
+    .prd04-row .card-price .price-num {
+      font-size: 24px !important;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .demo-wrap .prd04-row .card-price {
+      color: #FE6011;
+    }
+
+    .wireframe-wrap .prd04-row .card-price {
+      color: #333333;
+    }
 
     /* ===== TOP ===== */
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
+    #topBtn {
+      position: fixed;
+      right: 24px;
+      bottom: 32px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #333333;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+
+    #topBtn.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #topBtn span {
+      font-family: 'Noto Sans TC', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    #topBtn:hover {
+      background: #555555;
+    }
 
     /* ===== RWD ===== */
     @media (max-width: 1200px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .prd04-inner { width: 100%; max-width: 1162px; }
-      .prd04-row { width: 100%; max-width: 1162px; }
+      .demo-wrap,
+      .wireframe-wrap {
+        width: 100%;
+      }
+
+      .prd04-inner {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+        margin: 0 auto;
+      }
     }
 
     @media (max-width: 992px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .prd04-row { flex-wrap: wrap; gap: 12px; }
-      .prd04-row .card-price-wrap { width: auto; height: auto; padding: 4px 0 0; justify-content: flex-end; align-self: flex-end; margin-left: auto; }
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 30px 20px;
+      }
+
+      .prd04-inner {
+        width: 100%;
+      }
+
+      .prd04-row {
+        align-items: flex-start;
+      }
+
+      .prd04-row .card-price-wrap {
+        flex: 0 0 160px;
+        min-width: 140px;
+      }
     }
 
     @media (max-width: 768px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      /* demo 標題不裁切 */
-      .demo-wrap .prd04-row .card-name { height: auto !important; overflow: visible !important; }
-      /* === M版字級下限 === */
-      .prd04-row .card-name { font-size: 20px; line-height: 1.3; height: auto; }
-      .prd04-row .card-sale { font-size: 16px; line-height: 1.3; min-height: auto; height: auto; }
-      .prd04-row .card-detail { font-size: 16px; line-height: 1.5; }
-      .prd04-row .card-price { font-size: 16px; }
-      .prd04-row .card-price .price-num { font-size: 26px !important; }
-      /* 橫式 → 換行 */
-      .prd04-row { flex-wrap: wrap; gap: 12px; padding: 16px; }
-      .prd04-row .card-price-wrap { width: 100%; height: auto; padding: 4px 0 0; align-items: flex-end; }
+      .int-sub-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        flex-wrap: nowrap;
+      }
+
+      .int-sub-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .int-sub-nav .sub-tab {
+        font-size: 14px;
+        padding: 12px 14px;
+        min-width: auto;
+        height: auto;
+        flex-shrink: 0;
+        line-height: 1.2;
+      }
+
+      .demo-wrap,
+      .wireframe-wrap {
+        padding: 24px 16px;
+        min-height: auto;
+      }
+
+      .demo-wrap .prd04-row .card-name,
+      .demo-wrap .prd04-row .card-detail {
+        height: auto !important;
+        overflow: visible !important;
+      }
+
+      .prd04-row .card-name {
+        font-size: 20px;
+        line-height: 1.3;
+        height: auto;
+      }
+
+      .prd04-row .card-sale {
+        font-size: 16px;
+        line-height: 1.3;
+        height: auto !important;
+      }
+
+      .prd04-row .card-detail {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      .prd04-row .card-price {
+        font-size: 16px;
+      }
+
+      .prd04-row .card-price .price-num {
+        font-size: 26px !important;
+      }
+
+      .prd04-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .prd04-row .card-tag {
+        width: auto;
+        max-width: 100%;
+        flex: 0 0 auto;
+      }
+
+      .prd04-row .card-text {
+        width: 100%;
+      }
+
+      .prd04-row .card-price-wrap {
+        width: 100%;
+        min-width: 0;
+        flex: 0 0 auto;
+        align-items: flex-end;
+      }
+
+      /* 手機時每列皆為獨立卡片感 */
+      .demo-wrap .prd04-row,
+      .wireframe-wrap .prd04-row {
+        border-radius: 10px;
+      }
+
+      .wireframe-wrap .prd04-row:not(:last-child) {
+        border-bottom: none;
+      }
+
+      .prd04-inner {
+        gap: 16px;
+      }
     }
 
     @media (max-width: 576px) {
-      .prd04-inner { width: 278px; }
-      .prd04-row { width: 278px; flex-direction: column; gap: 8px; padding: 16px; }
-      .prd04-row .card-tag { width: auto; }
-      .prd04-row .card-price-wrap { width: 100%; height: auto; padding: 4px 0 0; align-items: flex-end; }
+      .prd04-inner {
+        width: 100%;
+        max-width: 278px;
+        align-items: center;
+      }
+
+      .prd04-row {
+        width: 100%;
+        max-width: 278px;
+      }
     }
   </style>
 </head>
@@ -253,8 +548,8 @@
       <div class="prd04-row">
         <div class="card-tag">標籤字數限八字元</div>
         <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
           <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
         </div>
         <div class="card-price-wrap">
@@ -265,8 +560,8 @@
       <div class="prd04-row">
         <div class="card-tag">標籤字數限八字元</div>
         <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
           <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
         </div>
         <div class="card-price-wrap">
@@ -277,8 +572,8 @@
       <div class="prd04-row">
         <div class="card-tag">標籤字數限八字元</div>
         <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資</div>
+          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
+          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊額外資訊</div>
           <div class="card-detail">• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹<br>• 介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
         </div>
         <div class="card-price-wrap">

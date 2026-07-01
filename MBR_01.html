@@ -17,8 +17,6 @@
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
 
     /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
 
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
@@ -31,12 +29,12 @@
 
     /* ===== wrap ===== */
     .demo-wrap {
-      width: 1400px; min-height: 770px;
+      width: 100%; min-height: 770px;
       background: #FF4A60;
       box-sizing: border-box; padding: 40px 0;
     }
     .wireframe-wrap {
-      width: 1400px; min-height: 770px;
+      width: 100%; min-height: 770px;
       background: #E5E5E5;
       box-sizing: border-box; padding: 40px 0;
     }
@@ -51,10 +49,13 @@
       padding: 32px 38px;
       gap: 67px;
       width: 1155px;
+      margin: 0 auto;
       min-height: 691px;
       border-radius: 30px;
       box-sizing: border-box;
       position: relative;
+    
+      margin: 0 auto;
     }
     .demo-wrap .mbr01-outer { background: #FFA25E; }
     .wireframe-wrap .mbr01-outer { background: #CCCCCC; border: 1px solid #999999; }
@@ -239,9 +240,10 @@
 
     /* ===== RWD ===== */
     @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
       .demo-wrap, .wireframe-wrap { width: 100%; }
-      .mbr01-outer { width: 100%; max-width: 1155px; }
+      .mbr01-outer { width: 100%; max-width: 1155px; 
+      margin: 0 auto;
+    }
     }
     @media (max-width: 1200px) {
       .mbr01-outer { gap: 32px; padding: 24px; }
@@ -262,8 +264,6 @@
       .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
       .int-sub-nav::-webkit-scrollbar { display: none; }
       .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
       .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
       .mbr01-outer { padding: 16px; }
       .mbr01-video-wrap { height: 320px; }

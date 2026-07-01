@@ -5,167 +5,191 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>POI頁面模組版型｜東南旅遊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <style>
-
     /* ===== 副選單 ===== */
     .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
     .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
     .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
-
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
     .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
     .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
 
-    /* ===== view-panel ===== */
     .view-panel { display: none !important; }
     .view-panel.active { display: block !important; }
 
-    /* ===== wrap ===== */
-    .demo-wrap {
-      width: 1400px;
-      background: #FFFAF1;
-      border: 0.5px solid #333333;
+    /* ===== INT08 Carousel ===== */
+    .int08-wrap {
+      --int08-stage-height: 500px;
+      --int08-center-width: 750px;
+      width: min(1400px, 100%);
+      min-height: 700px;
+      margin: 0 auto;
+      padding: 84px 0 78px;
       box-sizing: border-box;
-      padding: 55px 0 40px;
-      overflow: hidden;
-      position: relative;
-    }
-    .wireframe-wrap {
-      width: 1400px;
-      background: #E5E5E5;
       border: 0.5px solid #333333;
-      box-sizing: border-box;
-      padding: 55px 0 40px;
       overflow: hidden;
-      position: relative;
     }
 
-    /* ===== Slider 全寬溢出容器 ===== */
-    .int08-slider-viewport {
+    .demo-wrap { background: #FFFAF1; }
+    .wireframe-wrap { background: #E5E5E5; }
+
+    .int08-carousel {
       position: relative;
       width: 100%;
+      height: var(--int08-stage-height);
       overflow: hidden;
     }
 
-    /* 滑動軌道：3張圖橫排 */
-    .int08-track {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 100%;
-      height: 500px;
+    .int08-stage {
       position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
 
-    /* 每張圖片區塊 */
     .int08-slide {
       position: absolute;
       top: 0;
-      height: 500px;
-      transition: left 0.4s ease, opacity 0.4s ease, width 0.4s ease;
+      height: 100%;
+      overflow: hidden;
+      background: #999999;
+      transition: left .38s ease, width .38s ease, opacity .38s ease;
+      will-change: left, width;
     }
+
     .int08-slide img {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
+      opacity: 1;
     }
 
-    /* 側邊遮罩（demo：opacity，wireframe：白色半透明） */
-    .int08-slide .slide-mask {
+    .int08-slide-mask {
       position: absolute;
       inset: 0;
-      pointer-events: none;
       z-index: 1;
-      transition: background 0.4s ease;
+      pointer-events: none;
+      background: transparent;
+      transition: background .38s ease;
     }
 
-    /* 左右箭頭 */
+    .demo-wrap .int08-slide.is-side .int08-slide-mask { background: rgba(255,255,255,.42); }
+    .demo-wrap .int08-slide.is-active .int08-slide-mask { background: transparent; }
+
+    .wireframe-wrap .int08-slide { background: #999999; }
+    .wireframe-wrap .int08-slide.is-side .int08-slide-mask { background: rgba(255,255,255,.4); }
+    .wireframe-wrap .int08-slide.is-active .int08-slide-mask { background: transparent; }
+
     .int08-arrow {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
       z-index: 10;
-      cursor: pointer;
       width: 36px;
       height: 44px;
-      border: none;
-      background: transparent;
       padding: 0;
+      border: none;
       display: flex;
       align-items: center;
       justify-content: center;
+      cursor: pointer;
+      box-sizing: border-box;
+      transform: translateY(-50%);
     }
-    .int08-arrow img { width: 36px; height: 44px; display: block; }
-    .int08-arrow-left { left: 0; }
-    .int08-arrow-right { right: 0; }
 
-    /* dots */
+    .demo-wrap .int08-arrow { background: linear-gradient(191.02deg, #EFD9A2 0.01%, #CAA546 83.7%); }
+    .wireframe-wrap .int08-arrow { background: #333333; }
+
+    .int08-arrow::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid #FFFFFF;
+      border-right: 2px solid #FFFFFF;
+      box-sizing: border-box;
+    }
+
+    .int08-prev::before { transform: rotate(-135deg); margin-left: 5px; }
+    .int08-next::before { transform: rotate(45deg); margin-right: 5px; }
+
     .int08-dots {
       display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
       gap: 20px;
-      padding: 24px 0 0;
+      width: 100%;
+      padding: 25px 0 0;
+      box-sizing: border-box;
     }
+
     .int08-dot {
       width: 8px;
       height: 8px;
+      padding: 0;
+      border: 0;
       border-radius: 50%;
       cursor: pointer;
-      border: none;
-      padding: 0;
+      transition: transform .2s ease, background .2s ease;
     }
 
-    /* demo dots */
     .demo-wrap .int08-dot { background: #E0BA85; }
-    .demo-wrap .int08-dot.active { background: #B93728; }
+    .demo-wrap .int08-dot.is-active { background: #B93728; }
+    .wireframe-wrap .int08-dot { background: #333333; opacity: .55; }
+    .wireframe-wrap .int08-dot.is-active { opacity: 1; }
+    .int08-dot:hover { transform: scale(1.25); }
 
-    /* wireframe dots */
-    .wireframe-wrap .int08-dot { background: #333333; }
-    .wireframe-wrap .int08-dot.active { background: #333333; }
+    /* ===== 1024：正式驗收斷點，保留左右預覽，但不使用 100vw 避免被外層導覽撐出橫向卷軸 ===== */
+    @media (min-width: 901px) and (max-width: 1199px) {
+      .int08-wrap {
+        --int08-stage-height: 340px;
+        --int08-center-width: 620px;
+        width: min(960px, calc(100% - 64px));
+        max-width: 960px;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 52px 0 42px;
+      }
+    }
+
+    /* ===== 768 / Mobile：單主圖 + 箭頭 + dots，不再露出左右預覽圖 ===== */
+    @media (max-width: 900px) {
+      .int08-wrap {
+        --int08-stage-height: min(56vw, 360px);
+        --int08-center-width: 100%;
+        width: min(720px, calc(100% - 40px));
+        max-width: 720px;
+        min-height: 0;
+        margin: 0 auto;
+        padding: 42px 0 36px;
+      }
+
+      .int08-arrow { width: 30px; height: 38px; }
+      .int08-arrow::before { width: 10px; height: 10px; }
+      .int08-dots { padding-top: 20px; gap: 16px; }
+    }
+
+    @media (max-width: 767px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
+    }
+
+    @media (max-width: 520px) {
+      .int08-wrap { --int08-stage-height: 208px; padding: 40px 0 34px; }
+    }
 
     /* ===== TOP ===== */
     #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
     #topBtn.visible { opacity: 1; transform: translateY(0); }
     #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
     #topBtn:hover { background: #555555; }
-
-    /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .int08-track { height: 400px; }
-      .int08-slide { height: 400px; }
-    }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 0 24px; }
-      .int08-track { height: 320px; }
-      .int08-slide { height: 320px; }
-    }
-    @media (max-width: 767px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 20px 0 20px; min-height: auto; }
-      .int08-track { height: 220px; }
-      .int08-slide { height: 220px; }
-      .int08-arrow { width: 28px; height: 36px; }
-      .int08-arrow img { width: 28px; height: 36px; }
-    }
   </style>
 </head>
 <body data-id="int" data-page="intro">
@@ -195,86 +219,33 @@
     <button class="toggle-btn" data-view="wf-8">架構</button>
   </div>
 
-  <!-- ===== demo ===== -->
-  <div class="demo-wrap view-panel active" id="demo-8">
-    <div class="int08-slider-viewport">
-      <div class="int08-track" id="demo-track">
-        <!-- 左側圖（02）-->
-        <div class="int08-slide" data-index="0">
-          <img src="images/img_INT_08_02.jpg" alt="">
-          <div class="slide-mask"></div>
-        </div>
-        <!-- 中央圖（00）-->
-        <div class="int08-slide" data-index="1">
-          <img src="images/img_INT_08_00.jpg" alt="">
-          <div class="slide-mask"></div>
-        </div>
-        <!-- 右側圖（01）-->
-        <div class="int08-slide" data-index="2">
-          <img src="images/img_INT_08_01.jpg" alt="">
-          <div class="slide-mask"></div>
-        </div>
+  <!-- ===== demo：使用實際圖片；箭頭以 CSS 繪製，避免輸出頁依賴 SVG ===== -->
+  <div class="int08-wrap demo-wrap view-panel active" id="demo-8">
+    <div class="int08-carousel" data-int08-carousel="demo">
+      <div class="int08-stage">
+        <div class="int08-slide is-side" data-slot="left"><img src="images/img_INT_08_02.jpg" alt="夜間建築外觀"><div class="int08-slide-mask"></div></div>
+        <div class="int08-slide is-active" data-slot="center"><img src="images/img_INT_08_00.jpg" alt="客房室內"><div class="int08-slide-mask"></div></div>
+        <div class="int08-slide is-side" data-slot="right"><img src="images/img_INT_08_01.jpg" alt="浴室空間"><div class="int08-slide-mask"></div></div>
       </div>
-      <!-- 左箭頭 play1 -->
-      <button class="int08-arrow int08-arrow-left" id="demo-prev">
-        <img src="images/img_INT_08_play1.svg" alt="prev">
-      </button>
-      <!-- 右箭頭 play2 -->
-      <button class="int08-arrow int08-arrow-right" id="demo-next">
-        <img src="images/img_INT_08_play2.svg" alt="next">
-      </button>
+      <button class="int08-arrow int08-prev" type="button" aria-label="上一張"></button>
+      <button class="int08-arrow int08-next" type="button" aria-label="下一張"></button>
     </div>
-    <!-- dots -->
-    <div class="int08-dots" id="demo-dots">
-      <button class="int08-dot active" data-dot="0"></button>
-      <button class="int08-dot" data-dot="1"></button>
-      <button class="int08-dot" data-dot="2"></button>
-      <button class="int08-dot" data-dot="3"></button>
-      <button class="int08-dot" data-dot="4"></button>
-      <button class="int08-dot" data-dot="5"></button>
-    </div>
+    <div class="int08-dots" aria-label="圖片切換點"><button class="int08-dot is-active" type="button" aria-label="切換至第 1 張圖片"></button><button class="int08-dot" type="button" aria-label="切換至第 2 張圖片"></button><button class="int08-dot" type="button" aria-label="切換至第 3 張圖片"></button></div>
   </div>
 
-  <!-- ===== 架構 ===== -->
-  <div class="wireframe-wrap view-panel" id="wf-8">
-    <div class="int08-slider-viewport">
-      <div class="int08-track" id="wf-track">
-        <!-- 左側灰底 -->
-        <div class="int08-slide" data-index="0">
-          <img src="images/img_INT_08_02.jpg" alt="" style="visibility:hidden;">
-          <div class="slide-mask" style="background:#999999;"></div>
-        </div>
-        <!-- 中央灰底 -->
-        <div class="int08-slide" data-index="1">
-          <img src="images/img_INT_08_00.jpg" alt="" style="visibility:hidden;">
-          <div class="slide-mask" style="background:#999999;"></div>
-        </div>
-        <!-- 右側灰底 -->
-        <div class="int08-slide" data-index="2">
-          <img src="images/img_INT_08_01.jpg" alt="" style="visibility:hidden;">
-          <div class="slide-mask" style="background:#999999;"></div>
-        </div>
+  <!-- ===== 架構：不使用 JPG / SVG；灰圖、遮罩、箭頭全部 CSS ===== -->
+  <div class="int08-wrap wireframe-wrap view-panel" id="wf-8">
+    <div class="int08-carousel" data-int08-carousel="wireframe">
+      <div class="int08-stage">
+        <div class="int08-slide is-side" data-slot="left"><div class="int08-slide-mask"></div></div>
+        <div class="int08-slide is-active" data-slot="center"><div class="int08-slide-mask"></div></div>
+        <div class="int08-slide is-side" data-slot="right"><div class="int08-slide-mask"></div></div>
       </div>
-      <!-- 左箭頭 play3 -->
-      <button class="int08-arrow int08-arrow-left" id="wf-prev">
-        <img src="images/img_INT_08_play3.svg" alt="prev">
-      </button>
-      <!-- 右箭頭 play4 -->
-      <button class="int08-arrow int08-arrow-right" id="wf-next">
-        <img src="images/img_INT_08_play4.svg" alt="next">
-      </button>
+      <button class="int08-arrow int08-prev" type="button" aria-label="上一張"></button>
+      <button class="int08-arrow int08-next" type="button" aria-label="下一張"></button>
     </div>
-    <!-- dots -->
-    <div class="int08-dots" id="wf-dots">
-      <button class="int08-dot active" data-dot="0"></button>
-      <button class="int08-dot" data-dot="1"></button>
-      <button class="int08-dot" data-dot="2"></button>
-      <button class="int08-dot" data-dot="3"></button>
-      <button class="int08-dot" data-dot="4"></button>
-      <button class="int08-dot" data-dot="5"></button>
-    </div>
+    <div class="int08-dots" aria-label="圖片切換點"><button class="int08-dot is-active" type="button" aria-label="切換至第 1 張圖片"></button><button class="int08-dot" type="button" aria-label="切換至第 2 張圖片"></button><button class="int08-dot" type="button" aria-label="切換至第 3 張圖片"></button></div>
   </div>
-
 </div>
 
 <div data-include="footer"></div>
@@ -284,135 +255,134 @@
 </button>
 
 <script>
-  /* ============================================================
-     INT_08 Slider 邏輯
-     圖片順序（循環）：
-       index 0 = img_INT_08_02（左）
-       index 1 = img_INT_08_00（中，預設）
-       index 2 = img_INT_08_01（右）
-     play1（左箭頭）→ 往左移：02 進中央
-     play2（右箭頭）→ 往右移：01 進中央
-  ============================================================ */
-
-  function initSlider(trackId, prevId, nextId, dotsId, isDemo) {
-    var track = document.getElementById(trackId);
-    var slides = track.querySelectorAll('.int08-slide');
-    var dots = document.getElementById(dotsId).querySelectorAll('.int08-dot');
-    var currentDot = 0;
-
-    // 圖片來源（3張循環）
-    var images = [
-      'images/img_INT_08_02.jpg',
-      'images/img_INT_08_00.jpg',
-      'images/img_INT_08_01.jpg'
+  (function() {
+    var slidesData = [
+      { src: 'images/img_INT_08_00.jpg', alt: '客房室內' },
+      { src: 'images/img_INT_08_01.jpg', alt: '浴室空間' },
+      { src: 'images/img_INT_08_02.jpg', alt: '夜間建築外觀' }
     ];
 
-    // 排列：centerIdx = 中央圖的 images 索引，預設 1（img_INT_08_00）
-    var centerIdx = 1;
+    function mod(n, total) {
+      return ((n % total) + total) % total;
+    }
 
-    function layout() {
-      var vw = track.offsetWidth;
-      // 中央圖：750px 或視窗的 54%（取小）
-      var cw = Math.min(750, Math.round(vw * 0.54));
-      // 側邊圖：各佔剩餘空間的一半
-      var sw = Math.round((vw - cw) / 2);
+    function initCarousel(wrap) {
+      var carousel = wrap.querySelector('.int08-carousel');
+      var stage = wrap.querySelector('.int08-stage');
+      var slides = Array.prototype.slice.call(wrap.querySelectorAll('.int08-slide'));
+      var dotsWrap = wrap.querySelector('.int08-dots');
+      var prevBtn = wrap.querySelector('.int08-prev');
+      var nextBtn = wrap.querySelector('.int08-next');
+      var isDemo = carousel.dataset.int08Carousel === 'demo';
+      var current = 0;
+      var dots = [];
 
-      var leftIdx  = (centerIdx - 1 + images.length) % images.length;
-      var rightIdx = (centerIdx + 1) % images.length;
+      dotsWrap.innerHTML = '';
+      slidesData.forEach(function(_, index) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'int08-dot';
+        dot.setAttribute('aria-label', '切換至第 ' + (index + 1) + ' 張圖片');
+        dot.addEventListener('click', function() {
+          current = index;
+          render();
+        });
+        dotsWrap.appendChild(dot);
+        dots.push(dot);
+      });
 
-      var slideData = [
-        { img: images[leftIdx],   left: 0,        width: sw,  mask: isDemo ? 'rgba(255,255,255,0)' : 'rgba(255,255,255,0.4)', opacity: isDemo ? 0.6 : 1 },
-        { img: images[centerIdx], left: sw,        width: cw,  mask: 'rgba(0,0,0,0)',               opacity: 1 },
-        { img: images[rightIdx],  left: sw + cw,   width: sw,  mask: isDemo ? 'rgba(255,255,255,0)' : 'rgba(255,255,255,0.4)', opacity: isDemo ? 0.6 : 1 }
-      ];
+      function getSizes() {
+        var stageWidth = stage.clientWidth;
+        var isMobile = window.matchMedia('(max-width: 900px)').matches;
+        var centerWidth;
 
-      slides.forEach(function(slide, i) {
-        var d = slideData[i];
-        var img = slide.querySelector('img');
-        var mask = slide.querySelector('.slide-mask');
-
-        slide.style.left  = d.left + 'px';
-        slide.style.width = d.width + 'px';
-
-        if (isDemo) {
-          img.style.visibility = 'visible';
-          img.src = d.img;
-          img.style.opacity = d.opacity;
-          mask.style.background = 'transparent';
+        if (isMobile) {
+          centerWidth = stageWidth;
         } else {
-          img.style.visibility = 'hidden';
-          mask.style.background = i === 1 ? '#999999' : 'rgba(200,200,200,0.85)';
+          var cssCenter = getComputedStyle(wrap).getPropertyValue('--int08-center-width').trim();
+          centerWidth = cssCenter.indexOf('px') > -1 ? parseFloat(cssCenter) : Math.min(750, stageWidth * 0.54);
+          centerWidth = Math.min(centerWidth, stageWidth * 0.78);
         }
+
+        var sideWidth = Math.max(0, (stageWidth - centerWidth) / 2);
+        return { stageWidth: stageWidth, centerWidth: centerWidth, sideWidth: sideWidth, isMobile: isMobile };
+      }
+
+      function render() {
+        var total = slidesData.length;
+        var leftIndex = mod(current - 1, total);
+        var rightIndex = mod(current + 1, total);
+        var sizes = getSizes();
+        var slotData = [
+          { slot: 'left', index: leftIndex, left: 0, width: sizes.sideWidth, active: false },
+          { slot: 'center', index: current, left: sizes.sideWidth, width: sizes.centerWidth, active: true },
+          { slot: 'right', index: rightIndex, left: sizes.sideWidth + sizes.centerWidth, width: sizes.sideWidth, active: false }
+        ];
+
+        slides.forEach(function(slide, slotIndex) {
+          var data = slotData[slotIndex];
+          slide.style.left = data.left + 'px';
+          slide.style.width = data.width + 'px';
+          slide.style.opacity = data.width <= 1 ? '0' : '1';
+          slide.classList.toggle('is-active', data.active);
+          slide.classList.toggle('is-side', !data.active);
+
+          if (isDemo) {
+            var img = slide.querySelector('img');
+            img.src = slidesData[data.index].src;
+            img.alt = slidesData[data.index].alt;
+          }
+        });
+
+        prevBtn.style.left = sizes.isMobile ? '0px' : sizes.sideWidth + 'px';
+        prevBtn.style.right = 'auto';
+        prevBtn.style.transform = sizes.isMobile ? 'translateY(-50%)' : 'translateY(-50%) translateX(-100%)';
+
+        nextBtn.style.left = 'auto';
+        nextBtn.style.right = sizes.isMobile ? '0px' : sizes.sideWidth + 'px';
+        nextBtn.style.transform = sizes.isMobile ? 'translateY(-50%)' : 'translateY(-50%) translateX(100%)';
+
+        dots.forEach(function(dot, index) {
+          dot.classList.toggle('is-active', index === current);
+        });
+      }
+
+      prevBtn.addEventListener('click', function() {
+        current = mod(current - 1, slidesData.length);
+        render();
       });
 
-      // 箭頭定位：貼中央圖左右邊緣
-      var prevBtn = track.parentElement.querySelector('.int08-arrow-left');
-      var nextBtn = track.parentElement.querySelector('.int08-arrow-right');
-      if (prevBtn) { prevBtn.style.left = sw + 'px'; prevBtn.style.right = 'auto'; prevBtn.style.transform = 'translateY(-50%) translateX(-100%)'; }
-      if (nextBtn) { nextBtn.style.right = sw + 'px'; nextBtn.style.left = 'auto'; nextBtn.style.transform = 'translateY(-50%) translateX(100%)'; }
+      nextBtn.addEventListener('click', function() {
+        current = mod(current + 1, slidesData.length);
+        render();
+      });
+
+      window.addEventListener('resize', render);
+      render();
     }
 
-    function updateDots() {
-      dots.forEach(function(d) { d.classList.remove('active'); });
-      dots[currentDot].classList.add('active');
-    }
+    document.querySelectorAll('.int08-wrap').forEach(initCarousel);
 
-    function prev() {
-      centerIdx = (centerIdx - 1 + images.length) % images.length;
-      currentDot = (currentDot - 1 + dots.length) % dots.length;
-      layout();
-      updateDots();
-    }
-
-    function next() {
-      centerIdx = (centerIdx + 1) % images.length;
-      currentDot = (currentDot + 1) % dots.length;
-      layout();
-      updateDots();
-    }
-
-    document.getElementById(prevId).addEventListener('click', prev);
-    document.getElementById(nextId).addEventListener('click', next);
-
-    dots.forEach(function(dot, i) {
-      dot.addEventListener('click', function() {
-        var diff = i - currentDot;
-        if (diff > 0) { for (var k = 0; k < diff; k++) next(); }
-        else if (diff < 0) { for (var k = 0; k < -diff; k++) prev(); }
+    document.querySelectorAll('.view-toggle').forEach(function(toggle) {
+      toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var section = toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          var targetId = btn.dataset.view;
+          section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
+          section.querySelector('#' + targetId).classList.add('active');
+          window.dispatchEvent(new Event('resize'));
+        });
       });
     });
 
-    layout();
-    window.addEventListener('resize', layout);
-  }
-
-  // 初始化 demo slider
-  initSlider('demo-track', 'demo-prev', 'demo-next', 'demo-dots', true);
-  // 初始化 wireframe slider
-  initSlider('wf-track', 'wf-prev', 'wf-next', 'wf-dots', false);
-
-  // demo / 架構切換
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
-        // 切換後重新計算 layout
-        window.dispatchEvent(new Event('resize'));
-      });
+    window.addEventListener('scroll', function() {
+      var btn = document.getElementById('topBtn');
+      if (window.scrollY > 300) { btn.classList.add('visible'); }
+      else { btn.classList.remove('visible'); }
     });
-  });
-
-  // TOP btn
-  window.addEventListener('scroll', function() {
-    var btn = document.getElementById('topBtn');
-    if (window.scrollY > 300) { btn.classList.add('visible'); }
-    else { btn.classList.remove('visible'); }
-  });
+  })();
 </script>
 <script src="js/include.js"></script>
 </body>

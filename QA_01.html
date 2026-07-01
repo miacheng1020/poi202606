@@ -17,8 +17,6 @@
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; }
 
     /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
 
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
@@ -30,20 +28,29 @@
     .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
 
     /* ===== wrap ===== */
-    .demo-wrap      { width: 1400px; min-height: 700px; background: #FFE0A5; box-sizing: border-box; padding: 55px 0; }
-    .wireframe-wrap { width: 1400px; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 55px 0; border: 0.5px solid #333333; }
+    .demo-wrap      { width: 100%; min-height: 700px; background: #FFE0A5; box-sizing: border-box; padding: 55px 0; }
+    .wireframe-wrap { width: 100%; min-height: 700px; background: #E5E5E5; box-sizing: border-box; padding: 55px 0; border: 0.5px solid #333333; }
 
     /* ===== QA 卡片容器 ===== */
     .qa01-inner {
       width: 1162px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     /* ===== QA 卡片 ===== */
     .qa01-card {
       width: 1162px;
-      display: flex; flex-direction: column;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
 
     /* name 列（標題列） */
@@ -51,6 +58,7 @@
       width: 100%;
       display: flex; justify-content: center; align-items: center;
       padding: 14px 0;
+      box-sizing: border-box;
       font-family: 'Manrope', sans-serif;
       font-weight: 700; font-size: 20px; line-height: 27px;
       letter-spacing: 0.02em;
@@ -68,11 +76,14 @@
       background: #FFFFFF;
       box-sizing: border-box;
     }
-    .demo-wrap      .qa01-card .card-detail { border-radius: 0 0 20px 20px; height: 128px; }
-    .wireframe-wrap .qa01-card .card-detail { border-radius: 0; height: 88px; }
+    .demo-wrap      .qa01-card .card-detail { border-radius: 0 0 20px 20px; min-height: 128px; height: auto; }
+    .wireframe-wrap .qa01-card .card-detail { border-radius: 0; min-height: 88px; height: auto; }
 
     .qa01-card .card-detail p {
       width: 974px;
+      max-width: 100%;
+      margin: 0;
+      box-sizing: border-box;
       font-family: 'Manrope', sans-serif;
       font-weight: 400; font-size: 14px; line-height: 20px;
     }
@@ -86,15 +97,14 @@
     #topBtn:hover { background: #555555; }
 
     /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
+    @media (max-width: 1200px) {
       .demo-wrap, .wireframe-wrap { width: 100%; }
-      .qa01-inner { width: 100%; max-width: 1162px; }
+      .qa01-inner { width: calc(100% - 40px); max-width: 1162px; margin: 0 auto; }
       .qa01-card { width: 100%; }
     }
     @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
       .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
+      .qa01-inner { width: 100%; }
       .qa01-card .card-detail { padding: 20px 40px; height: auto; }
       .qa01-card .card-detail p { width: 100%; }
     }
@@ -102,13 +112,11 @@
       .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
       .int-sub-nav::-webkit-scrollbar { display: none; }
       .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
       .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .qa01-inner { width: 278px; }
-      .qa01-card { width: 278px; }
-      .qa01-card .card-name { font-size: 16px; padding: 12px 16px; height: auto; text-align: center; }
-      .qa01-card .card-detail { padding: 16px 20px; height: auto; }
+      .qa01-inner { width: 100%; max-width: 278px; }
+      .qa01-card { width: 100%; max-width: 278px; }
+      .qa01-card .card-name { font-size: 16px; line-height: 1.35; padding: 12px 16px; height: auto; min-height: 48px; text-align: center; }
+      .qa01-card .card-detail { padding: 16px 20px; height: auto; min-height: 0; }
       .demo-wrap      .qa01-card .card-name { border-radius: 12px 12px 0 0; }
       .demo-wrap      .qa01-card .card-detail { border-radius: 0 0 12px 12px; }
     }

@@ -5,175 +5,301 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>POI頁面模組版型｜東南旅遊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
-  <link rel="stylesheet" href="css/common.css" type="text/css">
-  <style>
-
+  <link rel="stylesheet" href="css/common.css" type="text/css"><style>
     /* ===== 副選單 ===== */
     .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
     .int-sub-nav { display: flex; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
     .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
     .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
-
     /* ===== 切換按鈕 ===== */
     .view-toggle { display: flex; width: 152px; height: 32px; margin: 0 auto 10px; }
     .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
     .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
 
-    /* ===== view-panel ===== */
     .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
+    .view-panel.active { display: flex !important; justify-content: center; align-items: flex-start; }
 
-    /* ===== wrap ===== */
-    .demo-wrap {
-      width: 1400px; min-height: 700px;
-      background: #F1F3F2; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
+    /* ===== INT06 Gallery Artboard ===== */
+    .int06-wrap {
+      width: min(1400px, 100%);
+      min-height: 700px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      padding: 55px 0;
+      border: 0.5px solid #333333;
+      overflow: hidden;
     }
-    .wireframe-wrap {
-      width: 1400px; min-height: 700px;
-      background: #E5E5E5; border: 0.5px solid #333333;
-      box-sizing: border-box; padding: 55px 0;
-    }
+    .demo-wrap { background: #F1F3F2; }
+    .wireframe-wrap { background: #E5E5E5; }
 
-    /* ===== 1162px 內容容器 ===== */
-    .int06-inner {
+    .int06-gallery {
       width: 1162px;
-      display: flex;
-      flex-direction: row;
-      gap: 26px;
-      align-items: flex-start;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 925px 209px;
+      gap: 28px;
+      align-items: stretch;
     }
 
-    /* ===========================================
-       左側大圖區
-    =========================================== */
+    /* ===== Main ===== */
     .int06-main {
       position: relative;
       width: 925px;
       height: 588px;
-      flex-shrink: 0;
-    }
-
-    /* 金色角標 */
-    .int06-main::before {
-      content: '';
-      position: absolute;
-      right: 0; top: 0;
-      width: 16px; height: 16px;
-      background: #CBB047;
-      z-index: 3;
-    }
-    .int06-main::after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: 0;
-      width: 16px; height: 16px;
-      background: #CBB047;
-      z-index: 3;
-    }
-
-    /* 大圖 */
-    .int06-main .main-img {
-      width: 925px; height: 588px;
-      object-fit: cover; display: block;
-      border: 1px solid #CBB047;
-      box-sizing: border-box;
-    }
-    .int06-main .main-grey {
-      width: 925px; height: 588px;
       background: #999999;
-      border: 1px solid #CBB047;
       box-sizing: border-box;
+      overflow: hidden;
+    }
+    .demo-wrap .int06-main { border: 2px solid #CBB047; }
+
+    .int06-main-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .wireframe-wrap .int06-main-img { display: none; }
+
+    .demo-wrap .int06-main::before,
+    .demo-wrap .int06-main::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #CBB047;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .demo-wrap .int06-main::before { right: 0; top: 0; }
+    .demo-wrap .int06-main::after { left: 0; bottom: 0; }
+
+    .wireframe-wrap .int06-main::before,
+    .wireframe-wrap .int06-main::after {
+      content: none;
+      display: none;
     }
 
-    /* Day4 tag */
-    .int06-main .main-tag {
-      position: absolute; left: 0; top: 0; z-index: 4;
-      display: flex; align-items: center; justify-content: center;
-      padding: 12px 16px;
-      width: 75px; height: 46px;
-      background: #004129;
-      border: 1px solid #CBB047;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 18px; font-weight: 500;
-      line-height: 22px; color: #FFFFFF;
+    .int06-tag {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       box-sizing: border-box;
-    }
-    /* 架構 tag */
-    .int06-main .main-tag-wf {
-      position: absolute; left: 0; top: 0; z-index: 4;
-      display: flex; align-items: center; justify-content: center;
+      height: 46px;
       padding: 12px 16px;
-      height: 43px;
-      background: #333333;
       border-radius: 0 0 10px 0;
       font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px; font-weight: 500;
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 22px;
       color: #FFFFFF;
+      white-space: nowrap;
     }
+    .demo-wrap .int06-tag { width: 75px; background: #004129; border: 2px solid #CBB047; }
+    .wireframe-wrap .int06-tag { width: 176px; background: #333333; border: none; }
 
-    /* ===========================================
-       右側三小圖
-    =========================================== */
-    .int06-side {
+    /* ===== Thumbnails ===== */
+    .int06-thumbs {
       display: flex;
       flex-direction: column;
-      gap: 9px;
-      flex-shrink: 0;
+      gap: 18px;
+      width: 209px;
     }
-
     .int06-thumb {
       position: relative;
-      width: 209px; height: 184px;
-      flex-shrink: 0;
-    }
-
-    /* demo 小圖 */
-    .int06-thumb .thumb-img {
-      width: 209px; height: 184px;
-      object-fit: cover; display: block;
-      border: 1px solid #CBB047;
+      width: 209px;
+      height: 184px;
       box-sizing: border-box;
-    }
-    /* 架構 小圖灰底 */
-    .int06-thumb .thumb-grey {
-      width: 209px; height: 184px;
       background: #999999;
-      border: 1px solid #CBB047;
-      box-sizing: border-box;
+      overflow: hidden;
+      border: none;
+      padding: 0;
+      cursor: pointer;
     }
+    .demo-wrap .int06-thumb { border: 2px solid #CBB047; }
+    .wireframe-wrap .int06-thumb { cursor: default; }
 
-    /* 播放按鈕（demo 第2、3張）*/
-    .int06-thumb .thumb-play {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 35px; height: 35px;
-      z-index: 2;
-      pointer-events: none;
+    .int06-thumb-img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1);
+      transition: transform 0.3s ease;
     }
+    .wireframe-wrap .int06-thumb-img { display: none; }
 
-    /* 架構：遮罩 + 播放圖示 */
-    .int06-thumb .thumb-overlay {
+    .int06-thumb::after {
+      content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 1;
+      transition: opacity 0.25s ease, background 0.25s ease;
       z-index: 1;
-    }
-    .int06-thumb .thumb-play-wf {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 35px; height: 35px;
-      z-index: 2;
       pointer-events: none;
+    }
+    .int06-thumb.is-active::after { opacity: 0; }
+    .demo-wrap .int06-thumb.is-active { outline: 2px solid #CBB047; outline-offset: -2px; }
+    .demo-wrap .int06-thumb:not(.is-active):hover::after { background: rgba(0, 0, 0, 0.35); }
+    .demo-wrap .int06-thumb:not(.is-active):hover .int06-thumb-img { transform: scale(1.04); }
+
+    .int06-play {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 35px;
+      height: 35px;
+      transform: translate(-50%, -50%) scale(1);
+      z-index: 2;
+      transition: transform 0.25s ease;
+      pointer-events: none;
+    }
+    .int06-thumb.is-active .int06-play { display: none; }
+    .demo-wrap .int06-thumb:not(.is-active):hover .int06-play { transform: translate(-50%, -50%) scale(1.12); }
+
+    .int06-play-circle { fill: rgba(255, 255, 255, 0.9); }
+    .demo-wrap .int06-play-triangle { fill: #CBB047; }
+    .wireframe-wrap .int06-play-triangle { fill: #333333; }
+
+    /* ===== 1024：維持 PC 左一右三結構，整體縮小 ===== */
+    @media (min-width: 769px) and (max-width: 1199px) {
+      .int06-wrap {
+        width: 100%;
+        min-height: 0;
+        padding: 48px 32px;
+      }
+      .int06-gallery {
+        width: 100%;
+        max-width: 960px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 170px;
+        gap: 20px;
+        align-items: stretch;
+      }
+      .int06-main {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 925 / 588;
+      }
+      .int06-thumbs {
+        width: 170px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .int06-thumb {
+        width: 170px;
+        height: auto;
+        aspect-ratio: 209 / 184;
+      }
+      .int06-tag {
+        height: 42px;
+        padding: 10px 16px;
+        font-size: 17px;
+        line-height: 21px;
+      }
+      .demo-wrap .int06-tag { width: 72px; }
+      .wireframe-wrap .int06-tag { width: 168px; }
+    }
+
+    /* ===== 768：Main 上、Thumbs 下 ===== */
+    @media (min-width: 681px) and (max-width: 768px) {
+      .int06-wrap {
+        width: 100%;
+        min-height: 0;
+        padding: 48px 32px;
+      }
+      .int06-gallery {
+        width: 100%;
+        max-width: 704px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .int06-main {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 925 / 588;
+      }
+      .int06-thumbs {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .int06-thumb {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 209 / 184;
+      }
+      .int06-tag {
+        height: 42px;
+        padding: 10px 16px;
+        font-size: 17px;
+        line-height: 21px;
+      }
+      .demo-wrap .int06-tag { width: 72px; }
+      .wireframe-wrap .int06-tag { width: 168px; }
+    }
+
+    /* ===== Mobile：Main 上、三縮圖並排 ===== */
+    @media (max-width: 680px) {
+      .int06-wrap {
+        width: 100%;
+        min-height: 0;
+        padding: 40px 0;
+      }
+      .int06-gallery {
+        width: 312px;
+        display: grid;
+        grid-template-columns: 312px;
+        gap: 14px;
+      }
+      .int06-main {
+        width: 312px;
+        height: 198px;
+      }
+      .int06-main::before,
+      .int06-main::after {
+        width: 12px;
+        height: 12px;
+      }
+      .int06-thumbs {
+        width: 312px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+      .int06-thumb {
+        width: 98.66px;
+        height: 87px;
+      }
+      .int06-tag {
+        height: 34px;
+        padding: 8px 12px;
+        border-radius: 0 0 8px 0;
+        font-size: 14px;
+        line-height: 18px;
+      }
+      .demo-wrap .int06-tag { width: 60px; }
+      .wireframe-wrap .int06-tag { width: 136px; }
+      .int06-play {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
+      .int-sub-nav::-webkit-scrollbar { display: none; }
+      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
     }
 
     /* ===== TOP ===== */
@@ -181,39 +307,6 @@
     #topBtn.visible { opacity: 1; transform: translateY(0); }
     #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
     #topBtn:hover { background: #555555; }
-
-    /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; }
-      .int06-inner { width: 100%; max-width: 1162px; }
-      .int06-main { width: calc(100% - 235px); height: auto; }
-      .int06-main .main-img, .int06-main .main-grey { width: 100%; height: 100%; min-height: 400px; }
-    }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .int06-inner { flex-direction: column; align-items: center; width: 100%; gap: 16px; }
-      .int06-main { width: 100%; height: auto; }
-      .int06-main .main-img, .int06-main .main-grey { width: 100%; height: 400px; }
-      .int06-side { flex-direction: row; justify-content: center; }
-      .int06-thumb { width: calc(33.3% - 12px); height: 130px; }
-      .int06-thumb .thumb-img, .int06-thumb .thumb-grey { width: 100%; height: 100%; }
-    }
-    @media (max-width: 767px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .int06-inner { width: 278px; flex-direction: column; align-items: center; }
-      .int06-main { width: 278px; height: 185px; }
-      .int06-main .main-img, .int06-main .main-grey { width: 278px !important; height: 185px !important; min-height: 0 !important; }
-      .int06-side { flex-direction: column; align-items: center; }
-      .int06-thumb { width: 278px; height: 185px; }
-      .int06-thumb .thumb-img, .int06-thumb .thumb-grey { width: 278px !important; height: 185px !important; }
-    }
   </style>
 </head>
 <body data-id="int" data-page="intro">
@@ -244,58 +337,48 @@
   </div>
 
   <!-- ===== demo ===== -->
-  <div class="demo-wrap view-panel active" id="demo-6">
-    <div class="int06-inner">
-      <!-- 左大圖 -->
+  <div class="int06-wrap demo-wrap view-panel active" id="demo-6">
+    <div class="int06-gallery" data-gallery="int06">
       <div class="int06-main">
-        <img class="main-img" src="images/img_INT_06.jpg" alt="">
-        <div class="main-tag">Day4</div>
+        <img class="int06-main-img" src="images/img_INT_06.jpg" alt="Day4 主圖">
+        <div class="int06-tag">Day4</div>
       </div>
-      <!-- 右側三小圖 -->
-      <div class="int06-side">
-        <!-- 第1張：無播放 -->
-        <div class="int06-thumb">
-          <img class="thumb-img" src="images/img_INT_06-1.jpg" alt="">
-        </div>
-        <!-- 第2張：有播放 play_1 -->
-        <div class="int06-thumb" data-switch="images/img_INT_06-2.jpg">
-          <img class="thumb-img" src="images/img_INT_06-2.jpg" alt="">
-          <img class="thumb-play" src="images/img_INT_06_play_1.svg" alt="">
-        </div>
-        <!-- 第3張：有播放 play_1 -->
-        <div class="int06-thumb" data-switch="images/img_INT_06-3.jpg">
-          <img class="thumb-img" src="images/img_INT_06-3.jpg" alt="">
-          <img class="thumb-play" src="images/img_INT_06_play_1.svg" alt="">
-        </div>
+      <div class="int06-thumbs" aria-label="圖片切換縮圖">
+        <button class="int06-thumb is-active" type="button" data-main="images/img_INT_06.jpg" aria-label="顯示第 1 張圖片">
+          <img class="int06-thumb-img" src="images/img_INT_06.jpg" alt="第 1 張縮圖">
+          <svg class="int06-play" viewBox="0 0 35 35" aria-hidden="true"><circle class="int06-play-circle" cx="17.5" cy="17.5" r="17.5"/><path class="int06-play-triangle" d="M14 10.5L25 17.5L14 24.5V10.5Z"/></svg>
+        </button>
+        <button class="int06-thumb" type="button" data-main="images/img_INT_06-2.jpg" aria-label="顯示第 2 張圖片">
+          <img class="int06-thumb-img" src="images/img_INT_06-2.jpg" alt="第 2 張縮圖">
+          <svg class="int06-play" viewBox="0 0 35 35" aria-hidden="true"><circle class="int06-play-circle" cx="17.5" cy="17.5" r="17.5"/><path class="int06-play-triangle" d="M14 10.5L25 17.5L14 24.5V10.5Z"/></svg>
+        </button>
+        <button class="int06-thumb" type="button" data-main="images/img_INT_06-3.jpg" aria-label="顯示第 3 張圖片">
+          <img class="int06-thumb-img" src="images/img_INT_06-3.jpg" alt="第 3 張縮圖">
+          <svg class="int06-play" viewBox="0 0 35 35" aria-hidden="true"><circle class="int06-play-circle" cx="17.5" cy="17.5" r="17.5"/><path class="int06-play-triangle" d="M14 10.5L25 17.5L14 24.5V10.5Z"/></svg>
+        </button>
       </div>
     </div>
   </div>
 
   <!-- ===== 架構 ===== -->
-  <div class="wireframe-wrap view-panel" id="wf-6">
-    <div class="int06-inner">
-      <!-- 左大圖 -->
+  <div class="int06-wrap wireframe-wrap view-panel" id="wf-6">
+    <div class="int06-gallery">
       <div class="int06-main">
-        <div class="main-grey"></div>
-        <div class="main-tag-wf">標籤字數限八字元</div>
+        <img class="int06-main-img" src="images/img_INT_06.jpg" alt="">
+        <div class="int06-tag">標籤字數限八字元</div>
       </div>
-      <!-- 右側三小圖 -->
-      <div class="int06-side">
-        <!-- 第1張：無遮罩 -->
-        <div class="int06-thumb">
-          <div class="thumb-grey"></div>
+      <div class="int06-thumbs" aria-hidden="true">
+        <div class="int06-thumb is-active">
+          <img class="int06-thumb-img" src="images/img_INT_06.jpg" alt="">
+          <svg class="int06-play" viewBox="0 0 35 35"><circle class="int06-play-circle" cx="17.5" cy="17.5" r="17.5"/><path class="int06-play-triangle" d="M14 10.5L25 17.5L14 24.5V10.5Z"/></svg>
         </div>
-        <!-- 第2張：遮罩 + 播放 -->
         <div class="int06-thumb">
-          <div class="thumb-grey"></div>
-          <div class="thumb-overlay"></div>
-          <img class="thumb-play-wf" src="images/img_INT_06_play_2.svg" alt="">
+          <img class="int06-thumb-img" src="images/img_INT_06-2.jpg" alt="">
+          <svg class="int06-play" viewBox="0 0 35 35"><circle class="int06-play-circle" cx="17.5" cy="17.5" r="17.5"/><path class="int06-play-triangle" d="M14 10.5L25 17.5L14 24.5V10.5Z"/></svg>
         </div>
-        <!-- 第3張：遮罩 + 播放 -->
         <div class="int06-thumb">
-          <div class="thumb-grey"></div>
-          <div class="thumb-overlay"></div>
-          <img class="thumb-play-wf" src="images/img_INT_06_play_2.svg" alt="">
+          <img class="int06-thumb-img" src="images/img_INT_06-3.jpg" alt="">
+          <svg class="int06-play" viewBox="0 0 35 35"><circle class="int06-play-circle" cx="17.5" cy="17.5" r="17.5"/><path class="int06-play-triangle" d="M14 10.5L25 17.5L14 24.5V10.5Z"/></svg>
         </div>
       </div>
     </div>
@@ -309,12 +392,19 @@
 </button>
 
 <script>
-  // 點擊縮圖 play → 切換左側大圖
-  document.querySelectorAll('#demo-6 .int06-thumb[data-switch]').forEach(function(thumb) {
-    thumb.style.cursor = 'pointer';
-    thumb.addEventListener('click', function() {
-      var src = this.dataset.switch;
-      document.querySelector('#demo-6 .int06-main .main-img').src = src;
+  document.querySelectorAll('[data-gallery="int06"]').forEach(function(gallery) {
+    var mainImg = gallery.querySelector('.int06-main-img');
+    var thumbs = gallery.querySelectorAll('.int06-thumb[data-main]');
+
+    thumbs.forEach(function(thumb) {
+      thumb.addEventListener('click', function() {
+        var nextSrc = thumb.dataset.main;
+        if (!nextSrc || thumb.classList.contains('is-active')) return;
+
+        mainImg.src = nextSrc;
+        thumbs.forEach(function(item) { item.classList.remove('is-active'); });
+        thumb.classList.add('is-active');
+      });
     });
   });
 

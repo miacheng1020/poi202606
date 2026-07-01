@@ -9,990 +9,177 @@
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
   <link rel="stylesheet" href="css/common.css" type="text/css">
   <style>
-    /* ===== Banner ===== */
-    .int-banner {
-      width: 100%;
-      height: 450px;
-      background: #999999;
-    }
-    /* ===== 內層 Tab（介紹_01 ~ 08）===== */
-    .int-sub-nav-sticky {
-      position: sticky;
-      top: 52px;
-      z-index: 89;
-      width: 100%;
-      background: #333333;
-    }
-    .int-sub-nav {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: stretch;
-      padding: 0;
-      width: 100%;
-      min-height: 48px;
-      background: #333333;
-    }
-    .int-sub-nav .sub-tab {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-      height: 48px;
-      min-width: 91px;
-      cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 16px;
-      color: #FFFFFF;
-      box-sizing: border-box;
-      text-decoration: none;
-    }
-    .int-sub-nav .sub-tab:first-child {
-      min-width: 92px;
-    }
-    .int-sub-nav .sub-tab.active {
-      background: #FFFFFF;
-      font-weight: 700;
-      color: #333333;
+    /* INT Family Component System v3 - clean rebuild */
+    *{box-sizing:border-box}body{margin:0 auto;font-family:'Noto Sans TC',sans-serif;color:#333}.int-banner{width:100%;height:450px;background:#999}.int-type-panel,.int-sub-panel{display:none}.int-type-panel.active,.int-sub-panel.active{display:block}.int-sub-nav-sticky{position:sticky;top:52px;z-index:89;width:100%;background:#333}.int-sub-nav{display:flex;flex-flow:row nowrap;justify-content:center;align-items:stretch;width:100%;min-height:48px;padding:0;background:#333;overflow-x:auto;overflow-y:hidden;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}.int-sub-nav::-webkit-scrollbar{display:none}.int-sub-nav .sub-tab{flex:0 0 auto;display:flex;justify-content:center;align-items:center;min-width:91px;height:48px;padding:16px;font-weight:400;font-size:16px;line-height:16px;color:#fff;text-decoration:none;cursor:pointer}.int-sub-nav .sub-tab:first-child{min-width:92px}.int-sub-nav .sub-tab.active{background:#fff;font-weight:700;color:#333}.int-section{width:100%;max-width:1400px;margin:0 auto;padding:50px 0 60px}.int-section-title{margin:0 0 18px;font-weight:700;font-size:32px;line-height:38px;text-align:center;letter-spacing:1px;color:#333}.view-toggle{display:flex;align-items:center;width:152px;height:32px;margin:0 auto 10px;padding:0}.view-toggle .toggle-btn{display:flex;justify-content:center;align-items:center;width:76px;height:32px;padding:8px 16px;border:0;background:#fff;color:#333;font-size:16px;line-height:16px;font-weight:400;cursor:pointer}.view-toggle .toggle-btn.active{background:#e5e5e5;font-weight:700}.view-panel{display:none!important}.view-panel.active{display:flex!important;justify-content:center;align-items:center}.wireframe-wrap,.demo-wrap{width:100%;min-height:700px;padding:55px 0;display:flex;justify-content:center;align-items:center;overflow:visible}.wireframe-wrap{background:#E5E5E5;border:.5px solid #333}.demo-wrap{background:#cacaca}
+
+    /* Base component skeleton */
+    .card-img{position:relative;flex-shrink:0;overflow:hidden;background:#999;z-index:1}.card-img img{position:absolute;inset:0;width:100%!important;height:100%!important;object-fit:cover;object-position:center;display:block}.card-tag,.card-tag-demo{position:absolute;left:0;top:0;display:flex;justify-content:center;align-items:center;border-radius:0 0 10px 0;color:#fff;white-space:nowrap;overflow:hidden;z-index:3}.card-tag{background:#333}.card-tag-demo{background:#1c787a}.card-text,.card-text-demo{position:relative;display:flex;flex-direction:column;align-items:center;background:#fff;z-index:2;height:auto}.card-name,.card-name-demo{line-height:130%;text-align:center;word-break:normal;overflow-wrap:normal}.card-name{font-weight:700;color:#333}.card-name-demo{font-weight:500;color:#1c787a}.card-border{height:0;border:1px solid #1c787a;flex-shrink:0}.card-sale{display:flex;align-items:center;justify-content:center;background:#333;font-weight:500;line-height:150%;color:#fff;text-align:center;height:auto;min-height:0;white-space:normal;word-break:normal;overflow-wrap:normal}.card-detail,.card-detail-demo{font-weight:400;line-height:150%;color:#333;text-align:left;word-break:normal;overflow-wrap:normal;word-wrap:normal;line-break:auto;white-space:normal;height:auto}.card-price,.card-price-demo{display:flex;justify-content:flex-end;align-items:center;text-align:right;height:auto}.card-price-demo span{color:#1c787a;font-weight:500}
+
+    /* PC >=1366: original Cloud columns, Hug height */
+    @media (min-width:1366px){
+      .int4-grid,.int3-grid,.int3-wf-grid,.int2-grid,.int2-wf-grid{width:1162px;max-width:1162px;margin:0 auto;display:flex;flex-direction:row;align-items:flex-start;justify-content:center}.int4-grid{gap:16px}.int3-grid,.int3-wf-grid{gap:17px}.int2-grid,.int2-wf-grid{gap:24px}
+      .int4-card,.int4-demo-card{position:relative;width:278px;flex:0 0 278px;display:flex;flex-direction:column;align-items:center;height:auto}.int4-card .card-img,.int4-demo-card .card-img{width:278px;height:214px}.int4-card .card-tag,.int4-demo-card .card-tag{height:25px;width:auto;padding:4px 16px;font-size:14px;line-height:17px;font-weight:400}.int4-card .card-text,.int4-demo-card .card-text{width:260px;margin-top:-26px;padding:14px;gap:8px}.int4-card .card-name,.int4-demo-card .card-name{width:232px;font-size:20px}.int4-card .card-sale{width:232px;padding:4px 12px;font-size:16px}.int4-demo-card .card-border{width:229px}.int4-card .card-detail,.int4-demo-card .card-detail{width:232px;font-size:16px}.int4-card .card-price,.int4-demo-card .card-price{width:220px;gap:4.89px;font-size:16px}.int4-demo-card .card-price span{font-size:16px}
+      .int3-card,.int3-wf-card{position:relative;width:376px;flex:0 0 376px;display:flex;flex-direction:column;align-items:center;height:auto}.int3-card .card-img,.int3-wf-card .card-img{width:376px;height:268px}.int3-card .card-tag-demo,.int3-wf-card .card-tag{width:144px;height:29px;padding:6px 16px;font-size:14px;line-height:17px;font-weight:400}.int3-card .card-text-demo,.int3-wf-card .card-text{width:354px;margin-top:-22px;padding:16px;gap:10px}.int3-card .card-name-demo,.int3-wf-card .card-name{width:322px;font-size:24px}.int3-card .card-name-demo{letter-spacing:1px}.int3-card .card-border{width:322px}.int3-wf-card .card-sale{width:322px;padding:6px 12px;font-size:20px}.int3-card .card-detail-demo,.int3-wf-card .card-detail{width:322px;font-size:18px}.int3-card .card-price-demo,.int3-wf-card .card-price{width:322px;gap:6.68px;font-size:20px}.int3-card .card-price-demo span{font-size:20px}
+      .int2-card,.int2-wf-card{position:relative;width:569px;flex:0 0 569px;display:flex;flex-direction:column;align-items:center;height:auto}.int2-card .card-img,.int2-wf-card .card-img{width:569px;height:390px}.int2-card .card-tag-demo,.int2-wf-card .card-tag{width:160px;height:35px;padding:8px 16px;font-size:16px;line-height:19px;font-weight:500}.int2-card .card-text-demo,.int2-wf-card .card-text{width:516px;margin-top:-50px;padding:18px;gap:10px}.int2-card .card-name-demo,.int2-wf-card .card-name{font-size:28px}.int2-card .card-name-demo,.int2-card .card-border,.int2-card .card-detail-demo,.int2-card .card-price-demo{width:465px}.int2-wf-card .card-name,.int2-wf-card .card-sale,.int2-wf-card .card-detail,.int2-wf-card .card-price{width:480px}.int2-card .card-name-demo{letter-spacing:.01em}.int2-wf-card .card-sale{padding:6px 12px;font-size:24px}.int2-card .card-detail-demo,.int2-wf-card .card-detail{font-size:20px}.int2-card .card-detail-demo{letter-spacing:.02em}.int2-card .card-price-demo,.int2-wf-card .card-price{gap:6.68px;font-size:22px}.int2-card .card-price-demo span{font-size:22px}
+      .int1-wrap,.int1-wf-wrap{position:relative;width:1162px;max-width:1162px;margin:0 auto;display:grid;grid-template-columns:688px 1fr;align-items:center;height:auto}.int1-wrap .card-img,.int1-wf-wrap .card-img{position:relative;grid-column:1/2;grid-row:1;width:688px;height:472px}.int1-wrap .card-tag-demo,.int1-wf-wrap .card-tag{width:160px;height:auto;min-height:39px;padding:10px 16px;font-size:16px;line-height:19px;font-weight:500}.int1-wf-wrap .card-tag{min-height:43px;padding:12px 16px}.int1-wrap .card-text-demo,.int1-wf-wrap .card-text{grid-column:1/3;grid-row:1;justify-self:end;width:521px;margin:0;padding:25px 24px;gap:12px}.int1-wrap .card-name-demo,.int1-wrap .card-border,.int1-wrap .card-detail-demo,.int1-wrap .card-price-demo,.int1-wf-wrap .card-name,.int1-wf-wrap .card-sale,.int1-wf-wrap .card-detail,.int1-wf-wrap .card-price{width:473px}.int1-wrap .card-name-demo,.int1-wf-wrap .card-name{font-size:28px}.int1-wrap .card-name-demo{letter-spacing:.01em}.int1-wf-wrap .card-sale{padding:8px 12px;font-size:24px}.int1-wrap .card-detail-demo,.int1-wf-wrap .card-detail{font-size:20px}.int1-wrap .card-detail-demo{letter-spacing:.02em}.int1-wrap .card-price-demo,.int1-wf-wrap .card-price{gap:6.68px;font-size:22px}.int1-wrap .card-price-demo span{font-size:22px}
     }
 
-    /* ===== 版型內容區塊 ===== */
-    .int-type-panel {
-      display: none;
-    }
-    .int-type-panel.active {
-      display: block;
-    }
-    .int-sub-panel {
-      display: none;
-    }
-    .int-sub-panel.active {
-      display: block;
+    /* Tablet 768-1365: all two columns, unified tablet token */
+    @media (max-width:1365px) and (min-width:768px){
+      .int-section{padding:40px 24px 56px}.wireframe-wrap,.demo-wrap{min-height:auto;padding:30px 20px}.int4-grid,.int3-grid,.int3-wf-grid,.int2-grid,.int2-wf-grid{width:100%;max-width:760px;margin:0 auto;display:flex;flex-flow:row wrap;justify-content:center;align-items:flex-start;gap:24px 16px}.int4-card,.int4-demo-card,.int3-card,.int3-wf-card,.int2-card,.int2-wf-card,.int1-wrap,.int1-wf-wrap{position:relative;width:calc((100% - 16px)/2);flex:0 0 calc((100% - 16px)/2);max-width:none;min-width:0;height:auto;display:flex;flex-direction:column;align-items:center}.int1-wrap,.int1-wf-wrap{max-width:372px;margin:0 auto}.int4-card .card-img,.int4-demo-card .card-img,.int3-card .card-img,.int3-wf-card .card-img,.int2-card .card-img,.int2-wf-card .card-img,.int1-wrap .card-img,.int1-wf-wrap .card-img{position:relative;left:auto;top:auto;width:100%;height:auto;aspect-ratio:3/2}.int4-card .card-text,.int4-demo-card .card-text,.int3-card .card-text-demo,.int3-wf-card .card-text,.int2-card .card-text-demo,.int2-wf-card .card-text,.int1-wrap .card-text-demo,.int1-wf-wrap .card-text{position:relative;left:auto;top:auto;transform:none;width:calc(100% - 22px);max-width:354px;min-width:0;margin-top:-22px;padding:16px;gap:10px}.int4-card .card-tag,.int4-demo-card .card-tag,.int3-card .card-tag-demo,.int3-wf-card .card-tag,.int2-card .card-tag-demo,.int2-wf-card .card-tag,.int1-wrap .card-tag-demo,.int1-wf-wrap .card-tag{width:144px;height:29px;padding:6px 16px;font-size:14px;line-height:17px;font-weight:400}.int4-card .card-name,.int4-demo-card .card-name,.int3-card .card-name-demo,.int3-wf-card .card-name,.int2-card .card-name-demo,.int2-wf-card .card-name,.int1-wrap .card-name-demo,.int1-wf-wrap .card-name{width:100%;font-size:24px;line-height:130%}.int4-card .card-sale,.int3-wf-card .card-sale,.int2-wf-card .card-sale,.int1-wf-wrap .card-sale{width:100%;padding:6px 12px;font-size:20px;line-height:150%}.int4-demo-card .card-border,.int3-card .card-border,.int2-card .card-border,.int1-wrap .card-border{width:100%}.int4-card .card-detail,.int4-demo-card .card-detail,.int3-card .card-detail-demo,.int3-wf-card .card-detail,.int2-card .card-detail-demo,.int2-wf-card .card-detail,.int1-wrap .card-detail-demo,.int1-wf-wrap .card-detail{width:100%;font-size:18px;line-height:150%}.int4-card .card-price,.int4-demo-card .card-price,.int3-card .card-price-demo,.int3-wf-card .card-price,.int2-card .card-price-demo,.int2-wf-card .card-price,.int1-wrap .card-price-demo,.int1-wf-wrap .card-price{width:100%;font-size:20px}.int4-demo-card .card-price span,.int3-card .card-price-demo span,.int2-card .card-price-demo span,.int1-wrap .card-price-demo span{font-size:20px}
     }
 
-    /* ===== 每個版型區塊（section）===== */
-    .int-section {
-      position: relative;
-      width: 1400px;
-      margin: 0 auto;
-      padding: 50px 0 60px;
+    /* Mobile 0-767: one column; <=390 remains fixed minimum */
+    @media (max-width:767px){
+      .int-section{padding:40px 16px}.int-section-title{font-size:24px;line-height:1.3}.wireframe-wrap,.demo-wrap{min-height:auto;padding:20px 0}.int-sub-nav{justify-content:flex-start}.int-sub-nav .sub-tab{height:auto;min-width:auto;padding:12px 14px;font-size:14px;line-height:1.2}.int4-grid,.int3-grid,.int3-wf-grid,.int2-grid,.int2-wf-grid,.int1-wrap,.int1-wf-wrap{width:278px;max-width:278px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px}.int4-card,.int4-demo-card,.int3-card,.int3-wf-card,.int2-card,.int2-wf-card,.int1-wrap,.int1-wf-wrap{position:relative;width:278px;max-width:278px;flex:0 0 auto;min-width:0;height:auto;display:flex;flex-direction:column;align-items:center}.int4-card .card-img,.int4-demo-card .card-img,.int3-card .card-img,.int3-wf-card .card-img,.int2-card .card-img,.int2-wf-card .card-img,.int1-wrap .card-img,.int1-wf-wrap .card-img{position:relative;left:auto;top:auto;width:278px;height:214px}.int4-card .card-text,.int4-demo-card .card-text,.int3-card .card-text-demo,.int3-wf-card .card-text,.int2-card .card-text-demo,.int2-wf-card .card-text,.int1-wrap .card-text-demo,.int1-wf-wrap .card-text{position:relative;left:auto;top:auto;transform:none;width:260px;max-width:260px;min-width:260px;margin-top:-26px;padding:14px;gap:8px}.int4-card .card-tag,.int4-demo-card .card-tag,.int3-card .card-tag-demo,.int3-wf-card .card-tag,.int2-card .card-tag-demo,.int2-wf-card .card-tag,.int1-wrap .card-tag-demo,.int1-wf-wrap .card-tag{width:auto;height:25px;padding:4px 16px;font-size:14px;line-height:17px;font-weight:400}.int4-card .card-name,.int4-demo-card .card-name,.int3-card .card-name-demo,.int3-wf-card .card-name,.int2-card .card-name-demo,.int2-wf-card .card-name,.int1-wrap .card-name-demo,.int1-wf-wrap .card-name{width:232px;font-size:20px;line-height:130%}.int4-card .card-sale,.int3-wf-card .card-sale,.int2-wf-card .card-sale,.int1-wf-wrap .card-sale{width:232px;padding:4px 12px;font-size:16px;line-height:150%}.int4-demo-card .card-border,.int3-card .card-border,.int2-card .card-border,.int1-wrap .card-border{width:229px}.int4-card .card-detail,.int4-demo-card .card-detail,.int3-card .card-detail-demo,.int3-wf-card .card-detail,.int2-card .card-detail-demo,.int2-wf-card .card-detail,.int1-wrap .card-detail-demo,.int1-wf-wrap .card-detail{width:232px;font-size:16px;line-height:150%}.int4-card .card-price,.int4-demo-card .card-price,.int3-card .card-price-demo,.int3-wf-card .card-price,.int2-card .card-price-demo,.int2-wf-card .card-price,.int1-wrap .card-price-demo,.int1-wf-wrap .card-price{width:220px;font-size:16px}.int4-demo-card .card-price span,.int3-card .card-price-demo span,.int2-card .card-price-demo span,.int1-wrap .card-price-demo span{font-size:16px}
     }
-    .int-section-title {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 32px;
-      line-height: 38px;
-      text-align: center;
-      letter-spacing: 1px;
-      color: #333333;
-      margin-bottom: 18px;
+  
+    /* =========================================================
+       INT Family Color Token Override v1
+       依據使用者最後確認：
+       Demo：綠色系 #1C787A
+       架構：黑灰系 #333333
+       Demo 外圍背景：#CACACA
+       架構外圍背景：#E5E5E5
+    ========================================================= */
+
+    :root {
+      --int-color-primary: #1C787A;
+      --int-color-dark: #333333;
+      --int-color-white: #FFFFFF;
+      --int-bg-demo: #CACACA;
+      --int-bg-wireframe: #E5E5E5;
     }
 
-    /* ===== 架構/demo 切換按鈕 ===== */
-    .view-toggle {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 0;
-      width: 152px;
-      height: 32px;
-      margin: 0 auto 10px;
-    }
-    .view-toggle .toggle-btn {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 16px;
-      width: 76px;
-      height: 32px;
-      cursor: pointer;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 16px;
-      line-height: 16px;
-      box-sizing: border-box;
-      border: none;
-      background: #FFFFFF;
-      color: #333333;
-      font-weight: 400;
-    }
-    .view-toggle .toggle-btn.active {
-      background: #E5E5E5;
-      font-weight: 700;
-    }
-
-    /* ===== wireframe 外框 ===== */
-    .wireframe-wrap {
-      width: 1400px;
-      min-height: 700px;
-      background: #E5E5E5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      padding: 30px;
-    }
     .demo-wrap {
-      width: 1400px;
-      min-height: 700px;
-      background: #CACACA;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      padding: 30px;
+      background: var(--int-bg-demo) !important;
     }
-    .view-panel { display: none; }
-    .view-panel.active { display: flex; align-items: center; justify-content: center; }
 
-    /* ===== 所有 tag 不換行 ===== */
-    .card-tag, .card-tag-demo,
-    .int4-card .card-tag,
+    .wireframe-wrap {
+      background: var(--int-bg-wireframe) !important;
+    }
+
+    /* Demo semantic colors */
+    .card-tag-demo,
+    .int4-demo-card .card-tag,
     .int3-card .card-tag-demo,
-    .int3-wf-card .card-tag,
     .int2-card .card-tag-demo,
-    .int2-wf-card .card-tag,
-    .int1-wrap .card-tag-demo,
-    .int1-wf-wrap .card-tag {
-      white-space: nowrap;
-      overflow: hidden;
-    }
-
-    /* ===== INT4 — 一排四個（wireframe）===== */
-    .int4-grid {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 16px;
-      width: 1162px;
-    }
-    .int4-card {
-      position: relative;
-      width: 278px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .int4-card .card-img {
-      width: 278px;
-      height: 214px;
-      background: #999999;
-      flex-shrink: 0;
-    }
-    .int4-card .card-tag {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 4px 16px;
-      position: absolute;
-      height: 25px;
-      left: 0;
-      top: 0;
-      background: #333333;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      color: #FFFFFF;
-      white-space: nowrap;
-    }
-    .int4-card .card-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 14px;
-      gap: 8px;
-      width: 260px;
-      background: #FFFFFF;
-      margin-top: -26px;
-      position: relative;
-      box-sizing: border-box;
-    }
-    .int4-card .card-name {
-      width: 232px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700;
-      font-size: 20px;
-      line-height: 130%;
-      text-align: center;
-      color: #333333;
-    }
-    .int4-card .card-sale {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 4px 0;
-      width: 232px;
-      height: 32px;
-      background: #333333;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 150%;
-      text-align: center;
-      color: #FFFFFF;
-    }
-    .int4-card .card-detail {
-      width: 232px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 150%;
-      color: #333333;
-    }
-    .int4-card .card-price {
-      width: 220px;
-      text-align: right;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      color: #333333;
-    }
-
-    /* ===== INT3 — 一排三個（demo）===== */
-    .int3-grid {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 17px;
-      width: 1162px;
-    }
-    .int3-card {
-      position: relative;
-      width: 376px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .int3-card .card-img {
-      width: 376px;
-      height: 268px;
-      background: #999999;
-      overflow: hidden;
-    }
-    .int3-card .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .int3-card .card-tag-demo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 6px 16px;
-      position: absolute;
-      width: 144px;
-      height: 29px;
-      left: 0;
-      top: 0;
-      background: #1C787A;
-      border-radius: 0 0 10px 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 14px;
-      color: #FFFFFF;
-    }
-    .int3-card .card-text-demo {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-      gap: 10px;
-      width: 354px;
-      background: #FFFFFF;
-      margin-top: -22px;
-      position: relative;
-      box-sizing: border-box;
-    }
-    .int3-card .card-name-demo {
-      width: 322px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 130%;
-      text-align: center;
-      letter-spacing: 1px;
-      color: #1C787A;
-      align-self: stretch;
-    }
-    .int3-card .card-border {
-      width: 322px;
-      height: 0;
-      border: 1px solid #1C787A;
-      align-self: stretch;
-    }
-    .int3-card .card-detail-demo {
-      width: 322px;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 150%;
-      color: #333333;
-    }
-    .int3-card .card-price-demo {
-      width: 322px;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 6.68px;
-    }
-    .int3-card .card-price-demo span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500;
-      font-size: 20px;
-      color: #1C787A;
-    }
-
-    /* ===== INT3 wireframe (一排三個 架構版) ===== */
-    .int3-wf-grid {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 17px;
-      width: 1162px;
-    }
-    .int3-wf-card {
-      position: relative;
-      width: 376px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .int3-wf-card .card-img {
-      width: 376px;
-      height: 268px;
-      background: #999999;
-    }
-    .int3-wf-card .card-tag {
-      position: absolute;
-      left: 0; top: 0;
-      width: 144px; height: 29px;
-      background: #333333;
-      border-radius: 0 0 10px 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 14px; color: #fff;
-    }
-    .int3-wf-card .card-text {
-      display: flex; flex-direction: column;
-      align-items: center; padding: 16px; gap: 10px;
-      width: 354px; background: #FFFFFF;
-      margin-top: -22px; position: relative; box-sizing: border-box;
-    }
-    .int3-wf-card .card-name {
-      width: 322px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 24px; line-height: 130%;
-      text-align: center; color: #333333;
-    }
-    .int3-wf-card .card-sale {
-      width: 322px; height: 42px; background: #333333;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 500;
-      font-size: 20px; color: #fff; text-align: center;
-    }
-    .int3-wf-card .card-detail {
-      width: 322px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 18px; line-height: 150%; color: #333;
-    }
-    .int3-wf-card .card-price {
-      width: 322px; text-align: right;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-size: 20px; color: #333;
-    }
-
-    /* ===== INT2 — 一排二個 ===== */
-    .int2-grid {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: center;
-      gap: 24px;
-      width: 1162px;
-    }
-    .int2-card {
-      position: relative;
-      width: 569px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .int2-card .card-img {
-      width: 569px;
-      height: 390px;
-      background: #999999;
-      overflow: hidden;
-    }
-    .int2-card .card-img img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .int2-card .card-tag-demo {
-      position: absolute; left: 0; top: 0;
-      width: 160px; height: 35px;
-      background: #1C787A; border-radius: 0 0 10px 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500; font-size: 16px; color: #fff;
-    }
-    .int2-card .card-text-demo {
-      display: flex; flex-direction: column;
-      align-items: center; padding: 18px; gap: 10px;
-      width: 516px; background: #FFFFFF;
-      margin-top: -50px; position: relative;
-      box-sizing: border-box;
-    }
-    .int2-card .card-name-demo {
-      width: 465px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500; font-size: 28px; line-height: 130%;
-      text-align: center; letter-spacing: 0.01em; color: #1C787A;
-    }
-    .int2-card .card-border { width: 465px; height: 0; border: 1px solid #1C787A; }
-    .int2-card .card-detail-demo {
-      width: 465px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 20px; line-height: 150%;
-      letter-spacing: 0.02em; color: #333;
-    }
-    .int2-card .card-price-demo {
-      width: 465px; display: flex; justify-content: flex-end;
-      align-items: center; gap: 6.68px;
-    }
-    .int2-card .card-price-demo span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500; font-size: 22px; color: #1C787A;
-    }
-
-    /* INT2 wireframe */
-    .int2-wf-grid {
-      display: flex; flex-direction: row;
-      align-items: flex-start; justify-content: center;
-      gap: 25px; width: 1163px;
-    }
-    .int2-wf-card {
-      position: relative; width: 569px; flex-shrink: 0;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .int2-wf-card .card-img {
-      width: 569px; height: 390px; background: #999;
-    }
-    .int2-wf-card .card-tag {
-      position: absolute; left: 0; top: 0;
-      width: 160px; height: 35px; background: #333;
-      border-radius: 0 0 10px 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif; font-size: 16px; color: #fff;
-    }
-    .int2-wf-card .card-text {
-      display: flex; flex-direction: column;
-      align-items: center; padding: 18px; gap: 10px;
-      width: 516px; background: #fff;
-      margin-top: -50px; position: relative;
-      box-sizing: border-box;
-    }
-    .int2-wf-card .card-name {
-      width: 480px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 28px; line-height: 130%;
-      text-align: center; color: #333;
-    }
-    .int2-wf-card .card-sale {
-      width: 480px; height: 48px; background: #333;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 500;
-      font-size: 24px; color: #fff; text-align: center;
-    }
-    .int2-wf-card .card-detail {
-      width: 480px; font-family: 'Noto Sans TC', sans-serif;
-      font-size: 20px; line-height: 150%; color: #333;
-    }
-    .int2-wf-card .card-price {
-      width: 480px; text-align: right;
-      font-family: 'Noto Sans TC', sans-serif; font-size: 22px; color: #333;
-    }
-
-    /* ===== INT1 — 一排一個 ===== */
-    .int1-wrap {
-      position: relative;
-      width: 1162px;
-      height: 472px;
-      margin: 0 auto;
-    }
-    .int1-wrap .card-img {
-      position: absolute;
-      width: 688px; height: 472px;
-      left: 0; top: 0;
-      background: #999;
-      overflow: hidden;
-    }
-    .int1-wrap .card-img img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
     .int1-wrap .card-tag-demo {
-      position: absolute; left: 0; top: 0;
-      width: 160px; height: 39px;
-      background: #1C787A; border-radius: 0 0 10px 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 500;
-      font-size: 16px; color: #fff; z-index: 1;
+      background: var(--int-color-primary) !important;
+      color: var(--int-color-white) !important;
     }
-    .int1-wrap .card-text-demo {
-      position: absolute;
-      width: 521px; left: 641px;
-      top: 50%; transform: translateY(-50%);
-      display: flex; flex-direction: column;
-      align-items: center; padding: 25px 24px; gap: 12px;
-      background: #fff; box-sizing: border-box;
-    }
+
+    .card-name-demo,
+    .int4-demo-card .card-name,
+    .int3-card .card-name-demo,
+    .int2-card .card-name-demo,
     .int1-wrap .card-name-demo {
-      width: 473px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500; font-size: 28px; line-height: 130%;
-      text-align: center; letter-spacing: 0.01em; color: #1C787A;
-      align-self: stretch;
+      color: var(--int-color-primary) !important;
     }
-    .int1-wrap .card-border { width: 473px; height: 0; border: 1px solid #1C787A; align-self: stretch; }
-    .int1-wrap .card-detail-demo {
-      width: 473px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 20px; line-height: 150%;
-      letter-spacing: 0.02em; color: #333; align-self: stretch;
+
+    .card-border,
+    .int4-demo-card .card-border,
+    .int3-card .card-border,
+    .int2-card .card-border,
+    .int1-wrap .card-border {
+      border-color: var(--int-color-primary) !important;
     }
-    .int1-wrap .card-price-demo {
-      width: 473px; display: flex; justify-content: flex-end;
-      align-items: center; gap: 6.68px; align-self: stretch;
-    }
+
+    .card-price-demo,
+    .card-price-demo span,
+    .int4-demo-card .card-price,
+    .int4-demo-card .card-price span,
+    .int3-card .card-price-demo,
+    .int3-card .card-price-demo span,
+    .int2-card .card-price-demo,
+    .int2-card .card-price-demo span,
+    .int1-wrap .card-price-demo,
     .int1-wrap .card-price-demo span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500; font-size: 22px; color: #1C787A;
+      color: var(--int-color-primary) !important;
     }
 
-    /* INT1 wireframe */
-    .int1-wf-wrap {
-      position: relative; width: 1161px; height: 472px;
-      margin: 0 auto;
-    }
-    .int1-wf-wrap .card-img {
-      position: absolute; width: 688px; height: 472px;
-      left: 0; top: 0; background: #999;
-    }
+    /* Wireframe semantic colors */
+    .card-tag,
+    .int4-card .card-tag,
+    .int3-wf-card .card-tag,
+    .int2-wf-card .card-tag,
     .int1-wf-wrap .card-tag {
-      position: absolute; left: 0; top: 0;
-      width: 160px; height: 43px; background: #333;
-      border-radius: 0 0 10px 0; z-index: 1;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif; font-size: 16px; color: #fff;
+      background: var(--int-color-dark) !important;
+      color: var(--int-color-white) !important;
     }
-    .int1-wf-wrap .card-text {
-      position: absolute; width: 521px; left: 641px;
-      top: 50%; transform: translateY(-50%);
-      display: flex; flex-direction: column;
-      align-items: center; padding: 25px 24px; gap: 12px;
-      background: #fff; box-sizing: border-box;
-    }
+
+    .card-name,
+    .int4-card .card-name,
+    .int3-wf-card .card-name,
+    .int2-wf-card .card-name,
     .int1-wf-wrap .card-name {
-      width: 473px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 700; font-size: 28px; line-height: 130%;
-      text-align: center; color: #333; align-self: stretch;
+      color: var(--int-color-dark) !important;
     }
+
+    .card-sale,
+    .int4-card .card-sale,
+    .int3-wf-card .card-sale,
+    .int2-wf-card .card-sale,
     .int1-wf-wrap .card-sale {
-      width: 473px; height: 52px; background: #333;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 500;
-      font-size: 24px; color: #fff; align-self: stretch;
+      background: var(--int-color-dark) !important;
+      color: var(--int-color-white) !important;
     }
-    .int1-wf-wrap .card-detail {
-      width: 473px; font-family: 'Noto Sans TC', sans-serif;
-      font-size: 20px; line-height: 150%; color: #333; align-self: stretch;
+
+    .card-detail,
+    .card-detail-demo,
+    .int4-card .card-detail,
+    .int4-demo-card .card-detail,
+    .int3-wf-card .card-detail,
+    .int3-card .card-detail-demo,
+    .int2-wf-card .card-detail,
+    .int2-card .card-detail-demo,
+    .int1-wf-wrap .card-detail,
+    .int1-wrap .card-detail-demo {
+      color: var(--int-color-dark) !important;
     }
+
+    .card-price,
+    .int4-card .card-price,
+    .int3-wf-card .card-price,
+    .int2-wf-card .card-price,
     .int1-wf-wrap .card-price {
-      width: 473px; text-align: right;
-      font-family: 'Noto Sans TC', sans-serif; font-size: 22px; color: #333;
+      color: var(--int-color-dark) !important;
     }
 
-    /* ===== INT4 demo 卡片（與架構版不同樣式）===== */
-    .int4-demo-card {
-      position: relative;
-      width: 278px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .int4-demo-card .card-img {
-      width: 278px;
-      height: 214px;
-      background: #999;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .int4-demo-card .card-img img { width: 100%; height: 100%; object-fit: cover; }
-    .int4-demo-card .card-tag {
-      position: absolute; left: 0; top: 0;
-      height: 25px; padding: 4px 16px;
-      background: #1C787A; border-radius: 0 0 10px 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 400;
-      font-size: 14px; color: #fff; white-space: nowrap;
-    }
-    .int4-demo-card .card-text {
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      padding: 14px; gap: 8px;
-      width: 260px; background: #FFFFFF;
-      margin-top: -26px; position: relative; box-sizing: border-box;
-    }
-    .int4-demo-card .card-name {
-      width: 232px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500; font-size: 20px; line-height: 130%;
-      text-align: center; color: #1C787A; align-self: stretch;
-    }
-    .int4-demo-card .card-border {
-      width: 229px; height: 0; border: 1px solid #1C787A; align-self: stretch;
-    }
-    .int4-demo-card .card-detail {
-      width: 232px; font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 400; font-size: 16px; line-height: 150%;
-      color: #333; align-self: stretch;
-    }
-    .int4-demo-card .card-price {
-      width: 220px; display: flex; justify-content: flex-end;
-      align-items: center; gap: 4.89px;
-    }
-    .int4-demo-card .card-price span {
-      font-family: 'Noto Sans TC', sans-serif;
-      font-weight: 500; font-size: 16px; color: #1C787A;
-    }
+  
 
-    /* 所有 card-img 內的 img 填滿置中 */
-    .card-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
+    /* ===== INT_01-04 page-level centering fix =====
+       Only fixes the outer 1400px display-page container.
+       Does not change card component layout.
+    */
+    .int-type-panel,
+    .int-sub-panel { width: 100%; box-sizing: border-box; }
 
-    /* ===== placeholder 內容 ===== */
-    .tab-placeholder {
-      display: flex; align-items: center; justify-content: center;
-      min-height: 400px; font-family: 'Noto Sans TC', sans-serif;
-      font-size: 24px; color: #999; letter-spacing: 2px;
-    }
-
-    /* ===== RWD ===== */
-
-    /* 中斷點：平板 768px～1199px → 4欄變2欄 */
-    /* ===== RWD 第一階段：1025px～1919px 等比縮放，不換行 ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .wireframe-wrap, .demo-wrap { width: 100%; box-sizing: border-box; overflow-x: auto; }
-      .int4-grid, .int3-grid, .int3-wf-grid, .int2-grid, .int2-wf-grid { flex-shrink: 0; }
-    }
-
-    /* ===== RWD 第二階段：≤1024px 開始換行 ===== */
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .wireframe-wrap, .demo-wrap { padding: 20px; }
-
-      /* 4欄 → 2欄 */
-      .int4-grid { width: 100%; flex-wrap: wrap; justify-content: center; gap: 16px; }
-      .int4-card, .int4-demo-card {
-        width: calc(50% - 8px); min-width: 240px;
-        display: flex; flex-direction: column; align-items: center;
-        position: relative;
-      }
-      .int4-card .card-img, .int4-demo-card .card-img { width: 100% !important; height: auto; aspect-ratio: 3/2; }
-      .int4-card .card-text { width: 90% !important; box-sizing: border-box; }
-      .int4-demo-card .card-text { width: 90% !important; box-sizing: border-box; }
-      .int4-card .card-name, .int4-card .card-sale, .int4-card .card-detail, .int4-card .card-price { width: 100% !important; }
-      .int4-demo-card .card-name, .int4-demo-card .card-border, .int4-demo-card .card-detail, .int4-demo-card .card-price { width: 100% !important; }
-
-      /* 3欄 → 1欄 */
-      .int3-grid, .int3-wf-grid { width: 100%; flex-wrap: wrap; justify-content: center; gap: 24px; }
-      .int3-card, .int3-wf-card {
-        width: 100%; max-width: 480px;
-        display: flex; flex-direction: column; align-items: center; position: relative;
-      }
-      .int3-card .card-img, .int3-wf-card .card-img { width: 100% !important; height: auto; aspect-ratio: 3/2; }
-      .int3-card .card-text-demo, .int3-wf-card .card-text { width: 90% !important; box-sizing: border-box; }
-      .int3-card .card-name-demo, .int3-card .card-border, .int3-card .card-detail-demo, .int3-card .card-price-demo { width: 100% !important; }
-      .int3-wf-card .card-name, .int3-wf-card .card-sale, .int3-wf-card .card-detail, .int3-wf-card .card-price { width: 100% !important; }
-
-      /* 2欄 → 1欄 */
-      .int2-grid, .int2-wf-grid { width: 100%; flex-wrap: wrap; justify-content: center; gap: 24px; }
-      .int2-card, .int2-wf-card {
-        width: 100%; max-width: 560px;
-        display: flex; flex-direction: column; align-items: center; position: relative;
-      }
-      .int2-card .card-img, .int2-wf-card .card-img { width: 100% !important; height: auto; aspect-ratio: 3/2; }
-      .int2-card .card-text-demo {
-        width: 90% !important; margin-left: 0 !important;
-        box-sizing: border-box; margin-top: -40px;
-      }
-      .int2-wf-card .card-text {
-        width: 90% !important; margin-left: 0 !important;
-        box-sizing: border-box; margin-top: -40px;
-      }
-      .int2-card .card-name-demo, .int2-card .card-border, .int2-card .card-detail-demo, .int2-card .card-price-demo { width: 100% !important; }
-      .int2-wf-card .card-name, .int2-wf-card .card-sale, .int2-wf-card .card-detail, .int2-wf-card .card-price { width: 100% !important; }
-
-      /* 1欄 */
-      .int1-wrap, .int1-wf-wrap {
-        width: 100% !important; max-width: 640px; height: auto !important;
-        margin: 0 auto; display: flex; flex-direction: column; align-items: center;
-      }
-      .int1-wrap .card-img, .int1-wf-wrap .card-img {
-        position: relative !important; width: 100% !important;
-        height: auto !important; aspect-ratio: 3/2; left: auto !important; top: auto !important;
-      }
-      .int1-wrap .card-tag-demo, .int1-wf-wrap .card-tag { position: absolute; left: 0; top: 0; }
-      .int1-wrap .card-text-demo {
-        position: relative !important; left: auto !important; top: auto !important;
-        transform: none !important; width: 90% !important;
-        box-sizing: border-box; margin-top: -40px;
-      }
-      .int1-wf-wrap .card-text {
-        position: relative !important; left: auto !important; top: auto !important;
-        transform: none !important; width: 90% !important;
-        box-sizing: border-box; margin-top: -40px;
-      }
-      .int1-wrap .card-name-demo, .int1-wrap .card-border, .int1-wrap .card-detail-demo, .int1-wrap .card-price-demo { width: 100% !important; }
-      .int1-wf-wrap .card-name, .int1-wf-wrap .card-sale, .int1-wf-wrap .card-detail, .int1-wf-wrap .card-price { width: 100% !important; }
-    }
-
-    /* 手機：< 768px → 全部1欄，套M版卡片樣式 */
-    @media (max-width: 767px) {
-      /* Banner — 等比縮小同一張，高度自適應 */
-      .int-banner { height: 56.25vw; min-height: 180px; max-height: 300px; }
-
-      /* 外層 Tab — 橫向捲動 */
-      .int-type-nav {
-        justify-content: flex-start;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        flex-wrap: nowrap;
-        height: auto;
-      }
-      .int-type-nav::-webkit-scrollbar { display: none; }
-      .int-type-nav .type-tab { font-size: 16px; padding: 12px 14px; width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-
-      /* 內層 Tab — 橫向捲動 */
-      .int-sub-nav {
-        justify-content: flex-start;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-        flex-wrap: nowrap;
-        height: auto;
-        align-items: stretch;
-      }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-
-      /* 所有 grid 變一欄，間距加大 */
-      .int4-grid, .int3-grid, .int3-wf-grid, .int2-grid, .int2-wf-grid {
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        gap: 32px;
-      }
-
-      /* ===== M版統一卡片尺寸 278px ===== */
-      .int4-card, .int4-demo-card,
-      .int3-card, .int3-wf-card,
-      .int2-card, .int2-wf-card {
-        width: 278px !important;
-        flex-shrink: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-      }
-
-      /* 所有圖片統一，維持 278:214 原始比例 */
-      .int4-card .card-img,
-      .int4-demo-card .card-img,
-      .int3-card .card-img,
-      .int3-wf-card .card-img,
-      .int2-card .card-img,
-      .int2-wf-card .card-img {
-        width: 278px !important;
-        height: 0 !important;
-        padding-bottom: 76.98% !important; /* 214/278 = 76.98% */
+    @media (min-width: 1400px) {
+      .int-section {
         position: relative !important;
-        flex-shrink: 0;
-        overflow: hidden;
+        width: 1400px !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
       }
-      .int4-card .card-img img,
-      .int4-demo-card .card-img img,
-      .int3-card .card-img img,
-      .int3-wf-card .card-img img,
-      .int2-card .card-img img,
-      .int2-wf-card .card-img img {
-        position: absolute;
-        top: 0; left: 0;
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover;
-        object-position: center;
-      }
-
-      /* ===== M版 demo 文字框（綠色系）===== */
-      .int4-demo-card .card-text,
-      .int3-card .card-text-demo,
-      .int2-card .card-text-demo {
-        display: flex; flex-direction: column;
-        justify-content: center; align-items: center;
-        padding: 14px; gap: 8px;
-        width: 260px !important; background: #FFFFFF;
-        margin-top: -26px; position: relative; box-sizing: border-box;
-      }
-      .int4-demo-card .card-name,
-      .int3-card .card-name-demo,
-      .int2-card .card-name-demo {
-        width: 232px !important; font-weight: 500 !important;
-        font-size: 20px !important; line-height: 130% !important;
-        text-align: center; color: #1C787A !important; align-self: stretch;
-      }
-      .int4-demo-card .card-border,
-      .int3-card .card-border,
-      .int2-card .card-border {
-        width: 229px !important; height: 0; border: 1px solid #1C787A; align-self: stretch;
-        display: block !important;
-      }
-      .int4-demo-card .card-detail,
-      .int3-card .card-detail-demo,
-      .int2-card .card-detail-demo {
-        width: 232px !important; font-size: 16px !important;
-        line-height: 150% !important; color: #333 !important;
-      }
-      .int4-demo-card .card-price,
-      .int3-card .card-price-demo,
-      .int2-card .card-price-demo {
-        width: 220px !important; display: flex !important;
-        justify-content: flex-end; align-items: center; gap: 4.89px;
-      }
-      .int4-demo-card .card-price span,
-      .int3-card .card-price-demo span,
-      .int2-card .card-price-demo span {
-        font-size: 16px !important; font-weight: 500 !important; color: #1C787A !important;
-      }
-      /* M版 demo tag 綠色 */
-      .int4-demo-card .card-tag,
-      .int3-card .card-tag-demo,
-      .int2-card .card-tag-demo {
-        background: #1C787A !important;
-        height: 25px; padding: 4px 16px;
-      }
-
-      /* ===== M版 wireframe 文字框（黑色系）===== */
-      .int4-card .card-text,
-      .int3-wf-card .card-text,
-      .int2-wf-card .card-text {
-        display: flex; flex-direction: column;
-        justify-content: center; align-items: center;
-        padding: 14px; gap: 8px;
-        width: 260px !important; background: #FFFFFF;
-        margin-top: -26px; position: relative; box-sizing: border-box;
-      }
-      .int4-card .card-name,
-      .int3-wf-card .card-name,
-      .int2-wf-card .card-name {
-        width: 232px !important; font-weight: 700 !important;
-        font-size: 20px !important; line-height: 130% !important;
-        text-align: center; color: #333 !important; align-self: stretch;
-      }
-      .int4-card .card-sale,
-      .int3-wf-card .card-sale,
-      .int2-wf-card .card-sale {
-        width: 232px !important; height: 32px !important;
-        font-size: 16px !important; display: flex !important;
-      }
-      .int4-card .card-detail,
-      .int3-wf-card .card-detail,
-      .int2-wf-card .card-detail {
-        width: 232px !important; font-size: 16px !important; line-height: 150% !important;
-      }
-      .int4-card .card-price,
-      .int3-wf-card .card-price,
-      .int2-wf-card .card-price {
-        width: 220px !important; text-align: right; font-size: 16px !important;
-      }
-      /* M版 wireframe tag 黑色 */
-      .int4-card .card-tag,
-      .int3-wf-card .card-tag,
-      .int2-wf-card .card-tag {
-        background: #333 !important;
-        height: 25px; padding: 4px 16px;
-      }
-
-      /* ===== 一排一個 M版 ===== */
-      .int1-wrap, .int1-wf-wrap {
-        width: 278px !important; height: auto !important; margin: 0 auto;
-        display: flex; flex-direction: column; align-items: center;
-      }
-      .int1-wrap .card-img, .int1-wf-wrap .card-img {
-        position: relative !important; width: 278px !important;
-        height: 0 !important; padding-bottom: 76.98% !important;
-        left: auto !important; top: auto !important;
-        overflow: hidden;
-      }
-      .int1-wrap .card-img img, .int1-wf-wrap .card-img img {
-        position: absolute; top: 0; left: 0;
-        width: 100% !important; height: 100% !important;
-        object-fit: cover; object-position: center;
-      }
-      .int1-wrap .card-tag-demo {
-        position: absolute; left: 0; top: 0;
-        background: #1C787A !important;
-      }
-      .int1-wf-wrap .card-tag {
-        position: absolute; left: 0; top: 0;
-        background: #333 !important;
-      }
-      /* demo 文字框 */
-      .int1-wrap .card-text-demo {
-        position: relative !important; left: auto !important;
-        top: auto !important; transform: none !important;
-        width: 260px !important; margin-top: -26px; box-sizing: border-box;
-        padding: 14px; gap: 8px;
-      }
-      .int1-wrap .card-name-demo {
-        width: 232px !important; font-size: 20px !important;
-        font-weight: 500 !important; color: #1C787A !important;
-      }
-      .int1-wrap .card-border { width: 229px !important; }
-      .int1-wrap .card-detail-demo { width: 232px !important; font-size: 16px !important; }
-      .int1-wrap .card-price-demo { width: 220px !important; }
-      .int1-wrap .card-price-demo span { font-size: 16px !important; }
-      /* wireframe 文字框 */
-      .int1-wf-wrap .card-text {
-        position: relative !important; left: auto !important;
-        top: auto !important; transform: none !important;
-        width: 260px !important; margin-top: -26px; box-sizing: border-box;
-        padding: 14px; gap: 8px;
-      }
-      .int1-wf-wrap .card-name { width: 232px !important; font-size: 20px !important; font-weight: 700 !important; }
-      .int1-wf-wrap .card-sale { width: 232px !important; font-size: 16px !important; height: 32px !important; display: flex !important; }
-      .int1-wf-wrap .card-detail { width: 232px !important; font-size: 16px !important; }
-      .int1-wf-wrap .card-price { width: 220px !important; font-size: 16px !important; }
-
-      /* wireframe/demo 外框 */
-      .wireframe-wrap, .demo-wrap { padding: 20px 16px; min-height: auto; }
     }
+
+    @media (max-width: 1399px) {
+      .int-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+      }
+    }
+
   </style>
+
 </head>
 <body data-id="int" data-page="intro">
 
@@ -1136,9 +323,9 @@
               <div class="card-img"></div>
               <div class="card-tag">標籤字數限八字元</div>
               <div class="card-text">
-                <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+                <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
                 <div class="card-sale">額外資訊額外資訊額外資訊</div>
-                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
                 <div class="card-price">價格價格價格</div>
               </div>
             </div>
@@ -1146,9 +333,9 @@
               <div class="card-img"></div>
               <div class="card-tag">標籤字數限八字元</div>
               <div class="card-text">
-                <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+                <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
                 <div class="card-sale">額外資訊額外資訊額外資訊</div>
-                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
                 <div class="card-price">價格價格價格</div>
               </div>
             </div>
@@ -1156,9 +343,9 @@
               <div class="card-img"></div>
               <div class="card-tag">標籤字數限八字元</div>
               <div class="card-text">
-               <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題</div>
+               <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題</div>
                 <div class="card-sale">額外資訊額外資訊額外資訊</div>
-                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
                 <div class="card-price">價格價格價格</div>
               </div>
             </div>
@@ -1216,8 +403,8 @@
               <div class="card-tag">標籤字數限八字元</div>
               <div class="card-text">
                 <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-                <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+                <div class="card-sale">額外資訊額外資訊額外資訊</div>
+                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
                 <div class="card-price">價格價格價格</div>
               </div>
             </div>
@@ -1226,8 +413,8 @@
               <div class="card-tag">標籤字數限八字元</div>
               <div class="card-text">
                 <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-                <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+                <div class="card-sale">額外資訊額外資訊額外資訊</div>
+                <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
                 <div class="card-price">價格價格價格</div>
               </div>
             </div>
@@ -1274,8 +461,8 @@
             <div class="card-tag">標籤字數限八字元</div>
             <div class="card-text">
               <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-              <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-              <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+              <div class="card-sale">額外資訊額外資訊額外資訊</div>
+              <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
               <div class="card-price">價格價格價格</div>
             </div>
           </div>
@@ -1297,28 +484,7 @@
 
     </div><!-- /subpanel-intro01 -->
 
-    <!-- 介紹_02 ~ 08 placeholder -->
-    <div class="int-sub-panel" id="subpanel-intro02"><div class="tab-placeholder">介紹_02 內容待規劃</div></div>
-    <div class="int-sub-panel" id="subpanel-intro03"><div class="tab-placeholder">介紹_03 內容待規劃</div></div>
-    <div class="int-sub-panel" id="subpanel-intro04"><div class="tab-placeholder">介紹_04 內容待規劃</div></div>
-    <div class="int-sub-panel" id="subpanel-intro05"><div class="tab-placeholder">介紹_05 內容待規劃</div></div>
-    <div class="int-sub-panel" id="subpanel-intro06"><div class="tab-placeholder">介紹_06 內容待規劃</div></div>
-    <div class="int-sub-panel" id="subpanel-intro07"><div class="tab-placeholder">介紹_07 內容待規劃</div></div>
-    <div class="int-sub-panel" id="subpanel-intro08"><div class="tab-placeholder">介紹_08 內容待規劃</div></div>
-
-  </div><!-- /panel-intro -->
-
-  <!-- 其他版型 placeholder -->
-  <div class="int-type-panel" id="panel-usage"><div class="tab-placeholder">使用說明 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-structure"><div class="tab-placeholder">頁面架構 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-product"><div class="tab-placeholder">產品卡牌 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-freetravel"><div class="tab-placeholder">自由行卡牌 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-member"><div class="tab-placeholder">會員卡牌 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-expo"><div class="tab-placeholder">旅展卡牌 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-video"><div class="tab-placeholder">影片卡牌 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-blog"><div class="tab-placeholder">部落格卡牌 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-qa"><div class="tab-placeholder">QA卡牌 內容待規劃</div></div>
-  <div class="int-type-panel" id="panel-review"><div class="tab-placeholder">評價卡牌 內容待規劃</div></div>
+    
 
 
 
@@ -1385,7 +551,6 @@
   </svg>
   <span>TOP</span>
 </button>
-
 
 <script src="js/include.js"></script>
 <script>

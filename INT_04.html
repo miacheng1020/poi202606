@@ -7,637 +7,624 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/all.css?v=20240808-3" type="text/css">
-  <link rel="stylesheet" href="css/common.css" type="text/css">
-  <style>
+  <link rel="stylesheet" href="css/common.css" type="text/css"><style>
+    /* INT04 Offset Image Card Component - rebuild */
+    *{box-sizing:border-box}
+    body{margin:0 auto;font-family:'Noto Sans TC',sans-serif;color:#333}
 
-    /* ===== 副選單 ===== */
-    .int-sub-nav-sticky { position: sticky; top: 52px; z-index: 89; width: 100%; background: #333333; }
-    .int-sub-nav { display: flex; flex-direction: row; justify-content: center; align-items: stretch; width: 100%; min-height: 48px; background: #333333; }
-    .int-sub-nav .sub-tab { display: flex; justify-content: center; align-items: center; padding: 16px; height: 48px; min-width: 91px; font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; color: #FFFFFF; text-decoration: none; box-sizing: border-box; }
-    .int-sub-nav .sub-tab.active { background: #FFFFFF; font-weight: 700; color: #333333; min-width: 92px; }
+    /* ===== 內層 Tab ===== */
+    .int-sub-nav-sticky{position:sticky;top:52px;z-index:89;width:100%;background:#333}
+    .int-sub-nav{display:flex;flex-flow:row nowrap;justify-content:center;align-items:stretch;width:100%;min-height:48px;padding:0;background:#333;overflow-x:auto;overflow-y:hidden;white-space:nowrap;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .int-sub-nav::-webkit-scrollbar{display:none}
+    .int-sub-nav .sub-tab{flex:0 0 auto;display:flex;justify-content:center;align-items:center;min-width:91px;height:48px;padding:16px;font-weight:400;font-size:16px;line-height:16px;color:#fff;text-decoration:none;cursor:pointer}
+    .int-sub-nav .sub-tab:first-child{min-width:92px}
+    .int-sub-nav .sub-tab.active{background:#fff;font-weight:700;color:#333}
 
-    /* ===== Section ===== */
-    .int-section { width: 1400px; margin: 0 auto; padding: 50px 0 60px; }
-    .int-section-title { font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 32px; line-height: 38px; text-align: center; letter-spacing: 1px; color: #333333; margin-bottom: 18px; }
+    /* ===== Section / Toggle ===== */
+    .int-section{width:100%;max-width:1400px;margin:0 auto;padding:50px 0 60px}
+    .int-section-title{margin:0 0 18px;font-weight:700;font-size:32px;line-height:38px;text-align:center;letter-spacing:1px;color:#333}
+    .view-toggle{display:flex;align-items:center;width:152px;height:32px;margin:0 auto 10px;padding:0}
+    .view-toggle .toggle-btn{display:flex;justify-content:center;align-items:center;width:76px;height:32px;padding:8px 16px;border:0;background:#fff;color:#333;font-size:16px;line-height:16px;font-weight:400;cursor:pointer}
+    .view-toggle .toggle-btn.active{background:#e5e5e5;font-weight:700}
+    .view-panel{display:none!important}
+    .view-panel.active{display:flex!important;justify-content:center;align-items:center}
+    .wireframe-wrap,.demo-wrap{width:100%;min-height:700px;padding:30px;display:flex;justify-content:center;align-items:center;overflow:visible;border:.5px solid #333}
+    .wireframe-wrap{background:#E5E5E5}
+    .demo-wrap{background:#5958B7}
 
-    /* ===== 切換按鈕 ===== */
-    .view-toggle { display: flex; flex-direction: row; align-items: center; width: 152px; height: 32px; margin: 0 auto 10px; }
-    .view-toggle .toggle-btn { display: flex; justify-content: center; align-items: center; padding: 8px 16px; width: 76px; height: 32px; cursor: pointer; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; line-height: 16px; box-sizing: border-box; border: none; background: #FFFFFF; color: #333333; font-weight: 400; }
-    .view-toggle .toggle-btn.active { background: #E5E5E5; font-weight: 700; }
-
-    /* ===== view-panel ===== */
-    .view-panel { display: none !important; }
-    .view-panel.active { display: flex !important; align-items: center; justify-content: center; }
-
-    /* ===== Demo wrap（紫色背景）===== */
-    .demo-wrap {
-      width: 1400px; min-height: 700px;
-      background: #5958B7;
-      border: 0.5px solid #333333;
-      align-items: center; justify-content: center;
-      box-sizing: border-box; padding: 40px 30px;
+    /* ===== INT04 tokens ===== */
+    .int04-grid{
+      --container-w:1162px;
+      --card-gap:17px;
+      --card-w:278px;
+      --card-flow:column;
+      --card-inner-gap:14px;
+      --media-w:278px;
+      --media-h:193px;
+      --media-bg-w:266px;
+      --media-bg-h:177px;
+      --image-w:269px;
+      --image-h:185px;
+      --image-offset-x:9px;
+      --image-offset-y:8px;
+      --image-radius:50px;
+      --tag-w:142.56px;
+      --tag-h:25px;
+      --tag-py:4px;
+      --tag-px:16px;
+      --tag-size:14px;
+      --tag-weight:400;
+      --title-size:20px;
+      --sale-size:16px;
+      --detail-size:16px;
+      --content-w:100%;
+      --content-gap:8px;
+      --sale-py:4px;
+      --sale-h:32px;
+      width:var(--container-w);
+      max-width:var(--container-w);
+      display:flex;
+      flex-flow:row nowrap;
+      justify-content:center;
+      align-items:center;
+      gap:var(--card-gap);
     }
 
-    /* ===== Wireframe wrap ===== */
-    .wireframe-wrap {
-      width: 1400px; min-height: 700px;
-      background: #E5E5E5;
-      align-items: center; justify-content: center;
-      box-sizing: border-box; padding: 40px 30px;
+    .int04-grid--4{
+      --container-w:1162px;
+      --card-gap:16.6667px;
+      --card-w:278px;
+      --card-inner-gap:14px;
+      --media-w:278px;
+      --media-h:193px;
+      --media-bg-w:266px;
+      --media-bg-h:177px;
+      --image-w:269px;
+      --image-h:185px;
+      --image-offset-x:9px;
+      --image-offset-y:8px;
+      --image-radius:50px;
+      --title-size:20px;
+      --sale-size:16px;
+      --detail-size:16px;
+      --content-gap:8px;
+      --sale-py:4px;
+      --sale-h:32px;
     }
 
-    /* ===========================================
-       共用排版 row
-    =========================================== */
-    .int4-row { display: flex; flex-direction: row; align-items: flex-start; gap: 21px; }
-    .int3-row { display: flex; flex-direction: row; align-items: flex-start; gap: 10px; }
-    .int2-row { display: flex; flex-direction: row; align-items: flex-start; gap: 23px; }
-
-    /* ===========================================
-       卡片圖片區共用：黃/白底 + 圓角右上
-       Figma 是 matrix(-1) 翻轉，HTML 用 scaleY(-1) 模擬，
-       再用 clip-path 或 border-radius 達到右上圓角效果
-    =========================================== */
-
-    /* ── 圖片區容器 ── */
-    .card-img-area {
-      position: relative;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    /* 黃色底框 (demo) */
-    .card-img-area.demo-img { background: #FEFFCC; }
-    /* 白色底框 (wf) */
-    .card-img-area.wf-img { background: #FFFFFF; }
-
-    /* 圖片（demo: 實際照片；wf: #999999 色塊）*/
-    .card-img-area .card-photo {
-      display: block;
-      object-fit: cover;
-      position: absolute;
-    }
-    .card-img-area .card-grey {
-      background: #999999;
-      position: absolute;
-    }
-    /* tag（左上角）*/
-    .card-tag {
-      position: absolute; left: 0; top: 0; z-index: 3;
-      background: #333333;
-      font-family: 'Noto Sans TC', sans-serif; font-size: 14px; font-weight: 400; color: #FFFFFF;
-      white-space: nowrap;
+    .int04-grid--3{
+      --container-w:1162px;
+      --card-gap:17px;
+      --card-w:376px;
+      --card-inner-gap:16px;
+      --media-w:376px;
+      --media-h:260.99px;
+      --media-bg-w:360.14px;
+      --media-bg-h:239.91px;
+      --image-w:364px;
+      --image-h:248.99px;
+      --image-offset-x:12px;
+      --image-offset-y:12px;
+      --image-radius:66px;
+      --tag-w:144px;
+      --tag-h:30px;
+      --tag-py:6px;
+      --tag-px:16px;
+      --tag-size:14px;
+      --title-size:24px;
+      --sale-size:20px;
+      --detail-size:18px;
+      --content-gap:8px;
+      --sale-py:8px;
+      --sale-h:46px;
     }
 
-    /* ===========================================
-       一排四個 INT4  卡片寬278px
-    =========================================== */
-    .card-4 { width: 278px; display: flex; flex-direction: column; gap: 14px; }
-
-    /* 圖片區 278×193 */
-    .card-4 .card-img-area { width: 278px; height: 193px; }
-    .card-4 .card-img-area .card-photo { width: 269px; height: 185px; left: 9px; top: 8px; border-radius: 0 50px 0 0; }
-    .card-4 .card-img-area .card-grey { width: 269px; height: 185px; left: 9px; top: 8px; border-radius: 0 50px 0 0; }
-    .card-4 .card-tag { padding: 4px 16px; border-radius: 0 0 15px 0; font-size: 14px; }
-
-    /* 文字區 */
-    .card-4 .card-text { display: flex; flex-direction: column; gap: 8px; width: 278px; }
-    .card-4 .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 20px; line-height: 130%;
-      text-align: center; width: 278px;
-    }
-    .card-4 .card-sale {
-      width: 278px; background: #333333; padding: 4px 0;
-      text-align: center; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; font-weight: 500;
-      line-height: 150%; color: #FFFFFF;
-    }
-    .card-4 .card-detail {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 16px; line-height: 150%; width: 278px;
-    }
-
-    /* demo 顏色 */
-    .demo-wrap .card-4 .card-name { color: #FAFF00; }
-    .demo-wrap .card-4 .card-detail { color: #FFFFFF; }
-    .demo-wrap .card-4 .card-sale { display: none; }
-    .demo-wrap .card-4 .card-tag { visibility: hidden; }
-
-    /* 架構 顏色 */
-    .wireframe-wrap .card-4 .card-name { color: #333333; }
-    .wireframe-wrap .card-4 .card-detail { color: #333333; }
-    .wireframe-wrap .card-4 .card-sale { display: flex; justify-content: center; align-items: center; }
-    .wireframe-wrap .card-4 .card-tag { visibility: visible; }
-
-    /* ===========================================
-       一排三個 INT3  卡片寬376px
-    =========================================== */
-    .card-3 { width: 376px; display: flex; flex-direction: column; gap: 16px; }
-
-    .card-3 .card-img-area { width: 376px; height: 261px; }
-    .card-3 .card-img-area .card-photo { width: 364px; height: 249px; left: 12px; top: 12px; border-radius: 0 66px 0 0; }
-    .card-3 .card-img-area .card-grey { width: 364px; height: 249px; left: 12px; top: 12px; border-radius: 0 66px 0 0; }
-    .card-3 .card-tag { padding: 6px 16px; border-radius: 0 0 10px 0; }
-
-    .card-3 .card-text { display: flex; flex-direction: column; gap: 8px; width: 376px; }
-    .card-3 .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 24px; line-height: 130%; width: 376px;
-    }
-    .card-3 .card-sale {
-      width: 376px; background: #333333; padding: 8px 0;
-      text-align: center; font-family: 'Noto Sans TC', sans-serif; font-size: 20px; font-weight: 500;
-      line-height: 150%; color: #FFFFFF;
-    }
-    .card-3 .card-detail {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 18px; line-height: 150%; width: 376px;
+    .int04-grid--2{
+      --container-w:1162px;
+      --card-gap:22px;
+      --card-w:570px;
+      --card-inner-gap:16px;
+      --media-w:570px;
+      --media-h:395px;
+      --media-bg-w:545px;
+      --media-bg-h:363.07px;
+      --image-w:551px;
+      --image-h:378px;
+      --image-offset-x:19px;
+      --image-offset-y:17px;
+      --image-radius:100px;
+      --tag-w:160px;
+      --tag-h:35px;
+      --tag-py:8px;
+      --tag-px:16px;
+      --tag-size:16px;
+      --tag-weight:500;
+      --title-size:28px;
+      --sale-size:24px;
+      --detail-size:20px;
+      --content-gap:10px;
+      --sale-py:6px;
+      --sale-h:48px;
     }
 
-    .demo-wrap .card-3 .card-name { color: #FAFF00; }
-    .demo-wrap .card-3 .card-detail { color: #FFFFFF; }
-    .demo-wrap .card-3 .card-sale { display: none; }
-    .demo-wrap .card-3 .card-tag { visibility: hidden; }
-    .wireframe-wrap .card-3 .card-name { color: #333333; }
-    .wireframe-wrap .card-3 .card-detail { color: #333333; }
-    .wireframe-wrap .card-3 .card-sale { display: flex; justify-content: center; align-items: center; }
-    .wireframe-wrap .card-3 .card-tag { visibility: visible; }
-
-    /* ===========================================
-       一排二個 INT2  卡片寬570px
-    =========================================== */
-    .card-2 { width: 570px; display: flex; flex-direction: column; gap: 16px; }
-
-    .card-2 .card-img-area { width: 570px; height: 395px; }
-    .card-2 .card-img-area .card-photo { width: 551px; height: 378px; left: 19px; top: 17px; border-radius: 0 100px 0 0; }
-    .card-2 .card-img-area .card-grey { width: 551px; height: 378px; left: 19px; top: 17px; border-radius: 0 100px 0 0; }
-    .card-2 .card-tag { padding: 8px 16px; border-radius: 0 0 15px 0; font-size: 16px; font-weight: 500; }
-
-    .card-2 .card-text { display: flex; flex-direction: column; gap: 10px; width: 570px; }
-    .card-2 .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 28px; line-height: 130%; width: 570px;
-    }
-    .card-2 .card-sale {
-      width: 570px; background: #333333; padding: 6px 0;
-      text-align: center; font-family: 'Noto Sans TC', sans-serif; font-size: 24px; font-weight: 500;
-      line-height: 150%; color: #FFFFFF;
-    }
-    .card-2 .card-detail {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 20px; line-height: 150%; width: 570px;
+    .int04-grid--single{
+      --container-w:1162px;
+      --card-gap:0px;
+      --card-w:1162px;
+      --card-flow:row;
+      --card-inner-gap:24px;
+      --media-w:569px;
+      --media-h:395px;
+      --media-bg-w:545px;
+      --media-bg-h:363.07px;
+      --image-w:551px;
+      --image-h:378px;
+      --image-offset-x:18px;
+      --image-offset-y:17px;
+      --image-radius:100px;
+      --tag-w:160px;
+      --tag-h:43px;
+      --tag-py:12px;
+      --tag-px:16px;
+      --tag-size:16px;
+      --tag-weight:500;
+      --title-size:28px;
+      --sale-size:24px;
+      --detail-size:20px;
+      --content-w:569px;
+      --content-gap:12px;
+      --sale-py:8px;
+      --sale-h:52px;
     }
 
-    .demo-wrap .card-2 .card-name { color: #FAFF00; }
-    .demo-wrap .card-2 .card-detail { color: #FFFFFF; }
-    .demo-wrap .card-2 .card-sale { display: none; }
-    .demo-wrap .card-2 .card-tag { visibility: hidden; }
-    .wireframe-wrap .card-2 .card-name { color: #333333; }
-    .wireframe-wrap .card-2 .card-detail { color: #333333; }
-    .wireframe-wrap .card-2 .card-sale { display: flex; justify-content: center; align-items: center; }
-    .wireframe-wrap .card-2 .card-tag { visibility: visible; }
+    /* ===== Card component ===== */
+    .int04-card{position:relative;width:var(--card-w);flex:0 0 var(--card-w);display:flex;flex-direction:var(--card-flow);align-items:center;gap:var(--card-inner-gap);color:var(--detail-color)}
+    .int04-card__media{position:relative;width:var(--media-w);height:var(--media-h);flex:0 0 auto;overflow:visible}
+    .int04-card__media-bg{position:absolute;left:0;top:0;z-index:1;width:var(--media-bg-w);height:var(--media-bg-h);background:var(--media-bg-color)}
+    .int04-card__image{position:absolute;left:var(--image-offset-x);top:var(--image-offset-y);z-index:2;width:var(--image-w);height:var(--image-h);border-radius:0 0 0 var(--image-radius);background:#999;overflow:hidden}
+    .int04-card__image img,.int04-card__image-placeholder{display:block;width:100%;height:100%;object-fit:cover;object-position:center;background:#999}
+    .int04-card__tag{position:absolute;left:0;top:0;z-index:3;display:flex;align-items:center;justify-content:center;width:var(--tag-w);height:var(--tag-h);padding:var(--tag-py) var(--tag-px);border-radius:0 0 15px 0;background:#333;font-weight:var(--tag-weight);font-size:var(--tag-size);line-height:1.2;color:#fff;white-space:nowrap}
+    .int04-card__tag[hidden]{display:none}
 
-    /* ===========================================
-       一排一個 INT1
-    =========================================== */
-    .int1-wrap { display: flex; flex-direction: row; align-items: center; width: 1162px; gap: 0; }
+    .int04-card__content{width:var(--content-w);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:var(--content-gap)}
+    .int04-card__title{width:100%;margin:0;font-weight:700;font-size:var(--title-size);line-height:130%;text-align:left;color:var(--title-color)}
+    .int04-card__sale{width:100%;min-height:var(--sale-h);display:flex;align-items:center;justify-content:center;padding:var(--sale-py) 0;background:#333;font-weight:500;font-size:var(--sale-size);line-height:150%;text-align:left;color:#fff}
+    .int04-card__sale span{display:block;width:100%;padding:0 16px;text-align:left}
+    .int04-card__sale[hidden]{display:none}
+    .int04-card__detail{width:100%;margin:0;font-weight:400;font-size:var(--detail-size);line-height:150%;text-align:left;color:var(--detail-color)}
 
-    /* 圖片區 569×395 */
-    .int1-img-area { width: 569px; height: 395px; position: relative; overflow: hidden; flex-shrink: 0; }
-    .int1-img-area.demo-img { background: #FEFFCC; }
-    .int1-img-area.wf-img { background: #FFFFFF; }
-    .int1-img-area .card-photo { width: 551px; height: 378px; position: absolute; left: 18px; top: 17px; border-radius: 0 100px 0 0; object-fit: cover; display: block; }
-    .int1-img-area .card-grey { width: 551px; height: 378px; position: absolute; left: 18px; top: 17px; border-radius: 0 100px 0 0; background: #999999; }
-    .int1-img-area .card-tag { position: absolute; left: 0; top: 0; padding: 12px 16px; background: #333333; border-radius: 0 0 15px 0; font-family: 'Noto Sans TC', sans-serif; font-size: 16px; font-weight: 500; color: #FFFFFF; }
+    .is-demo{--media-bg-color:#FEFFCC;--title-color:#FAFF00;--detail-color:#FFFFFF}
+    .is-wireframe{--media-bg-color:#FFFFFF;--title-color:#333333;--detail-color:#333333}
+    .is-demo .int04-card__sale,.is-demo .int04-card__tag{display:none}
+    .is-wireframe .int04-card__image img{display:none}
 
-    /* 文字區 */
-    .int1-text { width: 569px; display: flex; flex-direction: column; gap: 12px; padding-left: 24px; box-sizing: border-box; }
-    .int1-text .card-name {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 700; font-size: 28px; line-height: 130%; width: 100%;
-    }
-    .int1-text .card-sale {
-      width: 100%; background: #333333; padding: 8px 0;
-      text-align: center; font-family: 'Noto Sans TC', sans-serif; font-size: 24px; font-weight: 500;
-      line-height: 150%; color: #FFFFFF;
-    }
-    .int1-text .card-detail {
-      font-family: 'Noto Sans TC', sans-serif; font-weight: 400; font-size: 20px; line-height: 150%; width: 100%;
-    }
+    .int04-grid--single .int04-card{min-height:395px}
+    .int04-card__deco{display:none}
+    .int04-grid--single.is-demo .int04-card__deco{display:block;position:absolute;right:0;bottom:0;width:110.53px;height:86.53px;z-index:0;pointer-events:none}
 
-    /* demo 裝飾 SVG */
-    .deco-wrap { position: relative; }
-    .deco-svg {
-      position: absolute;
-      right: -100px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 87px;
-      height: 63px;
-      pointer-events: none;
+    @media (max-width:1365px) and (min-width:768px){
+      .int-section{padding:40px 24px 56px}
+      .wireframe-wrap,.demo-wrap{min-height:auto;padding:30px 20px}
+      .int04-grid,.int04-grid--single{width:100%;max-width:760px;height:auto;display:flex;flex-flow:row wrap;justify-content:center;align-items:flex-start;gap:32px 24px;--card-w:313px;--card-flow:column;--card-inner-gap:22px;--media-w:313px;--media-h:218px;--media-bg-w:300px;--media-bg-h:200px;--image-w:302px;--image-h:207px;--image-offset-x:11px;--image-offset-y:11px;--image-radius:54px;--tag-w:144px;--tag-h:25px;--tag-py:4px;--tag-px:16px;--tag-size:14px;--tag-weight:400;--content-w:312px;--content-gap:12px;--title-size:20px;--sale-size:16px;--detail-size:16px;--sale-h:27px;--sale-py:4px}
+      .int04-card{width:var(--card-w);flex:0 0 var(--card-w)}
+      .int04-grid--single .int04-card{min-height:0}
+      .int04-grid--single.is-demo .int04-card__deco{display:none}
+      .is-wireframe .int04-card__detail{font-weight:700;line-height:26px;color:#515151}
     }
 
-    .demo-wrap .int1-text .card-name { color: #FAFF00; }
-    .demo-wrap .int1-text .card-detail { color: #FFFFFF; }
-    .demo-wrap .int1-text .card-sale { display: none; }
-    .demo-wrap .int1-img-area .card-tag { visibility: hidden; }
-    .wireframe-wrap .int1-text .card-name { color: #333333; }
-    .wireframe-wrap .int1-text .card-detail { color: #333333; }
-    .wireframe-wrap .int1-text .card-sale { display: flex; justify-content: center; align-items: center; }
-    .wireframe-wrap .int1-img-area .card-tag { visibility: visible; }
+    @media (max-width:767px){
+      .int-section{max-width:none;padding:36px 16px 48px}
+      .int-section-title{font-size:26px;line-height:32px;margin-bottom:16px}
+      .wireframe-wrap,.demo-wrap{min-height:auto;padding:24px 14px;overflow-x:auto}
+      .int04-grid,.int04-grid--single{width:313px;max-width:313px;min-width:313px;height:auto;display:flex;flex-flow:column nowrap;justify-content:flex-start;align-items:center;gap:28px;--card-w:313px;--card-flow:column;--card-inner-gap:22px;--media-w:313px;--media-h:218px;--media-bg-w:300px;--media-bg-h:200px;--image-w:302px;--image-h:207px;--image-offset-x:11px;--image-offset-y:11px;--image-radius:54px;--tag-w:144px;--tag-h:25px;--tag-py:4px;--tag-px:16px;--tag-size:14px;--tag-weight:400;--content-w:312px;--content-gap:12px;--title-size:20px;--sale-size:16px;--detail-size:16px;--sale-h:27px;--sale-py:4px}
+      .int04-card{position:relative;width:313px;height:auto;flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:22px}
+      .int04-card__media{width:313px;height:218px;flex-basis:auto}
+      .int04-card__media-bg{width:300px;height:200px}
+      .int04-card__image{width:302px;height:207px;border-radius:0 0 0 54px}
+      .int04-card__content{width:312px;gap:12px}
+      .int04-card__title{font-size:20px;line-height:24px}
+      .int04-card__sale{min-height:27px;padding:4px 0;font-size:16px;line-height:19px}
+      .int04-card__detail{font-size:16px;line-height:24px;color:var(--detail-color)}
+      .is-wireframe .int04-card__detail{font-weight:700;line-height:26px;color:#515151}
+      .is-demo{--title-color:#FAFF00;--detail-color:#FFFFFF}
+      .is-wireframe{--title-color:#333333;--detail-color:#515151}
+      .int04-grid--single .int04-card{min-height:0}
+      .int04-grid--single.is-demo .int04-card__deco{display:none}
+      .int-sub-nav{justify-content:flex-start}
+    }
+  
 
-    /* ===== TOP ===== */
-    #topBtn { position: fixed; right: 24px; bottom: 32px; width: 60px; height: 60px; border-radius: 50%; background: #333333; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); opacity: 0; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; z-index: 999; }
-    #topBtn.visible { opacity: 1; transform: translateY(0); }
-    #topBtn span { font-family: 'Noto Sans TC', sans-serif; font-size: 13px; font-weight: 700; color: #FFFFFF; line-height: 1; }
-    #topBtn:hover { background: #555555; }
+    /* ===== INT_01-04 page-level centering fix =====
+       Only fixes the outer 1400px display-page container.
+       Does not change card component layout.
+    */
+    .int-type-panel,
+    .int-sub-panel { width: 100%; box-sizing: border-box; }
 
-    /* ===== RWD ===== */
-    @media (max-width: 1919px) {
-      .int-section { width: 100%; padding: 50px 24px; box-sizing: border-box; }
-      .demo-wrap, .wireframe-wrap { width: 100%; box-sizing: border-box; }
+    @media (min-width: 1400px) {
+      .int-section {
+        position: relative !important;
+        width: 1400px !important;
+        max-width: 1400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        box-sizing: border-box !important;
+      }
     }
-    @media (max-width: 1024px) {
-      .int-section { padding: 40px 20px; }
-      .demo-wrap, .wireframe-wrap { padding: 30px 20px; }
-      .int4-row, .int3-row, .int2-row { flex-wrap: wrap; justify-content: center; }
-      .card-4 { width: calc(50% - 12px); min-width: 240px; }
-      .card-4 .card-img-area, .card-4 .card-text, .card-4 .card-name, .card-4 .card-sale, .card-4 .card-detail { width: 100%; }
-      .card-3 { width: 100%; max-width: 400px; }
-      .card-3 .card-img-area, .card-3 .card-text, .card-3 .card-name, .card-3 .card-sale, .card-3 .card-detail { width: 100%; }
-      .card-2 { width: 100%; max-width: 560px; }
-      .card-2 .card-img-area, .card-2 .card-text, .card-2 .card-name, .card-2 .card-sale, .card-2 .card-detail { width: 100%; }
-      .int1-wrap { flex-direction: column; width: 100%; max-width: 600px; margin: 0 auto; }
-      .int1-img-area { width: 100%; }
-      .int1-text { width: 100%; padding-left: 0; padding-top: 16px; }
-      .int1-text .card-name, .int1-text .card-sale, .int1-text .card-detail { width: 100%; }
+
+    @media (max-width: 1399px) {
+      .int-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box !important;
+      }
     }
-    @media (max-width: 767px) {
-      .int-sub-nav { justify-content: flex-start; overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch; scrollbar-width: none; flex-wrap: nowrap; }
-      .int-sub-nav::-webkit-scrollbar { display: none; }
-      .int-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; line-height: 1.2; }
-      .int-section { padding: 30px 16px; }
-      .int-section-title { font-size: 24px; }
-      .demo-wrap, .wireframe-wrap { padding: 24px 16px; min-height: auto; }
-      .int4-row, .int3-row, .int2-row { flex-direction: column; align-items: center; gap: 32px; }
-      /* 一排四 M版 */
-      .card-4 { width: 278px !important; }
-      .card-4 .card-img-area { width: 278px !important; height: 193px !important; }
-      .card-4 .card-text, .card-4 .card-name, .card-4 .card-sale, .card-4 .card-detail { width: 278px !important; }
-      /* 一排三 M版 */
-      .card-3 { width: 278px !important; max-width: 278px !important; }
-      .card-3 .card-img-area { width: 278px !important; height: 193px !important; }
-      .card-3 .card-img-area .card-photo, .card-3 .card-img-area .card-grey { width: 260px !important; height: 181px !important; left: 9px !important; top: 8px !important; border-radius: 0 40px 0 0 !important; }
-      .card-3 .card-text, .card-3 .card-name, .card-3 .card-sale, .card-3 .card-detail { width: 278px !important; }
-      .card-3 .card-name { font-size: 20px !important; }
-      .card-3 .card-detail { font-size: 16px !important; }
-      /* 一排二 M版 */
-      .card-2 { width: 278px !important; max-width: 278px !important; }
-      .card-2 .card-img-area { width: 278px !important; height: 193px !important; }
-      .card-2 .card-img-area .card-photo, .card-2 .card-img-area .card-grey { width: 260px !important; height: 178px !important; left: 9px !important; top: 8px !important; border-radius: 0 50px 0 0 !important; }
-      .card-2 .card-text, .card-2 .card-name, .card-2 .card-sale, .card-2 .card-detail { width: 278px !important; }
-      .card-2 .card-name { font-size: 20px !important; }
-      .card-2 .card-detail { font-size: 16px !important; }
-      /* 一排一 M版 */
-      .int1-wrap { width: 278px !important; flex-direction: column; }
-      .int1-img-area { width: 278px !important; height: 193px !important; }
-      .int1-img-area .card-photo, .int1-img-area .card-grey { width: 260px !important; height: 178px !important; border-radius: 0 50px 0 0 !important; }
-      .int1-text { width: 278px !important; padding-left: 0 !important; padding-top: 16px; }
-      .int1-text .card-name { font-size: 20px !important; width: 100% !important; }
-      .int1-text .card-sale { font-size: 16px !important; width: 100% !important; }
-      .int1-text .card-detail { font-size: 16px !important; width: 100% !important; }
-      .deco-svg { display: none; }
-    }
+
   </style>
 </head>
+
 <body data-id="int" data-page="intro">
+  <div data-include="header"></div>
+  <div data-include="banner"></div>
+  <div data-include="nav"></div>
+  <div id="content"></div>
 
-<div data-include="header"></div>
-<div data-include="banner"></div>
-<div data-include="nav"></div>
-
-<div id="content"></div>
-<div class="int-sub-nav-sticky">
-  <div class="int-sub-nav">
-    <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
-    <a class="sub-tab" href="INT_02.html#content">介紹_02</a>
-    <a class="sub-tab" href="INT_03.html#content">介紹_03</a>
-    <a class="sub-tab active" href="INT_04.html#content">介紹_04</a>
-    <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
-    <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
-    <a class="sub-tab" href="INT_07.html#content">介紹_07</a>
-    <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
-  </div>
-</div>
-
-<!-- ===== 一排四個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排四個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-4">demo</button>
-    <button class="toggle-btn" data-view="wf-4">架構</button>
-  </div>
-
-  <div class="demo-wrap view-panel active" id="demo-4">
-    <div class="int4-row">
-      <div class="card-4">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-      <div class="card-4">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-      <div class="card-4">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-      <div class="card-4">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
+  <div class="int-sub-nav-sticky">
+    <div class="int-sub-nav">
+      <a class="sub-tab" href="INT_01.html#content">介紹_01</a>
+      <a class="sub-tab" href="INT_02.html#content">介紹_02</a>
+      <a class="sub-tab" href="INT_03.html#content">介紹_03</a>
+      <a class="sub-tab active" href="INT_04.html#content">介紹_04</a>
+      <a class="sub-tab" href="INT_05.html#content">介紹_05</a>
+      <a class="sub-tab" href="INT_06.html#content">介紹_06</a>
+      <a class="sub-tab" href="INT_07.html#content">介紹_07</a>
+      <a class="sub-tab" href="INT_08.html#content">介紹_08</a>
     </div>
   </div>
 
-  <div class="wireframe-wrap view-panel" id="wf-4">
-    <div class="int4-row">
-      <div class="card-4">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
+  <div class="int-type-panel active" id="panel-intro">
+    <div class="int-sub-panel active" id="subpanel-intro04">
+
+      <!-- 一排四個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排四個</h2>
+        <div class="view-toggle">
+          <button class="toggle-btn active" data-view="demo-4">demo</button>
+          <button class="toggle-btn" data-view="wf-4">架構</button>
         </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+        <div class="demo-wrap view-panel active" id="demo-4">
+          <div class="int04-grid int04-grid--4 is-demo">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+                <img class="int04-card__deco" src="images/img_INT_04_deco.svg" alt="" aria-hidden="true">
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+          </div>
         </div>
-      </div>
-      <div class="card-4">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
+        <div class="wireframe-wrap view-panel" id="wf-4">
+          <div class="int04-grid int04-grid--4 is-wireframe">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+          </div>
         </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+      </section>
+
+
+      <!-- 一排三個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排三個</h2>
+        <div class="view-toggle">
+          <button class="toggle-btn active" data-view="demo-3">demo</button>
+          <button class="toggle-btn" data-view="wf-3">架構</button>
         </div>
-      </div>
-      <div class="card-4">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
+        <div class="demo-wrap view-panel active" id="demo-3">
+          <div class="int04-grid int04-grid--3 is-demo">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+          </div>
         </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+        <div class="wireframe-wrap view-panel" id="wf-3">
+          <div class="int04-grid int04-grid--3 is-wireframe">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+          </div>
         </div>
-      </div>
-      <div class="card-4">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
+      </section>
+
+
+      <!-- 一排兩個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排兩個</h2>
+        <div class="view-toggle">
+          <button class="toggle-btn active" data-view="demo-2">demo</button>
+          <button class="toggle-btn" data-view="wf-2">架構</button>
         </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
+        <div class="demo-wrap view-panel active" id="demo-2">
+          <div class="int04-grid int04-grid--2 is-demo">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+          </div>
         </div>
-      </div>
+        <div class="wireframe-wrap view-panel" id="wf-2">
+          <div class="int04-grid int04-grid--2 is-wireframe">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+<article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- 一排一個 -->
+      <section class="int-section">
+        <h2 class="int-section-title">一排一個</h2>
+        <div class="view-toggle">
+          <button class="toggle-btn active" data-view="demo-1">demo</button>
+          <button class="toggle-btn" data-view="wf-1">架構</button>
+        </div>
+        <div class="demo-wrap view-panel active" id="demo-1">
+          <div class="int04-grid int04-grid--single is-demo">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><img src="images/img_INT_04.jpg" alt="流體藝術創作"></div>
+                  <span class="int04-card__tag" hidden>標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">流體藝術創作</h3>
+                  <div class="int04-card__sale" hidden><span>額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">學習運用色彩的深淺混色變化，藉由不同顏料層層堆疊，創造出獨特線條紋路的流體藝術，搭配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</p>
+                </div>
+              </article>
+          </div>
+        </div>
+        <div class="wireframe-wrap view-panel" id="wf-1">
+          <div class="int04-grid int04-grid--single is-wireframe">
+            <article class="int04-card">
+                <div class="int04-card__media">
+                  <div class="int04-card__media-bg"></div>
+                  <div class="int04-card__image"><div class="int04-card__image-placeholder"></div></div>
+                  <span class="int04-card__tag">標籤字數限八字元</span>
+                </div>
+                <div class="int04-card__content">
+                  <h3 class="int04-card__title">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</h3>
+                  <div class="int04-card__sale"><span>額外資訊額外資訊額外資訊額外資訊</span></div>
+                  <p class="int04-card__detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</p>
+                </div>
+              </article>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
-</div>
 
-<!-- ===== 一排三個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排三個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-3">demo</button>
-    <button class="toggle-btn" data-view="wf-3">架構</button>
-  </div>
+  <div data-include="footer"></div>
+  <button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+      <path d="M7 0L14 12H0L7 0Z" fill="white"/>
+    </svg>
+    <span>TOP</span>
+  </button>
 
-  <div class="demo-wrap view-panel active" id="demo-3">
-    <div class="int3-row">
-      <div class="card-3">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-      <div class="card-3">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-      <div class="card-3">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wireframe-wrap view-panel" id="wf-3">
-    <div class="int3-row">
-      <div class="card-3">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        </div>
-      </div>
-      <div class="card-3">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        </div>
-      </div>
-      <div class="card-3">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== 一排二個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排二個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-2">demo</button>
-    <button class="toggle-btn" data-view="wf-2">架構</button>
-  </div>
-
-  <div class="demo-wrap view-panel active" id="demo-2">
-    <div class="int2-row">
-      <div class="card-2">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-      <div class="card-2">
-        <div class="card-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="wireframe-wrap view-panel" id="wf-2">
-    <div class="int2-row">
-      <div class="card-2">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        </div>
-      </div>
-      <div class="card-2">
-        <div class="card-img-area wf-img">
-          <div class="card-grey"></div>
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="card-text">
-          <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== 一排一個 ===== -->
-<div class="int-section">
-  <div class="int-section-title">一排一個</div>
-  <div class="view-toggle">
-    <button class="toggle-btn active" data-view="demo-1">demo</button>
-    <button class="toggle-btn" data-view="wf-1">架構</button>
-  </div>
-
-  <div class="demo-wrap view-panel active" id="demo-1">
-    <div class="deco-wrap" style="position:relative;">
-      <div class="int1-wrap">
-        <div class="int1-img-area demo-img">
-          <img class="card-photo" src="images/img_INT_04.jpg" alt="">
-          <div class="card-tag">標籤字數限八字元</div>
-        </div>
-        <div class="int1-text">
-          <div class="card-name">流體藝術創作</div>
-          <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-          <div class="card-detail">學習運用色彩的深淺混色變化，藉由不同顏料量疊塔，創造出獨特紋樣的流體藝術，指配專業指導，將內心世界的感受具象化，創作出獨一無二的流體藝術作品，展現無限可能性。</div>
-        </div>
-      </div>
-      <img class="deco-svg" src="images/img_INT_04_devo.svg" alt="">
-    </div>
-  </div>
-
-  <div class="wireframe-wrap view-panel" id="wf-1">
-    <div class="int1-wrap">
-      <div class="int1-img-area wf-img">
-        <div class="card-grey"></div>
-        <div class="card-tag">標籤字數限八字元</div>
-      </div>
-      <div class="int1-text">
-        <div class="card-name">標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題標題</div>
-        <div class="card-sale">額外資訊額外資訊額外資訊額外資訊</div>
-        <div class="card-detail">介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹介紹</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div data-include="footer"></div>
-
-<button id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg width="14" height="12" viewBox="0 0 14 12" fill="none"><path d="M7 0L14 12H0L7 0Z" fill="white"/></svg>
-  <span>TOP</span>
-</button>
-
-<script>
-  document.querySelectorAll('.view-toggle').forEach(function(toggle) {
-    toggle.querySelectorAll('.toggle-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var section = toggle.closest('.int-section');
-        toggle.querySelectorAll('.toggle-btn').forEach(function(b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-        var targetId = btn.dataset.view;
-        section.querySelectorAll('.view-panel').forEach(function(p) { p.classList.remove('active'); });
-        section.querySelector('#' + targetId).classList.add('active');
+  <script>
+    document.querySelectorAll('.view-toggle').forEach(function(toggle){
+      toggle.querySelectorAll('.toggle-btn').forEach(function(btn){
+        btn.addEventListener('click',function(){
+          var section=toggle.closest('.int-section');
+          toggle.querySelectorAll('.toggle-btn').forEach(function(b){b.classList.remove('active')});
+          btn.classList.add('active');
+          section.querySelectorAll('.view-panel').forEach(function(p){p.classList.remove('active')});
+          section.querySelector('#'+btn.dataset.view).classList.add('active');
+        });
       });
     });
-  });
-</script>
-<script src="js/include.js"></script>
+  </script>
+  <script src="js/include.js"></script>
 </body>
 </html>
