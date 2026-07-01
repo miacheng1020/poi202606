@@ -1,11 +1,26 @@
-<svg width="36" height="44" viewBox="0 0 36 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="36" height="44" transform="matrix(-1 0 0 1 36 0)" fill="url(#paint0_linear_843_11942)"/>
-<path d="M24 12.9551L13.9874 22.0293L23.9984 31.0419L23.063 32L12.1364 22.163L12.1357 22.1625L12.1218 22.15L12.1222 22.1495L12 22.0322L12.1207 21.9162L12.1202 21.9157L23.0613 12L24 12.9551Z" fill="#C1914C"/>
-<path d="M24 12.9551L13.9874 22.0293L23.9984 31.0419L23.063 32L12.1364 22.163L12.1357 22.1625L12.1218 22.15L12.1222 22.1495L12 22.0322L12.1207 21.9162L12.1202 21.9157L23.0613 12L24 12.9551Z" fill="white"/>
-<defs>
-<linearGradient id="paint0_linear_843_11942" x1="35.9944" y1="0.0062888" x2="26.0857" y2="41.6404" gradientUnits="userSpaceOnUse">
-<stop stop-color="#EFD9A2"/>
-<stop offset="1" stop-color="#CAA546"/>
-</linearGradient>
-</defs>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_1" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 36 44">
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: url(#_未命名漸層);
+      }
+
+      .st1 {
+        fill: #fff;
+      }
+
+      .st2 {
+        fill: #c1914c;
+      }
+    </style>
+    <linearGradient id="_未命名漸層" data-name="未命名漸層" x1="-550.08" y1="48.87" x2="-559.99" y2="7.24" gradientTransform="translate(-538 46) rotate(-180)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#efd9a2"/>
+      <stop offset="1" stop-color="#caa546"/>
+    </linearGradient>
+  </defs>
+  <rect class="st0" width="36" height="44"/>
+  <path class="st2" d="M24,12.96l-10.01,9.07,10.01,9.01-.94.96-10.93-9.84h0s-.01-.01-.01-.01h0s-.12-.12-.12-.12l.12-.12h0s10.94-9.92,10.94-9.92l.94.96Z"/>
+  <path class="st1" d="M24,12.96l-10.01,9.07,10.01,9.01-.94.96-10.93-9.84h0s-.01-.01-.01-.01h0s-.12-.12-.12-.12l.12-.12h0s10.94-9.92,10.94-9.92l.94.96Z"/>
 </svg>

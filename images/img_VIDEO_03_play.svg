@@ -1,3 +1,12 @@
-<svg width="59" height="59" viewBox="0 0 59 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M29.5 0C45.7924 0 59 13.2076 59 29.5C59 45.7924 45.7924 59 29.5 59C13.2076 59 0 45.7924 0 29.5C0 13.2076 13.2076 0 29.5 0ZM22.25 41.124L44 29L22.25 16.876V41.124Z" fill="white"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_1" data-name="圖層_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 59 59">
+  <!-- Generator: Adobe Illustrator 30.6.0, SVG Export Plug-In . SVG Version: 2.1.4 Build 109)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="st0" d="M29.5,0c16.29,0,29.5,13.21,29.5,29.5s-13.21,29.5-29.5,29.5S0,45.79,0,29.5,13.21,0,29.5,0ZM22.25,41.12l21.75-12.12-21.75-12.12v24.25Z"/>
 </svg>
