@@ -69,15 +69,9 @@
     /* ===== Section ===== */
     .vid-section {
       width: 100%;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 50px 0 60px;
-      box-sizing: border-box;
-    }
-
-    .vid-content-container {
-      width: 1162px;
-      max-width: 100%;
-      margin: 0 auto;
       box-sizing: border-box;
     }
 
@@ -161,9 +155,11 @@
     .vid3-layout {
       display: flex;
       align-items: stretch;
-      width: 100%;
-      max-width: 1162px;
+      width: 1162px;
+      max-width: 100%;
       min-height: 440px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     /* 左側：影片圖 */
@@ -380,14 +376,47 @@
     }
 
     /* ===== RWD ===== */
-    @media (max-width: 1199px) {
+    /* 安全版：RWD 節奏改為 PRD / INT 類型，1200 以下先等比例縮版心，992 以下才改為上下排列。 */
+    @media (max-width: 1200px) {
       .vid-section {
+        width: 100%;
+        max-width: 1400px;
         padding: 40px 0 50px;
+        box-sizing: border-box;
       }
 
       .wireframe-wrap,
       .demo-wrap {
+        width: 100%;
         min-height: auto;
+        padding: 48px 0;
+        box-sizing: border-box;
+      }
+
+      .vid3-layout {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+        min-height: auto;
+        margin: 0 auto;
+      }
+
+      .vid3-img-wrap,
+      .vid3-img-placeholder {
+        width: 67.04%;
+        min-height: 0;
+        aspect-ratio: 779 / 440;
+      }
+
+      .vid3-text {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .wireframe-wrap,
+      .demo-wrap {
         padding: 40px 20px;
       }
 
@@ -395,13 +424,12 @@
         flex-direction: column;
         align-items: stretch;
         width: 100%;
-        min-height: auto;
+        max-width: 926px;
       }
 
       .vid3-img-wrap,
       .vid3-img-placeholder {
         width: 100%;
-        min-height: 0;
         aspect-ratio: 16 / 9;
       }
 
@@ -487,6 +515,7 @@
         padding: 0 22px;
       }
     }
+  
   </style>
 </head>
 
@@ -526,8 +555,7 @@
       </div>
 
       <div class="demo-wrap view-panel active" id="demo-v3">
-        <div class="vid-content-container">
-          <div class="vid3-layout">
+        <div class="vid3-layout">
             <div class="vid3-img-wrap">
               <img alt="影片_03" class="vid-thumb" src="images/img_VIDEO_03.jpg" />
               <img alt="播放" class="play-icon" src="images/img_VIDEO_03_play.svg" />
@@ -545,12 +573,10 @@
               </button>
             </div>
           </div>
-        </div>
       </div>
 
       <div class="wireframe-wrap view-panel" id="wf-v3">
-        <div class="vid-content-container">
-          <div class="vid3-layout">
+        <div class="vid3-layout">
             <div class="vid3-img-placeholder">
               <div class="vid3-tag">標籤字數限八字元</div>
               <div class="vid3-play-wf">
@@ -572,7 +598,6 @@
               </button>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>

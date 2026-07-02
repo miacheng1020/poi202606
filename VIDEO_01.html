@@ -57,9 +57,20 @@
 
     /* ===== Section ===== */
     .vid-section {
-      width: 1400px;
+      width: 100%;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 50px 0 60px;
+      box-sizing: border-box;
+    }
+    .vid1-layout {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 1162px;
+      max-width: 100%;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
     .vid-section-title {
       font-family: 'Noto Sans TC', sans-serif;
@@ -113,7 +124,7 @@
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      padding: 30px;
+      padding: 50px 0;
     }
     .demo-wrap {
       width: 100%;
@@ -123,7 +134,7 @@
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
-      padding: 30px;
+      padding: 50px 0;
     }
     .view-panel { display: none; }
     .view-panel.active { display: flex; align-items: center; justify-content: center; }
@@ -219,11 +230,49 @@
     #topBtn:hover { background: #555555; }
 
     /* ===== RWD ===== */
-    @media (max-width: 1024px) {
-      .vid-section { width: 100%; padding: 40px 20px; box-sizing: border-box; }
-      .wireframe-wrap, .demo-wrap { width: 100%; min-height: auto; padding: 20px; box-sizing: border-box; }
-      .vid-player-wrap, .vid-wf-player { width: 100%; aspect-ratio: 16 / 9; height: auto; padding-bottom: 0; border-radius: 16px; }
-      .vid-demo-img, .vid-player-wrap iframe { border-radius: 16px; }
+    /* 安全版：RWD 節奏改為 PRD / INT 類型，先讓版心隨視窗縮放，再進手機收斂，避免 1200→1199 瞬間跳寬。 */
+    @media (max-width: 1200px) {
+      .vid-section {
+        width: 100%;
+        max-width: 1400px;
+        padding: 40px 0 50px;
+        box-sizing: border-box;
+      }
+      .wireframe-wrap,
+      .demo-wrap {
+        width: 100%;
+        min-height: auto;
+        padding: 48px 0;
+        box-sizing: border-box;
+      }
+      .vid1-layout {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+        margin: 0 auto;
+      }
+      .vid-player-wrap,
+      .vid-wf-player {
+        width: 100%;
+        max-width: 926px;
+        aspect-ratio: 16 / 9;
+        height: auto;
+        padding-bottom: 0;
+        border-radius: 16px;
+      }
+      .vid-demo-img,
+      .vid-player-wrap iframe {
+        border-radius: 16px;
+      }
+    }
+    @media (max-width: 992px) {
+      .wireframe-wrap,
+      .demo-wrap {
+        padding: 40px 20px;
+      }
+      .vid1-layout {
+        width: 100%;
+        max-width: 926px;
+      }
     }
     @media (max-width: 767px) {
       .vid-sub-nav {
@@ -236,7 +285,8 @@
       .vid-sub-nav .sub-tab { font-size: 14px; padding: 12px 14px; min-width: auto; height: auto; flex-shrink: 0; }
       .vid-section { padding: 30px 16px; }
       .vid-section-title { font-size: 24px; }
-      .wireframe-wrap, .demo-wrap { padding: 20px 16px; }
+      .wireframe-wrap, .demo-wrap { padding: 30px 16px; }
+      .vid1-layout { width: 100%; }
       .vid-demo-img { border-radius: 16px; }
       .vid-demo-play, .vid-wf-play { width: 67px; height: 46px; }
       .vid-wf-play { border-radius: 8px; }
@@ -247,6 +297,7 @@
         margin-left: 4px;
       }
     }
+  
   </style>
 </head>
 <body data-id="video" data-page="video">
@@ -275,15 +326,19 @@
 </div>
 <!-- demo -->
 <div class="demo-wrap view-panel active" id="demo-v1">
+<div class="vid1-layout">
 <div class="vid-player-wrap">
 <img class="vid-demo-img" alt="影片_01 demo" src="images/img_VIDEO.jpg"/>
 <img class="vid-demo-play" alt="YT" src="images/YTicon.svg"/>
 </div>
 </div>
+</div>
 <!-- 架構 -->
 <div class="wireframe-wrap view-panel" id="wf-v1">
+<div class="vid1-layout">
 <div class="vid-wf-player">
 <div class="vid-wf-play" aria-hidden="true"></div>
+</div>
 </div>
 </div>
 </div>

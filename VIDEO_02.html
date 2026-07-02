@@ -58,14 +58,9 @@
     /* ===== Section ===== */
     .vid-section {
       width: 100%;
+      max-width: 1400px;
       margin: 0 auto;
       padding: 50px 0 60px;
-      box-sizing: border-box;
-    }
-    .vid-content-container {
-      width: 1162px;
-      max-width: 100%;
-      margin: 0 auto;
       box-sizing: border-box;
     }
     .vid-section-title {
@@ -141,9 +136,11 @@
       flex-direction: row;
       align-items: center;
       gap: 0;
-      width: 100%;
-      max-width: 1162px;
+      width: 1162px;
+      max-width: 100%;
       height: 432px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     /* 左側：影片圖 */
@@ -304,12 +301,62 @@
     #topBtn:hover { background: #555555; }
 
     /* ===== RWD ===== */
-    /* 低於 1162px 版心可完整容納的區間，改為上影片下文字，避免文字溢出中容器 */
-    @media (max-width: 1199px) {
-      .vid-section { width: 100%; padding: 40px 0 50px; box-sizing: border-box; }
-      .wireframe-wrap, .demo-wrap { width: 100%; min-height: auto; padding: 40px 20px; box-sizing: border-box; }
-      .vid2-layout { width: 100%; height: auto; flex-direction: column; align-items: stretch; gap: 22px; }
-      .vid2-img-wrap, .vid2-img-placeholder { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 16px; }
+    /* 安全版：RWD 節奏改為 PRD / INT 類型，1200 以下先等比例縮版心，992 以下才改為上下排列。 */
+    @media (max-width: 1200px) {
+      .vid-section {
+        width: 100%;
+        max-width: 1400px;
+        padding: 40px 0 50px;
+        box-sizing: border-box;
+      }
+      .wireframe-wrap,
+      .demo-wrap {
+        width: 100%;
+        min-height: auto;
+        padding: 48px 0;
+        box-sizing: border-box;
+      }
+      .vid2-layout {
+        width: calc(100% - 40px);
+        max-width: 1162px;
+        height: auto;
+        margin: 0 auto;
+      }
+      .vid2-img-wrap,
+      .vid2-img-placeholder {
+        width: 66.1%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        border-radius: 16px;
+      }
+      .vid2-text {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+        padding-left: 31px;
+      }
+      .vid2-name,
+      .vid2-border,
+      .vid2-detail {
+        width: 100%;
+      }
+    }
+    @media (max-width: 992px) {
+      .wireframe-wrap,
+      .demo-wrap {
+        padding: 40px 20px;
+      }
+      .vid2-layout {
+        width: 100%;
+        max-width: 926px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+      }
+      .vid2-img-wrap,
+      .vid2-img-placeholder {
+        width: 100%;
+      }
       .vid2-wf-play { width: 80px; height: 55px; border-radius: 12px; }
       .vid2-wf-play::before {
         border-top-width: 10px;
@@ -345,6 +392,7 @@
       .vid2-detail { font-size: 16px; line-height: 150%; }
       .vid2-btn { font-size: 16px; width: 160px; height: 42px; }
     }
+  
   </style>
 </head>
 <body data-id="video" data-page="video">
@@ -376,7 +424,6 @@
 </div>
 <!-- demo -->
 <div class="demo-wrap view-panel active" id="demo-v2">
-<div class="vid-content-container">
 <div class="vid2-layout">
 <!-- 左：影片圖 -->
 <div class="vid2-img-wrap">
@@ -396,10 +443,8 @@
 </div>
 </div>
 </div>
-</div>
 <!-- 架構 -->
 <div class="wireframe-wrap view-panel" id="wf-v2">
-<div class="vid-content-container">
 <div class="vid2-layout">
 <!-- 左：影片佔位 -->
 <div class="vid2-img-placeholder">
